@@ -6,6 +6,7 @@ import {
   MapContainer,
   Marker,
   Popup,
+  Tooltip,
   LayersControl,
   GeoJSON,
   TileLayer,
@@ -232,9 +233,13 @@ function BaseMap({ data, state, city, categoryName }) {
                 poi.properties.Category || poi.properties.descricao
               )}
             >
+              <div>{poi.properties.streetname}</div>
+              <Tooltip className="customTooltip" direction="right">
+                <h3>{poi.properties.streetname}</h3>
+              </Tooltip>
               <Popup>
                 <div>
-                  <h3>{poi.properties.streetname}</h3>
+                  <h1 className="text-[1.4rem]">{poi.properties.streetname}</h1>
                   <p>{poi.properties.descricao}</p>
                   <p>{`Coordinates - ${poi.geometry.coordinates} `}</p>
                 </div>
