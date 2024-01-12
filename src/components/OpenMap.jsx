@@ -41,7 +41,8 @@ const OpenMap = ({ state }) => {
     const fetchAndDisplayStateBoundaries = async () => {
       if (state && map) {
         try {
-          const response = await fetch(`./orissa.json`, {
+          // Fetch the GeoJSON file based on the selected state
+          const response = await fetch(`./Orissa.geojson`, {
             headers: {
               "Content-Type": "application/json",
             },
@@ -55,12 +56,11 @@ const OpenMap = ({ state }) => {
           const geojsonFormat = new GeoJSON();
           const features = geojsonFormat.readFeatures(geojsonData);
 
-          // Clear existing layers before adding new ones
-          // map.getLayers().forEach((layer) => {
-          //   if (layer instanceof VectorLayer) {
-          //     map.removeLayer(layer);
-          //   }
-          // });
+          map.getLayers().forEach((layer) => {
+            if (layer instanceof VectorLayer) {
+              map.removeLayer(layer);
+            }
+          });
 
           const vectorSource = new VectorSource({
             features: features,

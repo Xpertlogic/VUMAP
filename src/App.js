@@ -1,19 +1,35 @@
+import { useState } from "react";
 import "./style/style.css";
+import { Suspense, lazy } from "react";
 import { Layout } from "antd";
-import OpenMap from "./components/OpenMap";
-import HeaderCompo from "./components/HeaderCompo";
-import SideBar from "./components/SideBar";
+
 const { Content, Footer } = Layout;
 
+const HeaderCompo = lazy(() => import("./components/HeaderCompo"));
+const SideBar = lazy(() => import("./components/SideBar"));
+const OpenMap = lazy(() => import("./components/OpenMap"));
+
 function App() {
+  const [selectedState, setSelectedState] = useState(null);
+
+  const handleStateChange = (stateItem) => {
+    setSelectedState(stateItem);
+  };
+
   return (
     <Layout>
-      <HeaderCompo />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HeaderCompo />
+      </Suspense>
       <Content style={{ padding: "0 50px" }}>
         <Layout style={{ background: "#fff" }}>
-          <SideBar />
+          <Suspense fallback={<div>Loading...</div>}>
+            <SideBar onStateChange={handleStateChange} />
+          </Suspense>
           <Content className="overflow-hidden">
-            <OpenMap />
+            <Suspense fallback={<div>Loading...</div>}>
+              <OpenMap />
+            </Suspense>
           </Content>
         </Layout>
       </Content>

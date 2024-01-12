@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { Layout, Menu, Select, Form, Checkbox } from "antd";
-// import OpenMap from "./components/OpenMap";
+import stateData from "../data/states.json";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-function SideBar() {
+function SideBar({ onStateChange }) {
+  const [selectedState, setSelectedState] = useState(null);
+
   const handleChange = (value) => {
+    setSelectedState(value);
+    onStateChange(value);
     console.log(`selected ${value}`);
   };
 
@@ -29,13 +34,30 @@ function SideBar() {
           <Form.Item>
             <div className="select-group">
               <div>
+                <label className=" text-[1rem]">Country: </label>
+              </div>
+              <div>
+                <Select
+                  style={{ width: 150 }}
+                  onChange={handleChange}
+                  options={[{ value: "india", label: "India" }]}
+                />
+              </div>
+            </div>
+          </Form.Item>
+          <Form.Item>
+            <div className="select-group">
+              <div>
                 <label className=" text-[1rem]">States: </label>
               </div>
               <div>
                 <Select
                   style={{ width: 150 }}
                   onChange={handleChange}
-                  options={[{ value: "odisha", label: "Odisha" }]}
+                  options={stateData.features.map((item) => ({
+                    value: item.properties.STATE,
+                    label: item.properties.STATE,
+                  }))}
                 />
               </div>
             </div>
@@ -71,7 +93,7 @@ function SideBar() {
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1rem]">Postal:</label>{" "}
+                <label className=" text-[1rem]">Locality:</label>{" "}
               </div>
               <div>
                 <Select
@@ -85,7 +107,7 @@ function SideBar() {
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1rem]">Locality:</label>{" "}
+                <label className=" text-[1rem]">Sub Locality:</label>{" "}
               </div>
               <div>
                 <Select
@@ -96,6 +118,30 @@ function SideBar() {
               </div>
             </div>
           </Form.Item>
+
+          <SubMenu
+            key="sub5"
+            title={
+              <span className="text-[1rem]">Administrative Boundaries</span>
+            }
+          >
+            <Menu.Item key="1">
+              <Checkbox>Country Boundary</Checkbox>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Checkbox>State Boundary</Checkbox>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Checkbox>District Boundary</Checkbox>
+            </Menu.Item>
+            <Menu.Item key="4">
+              <Checkbox>Postal Boundary</Checkbox>
+            </Menu.Item>
+            <Menu.Item key="5">
+              <Checkbox>Locality Boundary</Checkbox>
+            </Menu.Item>
+          </SubMenu>
+
           <SubMenu
             key="sub1"
             title={<span className="text-[1rem]">Transports</span>}
