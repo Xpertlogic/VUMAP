@@ -1,39 +1,51 @@
-import { useEffect, useState } from "react";
-import "ol/ol.css";
-import Map from "ol/Map";
-import View from "ol/View";
-import { fromLonLat } from "ol/proj";
-import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
-import VectorSource from "ol/source/Vector";
-import VectorLayer from "ol/layer/Vector";
-import GeoJSON from "ol/format/GeoJSON";
-import Style from "ol/style/Style";
-import Stroke from "ol/style/Stroke";
-import Fill from "ol/style/Fill";
+import React, { useEffect, useState } from "react";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import "leaflet-draw/dist/leaflet.draw.css";
+import "leaflet-draw";
+import "leaflet/dist/images/marker-icon.png";
+import "leaflet/dist/images/marker-shadow.png";
 
 const OpenMap = ({ state }) => {
   const [map, setMap] = useState(null);
+  const [drawnItems, setDrawnItems] = useState(null);
 
   useEffect(() => {
     // Initialize the map when the component mounts
-    const map = new Map({
-      target: "map2",
-      layers: [
-        new TileLayer({
-          source: new OSM(),
-        }),
-      ],
-      view: new View({
-        center: fromLonLat([78.9629, 20.5937]),
-        zoom: 4.5,
-      }),
+    const mapInstance = L.map("map2").setView([20.5937, 78.9629], 4.5);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(mapInstance);
+
+    setMap(mapInstance);
+
+    // Initialize Leaflet Draw
+    const drawnItemsLayer = new L.FeatureGroup();
+    mapInstance.addLayer(drawnItemsLayer);
+    setDrawnItems(drawnItemsLayer);
+
+    const drawControl = new L.Control.Draw({
+      draw: {
+        polygon: true,
+        polyline: false,
+        rectangle: false,
+        circle: false,
+        marker: false,
+      },
+      edit: {
+        featureGroup: drawnItemsLayer,
+        remove: true,
+      },
     });
-    setMap(map);
+
+    mapInstance.addControl(drawControl);
 
     return () => {
-      // Cleanup
-      map.setTarget(null);
+      // Cleanup when the component unmounts
+      if (mapInstance) {
+        mapInstance.remove();
+      }
     };
   }, []);
 
@@ -53,34 +65,25 @@ const OpenMap = ({ state }) => {
           }
 
           const geojsonData = await response.json();
-          const geojsonFormat = new GeoJSON();
-          const features = geojsonFormat.readFeatures(geojsonData);
 
-          map.getLayers().forEach((layer) => {
-            if (layer instanceof VectorLayer) {
-              map.removeLayer(layer);
-            }
+          // Remove previous GeoJSON layer if it exists
+          if (drawnItems) {
+            map.removeLayer(drawnItems);
+          }
+
+          const newGeojsonLayer = L.geoJSON(geojsonData, {
+            style: {
+              color: "blue",
+              weight: 2,
+              fillOpacity: 0.1,
+            },
           });
 
-          const vectorSource = new VectorSource({
-            features: features,
-          });
+          newGeojsonLayer.addTo(map);
+          map.fitBounds(newGeojsonLayer.getBounds());
 
-          const vectorLayer = new VectorLayer({
-            source: vectorSource,
-            style: new Style({
-              stroke: new Stroke({
-                color: "blue",
-                width: 2,
-              }),
-              fill: new Fill({
-                color: "rgba(0, 0, 255, 0.1)",
-              }),
-            }),
-          });
-
-          map.addLayer(vectorLayer);
-          map.getView().fit(vectorSource.getExtent());
+          // Add the new GeoJSON layer to the drawn items layer
+          drawnItems.addLayer(newGeojsonLayer);
         } catch (error) {
           console.error("Error fetching or parsing GeoJSON data:", error);
         }
@@ -88,11 +91,11 @@ const OpenMap = ({ state }) => {
     };
 
     fetchAndDisplayStateBoundaries();
-  }, [state, map]);
+  }, [state, map, drawnItems]);
 
   return (
     <div>
-      <div id="map2" style={{ width: "100%", height: "100vh" }}></div>
+      <div id="map2" style={{ width: "100%", height: "80vh" }}></div>
     </div>
   );
 };

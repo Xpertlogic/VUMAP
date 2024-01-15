@@ -15,7 +15,7 @@ function App() {
   const handleStateChange = (stateItem) => {
     setSelectedState(stateItem);
   };
-
+  console.log(selectedState)
   return (
     <Layout>
       <Suspense fallback={<div>Loading...</div>}>
@@ -28,7 +28,7 @@ function App() {
           </Suspense>
           <Content className="overflow-hidden">
             <Suspense fallback={<div>Loading...</div>}>
-              <OpenMap />
+              <OpenMap state={selectedState} />
             </Suspense>
           </Content>
         </Layout>
