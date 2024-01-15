@@ -15,7 +15,7 @@ function App() {
   const handleStateChange = (stateItem) => {
     setSelectedState(stateItem);
   };
-  console.log(selectedState)
+  console.log(selectedState);
   return (
     <Layout>
       <Suspense fallback={<div>Loading...</div>}>

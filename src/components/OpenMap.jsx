@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet-draw";
+import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/images/marker-icon.png";
 import "leaflet/dist/images/marker-shadow.png";
 
@@ -12,10 +12,10 @@ const OpenMap = ({ state }) => {
 
   useEffect(() => {
     // Initialize the map when the component mounts
-    const mapInstance = L.map("map2").setView([20.5937, 78.9629], 4.5);
+    const mapInstance = L.map("map2").setView([20.5937, 78.9629], 5);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '© OpenStreetMap contributors',
+      attribution: "OpenStreetMap",
     }).addTo(mapInstance);
 
     setMap(mapInstance);
@@ -39,7 +39,17 @@ const OpenMap = ({ state }) => {
       },
     });
 
-    mapInstance.addControl(drawControl);
+    // Check if mapInstance is not null before adding event listeners
+    if (mapInstance) {
+      // Add event listener for created event
+      mapInstance.on(L.Draw.Event.CREATED, function (event) {
+        const layer = event.layer;
+        drawnItemsLayer.addLayer(layer);
+      });
+
+      // Add control to the map
+      mapInstance.addControl(drawControl);
+    }
 
     return () => {
       // Cleanup when the component unmounts
@@ -74,8 +84,8 @@ const OpenMap = ({ state }) => {
           const newGeojsonLayer = L.geoJSON(geojsonData, {
             style: {
               color: "blue",
-              weight: 2,
-              fillOpacity: 0.1,
+              weight: 1,
+              fillOpacity: 0,
             },
           });
 
@@ -95,7 +105,7 @@ const OpenMap = ({ state }) => {
 
   return (
     <div>
-      <div id="map2" style={{ width: "100%", height: "80vh" }}></div>
+      <div id="map2" style={{ width: "100%", height: "100vh" }}></div>
     </div>
   );
 };
