@@ -4,14 +4,21 @@ import stateData from "../data/states.json";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-function SideBar({ onStateChange }) {
+function SideBar() {
   const [selectedState, setSelectedState] = useState(null);
 
-  const handleChange = (value) => {
-    setSelectedState(value);
-    onStateChange(value);
-    console.log(`selected ${value}`);
+  /* ---- States ---- */
+  const getStatesData = stateData.features
+    .map((item) => item.properties.STATE)
+    .filter((x) => x !== null);
+
+  const handleStateChange = (value) => {
+    const getState = stateData?.features.find(
+      (item) => item.properties.STATE === value
+    );
+    setSelectedState(getState);
   };
+  /* --------------------- */
 
   return (
     <>
@@ -25,12 +32,7 @@ function SideBar({ onStateChange }) {
           height: "100vh",
         }}
       >
-        <Menu
-          mode="inline"
-          // defaultSelectedKeys={["1"]}
-          // defaultOpenKeys={["sub1"]}
-          style={{ height: "100%" }}
-        >
+        <Menu mode="inline" style={{ height: "100%" }}>
           <Form.Item>
             <div className="select-group">
               <div>
@@ -39,7 +41,6 @@ function SideBar({ onStateChange }) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  onChange={handleChange}
                   options={[{ value: "india", label: "India" }]}
                 />
               </div>
@@ -53,12 +54,18 @@ function SideBar({ onStateChange }) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  onChange={handleChange}
-                  options={stateData.features.map((item) => ({
-                    value: item.properties.STATE,
-                    label: item.properties.STATE,
-                  }))}
-                />
+                  onChange={(value) => handleStateChange(value)}
+                >
+                  {getStatesData && getStatesData !== undefined
+                    ? getStatesData.map((stateItem, index) => {
+                        return (
+                          <option value={stateItem} key={index}>
+                            {stateItem}
+                          </option>
+                        );
+                      })
+                    : "No State"}
+                </Select>
               </div>
             </div>
           </Form.Item>
@@ -70,7 +77,6 @@ function SideBar({ onStateChange }) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  onChange={handleChange}
                   options={[{ value: "khorda", label: "Khorda" }]}
                 />
               </div>
@@ -84,7 +90,6 @@ function SideBar({ onStateChange }) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  onChange={handleChange}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
                 />
               </div>
@@ -98,7 +103,6 @@ function SideBar({ onStateChange }) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  onChange={handleChange}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
                 />
               </div>
@@ -112,7 +116,6 @@ function SideBar({ onStateChange }) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  onChange={handleChange}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
                 />
               </div>

@@ -1,113 +1,55 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
-import "leaflet/dist/images/marker-icon.png";
-import "leaflet/dist/images/marker-shadow.png";
+import { MapContainer, TileLayer, FeatureGroup, GeoJSON } from "react-leaflet";
+import { EditControl } from "react-leaflet-draw";
 
-const OpenMap = ({ state }) => {
-  const [map, setMap] = useState(null);
-  const [drawnItems, setDrawnItems] = useState(null);
+function OpenMap({ mapData, stateView }) {
+  const position = mapData && mapData;
+  const [zoomLevel, setZoomLevel] = useState(5);
+
+  const stateCornersStyle = {
+    radius: 5,
+    fillColor: "transparent",
+    color: "blue",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
 
   useEffect(() => {
-    // Initialize the map when the component mounts
-    const mapInstance = L.map("map2").setView([20.5937, 78.9629], 5);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "OpenStreetMap",
-    }).addTo(mapInstance);
-
-    setMap(mapInstance);
-
-    // Initialize Leaflet Draw
-    const drawnItemsLayer = new L.FeatureGroup();
-    mapInstance.addLayer(drawnItemsLayer);
-    setDrawnItems(drawnItemsLayer);
-
-    const drawControl = new L.Control.Draw({
-      draw: {
-        polygon: true,
-        polyline: false,
-        rectangle: false,
-        circle: false,
-        marker: false,
-      },
-      edit: {
-        featureGroup: drawnItemsLayer,
-        remove: true,
-      },
-    });
-
-    // Check if mapInstance is not null before adding event listeners
-    if (mapInstance) {
-      // Add event listener for created event
-      mapInstance.on(L.Draw.Event.CREATED, function (event) {
-        const layer = event.layer;
-        drawnItemsLayer.addLayer(layer);
-      });
-
-      // Add control to the map
-      mapInstance.addControl(drawControl);
+    if (mapData) {
+      setZoomLevel(6);
     }
-
-    return () => {
-      // Cleanup when the component unmounts
-      if (mapInstance) {
-        mapInstance.remove();
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const fetchAndDisplayStateBoundaries = async () => {
-      if (state && map) {
-        try {
-          // Fetch the GeoJSON file based on the selected state
-          const response = await fetch(`./Orissa.geojson`, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-
-          if (!response.ok || response.status !== 200) {
-            throw new Error("Failed to fetch GeoJSON data");
-          }
-
-          const geojsonData = await response.json();
-
-          // Remove previous GeoJSON layer if it exists
-          if (drawnItems) {
-            map.removeLayer(drawnItems);
-          }
-
-          const newGeojsonLayer = L.geoJSON(geojsonData, {
-            style: {
-              color: "blue",
-              weight: 1,
-              fillOpacity: 0,
-            },
-          });
-
-          newGeojsonLayer.addTo(map);
-          map.fitBounds(newGeojsonLayer.getBounds());
-
-          // Add the new GeoJSON layer to the drawn items layer
-          drawnItems.addLayer(newGeojsonLayer);
-        } catch (error) {
-          console.error("Error fetching or parsing GeoJSON data:", error);
-        }
-      }
-    };
-
-    fetchAndDisplayStateBoundaries();
-  }, [state, map, drawnItems]);
+  }, [mapData]);
 
   return (
-    <div>
-      <div id="map2" style={{ width: "100%", height: "100vh" }}></div>
-    </div>
+    <MapContainer
+      center={position}
+      zoom={zoomLevel}
+      scrollWheelZoom={true}
+      style={{ height: "100vh", width: "100%" }}
+    >
+      {stateView && <GeoJSON data={stateView} style={stateCornersStyle} />}
+      <FeatureGroup>
+        <EditControl
+          position="topleft"
+          draw={{
+            rectangle: true,
+            polygon: true,
+            polyline: false,
+            circle: true,
+            circlemarker: false,
+            marker: false,
+          }}
+        />
+      </FeatureGroup>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+    </MapContainer>
   );
-};
+}
 
 export default OpenMap;
