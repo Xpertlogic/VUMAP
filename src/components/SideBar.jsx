@@ -4,7 +4,7 @@ import stateData from "../data/states.json";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-function SideBar() {
+function SideBar({onSelected}) {
   const [selectedState, setSelectedState] = useState(null);
 
   /* ---- States ---- */
@@ -16,7 +16,7 @@ function SideBar() {
     const getState = stateData?.features.find(
       (item) => item.properties.STATE === value
     );
-    setSelectedState(getState);
+    onSelected(value);
   };
   /* --------------------- */
 

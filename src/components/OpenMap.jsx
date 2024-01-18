@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import { MapContainer, TileLayer, FeatureGroup, GeoJSON } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
-
+import StateData from '../data/odisha.json'
 function OpenMap({ mapData, stateView }) {
   const position = mapData && mapData;
   const [zoomLevel, setZoomLevel] = useState(5);
@@ -30,7 +30,7 @@ function OpenMap({ mapData, stateView }) {
       scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%" }}
     >
-      {stateView && <GeoJSON data={stateView} style={stateCornersStyle} />}
+      {stateView && <GeoJSON data={StateData} style={stateCornersStyle} />}
       <FeatureGroup>
         <EditControl
           position="topleft"
