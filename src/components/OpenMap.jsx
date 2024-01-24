@@ -4,9 +4,11 @@ import "leaflet-draw/dist/leaflet.draw.css";
 import { MapContainer, TileLayer, FeatureGroup, GeoJSON } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 
+
 function OpenMap({ mapData, countryView, stateView }) {
   // const position = mapData && mapData;
   const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
+
   const [zoomLevel, setZoomLevel] = useState(5);
 
   const countryCornersStyle = {
@@ -34,10 +36,12 @@ function OpenMap({ mapData, countryView, stateView }) {
       scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%" }}
     >
+
       {countryView && (
         <GeoJSON data={countryView} style={countryCornersStyle} />
       )}
       {stateView && <GeoJSON data={stateView} style={stateCornersStyle} />}
+
       <FeatureGroup>
         <EditControl
           position="topleft"
