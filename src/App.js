@@ -2,14 +2,18 @@ import { useState } from "react";
 import "./style/style.css";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
-import OpenMap from "./components/OpenMap";
+
+import IndiaData from "./data/indiaData.json";
+
+
+
 
 const { Content, Footer } = Layout;
 const HeaderCompo = lazy(() => import("./components/HeaderCompo"));
 const SideBar = lazy(() => import("./components/SideBar"));
 function App() {
-  const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
-  const [selectedState, setSelectedState] = useState(null);
+  // const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
+  const [selectedState, setSelectedState] = useState([]);
 
   const handleStateChange = (stateItem) => {
     console.log(stateItem)
@@ -28,7 +32,14 @@ function App() {
           </Suspense>
           <Content className="overflow-hidden">
             <Suspense fallback={<div>Loading...</div>}>
-              <OpenMap mapData={centerPosition} stateView={selectedState} />
+
+              <OpenMap
+                // mapData={centerPosition}
+                countryView={IndiaData}
+                stateView={selectedState}
+              />
+
+
             </Suspense>
           </Content>
         </Layout>

@@ -1,24 +1,123 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Layout, Menu, Select, Form, Checkbox } from "antd";
-import stateData from "../data/states.json";
+import countryData from "../data/indiaData.json";
+import stateData from "../data/All_State_Data.json";
+import districtData from "../data/districts.json";
+// import HouseNumberData from "../data/HouseNum.json";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-function SideBar({onSelected}) {
+
+function SideBar({
+  onSelectedCountry,
+  onSelectedState,
+  onSelectedDistrict,
+  selectedAirportTypes,
+  onAirportTypeChange,
+  onSelectedHouseNum,
+}) {
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
   const [selectedState, setSelectedState] = useState(null);
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  // const [selectedHouseNum, setSelectedHouseNum] = useState();
+
+  /* --------------- Airport ------------- */
+
+  const handleAirportTypeChange = (airportType) => {
+    const updatedSelectedTypes = selectedAirportTypes.includes(airportType)
+      ? selectedAirportTypes.filter((type) => type !== airportType)
+      : [...selectedAirportTypes, airportType];
+
+    onAirportTypeChange(updatedSelectedTypes);
+  };
+
+  /* ------------------------------------- */
+
+  /* --------------- Railway ------------- */
+
+  /* ------------------------------------- */
+
+  /* ---- Country ---- */
+
+  const getCountryData = countryData.features
+    .map((item) => item.properties.NAME)
+    .filter((x) => x !== null);
+
+  const handleCountryChange = (value) => {
+    const getCountry = countryData?.features.find(
+      (item) => item.properties.NAME === value
+    );
+    setSelectedCountry(getCountry);
+    setSelectedState(null);
+    setSelectedDistrict(null);
+    onSelectedCountry(value);
+  };
+
+  /* --------------------- */
 
   /* ---- States ---- */
+
   const getStatesData = stateData.features
-    .map((item) => item.properties.STATE)
+    .map((item) => item.properties.Name)
     .filter((x) => x !== null);
 
   const handleStateChange = (value) => {
     const getState = stateData?.features.find(
-      (item) => item.properties.STATE === value
+      (item) => item.properties.Name === value
     );
-    onSelected(value);
+
+    setSelectedState(getState);
+    setSelectedDistrict(null);
+    onSelectedState(value);
+
   };
   /* --------------------- */
+
+  /* ---- Districts ---- */
+
+  const getDistrictsData = districtData.features
+    .map((item) => item.properties.Dist_Name)
+    .filter((x) => x !== null);
+
+  const handleDistrictChange = (value) => {
+    const getDistrict = districtData?.features.find(
+      (item) => item.properties.Dist_Name === value
+    );
+    setSelectedDistrict(getDistrict);
+
+    onSelectedDistrict(value);
+  };
+  /* --------------------- */
+
+  /* ------- House Number ------ */
+  // const getHousesData = HouseNumberData.features
+  //   .map((item) => item.properties.IDPRIM)
+  //   .filter((x) => x !== null);
+
+  // // console.log(getHousesData);
+
+  // const handelHouseNumber = (value) => {
+  //   const getHouseNum = HouseNumberData?.features.find(
+  //     (item) => item.properties.IDPRIM === value
+  //   );
+
+  //   setSelectedHouseNum(getHouseNum);
+  //   onSelectedHouseNum(value);
+  // };
+
+  /* -------------------------------- */
+
+  useEffect(() => {
+    // If the country changes, reset state and district
+    setSelectedState(null);
+    setSelectedDistrict(null);
+  }, [selectedCountry]);
+
+  useEffect(() => {
+    // If the state changes, reset district
+    setSelectedDistrict(null);
+  }, [selectedState]);
 
   return (
     <>
@@ -41,8 +140,18 @@ function SideBar({onSelected}) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  options={[{ value: "india", label: "India" }]}
-                />
+                  onChange={(value) => handleCountryChange(value)}
+                >
+                  {getCountryData && getCountryData !== undefined
+                    ? getCountryData.map((countryItem, index) => {
+                        return (
+                          <option value={countryItem} key={index}>
+                            {countryItem}
+                          </option>
+                        );
+                      })
+                    : "No Country"}
+                </Select>
               </div>
             </div>
           </Form.Item>
@@ -55,6 +164,7 @@ function SideBar({onSelected}) {
                 <Select
                   style={{ width: 150 }}
                   onChange={(value) => handleStateChange(value)}
+                  disabled={!selectedCountry}
                 >
                   {getStatesData && getStatesData !== undefined
                     ? getStatesData.map((stateItem, index) => {
@@ -77,8 +187,19 @@ function SideBar({onSelected}) {
               <div>
                 <Select
                   style={{ width: 150 }}
-                  options={[{ value: "khorda", label: "Khorda" }]}
-                />
+                  onChange={(value) => handleDistrictChange(value)}
+                  disabled={!selectedState}
+                >
+                  {getDistrictsData && getDistrictsData !== undefined
+                    ? getDistrictsData.map((districtItem, index) => {
+                        return (
+                          <option value={districtItem} key={index}>
+                            {districtItem}
+                          </option>
+                        );
+                      })
+                    : "No District"}
+                </Select>
               </div>
             </div>
           </Form.Item>
@@ -91,6 +212,7 @@ function SideBar({onSelected}) {
                 <Select
                   style={{ width: 150 }}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
+                  disabled
                 />
               </div>
             </div>
@@ -104,6 +226,7 @@ function SideBar({onSelected}) {
                 <Select
                   style={{ width: 150 }}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
+                  disabled
                 />
               </div>
             </div>
@@ -117,6 +240,7 @@ function SideBar({onSelected}) {
                 <Select
                   style={{ width: 150 }}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
+                  disabled
                 />
               </div>
             </div>
@@ -150,14 +274,29 @@ function SideBar({onSelected}) {
             title={<span className="text-[1rem]">Transports</span>}
           >
             <SubMenu key="sub1-1" title="Airports">
-              <Menu.Item key="3">
-                <Checkbox>Internationals Airports</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Major Airports</Checkbox>
-              </Menu.Item>
               <Menu.Item key="1">
-                <Checkbox>State/Other Airports</Checkbox>
+                <Checkbox
+                  onChange={() => handleAirportTypeChange("International")}
+                  checked={selectedAirportTypes.includes("International")}
+                >
+                  Internationals Airports
+                </Checkbox>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Checkbox
+                  onChange={() => handleAirportTypeChange("Domestic")}
+                  checked={selectedAirportTypes.includes("Domestic")}
+                >
+                  Domestic Airports
+                </Checkbox>
+              </Menu.Item>
+              <Menu.Item key="3">
+                <Checkbox
+                  onChange={() => handleAirportTypeChange("State/Private")}
+                  checked={selectedAirportTypes.includes("State/Private")}
+                >
+                  State/Other Airports
+                </Checkbox>
               </Menu.Item>
             </SubMenu>
             <SubMenu key="sub1-2" title="Rail">
