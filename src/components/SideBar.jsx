@@ -7,6 +7,7 @@ import districtData from "../data/districts.json";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
+
 function SideBar({
   onSelectedCountry,
   onSelectedState,
@@ -16,6 +17,7 @@ function SideBar({
   onSelectedHouseNum,
 }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
+
   const [selectedState, setSelectedState] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   // const [selectedHouseNum, setSelectedHouseNum] = useState();
@@ -64,9 +66,11 @@ function SideBar({
     const getState = stateData?.features.find(
       (item) => item.properties.Name === value
     );
+
     setSelectedState(getState);
     setSelectedDistrict(null);
     onSelectedState(value);
+
   };
   /* --------------------- */
 
