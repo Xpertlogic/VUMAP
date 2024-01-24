@@ -44,7 +44,7 @@ function OpenMap({ mapData, countryView, stateView }) {
           draw={{
             rectangle: true,
             polygon: true,
-            polyline: false,
+            polyline: false, 
             circle: true,
             circlemarker: false,
             marker: false,
