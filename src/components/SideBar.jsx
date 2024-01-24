@@ -7,7 +7,6 @@ import districtData from "../data/districts.json";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-
 function SideBar({
   onSelectedCountry,
   onSelectedState,
@@ -70,7 +69,6 @@ function SideBar({
     setSelectedState(getState);
     setSelectedDistrict(null);
     onSelectedState(value);
-
   };
   /* --------------------- */
 

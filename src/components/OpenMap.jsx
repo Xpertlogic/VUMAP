@@ -1,15 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  FeatureGroup,
+  GeoJSON,
+  Marker,
+  Popup,
+} from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
-import { MapContainer, TileLayer, FeatureGroup, GeoJSON } from "react-leaflet";
+import "../style/style.css";
 import { EditControl } from "react-leaflet-draw";
+import countryData from "../data/indiaData.json";
+import stateData from "../data/All_State_Data.json";
+import districtData from "../data/districts.json";
+// import HouseNumberData from "../data/HouseNum.json";
 
-
-function OpenMap({ mapData, countryView, stateView }) {
+function OpenMap({
+  mapData,
+  countryView,
+  stateView,
+  districtView,
+  selectedAirportTypes,
+  airportDataView,
+}) {
   // const position = mapData && mapData;
-  const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
-
+  const [centerPosition, setCenterPosition] = useState(mapData);
   const [zoomLevel, setZoomLevel] = useState(5);
+
+  useEffect(() => {
+    setCenterPosition(mapData);
+  }, [mapData]);
+
+  useEffect(() => {
+    if (countryView) {
+      setZoomLevel(6);
+    }
+  }, [countryView]);
+
+  useEffect(() => {
+    if (stateView) {
+      setZoomLevel(8);
+    }
+  }, [stateView]);
+
+  useEffect(() => {
+    if (districtView) {
+      setZoomLevel(8);
+    }
+  }, [districtView]);
 
   const countryCornersStyle = {
     radius: 5,
@@ -29,6 +69,29 @@ function OpenMap({ mapData, countryView, stateView }) {
     fillOpacity: 0.8,
   };
 
+  const districtCornersStyle = {
+    radius: 5,
+    fillColor: "transparent",
+    color: "red",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
+
+  const airportIcon = new L.Icon({
+    iconUrl: "images/airport.webp",
+    iconSize: [32, 32],
+    popupAnchor: [0, -10],
+  });
+
+  /* -------------- Airport Data -------------- */
+
+  // Filter the airports based on selected types
+  const filteredAirports = airportDataView.features.filter((airport) =>
+    selectedAirportTypes.includes(airport.properties["Airport Type"])
+  );
+  /* ------------------------------------------- */
+
   return (
     <MapContainer
       center={centerPosition}
@@ -36,11 +99,53 @@ function OpenMap({ mapData, countryView, stateView }) {
       scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%" }}
     >
-
       {countryView && (
-        <GeoJSON data={countryView} style={countryCornersStyle} />
+        <GeoJSON data={countryData} style={countryCornersStyle} />
       )}
-      {stateView && <GeoJSON data={stateView} style={stateCornersStyle} />}
+
+      {stateView && <GeoJSON data={stateData} style={stateCornersStyle} />}
+
+      {districtView && (
+        <GeoJSON data={districtData} style={districtCornersStyle} />
+      )}
+
+      {/* Render markers for filtered airports */}
+      {filteredAirports.map((airport, index) => (
+        <Marker
+          key={index}
+          icon={airportIcon}
+          position={[
+            airport.geometry.coordinates[1],
+            airport.geometry.coordinates[0],
+          ]}
+        >
+          <Popup>
+            <div>
+              <h3>{airport.properties["Airport Name"]}</h3>
+              <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+      {/* {airportCategoryView.features.map((feature) => (
+        <Marker
+          key={feature.properties["Airport Name"]}
+          position={[
+            feature.geometry.coordinates[1],
+            feature.geometry.coordinates[0],
+          ]}
+        >
+          <Popup>
+            <div>
+              <h3>{feature.properties["Airport Name"]}</h3>
+
+              <p>Type: {feature.properties["Airport Type"]}</p>
+
+              <p>State: {feature.properties.State}</p>
+            </div>
+          </Popup>
+        </Marker>
+      ))} */}
 
       <FeatureGroup>
         <EditControl
@@ -48,7 +153,7 @@ function OpenMap({ mapData, countryView, stateView }) {
           draw={{
             rectangle: true,
             polygon: true,
-            polyline: false, 
+            polyline: false,
             circle: true,
             circlemarker: false,
             marker: false,
