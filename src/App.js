@@ -4,6 +4,7 @@ import { Suspense, lazy } from "react";
 import { Layout } from "antd";
 import OpenMap from "./components/OpenMap";
 import airportData from "./data/Transports/Airports/Airports.json";
+import poiData from "./data/All_POI.json";
 
 const { Content, Footer } = Layout;
 const HeaderCompo = lazy(() => import("./components/HeaderCompo"));
@@ -15,8 +16,12 @@ function App() {
   const [selectedState, setSelectedState] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState();
 
-  /* --------------- for Airport ------------- */
+  /* ------------------------------------------ */
+
+  //-->For Airports
   const [selectedAirportTypes, setSelectedAirportTypes] = useState([]);
+  //-->For POI's
+  const [selectedPoiTypes, setSelectedPoiTypes] = useState([]);
 
   /* ------------------------------------------ */
 
@@ -35,8 +40,6 @@ function App() {
     setSelectedDistrict(districtItem);
   };
 
-  /* ---- Transport ---- */
-
   return (
     <Layout>
       <Suspense fallback={<div>Loading...</div>}>
@@ -51,6 +54,8 @@ function App() {
               onSelectedDistrict={handleDistrictChange}
               selectedAirportTypes={selectedAirportTypes}
               onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
+              selectedPoiTypes={selectedPoiTypes}
+              onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
             />
           </Suspense>
           <Content className="overflow-hidden">
@@ -62,6 +67,8 @@ function App() {
                 districtView={selectedDistrict}
                 selectedAirportTypes={selectedAirportTypes}
                 airportDataView={airportData}
+                selectedPoiTypes={selectedPoiTypes}
+                poiDataView={poiData}
               />
             </Suspense>
           </Content>

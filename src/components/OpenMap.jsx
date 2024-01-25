@@ -24,6 +24,8 @@ function OpenMap({
   districtView,
   selectedAirportTypes,
   airportDataView,
+  selectedPoiTypes,
+  poiDataView,
 }) {
   // const position = mapData && mapData;
   const [centerPosition, setCenterPosition] = useState(mapData);
@@ -84,11 +86,24 @@ function OpenMap({
     popupAnchor: [0, -10],
   });
 
+  const poiIcon = new L.Icon({
+    iconUrl: "images/markers.png",
+    iconSize: [32, 32],
+    popupAnchor: [0, -10],
+  });
+
   /* -------------- Airport Data -------------- */
 
   // Filter the airports based on selected types
   const filteredAirports = airportDataView.features.filter((airport) =>
     selectedAirportTypes.includes(airport.properties["Airport Type"])
+  );
+  /* ------------------------------------------- */
+
+  /* -------------- POI Data -------------- */
+
+  const filteredPois = poiDataView.features.filter((poi) =>
+    selectedPoiTypes.includes(poi.properties.descricao)
   );
   /* ------------------------------------------- */
 
@@ -127,6 +142,24 @@ function OpenMap({
           </Popup>
         </Marker>
       ))}
+
+      {/* Render markers for filtered POI'S */}
+      {filteredPois.map((poi, index) => (
+        <Marker
+          key={index}
+          icon={poiIcon}
+          position={[poi.geometry.coordinates[1], poi.geometry.coordinates[0]]}
+        >
+          <Popup>
+            <div>
+              <h3>{poi.properties.streetname}</h3>
+              <p>{`Type: ${poi.properties.estado}`}</p>
+              <p>{`Catregory: ${poi.properties.descricao}`}</p>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+
       {/* {airportCategoryView.features.map((feature) => (
         <Marker
           key={feature.properties["Airport Name"]}

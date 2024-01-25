@@ -14,6 +14,8 @@ function SideBar({
   selectedAirportTypes,
   onAirportTypeChange,
   onSelectedHouseNum,
+  selectedPoiTypes,
+  onPoiTypesChange,
 }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
@@ -33,7 +35,18 @@ function SideBar({
 
   /* ------------------------------------- */
 
-  /* --------------- Railway ------------- */
+  /* --------------- Rail ------------- */
+
+  /* ------------------------------------- */
+
+  /* --------------- POI ------------- */
+  const handelPoiTypeChange = (poiType) => {
+    const updatedSelectedPoiTypes = selectedPoiTypes.includes(poiType)
+      ? selectedPoiTypes.filter((type) => type !== poiType)
+      : [...selectedPoiTypes, poiType];
+
+    onPoiTypesChange(updatedSelectedPoiTypes);
+  };
 
   /* ------------------------------------- */
 
@@ -343,16 +356,36 @@ function SideBar({
           <SubMenu key="sub4" title={<span className="text-[1rem]">POI</span>}>
             <SubMenu key="sub4-1" title="Automotive Dealer">
               <Menu.Item key="1">
-                <Checkbox>Bike</Checkbox>
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Bike")}
+                  checked={selectedPoiTypes.includes("Bike")}
+                >
+                  Bike
+                </Checkbox>
               </Menu.Item>
               <Menu.Item key="2">
-                <Checkbox>Car</Checkbox>
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Car")}
+                  checked={selectedPoiTypes.includes("Car")}
+                >
+                  Car
+                </Checkbox>
               </Menu.Item>
               <Menu.Item key="3">
-                <Checkbox>Bus</Checkbox>
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Bus")}
+                  checked={selectedPoiTypes.includes("Bus")}
+                >
+                  Bus
+                </Checkbox>
               </Menu.Item>
               <Menu.Item key="4">
-                <Checkbox>Truck</Checkbox>
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Truck")}
+                  checked={selectedPoiTypes.includes("Truck")}
+                >
+                  Truck
+                </Checkbox>
               </Menu.Item>
               <Menu.Item key="5">
                 <Checkbox>Electric Vehicle</Checkbox>
