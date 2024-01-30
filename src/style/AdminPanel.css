@@ -1,0 +1,41 @@
+/* AdminPanel.css */
+
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+  }
+/*  
+  .admin-panel-header {
+    background-color: #1890ff; 
+    color: white;
+    padding: 16px;
+    text-align: center;
+  }
+*/
+
+.admin-panel-header{
+    background-color: #11406d;
+    color: white;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .admin-panel-heade-heading{
+    margin: 0;
+  }
+ 
+  .admin-panel-footer {
+    background-color: #001529; /* Dark background color for the footer */
+    color: white;
+    padding: 8px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  
