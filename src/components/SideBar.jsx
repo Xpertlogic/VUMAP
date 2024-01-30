@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Layout, Menu, Select, Form, Checkbox } from "antd";
+import { Layout, Menu, Select, Form, Checkbox, Button } from "antd";
 import countryData from "../data/indiaData.json";
 import stateData from "../data/All_State_Data.json";
 import districtData from "../data/districts.json";
@@ -778,6 +778,14 @@ function SideBar({
               <Checkbox>Shopping Centre</Checkbox>
             </Menu.Item>
           </SubMenu>
+          <div className="m-[2rem]">
+            <Button type="primary" className="bg-blue-700 mr-[1rem]">
+              Reset
+            </Button>
+            <Button type="primary" className="bg-blue-700 ">
+              Download
+            </Button>
+          </div>
         </Menu>
       </Sider>
     </>
