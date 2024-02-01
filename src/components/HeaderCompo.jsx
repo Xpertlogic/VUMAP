@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import "../style/style.css";
-import { Layout, Menu, Breadcrumb, Button, Modal } from "antd";
+import { Link, useLocation } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
-import AboutUs from "./AboutUs";
-import ContactUs from "./ContactUs";
+import { Layout, Menu, Breadcrumb, Button, Modal } from "antd";
 const { Header, Content } = Layout;
 
 function HeaderCompo() {
@@ -28,81 +26,88 @@ function HeaderCompo() {
     setIsSignUpModalOpen(false);
   };
 
+  /* ---- Path For Breadcrumb Item ---- */
+  const location = useLocation();
+  const pathForBreadcrumb = location.pathname.split("/").filter((i) => i);
+
   return (
-    <Router>
-      <>
-        <Layout>
-          <Header className="header">
-            <Menu
-              theme="dark"
-              mode="horizontal"
-              defaultSelectedKeys={["1"]}
+    <>
+      <Layout>
+        <Header className="header">
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["1"]}
+            style={{
+              lineHeight: "64px",
+            }}
+          >
+            <Menu.Item key="1">
+              <Link to="/">Home</Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/About">About</Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to="/Contact">Contact</Link>
+            </Menu.Item>
+            <div
               style={{
-                lineHeight: "64px",
+                position: "absolute",
+                right: "5%",
               }}
             >
-              <Menu.Item key="1">
-                <Link to="/">Home</Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/about">About</Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link to="/contact">Contact</Link>
-              </Menu.Item>
-              <div
-                style={{
-                  position: "absolute",
-                  right: "5%",
-                }}
-              >
-                <Button type="primary" onClick={showSignInModal}>
-                  Sign In
-                </Button>
-                <Button type="primary" onClick={showSignUpModal}>
-                  Sign Up
-                </Button>
-              </div>
-            </Menu>
+              <Button type="primary" onClick={showSignInModal}>
+                Sign In
+              </Button>
+              <Button type="primary" onClick={showSignUpModal}>
+                Sign Up
+              </Button>
+            </div>
+          </Menu>
 
-            {/* Sign In Modal  */}
-            <Modal
-              title="Sign In"
-              visible={isSignInModalOpen}
-              onOk={hideSignInModal}
-              onCancel={hideSignInModal}
-              footer={null}
-            >
-              <Signin />
-            </Modal>
+          {/* Sign In Modal  */}
+          <Modal
+            title="Sign In"
+            open={isSignInModalOpen}
+            onOk={hideSignInModal}
+            onCancel={hideSignInModal}
+            footer={null}
+          >
+            <Signin />
+          </Modal>
 
-            {/* Sign Up Modal  */}
-            <Modal
-              title="Sign Up"
-              visible={isSignUpModalOpen}
-              onOk={hideSignUpModal}
-              onCancel={hideSignUpModal}
-              footer={null}
-            >
-              <Signup />
-            </Modal>
-          </Header>
+          {/* Sign Up Modal  */}
+          <Modal
+            title="Sign Up"
+            open={isSignUpModalOpen}
+            onOk={hideSignUpModal}
+            onCancel={hideSignUpModal}
+            footer={null}
+          >
+            <Signup />
+          </Modal>
+        </Header>
 
-          <Content style={{ padding: "0 50px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>Map</Breadcrumb.Item>
-            </Breadcrumb>
-
-            <Routes>
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact" element={<ContactUs />} />
-              {/* <Route path="/" element={<Home />} /> */}
-            </Routes>
-          </Content>
-        </Layout>
-      </>
-    </Router>
+        <Content style={{ padding: "0 50px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>
+              <Link to="/">Home</Link>
+            </Breadcrumb.Item>
+            {/* Dynamic breadcrumbs */}
+            {pathForBreadcrumb.map((breadcrumbItem, index) => (
+              <Breadcrumb.Item key={index}>
+                <Link
+                  to={`/${pathForBreadcrumb.slice(0, index + 1).join("/")}`}
+                >
+                  {breadcrumbItem}
+                </Link>
+              </Breadcrumb.Item>
+            ))}
+          </Breadcrumb>
+        </Content>
+      </Layout>
+    </>
   );
 }
 

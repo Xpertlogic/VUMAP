@@ -1,27 +1,96 @@
 import { useEffect, useState } from "react";
-import { Layout, Menu, Select, Form, Checkbox, Button } from "antd";
+import {
+  Layout,
+  Menu,
+  Select,
+  Form,
+  Checkbox,
+  Button,
+  Modal,
+  Switch,
+} from "antd";
 import countryData from "../data/indiaData.json";
 import stateData from "../data/All_State_Data.json";
 import districtData from "../data/districts.json";
-// import HouseNumberData from "../data/HouseNum.json";
+import Subscription from "./Subscription";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 function SideBar({
+  onToggleMapLayerVisibility,
   onSelectedCountry,
   onSelectedState,
   onSelectedDistrict,
   selectedAirportTypes,
   onAirportTypeChange,
-  onSelectedHouseNum,
   selectedPoiTypes,
   onPoiTypesChange,
 }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
-
   const [selectedState, setSelectedState] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
-  // const [selectedHouseNum, setSelectedHouseNum] = useState();
+  // For Subscription Modal
+  const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
+  // For Map layer visiable
+  const [isMapLayerVisible, setIsMapLayerVisible] = useState(false);
+
+  /*----------- Select All checkbox ----------*/
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState({
+    sub5: [],
+    sub1: [],
+    sub2: [],
+    sub3: [],
+    sub4: [],
+    sub11: [],
+  });
+  /* ------------------------------------------ */
+
+  /* ------------Map Switch Layer ------------ */
+  const handleMapLayerToggle = () => {
+    const newVisibility = !isMapLayerVisible;
+    setIsMapLayerVisible(newVisibility);
+
+    if (onToggleMapLayerVisibility) {
+      onToggleMapLayerVisibility(newVisibility);
+    }
+  };
+
+  // --------------------------------
+
+  // Function to handle individual checkbox changes within each submenu
+  const handleCheckboxChange = (submenuKey, checkboxKey) => {
+    setSelectedCheckboxes((prevSelectedCheckboxes) => {
+      const submenuCheckboxes = prevSelectedCheckboxes[submenuKey];
+      const updatedCheckboxes = submenuCheckboxes.includes(checkboxKey)
+        ? submenuCheckboxes.filter((key) => key !== checkboxKey)
+        : [...submenuCheckboxes, checkboxKey];
+      return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
+    });
+  };
+
+  //Function to handle "Select All" checkbox changes within each submenu
+  const handleSelectAll = (submenuKey, submenuItems) => {
+    setSelectedCheckboxes((prevSelectedCheckboxes) => {
+      const updatedCheckboxes =
+        prevSelectedCheckboxes[submenuKey].length === submenuItems.length
+          ? []
+          : [...submenuItems.map((item) => item.toString())];
+      return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
+    });
+  };
+
+  // const handleSelectAll = (submenuKey, submenuItems) => {
+  //   setSelectedCheckboxes((prevSelectedCheckboxes) => {
+  //     const allSelected =
+  //       prevSelectedCheckboxes[submenuKey].length === submenuItems.length;
+  //     const updatedCheckboxes = allSelected
+  //       ? []
+  //       : [...submenuItems.map(String)];
+  //     return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
+  //   });
+  // };
+
+  /* ------------------------------------------------ */
 
   /* --------------- Airport ------------- */
 
@@ -32,10 +101,6 @@ function SideBar({
 
     onAirportTypeChange(updatedSelectedTypes);
   };
-
-  /* ------------------------------------- */
-
-  /* --------------- Rail ------------- */
 
   /* ------------------------------------- */
 
@@ -101,24 +166,6 @@ function SideBar({
   };
   /* --------------------- */
 
-  /* ------- House Number ------ */
-  // const getHousesData = HouseNumberData.features
-  //   .map((item) => item.properties.IDPRIM)
-  //   .filter((x) => x !== null);
-
-  // // console.log(getHousesData);
-
-  // const handelHouseNumber = (value) => {
-  //   const getHouseNum = HouseNumberData?.features.find(
-  //     (item) => item.properties.IDPRIM === value
-  //   );
-
-  //   setSelectedHouseNum(getHouseNum);
-  //   onSelectedHouseNum(value);
-  // };
-
-  /* -------------------------------- */
-
   useEffect(() => {
     // If the country changes, reset state and district
     setSelectedState(null);
@@ -129,6 +176,15 @@ function SideBar({
     // If the state changes, reset district
     setSelectedDistrict(null);
   }, [selectedState]);
+
+  /* -------- For Subscription ------- */
+  const showSubscriptionModal = () => {
+    setIsSubscriptionModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsSubscriptionModalOpen(false);
+  };
 
   return (
     <>
@@ -142,6 +198,24 @@ function SideBar({
           height: "100vh",
         }}
       >
+        {/* Checkbox for toggling map tile layer visibility */}
+        <div className="flex justify-center mb-[1.5rem]">
+          <Switch
+            checked={isMapLayerVisible}
+            onChange={handleMapLayerToggle}
+            checkedChildren="View"
+            unCheckedChildren="Hide"
+            style={{
+              transform: "transiction: all 0.7s ease",
+              backgroundColor: isMapLayerVisible ? "#1677FF" : "#36454f",
+              borderColor: isMapLayerVisible ? "red" : "green",
+              color: isMapLayerVisible ? "#fff" : "#000",
+            }}
+          />
+        </div>
+
+        {/* ------------- */}
+
         <Menu mode="inline" style={{ height: "100%" }}>
           <Form.Item>
             <div className="select-group">
@@ -260,23 +334,57 @@ function SideBar({
           <SubMenu
             key="sub5"
             title={
-              <span className="text-[1rem]">Administrative Boundaries</span>
+              <span className="text-[1rem] flex justify-around">
+                <Checkbox
+                  className=""
+                  onChange={() =>
+                    handleSelectAll("sub5", ["1", "2", "3", "4", "5"])
+                  }
+                  checked={selectedCheckboxes.sub5.length === 5}
+                ></Checkbox>
+                Administrative Boundaries
+              </span>
             }
           >
             <Menu.Item key="1">
-              <Checkbox>Country Boundary</Checkbox>
+              <Checkbox
+                onChange={() => handleCheckboxChange("sub5", "1")}
+                checked={selectedCheckboxes.sub5.includes("1")}
+              >
+                Country Boundary
+              </Checkbox>
             </Menu.Item>
             <Menu.Item key="2">
-              <Checkbox>State Boundary</Checkbox>
+              <Checkbox
+                onChange={() => handleCheckboxChange("sub5", "2")}
+                checked={selectedCheckboxes.sub5.includes("2")}
+              >
+                State Boundary
+              </Checkbox>
             </Menu.Item>
             <Menu.Item key="3">
-              <Checkbox>District Boundary</Checkbox>
+              <Checkbox
+                onChange={() => handleCheckboxChange("sub5", "3")}
+                checked={selectedCheckboxes.sub5.includes("3")}
+              >
+                District Boundary
+              </Checkbox>
             </Menu.Item>
             <Menu.Item key="4">
-              <Checkbox>Postal Boundary</Checkbox>
+              <Checkbox
+                onChange={() => handleCheckboxChange("sub5", "4")}
+                checked={selectedCheckboxes.sub5.includes("4")}
+              >
+                Postal Boundary
+              </Checkbox>
             </Menu.Item>
             <Menu.Item key="5">
-              <Checkbox>Locality Boundary</Checkbox>
+              <Checkbox
+                onChange={() => handleCheckboxChange("sub5", "5")}
+                checked={selectedCheckboxes.sub5.includes("5")}
+              >
+                Locality Boundary
+              </Checkbox>
             </Menu.Item>
           </SubMenu>
 
@@ -284,7 +392,19 @@ function SideBar({
             key="sub1"
             title={<span className="text-[1rem]">Transports</span>}
           >
-            <SubMenu key="sub1-1" title="Airports">
+            <SubMenu
+              key="sub11"
+              title={
+                <span className="text-[1rem]">
+                  <Checkbox
+                    className="mr-2"
+                    onChange={() => handleSelectAll("sub11", ["1", "2", "3"])}
+                    checked={selectedCheckboxes.sub11.length === 3}
+                  ></Checkbox>
+                  Airports
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox
                   onChange={() => handleAirportTypeChange("International")}
@@ -782,12 +902,28 @@ function SideBar({
             <Button type="primary" className="bg-blue-700 mr-[1rem]">
               Reset
             </Button>
-            <Button type="primary" className="bg-blue-700 ">
+            <Button
+              type="primary"
+              className="bg-blue-700 "
+              onClick={showSubscriptionModal}
+            >
               Download
             </Button>
           </div>
         </Menu>
       </Sider>
+
+      {/* Subscription Modal  */}
+      <Modal
+        open={isSubscriptionModalOpen}
+        onCancel={handleCancel}
+        style={{ margin: 10, padding: 0 }}
+        centered
+        width={"85%"}
+        footer={null}
+      >
+        <Subscription />
+      </Modal>
     </>
   );
 }

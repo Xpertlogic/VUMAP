@@ -86,6 +86,20 @@ function Signup() {
         </Form.Item>
 
         <Form.Item
+          name="company"
+          label="Company"
+          rules={[
+            {
+              required: true,
+              message: "Please input your company name!",
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
           name="phone"
           label="Phone Number"
           rules={[

@@ -15,9 +15,9 @@ import { EditControl } from "react-leaflet-draw";
 import countryData from "../data/indiaData.json";
 import stateData from "../data/All_State_Data.json";
 import districtData from "../data/districts.json";
-// import HouseNumberData from "../data/HouseNum.json";
 
 function OpenMap({
+  isMapLayerVisible,
   mapData,
   countryView,
   stateView,
@@ -160,26 +160,6 @@ function OpenMap({
         </Marker>
       ))}
 
-      {/* {airportCategoryView.features.map((feature) => (
-        <Marker
-          key={feature.properties["Airport Name"]}
-          position={[
-            feature.geometry.coordinates[1],
-            feature.geometry.coordinates[0],
-          ]}
-        >
-          <Popup>
-            <div>
-              <h3>{feature.properties["Airport Name"]}</h3>
-
-              <p>Type: {feature.properties["Airport Type"]}</p>
-
-              <p>State: {feature.properties.State}</p>
-            </div>
-          </Popup>
-        </Marker>
-      ))} */}
-
       <FeatureGroup>
         <EditControl
           position="topleft"
@@ -193,10 +173,12 @@ function OpenMap({
           }}
         />
       </FeatureGroup>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
+      {isMapLayerVisible && (
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="© OpenStreetMap contributors"
+        />
+      )}
     </MapContainer>
   );
 }
