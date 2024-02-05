@@ -10,6 +10,8 @@ exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
+    phone: req.body.phone,
+    company: req.body.company,
     password: bcrypt.hashSync(req.body.password, 8),
   });
 
@@ -65,7 +67,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
   User.findOne({
-    username: req.body.username,
+    email: req.body.email,
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
@@ -107,7 +109,12 @@ exports.signin = (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
+        company: user.company,
+        phone: user.phone,
         roles: authorities,
+        tier: user.tier,
+        isactive: user.isactive,
+        isverified:user.isverified,
         token: token
       });
     });

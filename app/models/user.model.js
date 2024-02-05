@@ -5,7 +5,22 @@ const User = mongoose.model(
   new mongoose.Schema({
     username: String,
     email: String,
+    phone: String,
+    company: String,
     password: String,
+    isactive:{
+      type: Boolean,
+      default: true,
+    },
+    isverified:{
+      type: Boolean,
+      default: false,
+    },
+    tier:{
+      type: String,
+      enum: ['free', 'tier1', 'tier2'],
+      default: 'free',
+    },
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,
