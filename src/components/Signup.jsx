@@ -1,5 +1,5 @@
-import { Button, Form, Input, Select } from "antd";
-const { Option } = Select;
+import { Button, Form, Input } from "antd";
+import axios from "axios";
 
 const formItemLayout = {
   labelCol: {
@@ -35,8 +35,26 @@ const tailFormItemLayout = {
 function Signup() {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const onFinish = async (values) => {
+    try {
+      // Make a POST request using Axios
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/signup",
+        {
+          username: values.name,
+          password: values.password,
+          email: values.email,
+          roles: "user",
+          company: values.company,
+          phone: values.phone,
+        }
+      );
+
+      console.log("API Response:", response.data);
+    } catch (error) {
+      // Handle errors from the API call
+      console.error("API Error:", error);
+    }
   };
 
   return (
@@ -46,9 +64,6 @@ function Signup() {
         form={form}
         name="register"
         onFinish={onFinish}
-        initialValues={{
-          prefix: "+91",
-        }}
         style={{
           maxWidth: 600,
         }}

@@ -15,6 +15,7 @@ import { EditControl } from "react-leaflet-draw";
 import countryData from "../data/indiaData.json";
 import stateData from "../data/All_State_Data.json";
 import districtData from "../data/districts.json";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 function OpenMap({
   isMapLayerVisible,
@@ -113,6 +114,7 @@ function OpenMap({
       zoom={zoomLevel}
       scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%" }}
+      maxZoom={18}
     >
       {countryView && (
         <GeoJSON data={countryData} style={countryCornersStyle} />
@@ -125,40 +127,49 @@ function OpenMap({
       )}
 
       {/* Render markers for filtered airports */}
-      {filteredAirports.map((airport, index) => (
-        <Marker
-          key={index}
-          icon={airportIcon}
-          position={[
-            airport.geometry.coordinates[1],
-            airport.geometry.coordinates[0],
-          ]}
-        >
-          <Popup>
-            <div>
-              <h3>{airport.properties["Airport Name"]}</h3>
-              <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+
+      <MarkerClusterGroup>
+        {filteredAirports.map((airport, index) => (
+          <Marker
+            key={index}
+            icon={airportIcon}
+            position={[
+              airport.geometry.coordinates[1],
+              airport.geometry.coordinates[0],
+            ]}
+          >
+            <Popup>
+              <div>
+                <h3>{airport.properties["Airport Name"]}</h3>
+                <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+      </MarkerClusterGroup>
 
       {/* Render markers for filtered POI'S */}
-      {filteredPois.map((poi, index) => (
-        <Marker
-          key={index}
-          icon={poiIcon}
-          position={[poi.geometry.coordinates[1], poi.geometry.coordinates[0]]}
-        >
-          <Popup>
-            <div>
-              <h3>{poi.properties.streetname}</h3>
-              <p>{`Type: ${poi.properties.estado}`}</p>
-              <p>{`Catregory: ${poi.properties.descricao}`}</p>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+
+      <MarkerClusterGroup>
+        {filteredPois.map((poi, index) => (
+          <Marker
+            key={index}
+            icon={poiIcon}
+            position={[
+              poi.geometry.coordinates[1],
+              poi.geometry.coordinates[0],
+            ]}
+          >
+            <Popup>
+              <div>
+                <h3>{poi.properties.streetname}</h3>
+                <p>{`Type: ${poi.properties.estado}`}</p>
+                <p>{`Catregory: ${poi.properties.descricao}`}</p>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+      </MarkerClusterGroup>
 
       <FeatureGroup>
         <EditControl

@@ -4,11 +4,25 @@ import { Link, useLocation } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import { Layout, Menu, Breadcrumb, Button, Modal } from "antd";
+import UserLogin from "./UserLogin";
 const { Header, Content } = Layout;
 
 function HeaderCompo() {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+
+  /* ------ for User Login ----- */
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+
+  const handleLogin = (email, authToken, enteredPassword) => {
+    setEmail(email);
+    setToken(authToken);
+    setPassword(enteredPassword);
+    setLoggedIn(true);
+  };
 
   const showSignInModal = () => {
     setIsSignInModalOpen(true);
@@ -74,7 +88,10 @@ function HeaderCompo() {
             onCancel={hideSignInModal}
             footer={null}
           >
-            <Signin />
+            <div>
+              {loggedIn ? <UserLogin /> : <Signin onLogin={handleLogin} />}
+            </div>
+            {/* <Signin onLogin={handleLogin}/> */}
           </Modal>
 
           {/* Sign Up Modal  */}

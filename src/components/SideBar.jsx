@@ -102,7 +102,12 @@ function SideBar({
     onAirportTypeChange(updatedSelectedTypes);
   };
 
-  /* ------------------------------------- */
+  //----------------Modified today still under development
+  // const handleAirportCheckboxChange = (checkboxKey, airportType) => {
+  //   handleCheckboxChange("sub11", checkboxKey);
+  //   handleAirportTypeChange(airportType);
+  // };
+  /* ----------------- */
 
   /* --------------- POI ------------- */
   const handelPoiTypeChange = (poiType) => {
@@ -113,7 +118,7 @@ function SideBar({
     onPoiTypesChange(updatedSelectedPoiTypes);
   };
 
-  /* ------------------------------------- */
+  /* ---------------- */
 
   /* ---- Country ---- */
 
@@ -334,7 +339,7 @@ function SideBar({
           <SubMenu
             key="sub5"
             title={
-              <span className="text-[1rem] flex justify-around">
+              <span className="text-[1rem] flex gap-2">
                 <Checkbox
                   className=""
                   onChange={() =>
@@ -407,15 +412,33 @@ function SideBar({
             >
               <Menu.Item key="1">
                 <Checkbox
-                  onChange={() => handleAirportTypeChange("International")}
+                  onChange={() => {
+                    handleAirportTypeChange("International");
+                    // handleAirportCheckboxChange("1");
+                  }}
                   checked={selectedAirportTypes.includes("International")}
                 >
                   Internationals Airports
                 </Checkbox>
               </Menu.Item>
+              {/* <Menu.Item key="1">
+                <Checkbox
+                  onChange={() =>
+                    handleAirportCheckboxChange("1", "International")
+                  }
+                  checked={selectedCheckboxes.sub11.includes(
+                    "1"
+                  )}
+                >
+                  Internationals Airports
+                </Checkbox>
+              </Menu.Item> */}
               <Menu.Item key="2">
                 <Checkbox
-                  onChange={() => handleAirportTypeChange("Domestic")}
+                  onChange={() => {
+                    handleAirportTypeChange("Domestic");
+                    handleCheckboxChange("sub11", "2");
+                  }}
                   checked={selectedAirportTypes.includes("Domestic")}
                 >
                   Domestic Airports
@@ -423,14 +446,25 @@ function SideBar({
               </Menu.Item>
               <Menu.Item key="3">
                 <Checkbox
-                  onChange={() => handleAirportTypeChange("State/Private")}
+                  onChange={() => {
+                    handleAirportTypeChange("State/Private");
+                    handleCheckboxChange("sub11", "3");
+                  }}
                   checked={selectedAirportTypes.includes("State/Private")}
                 >
                   State/Other Airports
                 </Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub1-2" title="Rail">
+            <SubMenu
+              key="sub1-2"
+              title={
+                <span className="text-[1rem]">
+                  <Checkbox className="mr-2"></Checkbox>
+                  Rail
+                </span>
+              }
+            >
               <Menu.Item key="3">
                 <Checkbox>Rail Line</Checkbox>
               </Menu.Item>
@@ -438,7 +472,15 @@ function SideBar({
                 <Checkbox>Platforms</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub1-3" title="Roads">
+            <SubMenu
+              key="sub1-3"
+              title={
+                <span className="text-[1rem]">
+                  <Checkbox className="mr-2"></Checkbox>
+                  Roads
+                </span>
+              }
+            >
               <Menu.Item key="3">
                 <Checkbox>Roads</Checkbox>
               </Menu.Item>
@@ -461,19 +503,45 @@ function SideBar({
           </SubMenu>
           <SubMenu
             key="sub2"
-            title={<span className="text-[1rem]">Buildings</span>}
+            title={
+              <span className="text-[1rem] flex gap-2">
+                <Checkbox
+                  onChange={() => handleSelectAll("sub2", ["1", "2"])}
+                  checked={selectedCheckboxes.sub2.length === 2}
+                ></Checkbox>
+                Buildings
+              </span>
+            }
           >
             <Menu.Item key="5">
-              <Checkbox>Residentials</Checkbox>
+              <Checkbox
+                onChange={() => handleCheckboxChange("sub2", "1")}
+                checked={selectedCheckboxes.sub2.includes("1")}
+              >
+                Residentials
+              </Checkbox>
             </Menu.Item>
             <Menu.Item key="6">
-              <Checkbox>Commercial</Checkbox>
+              <Checkbox
+                onChange={() => handleCheckboxChange("sub2", "2")}
+                checked={selectedCheckboxes.sub2.includes("2")}
+              >
+                Commercial
+              </Checkbox>
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="sub3">
             <Checkbox className="text-[1rem]">House Number</Checkbox>
           </Menu.Item>
-          <SubMenu key="sub4" title={<span className="text-[1rem]">POI</span>}>
+          <SubMenu
+            key="sub4"
+            title={
+              <span className="text-[1rem] flex gap-2">
+                <Checkbox></Checkbox>
+                POI
+              </span>
+            }
+          >
             <SubMenu key="sub4-1" title="Automotive Dealer">
               <Menu.Item key="1">
                 <Checkbox

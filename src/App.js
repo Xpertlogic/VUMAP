@@ -64,19 +64,17 @@ function App() {
             />
           </Suspense>
           <Content className="overflow-hidden">
-            <Suspense fallback={<div>Loading...</div>}>
-              <OpenMap
-                isMapLayerVisible={isMapLayerVisible}
-                mapData={centerPosition}
-                countryView={selectedCountry}
-                stateView={selectedState}
-                districtView={selectedDistrict}
-                selectedAirportTypes={selectedAirportTypes}
-                airportDataView={airportData}
-                selectedPoiTypes={selectedPoiTypes}
-                poiDataView={poiData}
-              />
-            </Suspense>
+            <OpenMap
+              isMapLayerVisible={isMapLayerVisible}
+              mapData={centerPosition}
+              countryView={selectedCountry}
+              stateView={selectedState}
+              districtView={selectedDistrict}
+              selectedAirportTypes={selectedAirportTypes}
+              airportDataView={airportData}
+              selectedPoiTypes={selectedPoiTypes}
+              poiDataView={poiData}
+            />
           </Content>
         </Layout>
       </Content>

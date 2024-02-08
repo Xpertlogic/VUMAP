@@ -1,9 +1,47 @@
+import { useState } from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
+import { notification, Button, Checkbox, Form, Input } from "antd";
+import axios from "axios";
 
-const Signin = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+const Signin = ({ onLogin }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onFinish = async () => {
+    try {
+      // Make a POST request using Axios
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/signin",
+        {
+          email: email,
+          password: password,
+        }
+      );
+      if (
+        response.data &&
+        response.data.email === email &&
+        response.data.token &&
+        response.data.roles[0] === "ROLE_USER"
+      ) {
+        onLogin(response.data.email, response.data.token, password);
+        console.log(response.data);
+
+        notification.success({
+          message: "Login Successful",
+          description: "You have successfully logged in.",
+        });
+      } else {
+        notification.error({
+          message: "Login Failed",
+          description: "Invalid response from the server.",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Login Failed",
+        description: "An error occurred while trying to log in.",
+      });
+    }
   };
 
   return (
@@ -27,7 +65,12 @@ const Signin = () => {
           },
         ]}
       >
-        <Input prefix={<MailOutlined />} type="email" placeholder="Email" />
+        <Input
+          prefix={<MailOutlined />}
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item
@@ -41,8 +84,9 @@ const Signin = () => {
       >
         <Input
           prefix={<LockOutlined />}
-          type="password"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Item>
       <Form.Item>
