@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { UserOutlined } from "@ant-design/icons";
 import "../style/style.css";
 import { Link, useLocation } from "react-router-dom";
 import Signup from "./Signup";
+import Subscription from "./Subscription";
 import Signin from "./Signin";
 import { Layout, Menu, Breadcrumb, Button, Modal } from "antd";
 import UserLogin from "./UserLogin";
@@ -16,12 +18,19 @@ function HeaderCompo() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   const handleLogin = (email, authToken, enteredPassword) => {
     setEmail(email);
     setToken(authToken);
     setPassword(enteredPassword);
     setLoggedIn(true);
+    setShowWelcomeModal(true); // Show the welcome modal
+    setIsSignInModalOpen(false); // Close the sign-in modal
+  };
+
+  const hideWelcomeModal = () => {
+    setShowWelcomeModal(false);
   };
 
   const showSignInModal = () => {
@@ -65,7 +74,7 @@ function HeaderCompo() {
             <Menu.Item key="3">
               <Link to="/Contact">Contact</Link>
             </Menu.Item>
-            <div
+            {/* <div
               style={{
                 position: "absolute",
                 right: "5%",
@@ -77,7 +86,23 @@ function HeaderCompo() {
               <Button type="primary" onClick={showSignUpModal}>
                 Sign Up
               </Button>
-            </div>
+            </div> */}
+            {loggedIn ? (
+              // Render user icon when logged in
+              <div style={{ position: "absolute", right: "5%" }}>
+                <Button type="link" icon={<UserOutlined />} />
+              </div>
+            ) : (
+              // Render Sign In and Sign Up buttons when not logged in
+              <div style={{ position: "absolute", right: "5%" }}>
+                <Button type="primary" onClick={showSignInModal}>
+                  Sign In
+                </Button>
+                <Button type="primary" onClick={showSignUpModal}>
+                  Sign Up
+                </Button>
+              </div>
+            )}
           </Menu>
 
           {/* Sign In Modal  */}
@@ -88,21 +113,48 @@ function HeaderCompo() {
             onCancel={hideSignInModal}
             footer={null}
           >
-            <div>
-              {loggedIn ? <UserLogin /> : <Signin onLogin={handleLogin} />}
-            </div>
-            {/* <Signin onLogin={handleLogin}/> */}
+            {/* {loggedIn ? (
+              <Modal
+                title="Welcome"
+                open={showWelcomeModal}
+                onOk={hideWelcomeModal}
+                onCancel={hideWelcomeModal}
+                centered
+                width={"50%"}
+              >
+                <p className="text-2xl">Welcome To Vumap, {email}!</p>
+              </Modal>
+            ) : (
+              <Signin onLogin={handleLogin} />
+            )} */}
+            <Signin onLogin={handleLogin} />
           </Modal>
+
+          {loggedIn && (
+            <Modal
+              title="Welcome"
+              open={showWelcomeModal}
+              onOk={hideWelcomeModal}
+              onCancel={hideWelcomeModal}
+              centered
+              width={"50%"}
+            >
+              <p className="text-2xl">Welcome To Vumap, {email}!</p>
+            </Modal>
+          )}
 
           {/* Sign Up Modal  */}
           <Modal
-            title="Sign Up"
+            // title="Sign Up"
             open={isSignUpModalOpen}
             onOk={hideSignUpModal}
             onCancel={hideSignUpModal}
+            centered
+            width={"85%"}
             footer={null}
           >
-            <Signup />
+            {/* <Signup /> */}
+            <Subscription />
           </Modal>
         </Header>
 

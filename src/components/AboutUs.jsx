@@ -1,7 +1,7 @@
 function AboutUs() {
   return (
-    <>
-      <h1>About us</h1>
+    <section style={{ padding: "0 50px" }}>
+      <h1 className="text-3xl">About us</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit eius
         perspiciatis quod quisquam rem a autem maxime, aliquam repudiandae,
@@ -13,7 +13,7 @@ function AboutUs() {
         quasi, repellendus nihil numquam. Sint at nam doloremque error dolorum,
         delectus ipsum deserunt facere?
       </p>
-    </>
+    </section>
   );
 }
 

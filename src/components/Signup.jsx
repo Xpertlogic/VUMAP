@@ -1,4 +1,5 @@
-import { Button, Form, Input } from "antd";
+import { useState } from "react";
+import { Button, Form, Input, notification } from "antd";
 import axios from "axios";
 
 const formItemLayout = {
@@ -34,27 +35,111 @@ const tailFormItemLayout = {
 
 function Signup() {
   const [form] = Form.useForm();
+  //---> For OTP
+  const [showOTPField, setShowOTPField] = useState(false);
+  const [email, setEmail] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
 
-  const onFinish = async (values) => {
+  const handleVerifyEmail = async () => {
     try {
-      // Make a POST request using Axios
+      // Make a POST request to send OTP
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signup",
+        "http://54.252.180.142:8080/api/auth/send-otp",
         {
-          username: values.name,
-          password: values.password,
-          email: values.email,
-          roles: "user",
-          company: values.company,
-          phone: values.phone,
+          email: form.getFieldValue("email"),
         }
       );
 
-      console.log("API Response:", response.data);
+      if (response.status === 200) {
+        setEmail(form.getFieldValue("email"));
+        setShowOTPField(true);
+        setOtpSent(true);
+        notification.success({
+          message: "OTP Sent",
+          description: "An OTP has been sent to your email address.",
+        });
+      } else {
+        notification.error({
+          message: "OTP Sending Failed",
+          description: "Failed to send OTP. Please try again later.",
+        });
+      }
     } catch (error) {
-      // Handle errors from the API call
-      console.error("API Error:", error);
+      notification.error({
+        message: "Error",
+        description:
+          "An error occurred while sending OTP. Please try again later.",
+      });
     }
+  };
+
+  const onFinish = async (values) => {
+    try {
+      // Make a POST request to verify OTP
+      const response = await axios.post(
+        "http://54.252.180.142:8080/api/auth/verify-otp",
+        {
+          email,
+          otp: values.otp,
+        }
+      );
+
+      if (response.status === 200) {
+        // OTP verification successful, proceed with registration
+        // Make a POST request to register user
+        const registerResponse = await axios.post(
+          "http://54.252.180.142:8080/api/auth/signup",
+          {
+            username: values.name,
+            password: values.password,
+            email: email,
+            roles: "user",
+            company: values.company,
+            phone: values.phone,
+          }
+        );
+
+        console.log("API Response:", registerResponse.data);
+
+        notification.success({
+          message: "Registration Successful",
+          description: "You have successfully registered.",
+        });
+      } else {
+        notification.error({
+          message: "OTP Verification Failed",
+          description: "Incorrect OTP entered. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Error during OTP verification:", error);
+
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data.message === "Failed! User E-mail is already in use!"
+      ) {
+        notification.warning({
+          message: "User Already Registered",
+          description:
+            "This email address is already registered. Please use a different email address.",
+        });
+      } else {
+        // Handle other errors from the API call
+        notification.error({
+          message: "Registration Failed",
+          description: "An error occurred while trying to register.",
+        });
+        console.error("API Error:", error);
+      }
+    }
+  };
+
+  //---> For Reset Button
+  const handleReset = () => {
+    form.resetFields();
+    setShowOTPField(false); // Hide OTP field and show verify button
+    setOtpSent(false); // Reset OTP sent state
   };
 
   return (
@@ -99,6 +184,33 @@ function Signup() {
         >
           <Input />
         </Form.Item>
+
+        {showOTPField && (
+          <Form.Item
+            name="otp"
+            label="OTP"
+            rules={[
+              {
+                required: true,
+                message: "Please input your OTP!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+        )}
+
+        {!showOTPField && (
+          <Form.Item {...tailFormItemLayout}>
+            <Button
+              type="primary"
+              onClick={handleVerifyEmail}
+              className="bg-green-500 text-white"
+            >
+              Verify
+            </Button>
+          </Form.Item>
+        )}
 
         <Form.Item
           name="company"
@@ -170,15 +282,24 @@ function Signup() {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item {...tailFormItemLayout}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="bg-blue-700 w-[60%]"
-          >
-            Register
-          </Button>
-        </Form.Item>
+        {showOTPField && (
+          <Form.Item {...tailFormItemLayout}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="bg-blue-700 w-[60%]"
+            >
+              Register
+            </Button>
+            <Button
+              type="default"
+              onClick={handleReset}
+              style={{ marginLeft: 8 }}
+            >
+              Reset
+            </Button>
+          </Form.Item>
+        )}
       </Form>
     </>
   );

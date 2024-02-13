@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { notification, Button, Checkbox, Form, Input } from "antd";
 import axios from "axios";
@@ -11,7 +12,7 @@ const Signin = ({ onLogin }) => {
     try {
       // Make a POST request using Axios
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signin",
+        "http://54.252.180.142:8080/api/auth/signin",
         {
           email: email,
           password: password,
@@ -82,21 +83,22 @@ const Signin = ({ onLogin }) => {
           },
         ]}
       >
-        <Input
+        <Input.Password
           prefix={<LockOutlined />}
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
 
-        <a className="block" href="">
+      <Form.Item>
+        {/* <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item> */}
+
+        <Link className="block" to="">
           Forgot password
-        </a>
+        </Link>
       </Form.Item>
 
       <Form.Item className="text-center">
@@ -107,7 +109,7 @@ const Signin = ({ onLogin }) => {
         >
           Log in
         </Button>
-        Or <a href="">register now!</a>
+        Or <Link to="/">register now!</Link>
       </Form.Item>
     </Form>
   );

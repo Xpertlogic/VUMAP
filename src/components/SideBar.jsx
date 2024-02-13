@@ -208,8 +208,8 @@ function SideBar({
           <Switch
             checked={isMapLayerVisible}
             onChange={handleMapLayerToggle}
-            checkedChildren="View"
-            unCheckedChildren="Hide"
+            checkedChildren="Hide Map"
+            unCheckedChildren="View Map"
             style={{
               transform: "transiction: all 0.7s ease",
               backgroundColor: isMapLayerVisible ? "#1677FF" : "#36454f",
