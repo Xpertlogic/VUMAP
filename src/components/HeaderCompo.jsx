@@ -1,24 +1,43 @@
-import { useState } from "react";
-import { UserOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react";
 import "../style/style.css";
 import { Link, useLocation } from "react-router-dom";
-import Signup from "./Signup";
 import Subscription from "./Subscription";
+import Signup from "./Signup";
 import Signin from "./Signin";
-import { Layout, Menu, Breadcrumb, Button, Modal } from "antd";
-import UserLogin from "./UserLogin";
-const { Header, Content } = Layout;
+import { Layout, Menu, notification, Button, Modal } from "antd";
+const { Header } = Layout;
 
 function HeaderCompo() {
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-
   /* ------ for User Login ----- */
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  //------------For Page Refresh Data store In Local Storage -----
+
+  useEffect(() => {
+    // Check if user information exists in local storage
+    const storedEmail = localStorage.getItem("email");
+    const storedToken = localStorage.getItem("token");
+
+    if (storedEmail && storedToken) {
+      setEmail(storedEmail);
+      setToken(storedToken);
+      setLoggedIn(true);
+    } else {
+      // Start timer to show signup modal every 10 seconds if user is not logged in
+      /* const timer = setInterval(() => {
+         setIsSignUpModalOpen(true);
+      }, 10000);
+       return () => clearInterval(timer); */
+    }
+  }, []);
 
   const handleLogin = (email, authToken, enteredPassword) => {
     setEmail(email);
@@ -27,6 +46,27 @@ function HeaderCompo() {
     setLoggedIn(true);
     setShowWelcomeModal(true); // Show the welcome modal
     setIsSignInModalOpen(false); // Close the sign-in modal
+    setIsLoggingIn(false); // Reset login attempt state
+
+    // Store user information in local storage
+    localStorage.setItem("email", email);
+    localStorage.setItem("token", authToken);
+  };
+
+  const handleLogout = () => {
+    setEmail("");
+    setPassword("");
+    setLoggedIn(false);
+    setIsSignInModalOpen(false);
+
+    // Remove user information in local storage
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+
+    notification.success({
+      message: "Logged Out",
+      description: "You have been successfully logged out.",
+    });
   };
 
   const hideWelcomeModal = () => {
@@ -35,14 +75,18 @@ function HeaderCompo() {
 
   const showSignInModal = () => {
     setIsSignInModalOpen(true);
+    setIsSignUpModalOpen(false);
   };
 
   const hideSignInModal = () => {
     setIsSignInModalOpen(false);
+    setIsLoggingIn(false); // Reset login attempt state when sign-in modal is closed
   };
 
   const showSignUpModal = () => {
-    setIsSignUpModalOpen(true);
+    if (!isSignInModalOpen) {
+      setIsSignUpModalOpen(true);
+    }
   };
 
   const hideSignUpModal = () => {
@@ -50,8 +94,8 @@ function HeaderCompo() {
   };
 
   /* ---- Path For Breadcrumb Item ---- */
-  const location = useLocation();
-  const pathForBreadcrumb = location.pathname.split("/").filter((i) => i);
+  // const location = useLocation();
+  // const pathForBreadcrumb = location.pathname.split("/").filter((i) => i);
 
   return (
     <>
@@ -74,23 +118,13 @@ function HeaderCompo() {
             <Menu.Item key="3">
               <Link to="/Contact">Contact</Link>
             </Menu.Item>
-            {/* <div
-              style={{
-                position: "absolute",
-                right: "5%",
-              }}
-            >
-              <Button type="primary" onClick={showSignInModal}>
-                Sign In
-              </Button>
-              <Button type="primary" onClick={showSignUpModal}>
-                Sign Up
-              </Button>
-            </div> */}
+
             {loggedIn ? (
               // Render user icon when logged in
               <div style={{ position: "absolute", right: "5%" }}>
-                <Button type="link" icon={<UserOutlined />} />
+                <Button type="primary" onClick={handleLogout}>
+                  Logout
+                </Button>
               </div>
             ) : (
               // Render Sign In and Sign Up buttons when not logged in
@@ -113,20 +147,6 @@ function HeaderCompo() {
             onCancel={hideSignInModal}
             footer={null}
           >
-            {/* {loggedIn ? (
-              <Modal
-                title="Welcome"
-                open={showWelcomeModal}
-                onOk={hideWelcomeModal}
-                onCancel={hideWelcomeModal}
-                centered
-                width={"50%"}
-              >
-                <p className="text-2xl">Welcome To Vumap, {email}!</p>
-              </Modal>
-            ) : (
-              <Signin onLogin={handleLogin} />
-            )} */}
             <Signin onLogin={handleLogin} />
           </Modal>
 
@@ -143,27 +163,29 @@ function HeaderCompo() {
             </Modal>
           )}
 
-          {/* Sign Up Modal  */}
+          {/* Signup Modal */}
           <Modal
-            // title="Sign Up"
-            open={isSignUpModalOpen}
-            onOk={hideSignUpModal}
+            title="Sign Up"
+            open={
+              isSignUpModalOpen &&
+              !loggedIn &&
+              !isLoggingIn &&
+              !isSignInModalOpen
+            } // Show modal only if it's not logged in
             onCancel={hideSignUpModal}
             centered
-            width={"85%"}
             footer={null}
           >
-            {/* <Signup /> */}
-            <Subscription />
+            <Signup onLogin={handleLogin} />
           </Modal>
         </Header>
-
-        <Content style={{ padding: "0 50px" }}>
+        {/* Dynamic breadcrumbs */}
+        {/* <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>
               <Link to="/">Home</Link>
             </Breadcrumb.Item>
-            {/* Dynamic breadcrumbs */}
+            
             {pathForBreadcrumb.map((breadcrumbItem, index) => (
               <Breadcrumb.Item key={index}>
                 <Link
@@ -174,7 +196,7 @@ function HeaderCompo() {
               </Breadcrumb.Item>
             ))}
           </Breadcrumb>
-        </Content>
+        </Content> */}
       </Layout>
     </>
   );

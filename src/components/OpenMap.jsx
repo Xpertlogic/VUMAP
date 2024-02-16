@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -18,6 +18,8 @@ import districtData from "../data/districts.json";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 function OpenMap({
+  markersInsidePolygon,
+  setMarkersInsidePolygon,
   isMapLayerVisible,
   mapData,
   countryView,
@@ -31,6 +33,13 @@ function OpenMap({
   // const position = mapData && mapData;
   const [centerPosition, setCenterPosition] = useState(mapData);
   const [zoomLevel, setZoomLevel] = useState(5);
+  // const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]);
+  const featureGroupRef = useRef();
+
+  //--------------------------------
+  const [selectedPolygonLayer, setSelectedPolygonLayer] = useState(null);
+
+  //--------------------------
 
   useEffect(() => {
     setCenterPosition(mapData);
@@ -93,6 +102,58 @@ function OpenMap({
     popupAnchor: [0, -10],
   });
 
+  /* ----- Created Polygon Draw ---- */
+  useEffect(() => {
+    if (selectedPolygonLayer) {
+      const bounds = selectedPolygonLayer.getBounds();
+      const filteredMarkers = markersInsidePolygon.filter((marker) => {
+        const coordinates = L.latLng(
+          marker.geometry.coordinates[1],
+          marker.geometry.coordinates[0]
+        );
+        return bounds.contains(coordinates);
+      });
+      setMarkersInsidePolygon(filteredMarkers);
+    }
+  }, [selectedPolygonLayer, setMarkersInsidePolygon]);
+
+  const handleDrawCreated = async (event) => {
+    const getData = filteredAirports;
+    console.log(getData);
+    const { layer } = event;
+    const geoJSONData = layer.toGeoJSON();
+    setSelectedPolygonLayer(layer);
+    setMarkersInsidePolygon([]); // Reset markers inside polygon when new polygon is drawn
+
+    const filteredAirports1 = await airportDataView.features.filter((airport) =>
+      selectedAirportTypes.includes(airport.properties["Airport Type"])
+    );
+    console.log(filteredAirports1);
+    const bounds = layer.getBounds();
+    const filteredMarkers = [];
+    airportDataView.features.forEach((airport) => {
+      const coordinates = L.latLng(
+        airport.geometry.coordinates[1],
+        airport.geometry.coordinates[0]
+      );
+      if (bounds.contains(coordinates)) {
+        filteredMarkers.push(airport); // Push the marker object
+      }
+    });
+    poiDataView.features.forEach((poi) => {
+      const coordinates = L.latLng(
+        poi.geometry.coordinates[1],
+        poi.geometry.coordinates[0]
+      );
+      if (bounds.contains(coordinates)) {
+        filteredMarkers.push(poi); // Push the marker object
+      }
+    });
+    setMarkersInsidePolygon(filteredMarkers);
+  };
+
+  console.log(markersInsidePolygon);
+
   /* -------------- Airport Data -------------- */
 
   // Filter the airports based on selected types
@@ -140,6 +201,7 @@ function OpenMap({
           >
             <Popup>
               <div>
+                <img src={airport.properties.Image} alt="airport" />
                 <h3>{airport.properties["Airport Name"]}</h3>
                 <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
               </div>
@@ -171,17 +233,18 @@ function OpenMap({
         ))}
       </MarkerClusterGroup>
 
-      <FeatureGroup>
+      <FeatureGroup ref={featureGroupRef}>
         <EditControl
           position="topleft"
           draw={{
-            rectangle: true,
+            rectangle: false,
             polygon: true,
             polyline: false,
-            circle: true,
+            circle: false,
             circlemarker: false,
             marker: false,
           }}
+          onCreated={handleDrawCreated}
         />
       </FeatureGroup>
       {isMapLayerVisible && (

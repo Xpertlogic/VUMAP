@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { notification, Button, Checkbox, Form, Input } from "antd";
+import { notification, Button, Form, Input } from "antd";
 import axios from "axios";
 
 const Signin = ({ onLogin }) => {
@@ -49,7 +49,7 @@ const Signin = ({ onLogin }) => {
     <Form
       name="normal_login"
       initialValues={{
-        remember: true,
+        remember: false,
       }}
       onFinish={onFinish}
     >
@@ -92,10 +92,6 @@ const Signin = ({ onLogin }) => {
       </Form.Item>
 
       <Form.Item>
-        {/* <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item> */}
-
         <Link className="block" to="">
           Forgot password
         </Link>
@@ -109,7 +105,6 @@ const Signin = ({ onLogin }) => {
         >
           Log in
         </Button>
-        Or <Link to="/">register now!</Link>
       </Form.Item>
     </Form>
   );

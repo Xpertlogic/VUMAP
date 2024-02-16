@@ -10,9 +10,11 @@ const { Content } = Layout;
 const SideBar = lazy(() => import("./components/SideBar"));
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]); // Track selected polygon data
   const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
   //--> For Map Switch
-  const [isMapLayerVisible, setIsMapLayerVisible] = useState(false);
+  const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
 
   const [selectedCountry, setSelectedCountry] = useState();
   const [selectedState, setSelectedState] = useState();
@@ -24,6 +26,12 @@ function App() {
   const [selectedPoiTypes, setSelectedPoiTypes] = useState([]);
 
   /* ------------------------------------------ */
+
+  // Function to handle user login
+  const handleLogin = () => {
+    // Logic to handle user login
+    setLoggedIn(true);
+  };
 
   /* State to manage the visibility of the map tile layer */
 
@@ -53,10 +61,14 @@ function App() {
         <Layout style={{ background: "#fff" }}>
           <Suspense fallback={<div>Loading...</div>}>
             <SideBar
+              loggedIn={loggedIn}
+              onLogin={handleLogin}
               onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
               onSelectedCountry={handleCountryChange}
               onSelectedState={handleStateChange}
               onSelectedDistrict={handleDistrictChange}
+              markersInsidePolygon={markersInsidePolygon}
+              setMarkersInsidePolygon={setMarkersInsidePolygon}
               selectedAirportTypes={selectedAirportTypes}
               onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
               selectedPoiTypes={selectedPoiTypes}
@@ -71,6 +83,8 @@ function App() {
               stateView={selectedState}
               districtView={selectedDistrict}
               selectedAirportTypes={selectedAirportTypes}
+              markersInsidePolygon={markersInsidePolygon}
+              setMarkersInsidePolygon={setMarkersInsidePolygon}
               airportDataView={airportData}
               selectedPoiTypes={selectedPoiTypes}
               poiDataView={poiData}
