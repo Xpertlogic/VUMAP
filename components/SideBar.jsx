@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import {
   Layout,
   Menu,
@@ -9,8 +9,6 @@ import {
   Modal,
   Switch,
 } from "antd";
-import useRazorpay from "react-razorpay";
-
 import countryData from "../data/indiaData.json";
 import stateData from "../data/All_State_Data.json";
 import districtData from "../data/districts.json";
@@ -19,10 +17,6 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 function SideBar({
-  onLogin,
-  loggedIn,
-  markersInsidePolygon,
-  setMarkersInsidePolygon,
   onToggleMapLayerVisibility,
   onSelectedCountry,
   onSelectedState,
@@ -38,71 +32,7 @@ function SideBar({
   // For Subscription Modal
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   // For Map layer visiable
-  const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
-  const [Razorpay, isLoaded] = useRazorpay();
-
-  const handlePayment = () => {
-
-    const options = {
-      key: "rzp_test_idc2jcfNoLW3KG",
-      amount: "30000",
-      currency: "INR",
-      name: "Acme Corp",
-      description: "Test Transaction",
-      image: "https://example.com/your_logo",
-      handler: (res) => {
-        console.log(res);
-      },
-      prefill: {
-        name: "Piyush Garg",
-        email: "youremail@example.com",
-        contact: "9999999999",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-
-    const rzpay = new Razorpay(options);
-    rzpay.open();
-  };
-
-
-  /* ---------- Download Boundary -------- */
-  const handleDownloadBoundary = () => {
-    // Replace the below URL with your Google Drive link
-    const googleDriveLink =
-      "https://drive.google.com/drive/folders/1pliyxUo_Pj7OrYk0gv7tB5j6Vv9l26zB?usp=drive_link";
-    window.location.href = googleDriveLink;
-  };
-
-  //----------Polygon Create-----------
-
-  const handleDownloadMarkersInsidePolygon = () => {
-    if (markersInsidePolygon.length > 0) {
-      const geoJSONData = {
-        type: "FeatureCollection",
-        features: markersInsidePolygon,
-      };
-      const blob = new Blob([JSON.stringify(geoJSONData)], {
-        type: "application/json",
-      });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "markers_inside_polygon.geojson";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  };
-
-  //-------------------
+  const [isMapLayerVisible, setIsMapLayerVisible] = useState(false);
 
   /*----------- Select All checkbox ----------*/
   const [selectedCheckboxes, setSelectedCheckboxes] = useState({
@@ -112,25 +42,8 @@ function SideBar({
     sub3: [],
     sub4: [],
     sub11: [],
-    airports: [],
   });
   /* ------------------------------------------ */
-
-  //-------------- For Reset ------------
-  const handleReset = () => {
-    setSelectedCheckboxes({
-      sub5: [],
-      sub1: [],
-      sub2: [],
-      sub3: [],
-      sub4: [],
-      sub11: [],
-      airports: [],
-    });
-    setSelectedCountry(undefined);
-    setSelectedState(undefined);
-    setSelectedDistrict(undefined);
-  };
 
   /* ------------Map Switch Layer ------------ */
   const handleMapLayerToggle = () => {
@@ -145,30 +58,6 @@ function SideBar({
   // --------------------------------
 
   // Function to handle individual checkbox changes within each submenu
-  // const handleCheckboxChange = (submenuKey, checkboxKey) => {
-  //   setSelectedCheckboxes((prevSelectedCheckboxes) => {
-  //     const submenuCheckboxes = prevSelectedCheckboxes[submenuKey];
-  //     const updatedCheckboxes = submenuCheckboxes.includes(checkboxKey)
-  //       ? submenuCheckboxes.filter((key) => key !== checkboxKey)
-  //       : [...submenuCheckboxes, checkboxKey];
-  //     return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
-  //   });
-  // };
-
-  //Function to handle "Select All" checkbox changes within each submenu
-  // const handleSelectAll = (submenuKey, submenuItems) => {
-  //   setSelectedCheckboxes((prevSelectedCheckboxes) => {
-  //     const updatedCheckboxes =
-  //       prevSelectedCheckboxes[submenuKey].length === submenuItems.length
-  //         ? []
-  //         : [...submenuItems.map((item) => item.toString())];
-  //     return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
-  //   });
-  // };
-
-  //-----------------------------------
-
-  // Function to handle individual checkbox changes within each submenu
   const handleCheckboxChange = (submenuKey, checkboxKey) => {
     setSelectedCheckboxes((prevSelectedCheckboxes) => {
       const submenuCheckboxes = prevSelectedCheckboxes[submenuKey];
@@ -179,31 +68,32 @@ function SideBar({
     });
   };
 
-  // Function to handle "Select All" checkbox changes within each submenu
+  //Function to handle "Select All" checkbox changes within each submenu
   const handleSelectAll = (submenuKey, submenuItems) => {
     setSelectedCheckboxes((prevSelectedCheckboxes) => {
-      const isAllSelected =
-        prevSelectedCheckboxes[submenuKey].length === submenuItems.length;
-      const updatedCheckboxes = isAllSelected
-        ? []
-        : [...submenuItems.map((item) => item.toString())];
+      const updatedCheckboxes =
+        prevSelectedCheckboxes[submenuKey].length === submenuItems.length
+          ? []
+          : [...submenuItems.map((item) => item.toString())];
       return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
     });
   };
+
+  // const handleSelectAll = (submenuKey, submenuItems) => {
+  //   setSelectedCheckboxes((prevSelectedCheckboxes) => {
+  //     const allSelected =
+  //       prevSelectedCheckboxes[submenuKey].length === submenuItems.length;
+  //     const updatedCheckboxes = allSelected
+  //       ? []
+  //       : [...submenuItems.map(String)];
+  //     return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
+  //   });
+  // };
 
   /* ------------------------------------------------ */
 
   /* --------------- Airport ------------- */
 
-  // const handleAirportTypeChange = (airportType) => {
-  //   const updatedSelectedTypes = selectedAirportTypes.includes(airportType)
-  //     ? selectedAirportTypes.filter((type) => type !== airportType)
-  //     : [...selectedAirportTypes, airportType];
-
-  //   onAirportTypeChange(updatedSelectedTypes);
-  // };
-
-  // Function to handle airport type change
   const handleAirportTypeChange = (airportType) => {
     const updatedSelectedTypes = selectedAirportTypes.includes(airportType)
       ? selectedAirportTypes.filter((type) => type !== airportType)
@@ -211,6 +101,13 @@ function SideBar({
 
     onAirportTypeChange(updatedSelectedTypes);
   };
+
+  //----------------Modified today still under development
+  // const handleAirportCheckboxChange = (checkboxKey, airportType) => {
+  //   handleCheckboxChange("sub11", checkboxKey);
+  //   handleAirportTypeChange(airportType);
+  // };
+  /* ----------------- */
 
   /* --------------- POI ------------- */
   const handelPoiTypeChange = (poiType) => {
@@ -311,8 +208,8 @@ function SideBar({
           <Switch
             checked={isMapLayerVisible}
             onChange={handleMapLayerToggle}
-            checkedChildren="View Map"
-            unCheckedChildren="Hide Map"
+            checkedChildren="View"
+            unCheckedChildren="Hide"
             style={{
               transform: "transiction: all 0.7s ease",
               backgroundColor: isMapLayerVisible ? "#1677FF" : "#36454f",
@@ -497,14 +394,10 @@ function SideBar({
           </SubMenu>
 
           <SubMenu
-            key="sub11"
-            title={
-              <span className="text-[1rem] flex gap-2">
-                <Checkbox>Transports</Checkbox>
-              </span>
-            }
+            key="sub1"
+            title={<span className="text-[1rem]">Transports</span>}
           >
-            {/* <SubMenu
+            <SubMenu
               key="sub11"
               title={
                 <span className="text-[1rem]">
@@ -521,14 +414,25 @@ function SideBar({
                 <Checkbox
                   onChange={() => {
                     handleAirportTypeChange("International");
-                   
+                    // handleAirportCheckboxChange("1");
                   }}
                   checked={selectedAirportTypes.includes("International")}
                 >
                   Internationals Airports
                 </Checkbox>
               </Menu.Item>
-              
+              {/* <Menu.Item key="1">
+                <Checkbox
+                  onChange={() =>
+                    handleAirportCheckboxChange("1", "International")
+                  }
+                  checked={selectedCheckboxes.sub11.includes(
+                    "1"
+                  )}
+                >
+                  Internationals Airports
+                </Checkbox>
+              </Menu.Item> */}
               <Menu.Item key="2">
                 <Checkbox
                   onChange={() => {
@@ -551,62 +455,7 @@ function SideBar({
                   State/Other Airports
                 </Checkbox>
               </Menu.Item>
-            </SubMenu> */}
-            <SubMenu
-              key="airports"
-              title={
-                <span>
-                  <Checkbox
-                    onChange={() =>
-                      handleSelectAll("airports", [
-                        "International",
-                        "Domestic",
-                        "State/Private",
-                      ])
-                    }
-                    checked={selectedCheckboxes.airports.length === 3}
-                  />
-                  Airports
-                </span>
-              }
-            >
-              <Menu.Item key="International">
-                <Checkbox
-                  onChange={() => {
-                    handleCheckboxChange("airports", "International");
-                    handleAirportTypeChange("International");
-                  }}
-                  checked={selectedCheckboxes.airports.includes(
-                    "International"
-                  )}
-                />
-                International
-              </Menu.Item>
-              <Menu.Item key="Domestic">
-                <Checkbox
-                  onChange={() => {
-                    handleCheckboxChange("airports", "Domestic");
-                    handleAirportTypeChange("Domestic");
-                  }}
-                  checked={selectedCheckboxes.airports.includes("Domestic")}
-                />
-                Domestic
-              </Menu.Item>
-
-              <Menu.Item key="State/Private">
-                <Checkbox
-                  onChange={() => {
-                    handleCheckboxChange("airports", "State/Private");
-                    handleAirportTypeChange("State/Private");
-                  }}
-                  checked={selectedCheckboxes.airports.includes(
-                    "State/Private"
-                  )}
-                />
-                Regional
-              </Menu.Item>
             </SubMenu>
-
             <SubMenu
               key="sub1-2"
               title={
@@ -1117,43 +966,23 @@ function SideBar({
               <Checkbox>Shopping Centre</Checkbox>
             </Menu.Item>
           </SubMenu>
-          <div className="m-4">
-            <Button
-              type="primary"
-              className="bg-blue-700 mr-[1rem]"
-              onClick={handleReset}
-            >
+          <div className="m-[2rem]">
+            <Button type="primary" className="bg-blue-700 mr-[1rem]">
               Reset
             </Button>
             <Button
               type="primary"
-              className="bg-blue-700 mr-[1rem]"
-              onClick={handleDownloadMarkersInsidePolygon}
+              className="bg-blue-700 "
+              onClick={showSubscriptionModal}
             >
               Download
             </Button>
-            <Button onClick={handlePayment} type="primary" className="bg-blue-700">
-             
-                Pay
-            </Button>
-            {/* Conditionally render the "Download Boundary" button based on the user's login status */}
-            {!loggedIn && (
-              <div className="m-[2rem]">
-                <Button
-                  type="primary"
-                  className="bg-blue-700"
-                  onClick={handleDownloadBoundary}
-                >
-                  Download Boundary
-                </Button>
-              </div>
-            )}
           </div>
         </Menu>
       </Sider>
 
       {/* Subscription Modal  */}
-      {/* <Modal
+      <Modal
         open={isSubscriptionModalOpen}
         onCancel={handleCancel}
         style={{ margin: 10, padding: 0 }}
@@ -1162,7 +991,7 @@ function SideBar({
         footer={null}
       >
         <Subscription />
-      </Modal> */}
+      </Modal>
     </>
   );
 }
