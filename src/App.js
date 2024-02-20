@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LoginProvider } from "./context/LoginContext";
 import "./style/style.css";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
@@ -60,20 +61,22 @@ function App() {
       <Content style={{ padding: "0 50px" }}>
         <Layout style={{ background: "#fff" }}>
           <Suspense fallback={<div>Loading...</div>}>
-            <SideBar
-              loggedIn={loggedIn}
-              onLogin={handleLogin}
-              onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
-              onSelectedCountry={handleCountryChange}
-              onSelectedState={handleStateChange}
-              onSelectedDistrict={handleDistrictChange}
-              markersInsidePolygon={markersInsidePolygon}
-              setMarkersInsidePolygon={setMarkersInsidePolygon}
-              selectedAirportTypes={selectedAirportTypes}
-              onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
-              selectedPoiTypes={selectedPoiTypes}
-              onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
-            />
+            <LoginProvider>
+              <SideBar
+                loggedIn={loggedIn}
+                onLogin={handleLogin}
+                onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
+                onSelectedCountry={handleCountryChange}
+                onSelectedState={handleStateChange}
+                onSelectedDistrict={handleDistrictChange}
+                markersInsidePolygon={markersInsidePolygon}
+                setMarkersInsidePolygon={setMarkersInsidePolygon}
+                selectedAirportTypes={selectedAirportTypes}
+                onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
+                selectedPoiTypes={selectedPoiTypes}
+                onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
+              />
+            </LoginProvider>
           </Suspense>
           <Content className="overflow-hidden">
             <OpenMap

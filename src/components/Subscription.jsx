@@ -1,18 +1,87 @@
 import { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
-import { Modal } from "antd"; // Import Modal from Ant Design
-import Signup from "./Signup"; // Import the Signup component
+import useRazorpay from "react-razorpay";
 import "../style/subscription.scss";
 
 function Subscription() {
-  const [selectedPlan, setSelectedPlan] = useState(null); // State to store selected plan
-  const [signupModalVisible, setSignupModalVisible] = useState(false); // State to manage signup modal visibility
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [Razorpay, isLoaded] = useRazorpay();
 
   const PricingCard = ({ title, price, features, isActive }) => {
+    const handlePayment = async (plan, price) => {
+      // Static user data
+      const userData = {
+        username: "John Doe",
+        email: "john@example.com",
+        phone: "1234567890",
+      };
+
+      const amount =
+        parseFloat(
+          price
+            .replace("₹", "")
+            .replace(",", "")
+            .replace(" /3 Months", "")
+            .replace(" /12 Months", "")
+        ) * 100; // Convert price to integer amount in paise
+
+      const options = {
+        key: "rzp_test_idc2jcfNoLW3KG",
+        amount: amount,
+        currency: "INR",
+        name: "Acme Corp",
+        description: `Subscription for ${
+          plan === "free" ? "Premium" : "Premium Plus"
+        } Plan`,
+        image: "https://example.com/your_logo",
+        handler: async (razorpayResponse) => {
+          try {
+            const Payload = {
+              email: userData.email,
+              tier: plan === "free" ? "tier1" : "tier2", // Update tier based on plan
+              paymentid: razorpayResponse.razorpay_payment_id,
+            };
+
+            const response = await axios.post(
+              "http://54.252.180.142:8080/api/user/payments",
+              Payload
+            );
+
+            if (!response.data.success) {
+              throw new Error("Failed to record payment");
+            }
+            setPaymentSuccess(true);
+            console.log("Payment recorded successfully!");
+            // Handle any further actions after successful payment
+          } catch (error) {
+            console.error("Error recording payment:", error);
+          }
+        },
+        prefill: {
+          name: userData.username,
+          email: userData.email,
+          contact: userData.phone,
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzpay = new Razorpay(options);
+      rzpay.open();
+    };
+
     const handleSubscribe = () => {
-      setSelectedPlan({ title, price, features, isActive }); // Set selected plan
-      setSignupModalVisible(true); // Open signup modal
+      const plan = title.toLowerCase().includes("premium")
+        ? "premium"
+        : "premium plus";
+      handlePayment(plan, price);
     };
 
     return (
@@ -26,9 +95,9 @@ function Subscription() {
             </li>
           ))}
         </ul>
-        <Link onClick={handleSubscribe} className="subscribe-link">
+        <button onClick={handleSubscribe} className="subscribe-link">
           Subscribe
-        </Link>
+        </button>
         <Link to="/" className="terms-link">
           Terms & Conditions
         </Link>
@@ -36,66 +105,40 @@ function Subscription() {
     );
   };
 
-  const plans = [
-    // {
-    //   title: "Basic Plan",
-    //   price: "₹399 /3 Months",
-
-    //   features: [
-    //     "Unlimited basic exports",
-    //     "Pay as you go PRO exports",
-    //     "Area up to 1 km²",
-    //     "Precision 5m",
-    //   ],
-    //   isActive: false,
-    // },
-    {
-      title: "Premium Plan",
-      price: "₹299 /3 Months",
-
-      features: [
-        "Unlimited boundary downloads",
-        "Download limit: Users can download up to 1000 POIs (Points of Interest)",
-        "Access to limited features for the duration of the subscription",
-      ],
-      isActive: false,
-    },
-    {
-      title: "Premium Plus Plan",
-      price: "₹999 /12 Months",
-
-      features: [
-        "Unlimited boundary downloads",
-        "Download limit: Users can download up to 3000 POIs (Points of Interest)",
-        "House number feature: Exclusive access for Premium Plus members",
-        "Access to more limited features compared to the Premium Plan",
-      ],
-      isActive: true,
-    },
-  ];
-
   return (
     <section>
       <header>
         <h1>Subscription Plan</h1>
       </header>
-      <div className="wrapper">
-        {plans.map((plan, index) => (
-          <PricingCard key={index} {...plan} />
-        ))}
-      </div>
-
-      {/* Signup Modal */}
-
-      <Modal
-        title={`Subscribe to ${selectedPlan ? selectedPlan.title : ""}`}
-        open={signupModalVisible}
-        onCancel={() => setSignupModalVisible(false)}
-        footer={null}
-      >
-        {/* Pass selected plan information to the Signup component */}
-        {selectedPlan && <Signup plan={selectedPlan} />}
-      </Modal>
+      {paymentSuccess ? (
+        <div>
+          <h2>Payment successful!</h2>
+        </div>
+      ) : (
+        <div className="wrapper">
+          <PricingCard
+            title="Premium Plan"
+            price="₹299 /3 Months"
+            features={[
+              "Unlimited boundary downloads",
+              "Download limit: Users can download up to 1000 POIs (Points of Interest)",
+              "Access to limited features for the duration of the subscription",
+            ]}
+            isActive={false}
+          />
+          <PricingCard
+            title="Premium Plus Plan"
+            price="₹999 /12 Months"
+            features={[
+              "Unlimited boundary downloads",
+              "Download limit: Users can download up to 3000 POIs (Points of Interest)",
+              "House number feature: Exclusive access for Premium Plus members",
+              "Access to more limited features compared to the Premium Plan",
+            ]}
+            isActive={true}
+          />
+        </div>
+      )}
     </section>
   );
 }

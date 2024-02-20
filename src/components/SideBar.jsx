@@ -1,4 +1,5 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
+import { LoginContext } from "../context/LoginContext";
 import {
   Layout,
   Menu,
@@ -10,7 +11,6 @@ import {
   Switch,
 } from "antd";
 import useRazorpay from "react-razorpay";
-
 import countryData from "../data/indiaData.json";
 import stateData from "../data/All_State_Data.json";
 import districtData from "../data/districts.json";
@@ -35,41 +35,52 @@ function SideBar({
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
-  // For Subscription Modal
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
-  // For Map layer visiable
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
-  const [Razorpay, isLoaded] = useRazorpay();
 
-  const handlePayment = () => {
+  /* ---------- Login ------------ */
 
-    const options = {
-      key: "rzp_test_idc2jcfNoLW3KG",
-      amount: "30000",
-      currency: "INR",
-      name: "Acme Corp",
-      description: "Test Transaction",
-      image: "https://example.com/your_logo",
-      handler: (res) => {
-        console.log(res);
-      },
-      prefill: {
-        name: "Piyush Garg",
-        email: "youremail@example.com",
-        contact: "9999999999",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
+  const loginState = useContext(LoginContext);
+  console.log("login", loginState);
 
-    const rzpay = new Razorpay(options);
-    rzpay.open();
-  };
+  /* ------- Payment ----------- */
 
+  // const handlePayment = async () => {
+  //   const options = {
+  //     key: "rzp_test_idc2jcfNoLW3KG",
+  //     amount: "30000",
+  //     currency: "INR",
+  //     name: "Acme Corp",
+  //     description: "Test Transaction",
+  //     image: "https://example.com/your_logo",
+  //     handler: (res) => {
+  //       console.log(res); //Api hit post method -> payment id
+  //     },
+  //     prefill: {
+  //       name: "Piyush Garg",
+  //       email: "youremail@example.com",
+  //       contact: "9999999999",
+  //     },
+  //     notes: {
+  //       address: "Razorpay Corporate Office",
+  //     },
+  //     theme: {
+  //       color: "#3399cc",
+  //     },
+  //   };
+
+  //   const rzpay = new Razorpay(options);
+  //   rzpay.open();
+  // };
+
+  // let amount;
+  // if (plan === "premium") {
+  //   amount = "29900";
+  // } else if (plan === "premiumPlus") {
+  //   amount = "99900";
+  // }
+
+  /* ---------------------------------- */
 
   /* ---------- Download Boundary -------- */
   const handleDownloadBoundary = () => {
@@ -143,28 +154,6 @@ function SideBar({
   };
 
   // --------------------------------
-
-  // Function to handle individual checkbox changes within each submenu
-  // const handleCheckboxChange = (submenuKey, checkboxKey) => {
-  //   setSelectedCheckboxes((prevSelectedCheckboxes) => {
-  //     const submenuCheckboxes = prevSelectedCheckboxes[submenuKey];
-  //     const updatedCheckboxes = submenuCheckboxes.includes(checkboxKey)
-  //       ? submenuCheckboxes.filter((key) => key !== checkboxKey)
-  //       : [...submenuCheckboxes, checkboxKey];
-  //     return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
-  //   });
-  // };
-
-  //Function to handle "Select All" checkbox changes within each submenu
-  // const handleSelectAll = (submenuKey, submenuItems) => {
-  //   setSelectedCheckboxes((prevSelectedCheckboxes) => {
-  //     const updatedCheckboxes =
-  //       prevSelectedCheckboxes[submenuKey].length === submenuItems.length
-  //         ? []
-  //         : [...submenuItems.map((item) => item.toString())];
-  //     return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
-  //   });
-  // };
 
   //-----------------------------------
 
@@ -1128,16 +1117,23 @@ function SideBar({
             <Button
               type="primary"
               className="bg-blue-700 mr-[1rem]"
-              onClick={handleDownloadMarkersInsidePolygon}
+              // onClick={handleDownloadMarkersInsidePolygon}
+              onClick={() => {
+                handleDownloadMarkersInsidePolygon();
+                showSubscriptionModal();
+              }}
             >
               Download
             </Button>
-            <Button onClick={handlePayment} type="primary" className="bg-blue-700">
-             
-                Pay
-            </Button>
+            {/* <Button
+              onClick={handlePayment}
+              type="primary"
+              className="bg-blue-700"
+            >
+              Pay
+            </Button> */}
             {/* Conditionally render the "Download Boundary" button based on the user's login status */}
-            {!loggedIn && (
+            {loginState.loggedIn && (
               <div className="m-[2rem]">
                 <Button
                   type="primary"
@@ -1153,7 +1149,7 @@ function SideBar({
       </Sider>
 
       {/* Subscription Modal  */}
-      {/* <Modal
+      <Modal
         open={isSubscriptionModalOpen}
         onCancel={handleCancel}
         style={{ margin: 10, padding: 0 }}
@@ -1162,7 +1158,7 @@ function SideBar({
         footer={null}
       >
         <Subscription />
-      </Modal> */}
+      </Modal>
     </>
   );
 }
