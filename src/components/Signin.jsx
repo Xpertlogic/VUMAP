@@ -27,10 +27,10 @@ const Signin = ({ onLogin }) => {
         onLogin(response.data.email, response.data.token, password);
         console.log(response.data);
 
-        notification.success({
-          message: "Login Successful",
-          description: "You have successfully logged in.",
-        });
+        // notification.success({
+        //   message: "Login Successful",
+        //   description: "You have successfully logged in.",
+        // });
       } else {
         notification.error({
           message: "Login Failed",

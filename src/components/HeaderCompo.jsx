@@ -1,68 +1,42 @@
-import { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../style/style.css";
-import { Link, useLocation } from "react-router-dom";
-import Subscription from "./Subscription";
+import { Link } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import { Layout, Menu, notification, Button, Modal } from "antd";
+import { LoginContext } from "../context/LoginContext";
 const { Header } = Layout;
 
 function HeaderCompo() {
   /* ------ for User Login ----- */
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+  const { loggedIn, login, logout, email, userData } = useContext(LoginContext);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
-
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   //------------For Page Refresh Data store In Local Storage -----
 
-  useEffect(() => {
-    // Check if user information exists in local storage
-    const storedEmail = localStorage.getItem("email");
-    const storedToken = localStorage.getItem("token");
+  // useEffect(() => {
+  //   if (!loggedIn) {
+  //     const timer = setInterval(() => {
+  //       setIsSignUpModalOpen(true);
+  //     }, 10000);
 
-    if (storedEmail && storedToken) {
-      setEmail(storedEmail);
-      setToken(storedToken);
-      setLoggedIn(true);
-    } else {
-      // Start timer to show signup modal every 10 seconds if user is not logged in
-      /* const timer = setInterval(() => {
-         setIsSignUpModalOpen(true);
-      }, 10000);
-       return () => clearInterval(timer); */
-    }
-  }, []);
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [loggedIn]);
 
   const handleLogin = (email, authToken, enteredPassword) => {
-    setEmail(email);
-    setToken(authToken);
-    setPassword(enteredPassword);
-    setLoggedIn(true);
-    setShowWelcomeModal(true); // Show the welcome modal
-    setIsSignInModalOpen(false); // Close the sign-in modal
-    setIsLoggingIn(false); // Reset login attempt state
-
-    // Store user information in local storage
-    localStorage.setItem("email", email);
-    localStorage.setItem("token", authToken);
+    login(email, authToken);
+    setShowWelcomeModal(true);
+    setIsSignInModalOpen(false);
+    setIsLoggingIn(false);
   };
 
   const handleLogout = () => {
-    setEmail("");
-    setPassword("");
-    setLoggedIn(false);
-    setIsSignInModalOpen(false);
-
-    // Remove user information in local storage
-    localStorage.removeItem("email");
-    localStorage.removeItem("token");
-
+    logout();
+    setShowWelcomeModal(false);
     notification.success({
       message: "Logged Out",
       description: "You have been successfully logged out.",
@@ -80,7 +54,7 @@ function HeaderCompo() {
 
   const hideSignInModal = () => {
     setIsSignInModalOpen(false);
-    setIsLoggingIn(false); // Reset login attempt state when sign-in modal is closed
+    setIsLoggingIn(false);
   };
 
   const showSignUpModal = () => {
@@ -159,7 +133,7 @@ function HeaderCompo() {
               centered
               width={"50%"}
             >
-              <p className="text-2xl">Welcome To Vumap, {email}!</p>
+              <p className="text-2xl">Welcome To Vumap, {userData.username}!</p>
             </Modal>
           )}
 

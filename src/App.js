@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LoginProvider } from "./context/LoginContext";
 import "./style/style.css";
 import { Suspense, lazy } from "react";
@@ -11,28 +11,31 @@ const { Content } = Layout;
 const SideBar = lazy(() => import("./components/SideBar"));
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]); // Track selected polygon data
   const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
-  //--> For Map Switch
-  const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
-
   const [selectedCountry, setSelectedCountry] = useState();
   const [selectedState, setSelectedState] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState();
-
   //-->For Airports
-  const [selectedAirportTypes, setSelectedAirportTypes] = useState([]);
+  // const [selectedAirportTypes, setSelectedAirportTypes] = useState([])
+  const [selectedAirportTypes, setSelectedAirportTypes] = useState([
+    "International",
+    "Domestic",
+    "State/Private",
+  ]);
   //-->For POI's
   const [selectedPoiTypes, setSelectedPoiTypes] = useState([]);
+  //--> Track selected polygon data
+  const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]);
+  //--> For Map Switch
+  const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
 
   /* ------------------------------------------ */
 
   // Function to handle user login
-  const handleLogin = () => {
-    // Logic to handle user login
-    setLoggedIn(true);
-  };
+  // const handleLogin = async () => {
+  //   // Logic to handle user login
+  //   setLoggedIn(true);
+  // };
 
   /* State to manage the visibility of the map tile layer */
 
@@ -42,29 +45,24 @@ function App() {
   /* ------------------------------------------ */
 
   const handleCountryChange = (countryItem) => {
-    console.log(countryItem);
     setSelectedCountry(countryItem);
   };
 
   const handleStateChange = (stateItem) => {
-    console.log(stateItem);
     setSelectedState(stateItem);
   };
 
   const handleDistrictChange = (districtItem) => {
-    console.log(districtItem);
     setSelectedDistrict(districtItem);
   };
 
   return (
-    <Layout>
-      <Content style={{ padding: "0 50px" }}>
-        <Layout style={{ background: "#fff" }}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <LoginProvider>
+    <LoginProvider>
+      <Layout>
+        <Content style={{ padding: "0 50px" }}>
+          <Layout style={{ background: "#fff" }}>
+            <Suspense fallback={<div>Loading...</div>}>
               <SideBar
-                loggedIn={loggedIn}
-                onLogin={handleLogin}
                 onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
                 onSelectedCountry={handleCountryChange}
                 onSelectedState={handleStateChange}
@@ -76,26 +74,26 @@ function App() {
                 selectedPoiTypes={selectedPoiTypes}
                 onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
               />
-            </LoginProvider>
-          </Suspense>
-          <Content className="overflow-hidden">
-            <OpenMap
-              isMapLayerVisible={isMapLayerVisible}
-              mapData={centerPosition}
-              countryView={selectedCountry}
-              stateView={selectedState}
-              districtView={selectedDistrict}
-              selectedAirportTypes={selectedAirportTypes}
-              markersInsidePolygon={markersInsidePolygon}
-              setMarkersInsidePolygon={setMarkersInsidePolygon}
-              airportDataView={airportData}
-              selectedPoiTypes={selectedPoiTypes}
-              poiDataView={poiData}
-            />
-          </Content>
-        </Layout>
-      </Content>
-    </Layout>
+            </Suspense>
+            <Content className="overflow-hidden">
+              <OpenMap
+                isMapLayerVisible={isMapLayerVisible}
+                mapData={centerPosition}
+                countryView={selectedCountry}
+                stateView={selectedState}
+                districtView={selectedDistrict}
+                selectedAirportTypes={selectedAirportTypes}
+                markersInsidePolygon={markersInsidePolygon}
+                setMarkersInsidePolygon={setMarkersInsidePolygon}
+                airportDataView={airportData}
+                selectedPoiTypes={selectedPoiTypes}
+                poiDataView={poiData}
+              />
+            </Content>
+          </Layout>
+        </Content>
+      </Layout>
+    </LoginProvider>
   );
 }
 

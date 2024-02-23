@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const LoginContext = createContext(false);
 
@@ -6,22 +7,34 @@ export const LoginProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
+  const [userData, setUserData] = useState(null);
+  const storedToken = localStorage.getItem("token");
+
+  const verifyToken = async (token) => {
+    try {
+      const response = await axios.post(
+        "http://54.252.180.142:8080/api/v1/admin/verifytoken",
+        { token: storedToken }
+      );
+
+      if (response.status === 200) {
+        setUserData(response.data);
+        setLoggedIn(true);
+      } else {
+        throw new Error("Failed to verify token");
+      }
+    } catch (error) {
+      console.error("Error verifying token:", error);
+      return false;
+    }
+  };
 
   useEffect(() => {
-    const storedEmail = localStorage.getItem("email");
-    const storedToken = localStorage.getItem("token");
-
-    if (storedEmail && storedToken) {
-      setEmail(storedEmail);
-      setToken(storedToken);
-      setLoggedIn(true);
-    }
-  }, []);
+    verifyToken(token);
+  }, [token, storedToken, loggedIn]);
 
   const login = (email, token) => {
     setEmail(email);
-    setToken(token);
-    setLoggedIn(true);
     localStorage.setItem("email", email);
     localStorage.setItem("token", token);
   };
@@ -35,7 +48,9 @@ export const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ loggedIn, login, logout }}>
+    <LoginContext.Provider
+      value={{ userData, loggedIn, logout, login, storedToken }}
+    >
       {children}
     </LoginContext.Provider>
   );

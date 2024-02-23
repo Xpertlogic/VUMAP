@@ -1,23 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 import useRazorpay from "react-razorpay";
+import { LoginContext } from "../context/LoginContext";
 import "../style/subscription.scss";
 
 function Subscription() {
-  const [selectedPlan, setSelectedPlan] = useState(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [Razorpay, isLoaded] = useRazorpay();
+  const { userData, storedToken } = useContext(LoginContext);
 
   const PricingCard = ({ title, price, features, isActive }) => {
     const handlePayment = async (plan, price) => {
-      // Static user data
-      const userData = {
-        username: "John Doe",
-        email: "john@example.com",
-        phone: "1234567890",
-      };
+      const accessToken = localStorage.getItem("token");
+      console.log(accessToken);
+      console.log(storedToken);
 
       const amount =
         parseFloat(
@@ -34,20 +32,27 @@ function Subscription() {
         currency: "INR",
         name: "Acme Corp",
         description: `Subscription for ${
-          plan === "free" ? "Premium" : "Premium Plus"
+          plan === "premium" ? "Premium" : "Premium Plus"
         } Plan`,
-        image: "https://example.com/your_logo",
+        image: "",
         handler: async (razorpayResponse) => {
           try {
             const Payload = {
               email: userData.email,
-              tier: plan === "free" ? "tier1" : "tier2", // Update tier based on plan
+              tier: plan === "premium" ? "tier1" : "tier2", // Update tier based on plan
               paymentid: razorpayResponse.razorpay_payment_id,
+              token: storedToken,
+            };
+
+            const headers = {
+              Token: storedToken,
+              "Content-Type": "application/json",
             };
 
             const response = await axios.post(
               "http://54.252.180.142:8080/api/user/payments",
-              Payload
+              Payload,
+              { headers: headers }
             );
 
             if (!response.data.success) {
