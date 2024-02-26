@@ -93,6 +93,8 @@ function HeaderCompo() {
               <Link to="/Contact">Contact</Link>
             </Menu.Item>
 
+            {/* {use anchor link insted of button and give route} */}
+
             {loggedIn ? (
               // Render user icon when logged in
               <div style={{ position: "absolute", right: "5%" }}>

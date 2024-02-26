@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
+import { SubscribeContext } from "../context/SubscribeContext";
 import {
   Layout,
   Menu,
@@ -36,6 +37,7 @@ function SideBar({
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
 
+  const { subscriptionState } = useContext(SubscribeContext);
   /* ---------- Login ------------ */
   const { loggedIn, userData } = useContext(LoginContext);
   // console.log(loggedIn, "login");
@@ -54,6 +56,7 @@ function SideBar({
   //----------Polygon Create-----------
 
   const handleDownloadMarkersInsidePolygon = () => {
+    // if (subscriptionState.paymentSuccess) {
     if (markersInsidePolygon.length > 0) {
       const geoJSONData = {
         type: "FeatureCollection",
@@ -72,6 +75,11 @@ function SideBar({
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
+    // }
+    // else {
+    //   // Show subscription modal if the user has not subscribed
+    //   setIsSubscriptionModalOpen(true);
+    // }
   };
 
   //-------------------
@@ -233,8 +241,34 @@ function SideBar({
   const handleCancel = () => {
     setIsSubscriptionModalOpen(false);
   };
+
+  useEffect(() => {
+    // Function to prevent right-click on the sidebar when user is not logged in
+    const preventRightClick = (event) => {
+      if (!loggedIn) {
+        event.preventDefault();
+      }
+    };
+
+    // Function to prevent F12 key when user is not logged in
+    const preventF12 = (event) => {
+      if (!loggedIn && event.keyCode === 123) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("contextmenu", preventRightClick);
+    document.addEventListener("keydown", preventF12);
+
+    return () => {
+      document.removeEventListener("contextmenu", preventRightClick);
+      document.removeEventListener("keydown", preventF12);
+    };
+  }, [loggedIn]);
+
   return (
     <>
+      {/* {f12 remove and right click off without login} */}
       <Sider
         width={300}
         className="side-bar"
@@ -243,7 +277,7 @@ function SideBar({
           background: "#fff",
           overflow: "auto",
           height: "100vh",
-          pointerEvents: loggedIn ? "auto" : "none",
+          // pointerEvents: loggedIn ? "auto" : "none",
         }}
       >
         {/* Checkbox for toggling map tile layer visibility */}
@@ -440,7 +474,7 @@ function SideBar({
             key="sub11"
             title={
               <span className="text-[1rem] flex gap-2">
-                <Checkbox>Transports</Checkbox>
+                <Checkbox></Checkbox>Transports
               </span>
             }
           >
@@ -693,6 +727,7 @@ function SideBar({
               }}
             >
               Download
+              {/* {subscriptionState.paymentSuccess ? "Download" : "Subscribe"} */}
             </Button>
             {/* <Button
               onClick={handlePayment}

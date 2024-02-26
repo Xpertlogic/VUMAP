@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { LoginProvider } from "./context/LoginContext";
+import { useState, useEffect, useContext } from "react";
+import { LoginContext, LoginProvider } from "./context/LoginContext";
+import { SubscribeProvider } from "./context/SubscribeContext";
 import "./style/style.css";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
@@ -16,12 +17,7 @@ function App() {
   const [selectedState, setSelectedState] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState();
   //-->For Airports
-  // const [selectedAirportTypes, setSelectedAirportTypes] = useState([])
-  const [selectedAirportTypes, setSelectedAirportTypes] = useState([
-    "International",
-    "Domestic",
-    "State/Private",
-  ]);
+  const [selectedAirportTypes, setSelectedAirportTypes] = useState([]);
   //-->For POI's
   const [selectedPoiTypes, setSelectedPoiTypes] = useState([]);
   //--> Track selected polygon data
@@ -30,6 +26,8 @@ function App() {
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
 
   /* ------------------------------------------ */
+
+  // const { loggedIn } = useContext(LoginContext);
 
   // Function to handle user login
   // const handleLogin = async () => {
@@ -62,18 +60,22 @@ function App() {
         <Content style={{ padding: "0 50px" }}>
           <Layout style={{ background: "#fff" }}>
             <Suspense fallback={<div>Loading...</div>}>
-              <SideBar
-                onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
-                onSelectedCountry={handleCountryChange}
-                onSelectedState={handleStateChange}
-                onSelectedDistrict={handleDistrictChange}
-                markersInsidePolygon={markersInsidePolygon}
-                setMarkersInsidePolygon={setMarkersInsidePolygon}
-                selectedAirportTypes={selectedAirportTypes}
-                onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
-                selectedPoiTypes={selectedPoiTypes}
-                onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
-              />
+              <SubscribeProvider>
+                <SideBar
+                  onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
+                  onSelectedCountry={handleCountryChange}
+                  onSelectedState={handleStateChange}
+                  onSelectedDistrict={handleDistrictChange}
+                  markersInsidePolygon={markersInsidePolygon}
+                  setMarkersInsidePolygon={setMarkersInsidePolygon}
+                  selectedAirportTypes={selectedAirportTypes}
+                  onAirportTypeChange={(types) =>
+                    setSelectedAirportTypes(types)
+                  }
+                  selectedPoiTypes={selectedPoiTypes}
+                  onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
+                />
+              </SubscribeProvider>
             </Suspense>
             <Content className="overflow-hidden">
               <OpenMap
