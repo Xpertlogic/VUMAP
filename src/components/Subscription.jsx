@@ -1,21 +1,24 @@
 import { useState, useContext } from "react";
+import "../style/subscription.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 import useRazorpay from "react-razorpay";
 import { LoginContext } from "../context/LoginContext";
-import "../style/subscription.scss";
+import { SubscribeContext } from "../context/SubscribeContext";
 
 function Subscription() {
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  // const [paymentSuccess,setPaymentSuccess] = useState(false)
   const [Razorpay, isLoaded] = useRazorpay();
   const { userData, storedToken } = useContext(LoginContext);
+  const { subscriptionState, setSubscriptionState } =
+    useContext(SubscribeContext);
 
-  const PricingCard = ({ title, price, features, isActive }) => {
+  const PricingCard = ({ title, price, features, isActive, plan }) => {
     const handlePayment = async (plan, price) => {
-      const accessToken = localStorage.getItem("token");
-      console.log(accessToken);
-      console.log(storedToken);
+      // const accessToken = localStorage.getItem("token");
+      // console.log(accessToken);
+      // console.log(storedToken);
 
       const amount =
         parseFloat(
@@ -39,7 +42,7 @@ function Subscription() {
           try {
             const Payload = {
               email: userData.email,
-              tier: plan === "premium" ? "tier1" : "tier2", // Update tier based on plan
+              tier: plan === "premium" ? "Premium" : "Premium Plus", // Update tier based on plan
               paymentid: razorpayResponse.razorpay_payment_id,
               token: storedToken,
             };
@@ -58,9 +61,13 @@ function Subscription() {
             if (!response.data.success) {
               throw new Error("Failed to record payment");
             }
-            setPaymentSuccess(true);
+            // setPaymentSuccess(true);
+            setSubscriptionState({
+              ...subscriptionState,
+              paymentSuccess: true,
+              selectedPlan: plan,
+            });
             console.log("Payment recorded successfully!");
-            // Handle any further actions after successful payment
           } catch (error) {
             console.error("Error recording payment:", error);
           }
@@ -83,9 +90,9 @@ function Subscription() {
     };
 
     const handleSubscribe = () => {
-      const plan = title.toLowerCase().includes("premium")
-        ? "premium"
-        : "premium plus";
+      // const plan = title.toLowerCase().includes("premium")
+      //   ? "premium"
+      //   : "premium plus";
       handlePayment(plan, price);
     };
 
@@ -115,7 +122,7 @@ function Subscription() {
       <header>
         <h1>Subscription Plan</h1>
       </header>
-      {paymentSuccess ? (
+      {subscriptionState.paymentSuccess ? (
         <div>
           <h2>Payment successful!</h2>
         </div>
