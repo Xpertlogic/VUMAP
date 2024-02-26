@@ -1,0 +1,2446 @@
+{
+  "type": "FeatureCollection",
+  "name": "Airports",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Darbhanga Airport",
+        "IATA": "DBR",
+        "ICAO": "VEDH",
+        "Airport Type": "Domestic (CE)",
+        "Operational": true,
+        "State": "Bihar",
+        "Latitude": 26.1967856,
+        "Longitude": 85.9118892
+      },
+      "geometry": { "type": "Point", "coordinates": [85.9118892, 26.1967856] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Gaya Airport",
+        "IATA": "GAY",
+        "ICAO": "VEGY",
+        "Airport Type": "Customs",
+        "Operational": true,
+        "State": "Bihar",
+        "Latitude": 24.742928,
+        "Longitude": 84.9521689
+      },
+      "geometry": { "type": "Point", "coordinates": [84.9521689, 24.742928] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Forbesganj Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": "Domestic",
+        "Operational": false,
+        "State": "Bihar",
+        "Latitude": 26.2970291,
+        "Longitude": 87.2830426
+      },
+      "geometry": { "type": "Point", "coordinates": [87.2830426, 26.2970291] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Muzaffarpur Airport",
+        "IATA": "MZU",
+        "ICAO": "VEMZ",
+        "Airport Type": "Domestic",
+        "Operational": false,
+        "State": "Bihar",
+        "Latitude": 26.11857484,
+        "Longitude": 85.31206513
+      },
+      "geometry": { "type": "Point", "coordinates": [85.31206513, 26.11857484] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jay Prakash Narayan Airport",
+        "IATA": "PAT",
+        "ICAO": "VEPT",
+        "Airport Type": "Customs",
+        "Operational": true,
+        "State": "Bihar",
+        "Latitude": 25.59246891,
+        "Longitude": 85.09205904
+      },
+      "geometry": { "type": "Point", "coordinates": [85.09205904, 25.59246891] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Ambikapur Airport",
+        "IATA": null,
+        "ICAO": "VEAP",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Chhattisgarh",
+        "Latitude": 22.994129,
+        "Longitude": 83.1932401
+      },
+      "geometry": { "type": "Point", "coordinates": [83.1932401, 22.994129] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Bilaspur Airport",
+        "IATA": "PAB",
+        "ICAO": "VEBU",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Chhattisgarh",
+        "Latitude": 21.9893403,
+        "Longitude": 82.109965
+      },
+      "geometry": { "type": "Point", "coordinates": [82.109965, 21.9893403] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jagdalpur Airport",
+        "IATA": "JGB",
+        "ICAO": "VEJR",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Chhattisgarh",
+        "Latitude": 19.0738998,
+        "Longitude": 82.0363801
+      },
+      "geometry": { "type": "Point", "coordinates": [82.0363801, 19.0738998] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Swami Vivekananda Airport",
+        "IATA": "RPR",
+        "ICAO": "VARP",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Chhattisgarh",
+        "Latitude": 21.1826689,
+        "Longitude": 81.7399479
+      },
+      "geometry": { "type": "Point", "coordinates": [81.7399479, 21.1826689] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Raigarh Airport",
+        "IATA": null,
+        "ICAO": "VERH",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Chhattisgarh",
+        "Latitude": 21.8217237,
+        "Longitude": 83.3653352
+      },
+      "geometry": { "type": "Point", "coordinates": [83.3653352, 21.8217237] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Surat International Airport",
+        "IATA": "STV",
+        "ICAO": "VASU",
+        "Airport Type": "Customs",
+        "Operational": true,
+        "State": "Gujarat",
+        "Latitude": 21.11828494,
+        "Longitude": 72.74542885
+      },
+      "geometry": { "type": "Point", "coordinates": [72.74542885, 21.11828494] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Vadodara Airport",
+        "IATA": "BDQ",
+        "ICAO": "VABO",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Gujarat",
+        "Latitude": 22.3368167,
+        "Longitude": 73.2270689
+      },
+      "geometry": { "type": "Point", "coordinates": [73.2270689, 22.3368167] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Bokaro Airport",
+        "IATA": null,
+        "ICAO": "VEBK",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Jharkhand",
+        "Latitude": 23.6421258,
+        "Longitude": 86.1496088
+      },
+      "geometry": { "type": "Point", "coordinates": [86.1496088, 23.6421258] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Deoghar Airport",
+        "IATA": "DGH",
+        "ICAO": "VEDO",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Jharkhand",
+        "Latitude": 24.4462688,
+        "Longitude": 86.7009191
+      },
+      "geometry": { "type": "Point", "coordinates": [86.7009191, 24.4462688] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dhalbhumgarh Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": "State/Private",
+        "Operational": false,
+        "State": "Jharkhand",
+        "Latitude": 22.5208545,
+        "Longitude": 86.55791914
+      },
+      "geometry": { "type": "Point", "coordinates": [86.55791914, 22.5208545] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dumka Airport",
+        "IATA": null,
+        "ICAO": "VEDK",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Jharkhand",
+        "Latitude": 24.2304916,
+        "Longitude": 87.2667447
+      },
+      "geometry": { "type": "Point", "coordinates": [87.2667447, 24.2304916] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chakulia Airport",
+        "IATA": null,
+        "ICAO": "VECK",
+        "Airport Type": "Domestic",
+        "Operational": false,
+        "State": "Jharkhand",
+        "Latitude": 22.46417768,
+        "Longitude": 86.70509574
+      },
+      "geometry": { "type": "Point", "coordinates": [86.70509574, 22.46417768] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sonari Airport",
+        "IATA": "IXW",
+        "ICAO": "VEJS",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Jharkhand",
+        "Latitude": 22.8136029,
+        "Longitude": 86.1693038
+      },
+      "geometry": { "type": "Point", "coordinates": [86.1693038, 22.8136029] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Birsa Munda Airport",
+        "IATA": "IXR",
+        "ICAO": "VERC",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Jharkhand",
+        "Latitude": 23.3145823,
+        "Longitude": 85.3255462
+      },
+      "geometry": { "type": "Point", "coordinates": [85.3255462, 23.3145823] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Raja Bhoj Airport",
+        "IATA": "BHO",
+        "ICAO": "VABP",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Madhya Pradesh",
+        "Latitude": 23.28810688,
+        "Longitude": 77.33158056000001
+      },
+      "geometry": { "type": "Point", "coordinates": [77.33158056, 23.28810688] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rajmata Vijaya Raje Scindia Airport,Gwalior",
+        "IATA": "GWL",
+        "ICAO": "VIGR",
+        "Airport Type": "Domestic (CE)",
+        "Operational": true,
+        "State": "Madhya Pradesh",
+        "Latitude": 26.2972939,
+        "Longitude": 78.2227819
+      },
+      "geometry": { "type": "Point", "coordinates": [78.2227819, 26.2972939] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Devi Ahilya Bai Holkar Airport",
+        "IATA": "IDR",
+        "ICAO": "VAID",
+        "Airport Type": "Customs",
+        "Operational": true,
+        "State": "Madhya Pradesh",
+        "Latitude": 22.72490764,
+        "Longitude": 75.80508154
+      },
+      "geometry": { "type": "Point", "coordinates": [75.80508154, 22.72490764] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jabalpur Airport",
+        "IATA": "JLR",
+        "ICAO": "VAJB",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Madhya Pradesh",
+        "Latitude": 23.1799312,
+        "Longitude": 80.0539549
+      },
+      "geometry": { "type": "Point", "coordinates": [80.0539549, 23.1799312] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Khajuraho Airport",
+        "IATA": "HJR",
+        "ICAO": "VAKJ",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Madhya Pradesh",
+        "Latitude": 24.81028224,
+        "Longitude": 79.91677724
+      },
+      "geometry": { "type": "Point", "coordinates": [79.91677724, 24.81028224] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Khandwa Airport",
+        "IATA": null,
+        "ICAO": "VAKD",
+        "Airport Type": "Domestic",
+        "Operational": false,
+        "State": "Madhya Pradesh",
+        "Latitude": 21.8573191,
+        "Longitude": 76.3351708
+      },
+      "geometry": { "type": "Point", "coordinates": [76.3351708, 21.8573191] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Birlagram Airport",
+        "IATA": null,
+        "ICAO": "VA1C",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Madhya Pradesh",
+        "Latitude": 23.4470618,
+        "Longitude": 75.4202969
+      },
+      "geometry": { "type": "Point", "coordinates": [75.4202969, 23.4470618] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Panna Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": "Domestic",
+        "Operational": false,
+        "State": "Madhya Pradesh",
+        "Latitude": 24.65500745,
+        "Longitude": 80.26131587
+      },
+      "geometry": { "type": "Point", "coordinates": [80.26131587, 24.65500745] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Satna Airport",
+        "IATA": "TNI",
+        "ICAO": "VIST",
+        "Airport Type": "Domestic",
+        "Operational": false,
+        "State": "Madhya Pradesh",
+        "Latitude": 24.5618782,
+        "Longitude": 80.8549555
+      },
+      "geometry": { "type": "Point", "coordinates": [80.8549555, 24.5618782] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Akola Airport",
+        "IATA": "AKD",
+        "ICAO": "VAAK",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 20.697417,
+        "Longitude": 77.0613445
+      },
+      "geometry": { "type": "Point", "coordinates": [77.0613445, 20.697417] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Aurangabad Airport",
+        "IATA": "IXU",
+        "ICAO": "VAAU",
+        "Airport Type": "Customs",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 19.8643701,
+        "Longitude": 75.402442
+      },
+      "geometry": { "type": "Point", "coordinates": [75.402442, 19.8643701] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Baramati Airport",
+        "IATA": null,
+        "ICAO": "IN-0024",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 18.2274636,
+        "Longitude": 74.5892465
+      },
+      "geometry": { "type": "Point", "coordinates": [74.5892465, 18.2274636] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Gondia Airport",
+        "IATA": "GDB",
+        "ICAO": "VAGD",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 21.52452239,
+        "Longitude": 80.28800526000001
+      },
+      "geometry": { "type": "Point", "coordinates": [80.28800526, 21.52452239] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jalgaon Airport",
+        "IATA": "JLG",
+        "ICAO": "VAJL",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 20.9636249,
+        "Longitude": 75.6278805
+      },
+      "geometry": { "type": "Point", "coordinates": [75.6278805, 20.9636249] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Latur Airport",
+        "IATA": "LTU",
+        "ICAO": "VOLT",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 18.4127049,
+        "Longitude": 76.4653703
+      },
+      "geometry": { "type": "Point", "coordinates": [76.4653703, 18.4127049] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chhatrapati Shivaji Maharaj International Airport",
+        "IATA": "BOM",
+        "ICAO": "VABB",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 19.0901528,
+        "Longitude": 72.8637135
+      },
+      "geometry": { "type": "Point", "coordinates": [72.8637135, 19.0901528] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Juhu Aerodrome",
+        "IATA": null,
+        "ICAO": "VAJJ",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 19.0977728,
+        "Longitude": 72.833223
+      },
+      "geometry": { "type": "Point", "coordinates": [72.833223, 19.0977728] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dr. Babasaheb Ambedkar International Airport",
+        "IATA": "NAG",
+        "ICAO": "VANP",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 21.0895028,
+        "Longitude": 79.0460288
+      },
+      "geometry": { "type": "Point", "coordinates": [79.0460288, 21.0895028] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Shri Guru Gobind Singh Ji Airport",
+        "IATA": "NDC",
+        "ICAO": "VAND",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 19.18055043,
+        "Longitude": 77.33519487
+      },
+      "geometry": { "type": "Point", "coordinates": [77.33519487, 19.18055043] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Nashik Airport",
+        "IATA": "ISK",
+        "ICAO": "VAOZ",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 20.1134525,
+        "Longitude": 73.8963999
+      },
+      "geometry": { "type": "Point", "coordinates": [73.8963999, 20.1134525] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Osmanabad Airport",
+        "IATA": "OMN",
+        "ICAO": "IN-0375",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 18.2822454,
+        "Longitude": 76.0588166
+      },
+      "geometry": { "type": "Point", "coordinates": [76.0588166, 18.2822454] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Pune International Airport",
+        "IATA": "PNQ",
+        "ICAO": "VAPO",
+        "Airport Type": "Customs",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 18.5793149,
+        "Longitude": 73.9090126
+      },
+      "geometry": { "type": "Point", "coordinates": [73.9090126, 18.5793149] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Shirdi International Airport",
+        "IATA": "SAG",
+        "ICAO": "VASD",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 19.69229167,
+        "Longitude": 74.39361578
+      },
+      "geometry": { "type": "Point", "coordinates": [74.39361578, 19.69229167] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sant Gadge Baba Yavatmal Airport",
+        "IATA": "YTL",
+        "ICAO": "VA78",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Maharashtra",
+        "Latitude": 20.3961659,
+        "Longitude": 78.214348
+      },
+      "geometry": { "type": "Point", "coordinates": [78.214348, 20.3961659] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Savitri Jindal Airport",
+        "IATA": null,
+        "ICAO": "VEAL",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 20.9105222,
+        "Longitude": 85.0355182
+      },
+      "geometry": { "type": "Point", "coordinates": [85.0355182, 20.9105222] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rangeilunda Airport",
+        "IATA": "QBM",
+        "ICAO": "VEBM",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 19.29423007,
+        "Longitude": 84.8771411
+      },
+      "geometry": { "type": "Point", "coordinates": [84.8771411, 19.29423007] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Biju Patnaik International Airport",
+        "IATA": "BBI",
+        "ICAO": "VEBS",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 20.2522954,
+        "Longitude": 85.8134847
+      },
+      "geometry": { "type": "Point", "coordinates": [85.8134847, 20.2522954] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jeypore Airport",
+        "IATA": "PYB",
+        "ICAO": "VEJP",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 18.8796928,
+        "Longitude": 82.5535577
+      },
+      "geometry": { "type": "Point", "coordinates": [82.5535577, 18.8796928] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Veer Surendra Sai Airport",
+        "IATA": "JRG",
+        "ICAO": "VEJH",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 21.915943,
+        "Longitude": 84.0505048
+      },
+      "geometry": { "type": "Point", "coordinates": [84.0505048, 21.915943] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Satibhata Airstrip",
+        "IATA": null,
+        "ICAO": "VEPP",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 21.038498,
+        "Longitude": 83.04395005000001
+      },
+      "geometry": { "type": "Point", "coordinates": [83.04395005, 21.038498] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rourkela Airport",
+        "IATA": "RRK",
+        "ICAO": "VERK",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 22.2548446,
+        "Longitude": 84.815512
+      },
+      "geometry": { "type": "Point", "coordinates": [84.815512, 22.2548446] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Utkela Airport",
+        "IATA": "UKE",
+        "ICAO": "VEUK",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Odisha",
+        "Latitude": 20.0974515,
+        "Longitude": 83.1831798
+      },
+      "geometry": { "type": "Point", "coordinates": [83.1831798, 20.0974515] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kishangarh Airport",
+        "IATA": "KQH",
+        "ICAO": "VIKG",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Rajasthan",
+        "Latitude": 26.5894147,
+        "Longitude": 74.8170017
+      },
+      "geometry": { "type": "Point", "coordinates": [74.8170017, 26.5894147] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Banasthali Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Rajasthan",
+        "Latitude": 26.40767523,
+        "Longitude": 75.86975894
+      },
+      "geometry": { "type": "Point", "coordinates": [75.86975894, 26.40767523] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jaipur International Airport",
+        "IATA": "JAI",
+        "ICAO": "VIJP",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Rajasthan",
+        "Latitude": 26.8281087,
+        "Longitude": 75.8079888
+      },
+      "geometry": { "type": "Point", "coordinates": [75.8079888, 26.8281087] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jodhpur Airport",
+        "IATA": "JDH",
+        "ICAO": "VIJO",
+        "Airport Type": "Domestic (CE)",
+        "Operational": true,
+        "State": "Rajasthan",
+        "Latitude": 26.262838,
+        "Longitude": 73.0524368
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0524368, 26.262838] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kota Airport",
+        "IATA": "KTU",
+        "ICAO": "VIKO",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Rajasthan",
+        "Latitude": 25.1607372,
+        "Longitude": 75.845431
+      },
+      "geometry": { "type": "Point", "coordinates": [75.845431, 25.1607372] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Maharana Pratap Airport",
+        "IATA": "UDR",
+        "ICAO": "VAUD",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Rajasthan",
+        "Latitude": 24.617478,
+        "Longitude": 73.8953649
+      },
+      "geometry": { "type": "Point", "coordinates": [73.8953649, 24.617478] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Fursatganj Airfield",
+        "IATA": null,
+        "ICAO": "VERB",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.24860733,
+        "Longitude": 81.37474943
+      },
+      "geometry": { "type": "Point", "coordinates": [81.37474943, 26.24860733] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Azamgarh Airport",
+        "IATA": null,
+        "ICAO": "VEAH",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.156067,
+        "Longitude": 83.1161368
+      },
+      "geometry": { "type": "Point", "coordinates": [83.1161368, 26.156067] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chitrakoot Airport",
+        "IATA": null,
+        "ICAO": "VECT",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 25.1606892,
+        "Longitude": 80.9262864
+      },
+      "geometry": { "type": "Point", "coordinates": [80.9262864, 25.1606892] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Andhau Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 25.61781843,
+        "Longitude": 83.5662356
+      },
+      "geometry": { "type": "Point", "coordinates": [83.5662356, 25.61781843] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Gorakhpur Airport",
+        "IATA": "GOP",
+        "ICAO": "VEGK",
+        "Airport Type": "Domestic (CE)",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.7331535,
+        "Longitude": 83.4613108
+      },
+      "geometry": { "type": "Point", "coordinates": [83.4613108, 26.7331535] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kanpur Civil Aerodrome",
+        "IATA": null,
+        "ICAO": "VICX",
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.439774,
+        "Longitude": 80.3649338
+      },
+      "geometry": { "type": "Point", "coordinates": [80.3649338, 26.439774] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kanpur Airport",
+        "IATA": "KNU",
+        "ICAO": "VIKA",
+        "Airport Type": "Domestic (CE)",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.4054757,
+        "Longitude": 80.41536
+      },
+      "geometry": { "type": "Point", "coordinates": [80.41536, 26.4054757] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kushinagar International Airport",
+        "IATA": "KBK",
+        "ICAO": "VEKI",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.77422616,
+        "Longitude": 83.89603561
+      },
+      "geometry": { "type": "Point", "coordinates": [83.89603561, 26.77422616] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Lalitpur Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": "Domestic",
+        "Operational": false,
+        "State": "Uttar Pradesh",
+        "Latitude": 24.7159866,
+        "Longitude": 78.421231
+      },
+      "geometry": { "type": "Point", "coordinates": [78.421231, 24.7159866] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chaudhary Charan Singh International Airport",
+        "IATA": "LKO",
+        "ICAO": "VILK",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.7584263,
+        "Longitude": 80.8777995
+      },
+      "geometry": { "type": "Point", "coordinates": [80.8777995, 26.7584263] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Prayagraj Airport",
+        "IATA": "IXD",
+        "ICAO": "VEAB",
+        "Airport Type": "Domestic (CE)",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 25.4368982,
+        "Longitude": 81.7342102
+      },
+      "geometry": { "type": "Point", "coordinates": [81.7342102, 25.4368982] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Muirpur Airport",
+        "IATA": null,
+        "ICAO": "VU1D",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 24.12552109,
+        "Longitude": 83.0418924
+      },
+      "geometry": { "type": "Point", "coordinates": [83.0418924, 24.12552109] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Lal Bahadur Shastri International Airport",
+        "IATA": "VNS",
+        "ICAO": "VEBN",
+        "Airport Type": "International",
+        "Operational": true,
+        "State": "Uttar Pradesh",
+        "Latitude": 25.4509975,
+        "Longitude": 82.8636052
+      },
+      "geometry": { "type": "Point", "coordinates": [82.8636052, 25.4509975] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Burnpur Airport",
+        "IATA": null,
+        "ICAO": "VEBB",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "West Bengal",
+        "Latitude": 23.6312114,
+        "Longitude": 86.9752038
+      },
+      "geometry": { "type": "Point", "coordinates": [86.9752038, 23.6312114] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kazi Nazrul Islam Airport",
+        "IATA": "RDP",
+        "ICAO": "VEDG",
+        "Airport Type": "State/Private",
+        "Operational": true,
+        "State": "West Bengal",
+        "Latitude": 23.6247865,
+        "Longitude": 87.2411693
+      },
+      "geometry": { "type": "Point", "coordinates": [87.2411693, 23.6247865] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rewa airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": "Domestic",
+        "Operational": true,
+        "State": "Madhya Pradesh",
+        "Latitude": 24.50421099,
+        "Longitude": 81.22220765
+      },
+      "geometry": { "type": "Point", "coordinates": [81.22220765, 24.50421099] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Bihta Air Force Station",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 25.59153151,
+        "Longitude": 84.87939282000001
+      },
+      "geometry": { "type": "Point", "coordinates": [84.87939282, 25.59153151] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Purnia Airport",
+        "IATA": "PUI",
+        "ICAO": "VEPU",
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 25.76196087,
+        "Longitude": 87.41483479
+      },
+      "geometry": { "type": "Point", "coordinates": [87.41483479, 25.76196087] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sabeya airport, Gopalganj",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 26.39779101,
+        "Longitude": 84.29404551
+      },
+      "geometry": { "type": "Point", "coordinates": [84.29404551, 26.39779101] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sido Kanhu Airport",
+        "IATA": "IN-0100",
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Jharkhand",
+        "Latitude": 24.23082465,
+        "Longitude": 87.26793724
+      },
+      "geometry": { "type": "Point", "coordinates": [87.26793724, 24.23082465] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Charbatia Air Base, Cuttack",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.54852067,
+        "Longitude": 85.88516987
+      },
+      "geometry": { "type": "Point", "coordinates": [85.88516987, 20.54852067] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Talabania Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.81038352,
+        "Longitude": 85.84759516
+      },
+      "geometry": { "type": "Point", "coordinates": [85.84759516, 19.81038352] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Konark Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.88261607,
+        "Longitude": 86.1010215
+      },
+      "geometry": { "type": "Point", "coordinates": [86.1010215, 19.88261607] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sri Jagannath International Airport, Puri",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.8142669,
+        "Longitude": 85.85418412
+      },
+      "geometry": { "type": "Point", "coordinates": [85.85418412, 19.8142669] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Helipad, POLYTECHNIC GROUNDS",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Telangana",
+        "Latitude": 18.68572315,
+        "Longitude": 78.11160183
+      },
+      "geometry": { "type": "Point", "coordinates": [78.11160183, 18.68572315] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Shri Ram International Airport, Ayodhya",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.74881151,
+        "Longitude": 82.15153686
+      },
+      "geometry": { "type": "Point", "coordinates": [82.15153686, 26.74881151] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Myorpur Airport ",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Uttar Pradesh",
+        "Latitude": 24.12555047,
+        "Longitude": 83.04283654
+      },
+      "geometry": { "type": "Point", "coordinates": [83.04283654, 24.12555047] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sukinda Airstrip\t",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.9837215,
+        "Longitude": 85.68111733000001
+      },
+      "geometry": { "type": "Point", "coordinates": [85.68111733, 20.9837215] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Therubali Aerodrome Field",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.34152498,
+        "Longitude": 83.43222088
+      },
+      "geometry": { "type": "Point", "coordinates": [83.43222088, 19.34152498] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rasgovindpur Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 21.80588208,
+        "Longitude": 87.04698036000001
+      },
+      "geometry": { "type": "Point", "coordinates": [87.04698036, 21.80588208] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Pokhariput Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.2509122,
+        "Longitude": 85.81157556
+      },
+      "geometry": { "type": "Point", "coordinates": [85.81157556, 20.2509122] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Gudari Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.46451282,
+        "Longitude": 84.26504066
+      },
+      "geometry": { "type": "Point", "coordinates": [84.26504066, 20.46451282] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Raisuan Airstrip, Kendujhar",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 21.69643325,
+        "Longitude": 85.58179657
+      },
+      "geometry": { "type": "Point", "coordinates": [85.58179657, 21.69643325] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Gopalpur Cantonment, Hatipada",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.23917925,
+        "Longitude": 84.88652486
+      },
+      "geometry": { "type": "Point", "coordinates": [84.88652486, 19.23917925] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Vedanta Lanjigarh Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.71958047,
+        "Longitude": 83.39346845
+      },
+      "geometry": { "type": "Point", "coordinates": [83.39346845, 19.71958047] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sambalpur Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 21.58039316,
+        "Longitude": 84.00544252
+      },
+      "geometry": { "type": "Point", "coordinates": [84.00544252, 21.58039316] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Nuapada Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.86931894,
+        "Longitude": 82.51966142000001
+      },
+      "geometry": { "type": "Point", "coordinates": [82.51966142, 20.86931894] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Malkangiri Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 18.33265327,
+        "Longitude": 81.92101779
+      },
+      "geometry": { "type": "Point", "coordinates": [81.92101779, 18.33265327] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Barbil / Tonto Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 22.04766784,
+        "Longitude": 85.37366154
+      },
+      "geometry": { "type": "Point", "coordinates": [85.37366154, 22.04766784] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rairangpur Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 22.30482185,
+        "Longitude": 86.13517037
+      },
+      "geometry": { "type": "Point", "coordinates": [86.13517037, 22.30482185] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Hirakud Right Dike",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 21.57998162,
+        "Longitude": 84.00578584
+      },
+      "geometry": { "type": "Point", "coordinates": [84.00578584, 21.57998162] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Mathakaragola Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.89856539,
+        "Longitude": 85.67748397
+      },
+      "geometry": { "type": "Point", "coordinates": [85.67748397, 20.89856539] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Shaudwar Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.55862974,
+        "Longitude": 85.89497338
+      },
+      "geometry": { "type": "Point", "coordinates": [85.89497338, 20.55862974] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "BADANGI OLD AIR PORT",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Andhra Pradesh",
+        "Latitude": 18.48852737,
+        "Longitude": 83.38284421
+      },
+      "geometry": { "type": "Point", "coordinates": [83.38284421, 18.48852737] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dhamara Helipad_1",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.78737176,
+        "Longitude": 86.95417424
+      },
+      "geometry": { "type": "Point", "coordinates": [86.95417424, 20.78737176] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dhamara Helipad_2",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.8181129,
+        "Longitude": 86.94659661
+      },
+      "geometry": { "type": "Point", "coordinates": [86.94659661, 20.8181129] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Birasal Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.98375349,
+        "Longitude": 85.68100612000001
+      },
+      "geometry": { "type": "Point", "coordinates": [85.68100612, 20.98375349] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rastrakavi Ramdhari Singh Dinkar Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 25.42743377,
+        "Longitude": 86.0899596
+      },
+      "geometry": { "type": "Point", "coordinates": [86.0899596, 25.42743377] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Bhagalpur Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 25.2497285,
+        "Longitude": 87.01046537000001
+      },
+      "geometry": { "type": "Point", "coordinates": [87.01046537, 25.2497285] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Munger Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 25.34638928,
+        "Longitude": 86.48293204
+      },
+      "geometry": { "type": "Point", "coordinates": [86.48293204, 25.34638928] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Saharsa Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 25.8921084,
+        "Longitude": 86.58433259
+      },
+      "geometry": { "type": "Point", "coordinates": [86.58433259, 25.8921084] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Birpur Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 26.50984366,
+        "Longitude": 87.01682893
+      },
+      "geometry": { "type": "Point", "coordinates": [87.01682893, 26.50984366] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chapra Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Bihar",
+        "Latitude": 25.78283622,
+        "Longitude": 84.76244085
+      },
+      "geometry": { "type": "Point", "coordinates": [84.76244085, 25.78283622] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Bhilai Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Chhattisgarh",
+        "Latitude": 21.29443273,
+        "Longitude": 81.3798152
+      },
+      "geometry": { "type": "Point", "coordinates": [81.3798152, 21.29443273] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Darima Hawai Patti",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Chhattisgarh",
+        "Latitude": 22.99725661,
+        "Longitude": 83.19203585
+      },
+      "geometry": { "type": "Point", "coordinates": [83.19203585, 22.99725661] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jashpur Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Chhattisgarh",
+        "Latitude": 22.89122313,
+        "Longitude": 84.14805704
+      },
+      "geometry": { "type": "Point", "coordinates": [84.14805704, 22.89122313] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Pugu helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Chhattisgarh",
+        "Latitude": 23.05396463,
+        "Longitude": 84.58873678
+      },
+      "geometry": { "type": "Point", "coordinates": [84.58873678, 23.05396463] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Korba Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Chhattisgarh",
+        "Latitude": 22.41430341,
+        "Longitude": 82.71950433000001
+      },
+      "geometry": { "type": "Point", "coordinates": [82.71950433, 22.41430341] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Daman Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Dadra and Nagar Haveli and Daman and Diu",
+        "Latitude": 20.43506238,
+        "Longitude": 72.8436064
+      },
+      "geometry": { "type": "Point", "coordinates": [72.8436064, 20.43506238] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Ankleshwar Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Gujarat",
+        "Latitude": 21.66359165,
+        "Longitude": 73.05853924
+      },
+      "geometry": { "type": "Point", "coordinates": [73.05853924, 21.66359165] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dhanbad Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Jharkhand",
+        "Latitude": 23.83400152,
+        "Longitude": 86.42519086
+      },
+      "geometry": { "type": "Point", "coordinates": [86.42519086, 23.83400152] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chhindwara Domestic Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 22.00205224,
+        "Longitude": 78.91732723
+      },
+      "geometry": { "type": "Point", "coordinates": [78.91732723, 22.00205224] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Satna Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 24.56312787,
+        "Longitude": 80.85121782
+      },
+      "geometry": { "type": "Point", "coordinates": [80.85121782, 24.56312787] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Panna Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 24.9086392,
+        "Longitude": 80.25786556
+      },
+      "geometry": { "type": "Point", "coordinates": [80.25786556, 24.9086392] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dhana Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 23.75502217,
+        "Longitude": 78.85551571000001
+      },
+      "geometry": { "type": "Point", "coordinates": [78.85551571, 23.75502217] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Ujjain Air Strip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 23.09514646,
+        "Longitude": 75.88471026000001
+      },
+      "geometry": { "type": "Point", "coordinates": [75.88471026, 23.09514646] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Ratlam airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 23.38185915,
+        "Longitude": 75.02842145
+      },
+      "geometry": { "type": "Point", "coordinates": [75.02842145, 23.38185915] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Nagda Air strip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 23.44770118,
+        "Longitude": 75.41977493
+      },
+      "geometry": { "type": "Point", "coordinates": [75.41977493, 23.44770118] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Harda Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 22.59363868,
+        "Longitude": 76.91669012
+      },
+      "geometry": { "type": "Point", "coordinates": [76.91669012, 22.59363868] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Guna Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 24.65490116,
+        "Longitude": 77.34728097
+      },
+      "geometry": { "type": "Point", "coordinates": [77.34728097, 24.65490116] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Datia Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 25.6516437,
+        "Longitude": 78.50458991000001
+      },
+      "geometry": { "type": "Point", "coordinates": [78.50458991, 25.6516437] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Narmadapuram Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 22.88771742,
+        "Longitude": 77.89927099000001
+      },
+      "geometry": { "type": "Point", "coordinates": [77.89927099, 22.88771742] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Salkanpur Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 22.73445077,
+        "Longitude": 77.48044802
+      },
+      "geometry": { "type": "Point", "coordinates": [77.48044802, 22.73445077] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Govt. College, Bhairunda, Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Madhya Pradesh",
+        "Latitude": 22.67920459,
+        "Longitude": 77.27246336
+      },
+      "geometry": { "type": "Point", "coordinates": [77.27246336, 22.67920459] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Navi Mumbai International Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 18.98963113,
+        "Longitude": 73.06552496
+      },
+      "geometry": { "type": "Point", "coordinates": [73.06552496, 18.98963113] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Nashik International Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 20.11504368,
+        "Longitude": 73.89994986000001
+      },
+      "geometry": { "type": "Point", "coordinates": [73.89994986, 20.11504368] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Vijay Nagar Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 19.88378824,
+        "Longitude": 73.84014441
+      },
+      "geometry": { "type": "Point", "coordinates": [73.84014441, 19.88378824] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Gandhinagar Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 19.96388332,
+        "Longitude": 73.8069315
+      },
+      "geometry": { "type": "Point", "coordinates": [73.8069315, 19.96388332] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Hadapsar Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 18.49223966,
+        "Longitude": 73.94256196000001
+      },
+      "geometry": { "type": "Point", "coordinates": [73.94256196, 18.49223966] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dr. Punjabrao Deshmuk Airport AMRAVATI Division",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 20.81435311,
+        "Longitude": 77.72133477
+      },
+      "geometry": { "type": "Point", "coordinates": [77.72133477, 20.81435311] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kalyan Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 19.25228345,
+        "Longitude": 73.12229925
+      },
+      "geometry": { "type": "Point", "coordinates": [73.12229925, 19.25228345] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Aamby Valley Air Strip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 18.60965296,
+        "Longitude": 73.37757191
+      },
+      "geometry": { "type": "Point", "coordinates": [73.37757191, 18.60965296] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chandrapur Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 19.99456398,
+        "Longitude": 79.22274946
+      },
+      "geometry": { "type": "Point", "coordinates": [79.22274946, 19.99456398] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dhule Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 20.92634659,
+        "Longitude": 74.73902299
+      },
+      "geometry": { "type": "Point", "coordinates": [74.73902299, 20.92634659] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Baramati Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 18.22721317,
+        "Longitude": 74.5900997
+      },
+      "geometry": { "type": "Point", "coordinates": [74.5900997, 18.22721317] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Shirpur Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 21.32415614,
+        "Longitude": 74.95675983
+      },
+      "geometry": { "type": "Point", "coordinates": [74.95675983, 21.32415614] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chandrapur Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Maharashtra",
+        "Latitude": 19.57464506,
+        "Longitude": 74.43437762000001
+      },
+      "geometry": { "type": "Point", "coordinates": [74.43437762, 19.57464506] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Tusura Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.50881963,
+        "Longitude": 83.44277665
+      },
+      "geometry": { "type": "Point", "coordinates": [83.44277665, 20.50881963] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Barbil Tonto Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 22.04817498,
+        "Longitude": 85.37375809
+      },
+      "geometry": { "type": "Point", "coordinates": [85.37375809, 22.04817498] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Rajabasa Airfield",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 21.94234743,
+        "Longitude": 86.80534531000001
+      },
+      "geometry": { "type": "Point", "coordinates": [86.80534531, 21.94234743] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Sukinda Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.97113104,
+        "Longitude": 85.90576453
+      },
+      "geometry": { "type": "Point", "coordinates": [85.90576453, 20.97113104] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Raisuan Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 21.697303,
+        "Longitude": 85.58181266
+      },
+      "geometry": { "type": "Point", "coordinates": [85.58181266, 21.697303] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Nuapada Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.869026,
+        "Longitude": 82.51956278
+      },
+      "geometry": { "type": "Point", "coordinates": [82.51956278, 20.869026] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Gunupur Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.06807357,
+        "Longitude": 83.80827387
+      },
+      "geometry": { "type": "Point", "coordinates": [83.80827387, 19.06807357] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Therubali Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 19.34257049,
+        "Longitude": 83.43271322
+      },
+      "geometry": { "type": "Point", "coordinates": [83.43271322, 19.34257049] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Hirakud Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 21.5227793,
+        "Longitude": 83.99743142
+      },
+      "geometry": { "type": "Point", "coordinates": [83.99743142, 21.5227793] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dhamra Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 20.83873096,
+        "Longitude": 86.93798853
+      },
+      "geometry": { "type": "Point", "coordinates": [86.93798853, 20.83873096] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Malkangiri Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Odisha",
+        "Latitude": 18.32796138,
+        "Longitude": 81.92278406
+      },
+      "geometry": { "type": "Point", "coordinates": [81.92278406, 18.32796138] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Ramagundam Airport",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Telangana",
+        "Latitude": 18.70122776,
+        "Longitude": 79.39165168
+      },
+      "geometry": { "type": "Point", "coordinates": [79.39165168, 18.70122776] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Helipad Banswada",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Telangana",
+        "Latitude": 18.37512335,
+        "Longitude": 77.87410904
+      },
+      "geometry": { "type": "Point", "coordinates": [77.87410904, 18.37512335] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Heli-Pad Makloor",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Telangana",
+        "Latitude": 18.74380159,
+        "Longitude": 78.12568447
+      },
+      "geometry": { "type": "Point", "coordinates": [78.12568447, 18.74380159] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Helipad SOANPET",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Telangana",
+        "Latitude": 18.97725364,
+        "Longitude": 78.36542742
+      },
+      "geometry": { "type": "Point", "coordinates": [78.36542742, 18.97725364] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Jhansi Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Uttar Pradesh",
+        "Latitude": 25.4879403,
+        "Longitude": 78.56110541
+      },
+      "geometry": { "type": "Point", "coordinates": [78.56110541, 25.4879403] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Flight Laboratory, IIT Kanpur",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": "Uttar Pradesh",
+        "Latitude": 26.52025275,
+        "Longitude": 80.23250942
+      },
+      "geometry": { "type": "Point", "coordinates": [80.23250942, 26.52025275] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Kalaikunda Air Force Station",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.32954777,
+        "Longitude": 87.24064478
+      },
+      "geometry": { "type": "Point", "coordinates": [87.24064478, 22.32954777] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Durgapur Steel Plant Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 23.58153644,
+        "Longitude": 87.34239887
+      },
+      "geometry": { "type": "Point", "coordinates": [87.34239887, 23.58153644] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Panagarh Air Force Station",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 23.47318826,
+        "Longitude": 87.42867583
+      },
+      "geometry": { "type": "Point", "coordinates": [87.42867583, 23.47318826] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Air Force Station Salua",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.27310724,
+        "Longitude": 87.29687047
+      },
+      "geometry": { "type": "Point", "coordinates": [87.29687047, 22.27310724] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "IIT Kharagpur Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.3117565,
+        "Longitude": 87.32166542
+      },
+      "geometry": { "type": "Point", "coordinates": [87.32166542, 22.3117565] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Midnapore Helipad",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.44309349,
+        "Longitude": 87.31971546
+      },
+      "geometry": { "type": "Point", "coordinates": [87.31971546, 22.44309349] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Piardoba British Aerodrome",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.9975306,
+        "Longitude": 87.2944794
+      },
+      "geometry": { "type": "Point", "coordinates": [87.2944794, 22.9975306] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "\tDigri Airfield",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.79015799,
+        "Longitude": 87.3627435
+      },
+      "geometry": { "type": "Point", "coordinates": [87.3627435, 22.79015799] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Dudhkundi Air Field",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.32658895,
+        "Longitude": 87.10548523
+      },
+      "geometry": { "type": "Point", "coordinates": [87.10548523, 22.32658895] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Pandaveswar Airfield",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 23.69683127,
+        "Longitude": 87.30263389
+      },
+      "geometry": { "type": "Point", "coordinates": [87.30263389, 23.69683127] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Chharra Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 23.3658022,
+        "Longitude": 86.43685969000001
+      },
+      "geometry": { "type": "Point", "coordinates": [86.43685969, 23.3658022] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Salboni Airfield",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 22.60648302,
+        "Longitude": 87.30878157
+      },
+      "geometry": { "type": "Point", "coordinates": [87.30878157, 22.60648302] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Airport Name": "Phaphamau Airstrip",
+        "IATA": null,
+        "ICAO": null,
+        "Airport Type": null,
+        "Operational": null,
+        "State": null,
+        "Latitude": 25.5459323,
+        "Longitude": 81.8888122
+      },
+      "geometry": { "type": "Point", "coordinates": [81.8888122, 25.5459323] }
+    }
+  ]
+}

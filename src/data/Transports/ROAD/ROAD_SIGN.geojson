@@ -1,0 +1,2026 @@
+{
+  "type": "FeatureCollection",
+  "name": "ROAD_SIGN",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 2202,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00002798_20230815_17312037_00700008_0_07198",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO ENTRADA E SAÍDA DE VIATURAS",
+        "valida": "NEW",
+        "tecnico": null,
+        "check": null,
+        "data": "2023-10-28T13:00:34.426",
+        "ideixo": "5697",
+        "ordem": "1",
+        "streetname": "Rua Da Gândara"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.577933899392667, 40.940821526518334]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 2261,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00002812_20230815_17510447_00800008_180_07734",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO ENTRADA E SAÍDA DE VIATURAS",
+        "valida": "NEW",
+        "tecnico": "Sujata",
+        "check": null,
+        "data": "2023-10-28T13:01:04.883",
+        "ideixo": "20159",
+        "ordem": "1",
+        "streetname": "Rua Da Gândara"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.579671826519967, 40.93969542908409]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 4365,
+        "codsinal": "STV1",
+        "estado": "Regular",
+        "foto": "CROP_00003049_20230815_15583718_00900008_0_05093",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-10-28T12:42:48.388",
+        "ideixo": "15612",
+        "ordem": "1",
+        "streetname": "Rua De Espargo De Baixo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.580434162912029, 40.932289520508156]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 4807,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00002959_20230813_14280338_00200008_0_02340",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "SONY",
+        "check": null,
+        "data": "2023-11-01T18:33:08.067",
+        "ideixo": "7294",
+        "ordem": "1",
+        "streetname": "Rua Da Lapa De Cima"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.603912006140368, 40.983311018494497]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 4813,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00002962_20230813_14281168_00400008_180_02343",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "SONY",
+        "check": null,
+        "data": "2023-11-01T18:33:08.102",
+        "ideixo": "7294",
+        "ordem": "1",
+        "streetname": "Rua Da Lapa De Cima"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.604067649497013, 40.983424497034832]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 4908,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003189_20230813_10502009_00100008_0_00266",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-06T09:35:40.087",
+        "ideixo": "15293",
+        "ordem": "1",
+        "streetname": "Rua Doutor Ângelo Sampaio Maia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.589031130488507, 40.98392512376693]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 4917,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003191_20230813_10525031_00600008_0_00329",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA OROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-06T09:35:40.120",
+        "ideixo": "15293",
+        "ordem": "1",
+        "streetname": "Rua Doutor Ângelo Sampaio Maia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.589117181947325, 40.983987270801926]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 5297,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003296_20230813_10111172_00500008_0_00101",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONA PARA",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-04T18:32:57.731",
+        "ideixo": "15626",
+        "ordem": "1",
+        "streetname": "Rua Comendador Sá Couto"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.592083476919585, 40.984783697043973]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 5309,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003298_20230813_10111664_00700008_180_00103",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONA PARA",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-04T18:32:57.756",
+        "ideixo": "15626",
+        "ordem": "1",
+        "streetname": "Rua Comendador Sá Couto"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.592128929901005, 40.98482658578078]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 6367,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003011_20230813_11083458_00700008_0_00694",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-01T18:00:04.457",
+        "ideixo": "14174",
+        "ordem": "1",
+        "streetname": "Travessa Da Calçada Do Rio Maior"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.582542867847231, 40.979367206006728]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 6369,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00002395_20230818_14081273_00700008_0_01221",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-01T17:55:32.436",
+        "ideixo": "12516",
+        "ordem": "1",
+        "streetname": "Rua Da Estaçao"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.584781256323391, 40.97211489576452]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 6376,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003013_20230813_11095272_00900008_180_00713",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-01T17:59:33.305",
+        "ideixo": "721",
+        "ordem": "1",
+        "streetname": "Rua 5 Urbanização Da Tapada Dos Eucaliptos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.582415910604931, 40.97942355235184]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 6801,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003128_20230818_11282785_00100012_0_00581",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-01T17:46:40.226",
+        "ideixo": "12051",
+        "ordem": "1",
+        "streetname": "Rua Do Passo Novo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.585375564140735, 40.973943060881851]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 6806,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003131_20230818_11283639_00200012_180_00584",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-01T17:46:36.769",
+        "ideixo": "18",
+        "ordem": "1",
+        "streetname": "Beco Do Paço Novo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.585466753633051, 40.973905126378249]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 6887,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00003584_20230820_17374586_00400008_-90_06574",
+        "notas": "SINAL TEMPORARIO",
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "SONY",
+        "check": null,
+        "data": "2023-11-24T09:13:11.222",
+        "ideixo": "9251",
+        "ordem": "1",
+        "streetname": "Rua Serafim Alves Ribeiro"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.552018863379315, 41.003826023370998]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 6889,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003163_20230813_16362352_00200008_0_05096",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-01T17:46:31.763",
+        "ideixo": "14543",
+        "ordem": "1",
+        "streetname": "Travessa Da Sobreira"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.585427990534971, 40.973964573156174]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 7448,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00003341_20230810_13440277_00600008_-90_00013",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO ENTRADA E SAÍDA DE VIATURAS",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-04T14:01:15.131",
+        "ideixo": "11568",
+        "ordem": "1",
+        "streetname": "Rua Grupo Musical Estrela De Argoncilhe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.542507392228552, 41.023294644924398]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 8086,
+        "codsinal": "T4b",
+        "estado": "Mau",
+        "foto": "CROP_00004260_20230820_10410449_00200008_-90_00093",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DANONASELO ESCULTURA DE ARTE CONTEMPORANCA POR SAN EMÉLODIE DAMON 3,5KM FIÃES",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-03T17:14:19.833",
+        "ideixo": "9708",
+        "ordem": "1",
+        "streetname": "Rua Do Rio"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.560677863907308, 40.997629449759408]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 9888,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00004274_20230824_14523833_00600008_90_02668",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-09T15:22:07.223",
+        "ideixo": "832",
+        "ordem": "1",
+        "streetname": "Rua Dr. Dos Santos Carneiro"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.535374102394483, 40.9258050895154]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 9895,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00004278_20230824_14501943_00400008_0_02652",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-20T14:11:11.975",
+        "ideixo": "10049",
+        "ordem": "1",
+        "streetname": "Rua De Nossa Senhora Da Piedade"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.535216477118977, 40.925814946739301]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 11348,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00005178_20231011_10420101_00000008_0_02359",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-18T16:26:51.624",
+        "ideixo": "17036",
+        "ordem": "1",
+        "streetname": "Rua Dos Bombeiros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.496290778600573, 40.915159250578853]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 11357,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00005183_20231011_10440232_00100008_0_02369",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-18T16:25:45.881",
+        "ideixo": "3183",
+        "ordem": "1",
+        "streetname": "Rua Cristóvao Colombo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.495887902206274, 40.915665006178969]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 11628,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00003009_20231012_13302300_00500009_180_06318",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO UÍMA",
+        "valida": "NEW",
+        "tecnico": "DHARAMA",
+        "check": null,
+        "data": "2023-11-08T16:29:42.157",
+        "ideixo": "15248",
+        "ordem": "1",
+        "streetname": "Rua Dom Agrela De Baixo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.505600395134987, 41.005517041196448]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 11708,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00005349_20231009_11014891_00800008_0_01050",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-13T18:28:19.564",
+        "ideixo": "3949",
+        "ordem": "1",
+        "streetname": "Rua Dos Bombeiros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.495265433462581, 40.914118228648839]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 11711,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00005351_20231009_11145822_00600008_0_01377",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-18T16:26:51.650",
+        "ideixo": "17036",
+        "ordem": "1",
+        "streetname": "Rua Dos Bombeiros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.496289671130919, 40.915155563999271]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 11714,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00005353_20231009_11023053_00800008_90_01070",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-18T16:26:51.749",
+        "ideixo": "17036",
+        "ordem": "1",
+        "streetname": "Rua Dos Bombeiros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.496418618256776, 40.915034685416266]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 11738,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00005834_20230817_11111578_00400008_90_01218",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO TAMPAS ALTS",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-12-02T13:35:24.688",
+        "ideixo": "11641",
+        "ordem": "1",
+        "streetname": "Rua Das Escolas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.523815007263, 40.981636759944308]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 12892,
+        "codsinal": "T3",
+        "estado": "Regular",
+        "foto": "CROP_00005848_20231023_15522260_00100008_0_03061",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO UIMA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-20T15:49:42.651",
+        "ideixo": "990",
+        "ordem": "1",
+        "streetname": "Rua De Trezuma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.481833886884331, 40.944520528755824]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13178,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008753_20231009_11135559_00900008_0_01332",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ENTRADA E SAÍDA DE VIATURAS",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-18T17:33:51.610",
+        "ideixo": "5194",
+        "ordem": "1",
+        "streetname": "Rua Dos Bombeiros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.494730802795036, 40.912565260526847]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13188,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008760_20231009_11140398_00400008_0_01336",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO OBRAS ,ENTRADA E SAIDA DE VUATURAS",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-18T17:33:51.647",
+        "ideixo": "5194",
+        "ordem": "2",
+        "streetname": "Rua Dos Bombeiros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.49490299829052, 40.912725185616893]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13203,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008774_20231009_11141955_00800008_180_01340",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO,ENTRADA E SAIDA DE VUATURAS",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-13T18:28:19.623",
+        "ideixo": "3949",
+        "ordem": "1",
+        "streetname": "Rua Dos Bombeiros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.494954449443435, 40.913164042598652]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13314,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008842_20231009_11102186_00800008_0_01226",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "CUIDADO ZONA DE ACIDENTES",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-14T09:07:19.488",
+        "ideixo": "5850",
+        "ordem": "1",
+        "streetname": "Rua Professor Egas Moniz"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.491683835075532, 40.913760873997418]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13444,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00008890_20231009_11443607_00500008_90_02229",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-13T18:25:11.354",
+        "ideixo": "8477",
+        "ordem": "1",
+        "streetname": "Rua Do Regimento De Infantaria De Espinho"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.496963720989433, 40.91228106188268]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13474,
+        "codsinal": "T3",
+        "estado": "Regular",
+        "foto": "CROP_00006136_20231023_16012699_00900008_0_03333",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO UIMA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-21T12:57:51.965",
+        "ideixo": "14681",
+        "ordem": "1",
+        "streetname": "Rua Da Galga"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.479722883285433, 40.9479665191948]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13475,
+        "codsinal": "T3",
+        "estado": "Regular",
+        "foto": "CROP_00006137_20231023_16012956_00700008_180_03333",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO UIMA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-21T12:57:51.998",
+        "ideixo": "14681",
+        "ordem": "1",
+        "streetname": "Rua Da Galga"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.47975570570908, 40.947910281990133]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13508,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00008916_20231009_11570283_00000008_90_02518",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-13T18:24:49.134",
+        "ideixo": "3331",
+        "ordem": "1",
+        "streetname": "Rua Professor Vicente Reis"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.497724538902501, 40.912459620986382]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13567,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00006164_20231009_11575050_00400008_90_02535",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-13T18:24:25.402",
+        "ideixo": "12994",
+        "ordem": "1",
+        "streetname": "Largo Élio de Amorim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.49749191944035, 40.911574537227622]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13766,
+        "codsinal": "T3",
+        "estado": "Regular",
+        "foto": "CROP_00006347_20231019_15533765_00800009_0_02271",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO UIMA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-10T15:04:14.765",
+        "ideixo": "3273",
+        "ordem": "1",
+        "streetname": "Rua 25 De Abril"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.491154519814366, 40.944106891875791]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13770,
+        "codsinal": "T3",
+        "estado": "Regular",
+        "foto": "CROP_00006349_20231019_15534332_00800009_180_02268",
+        "notas": "NECESSITA CORTE DE RAMOS",
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO UIMA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-10T15:04:14.798",
+        "ideixo": "3273",
+        "ordem": "1",
+        "streetname": "Rua 25 De Abril"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.491050310090223, 40.944190707831069]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13784,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006218_20231011_10580124_00900008_90_02578",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ACESSO À IGREJA",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-14T09:03:12.457",
+        "ideixo": "10347",
+        "ordem": "1",
+        "streetname": "Rua Rainha Santa Isabel"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.498453369753324, 40.90982109688435]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13831,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006233_20231009_10521500_00500008_0_00862",
+        "notas": "SINAL TEMPORARIO",
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO TAMPAS ALTAS",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-13T18:24:07.479",
+        "ideixo": "9884",
+        "ordem": "1",
+        "streetname": "Avenida 5 De Outubro"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.496675177229656, 40.91151346829129]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13836,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006236_20231009_10522888_00100008_0_00866",
+        "notas": "SINAL TEMPORARIO",
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO TAMPAS ALTAS",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-14T09:39:41.208",
+        "ideixo": "2903",
+        "ordem": "1",
+        "streetname": "Avenida 5 De Outubro"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.496412663362975, 40.91158882909415]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 13990,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006317_20230816_16584539_00000008_0_01150",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO ENTRADA E SAÍDA DE CAMIÕES",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-13T12:17:38.906",
+        "ideixo": "18710",
+        "ordem": "1",
+        "streetname": "Rua De Gaiate"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.476141154380658, 40.930634022299124]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 14054,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006336_20230816_17081413_00300008_0_01368",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO ENTRADA E SAÍDA DE CAMIÕES",
+        "valida": "NEW",
+        "tecnico": "Aliva",
+        "check": null,
+        "data": "2023-11-13T12:17:39.249",
+        "ideixo": "18710",
+        "ordem": "1",
+        "streetname": "Rua De Gaiate"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.473494895378437, 40.931183805328793]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 14347,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006656_20231010_17131106_00800009_90_03919",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-10T14:52:12.643",
+        "ideixo": "4418",
+        "ordem": "1",
+        "streetname": "Rua De Giesteira"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.546125855634168, 40.949081383595313]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 14353,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006657_20231010_17130767_00000009_-90_03919",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-10T14:52:12.666",
+        "ideixo": "4418",
+        "ordem": "1",
+        "streetname": "Rua De Giesteira"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.546154395680167, 40.949146029105776]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 14389,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006685_20231010_17124659_00200009_0_04231",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-10T14:52:22.387",
+        "ideixo": "3790",
+        "ordem": "1",
+        "streetname": "Rua Giesteira De Trás"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.546118733409177, 40.949188781059725]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 14800,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006835_20231010_16363836_00600009_0_03016",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-10T14:56:27.461",
+        "ideixo": "7325",
+        "ordem": "1",
+        "streetname": "Rua Santo André"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.54432983939439, 40.948320201910036]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 14802,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00006836_20231010_16364455_00100009_180_02999",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-10T14:56:27.513",
+        "ideixo": "7325",
+        "ordem": "1",
+        "streetname": "Rua Santo André"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.544277056615654, 40.948254029839319]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 15508,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00007143_20231011_16525827_00200008_0_03522",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO INHA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-20T16:11:15.722",
+        "ideixo": "7419",
+        "ordem": "1",
+        "streetname": "Rua De S. Tomé"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.436260289661259, 40.953402986855259]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 15514,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00007144_20231011_16530769_00900008_180_03470",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO INHA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-20T16:11:15.742",
+        "ideixo": "7419",
+        "ordem": "1",
+        "streetname": "Rua De S. Tomé"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.436453213759238, 40.953247776987375]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 16046,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00007401_20231012_10284293_00200009_90_00705",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO SAÍDA DE CAMIÕES",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-16T17:00:48.043",
+        "ideixo": "15745",
+        "ordem": "1",
+        "streetname": "Rua Do Centro Social"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.465912650724947, 41.012846637845151]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 16083,
+        "codsinal": "T3",
+        "estado": "Regular",
+        "foto": "CROP_00009653_20231006_14345252_00800009_180_00028",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO INHA",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-16T16:37:13.780",
+        "ideixo": "1602",
+        "ordem": "1",
+        "streetname": "Rua Principal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.430035454153723, 41.024556836409339]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 16759,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00007846_20231031_11324367_00600008_90_00342",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ACESSO Á IGREJA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T09:11:42.947",
+        "ideixo": "9256",
+        "ordem": "1",
+        "streetname": "Rua Da Rainha Santa Isabel"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.495488808529094, 40.909889852716404]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17085,
+        "codsinal": "ST8a",
+        "estado": "Bom",
+        "foto": "CROP_00008042_20231030_16214126_00200012_0_01557",
+        "notas": "SINAL TEMPORARIO",
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DESVIO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T15:43:50.450",
+        "ideixo": "19390",
+        "ordem": "1",
+        "streetname": "Travessa Da Lavoura"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.558535488820404, 40.964082740448696]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17125,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00010530_20231031_11541667_00500008_0_01307",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO ÚL",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-07T17:30:15.196",
+        "ideixo": null,
+        "ordem": "1",
+        "streetname": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.461427965342461, 40.929684913168742]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17131,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00010533_20231031_11543742_00400008_90_01330",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO ÚL",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-07T17:34:17.378",
+        "ideixo": null,
+        "ordem": "1",
+        "streetname": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.460128522412584, 40.929376930061217]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17137,
+        "codsinal": "ST9",
+        "estado": "Regular",
+        "foto": "CROP_00008069_20231030_16253800_00400012_0_01705",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "ENTRADA E SAÍDA DE VIATURAS",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T15:40:01.183",
+        "ideixo": "5635",
+        "ordem": "1",
+        "streetname": "Rua Do Souto"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.566077443477718, 40.963975272306612]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17276,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008133_20230818_10180656_00800008_0_00394",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T15:39:03.311",
+        "ideixo": "16371",
+        "ordem": "1",
+        "streetname": "Rua Da Estaçao"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.575811662547476, 40.967201077742182]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17281,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008136_20230818_10560212_00600008_0_00526",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T15:39:17.270",
+        "ideixo": "4694",
+        "ordem": "2",
+        "streetname": "Rua Da Mata"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.575851682699005, 40.967308807087633]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17282,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008135_20230818_10560212_00600008_0_00526",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T15:39:17.281",
+        "ideixo": "4694",
+        "ordem": "1",
+        "streetname": "Rua Da Mata"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.575948031212089, 40.967320186950495]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17301,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008148_20231030_16312103_00900012_0_01839",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T15:34:23.850",
+        "ideixo": "17895",
+        "ordem": "1",
+        "streetname": "Travessa Da Estaçao"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.571509338548395, 40.960991130595808]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17305,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00008149_20230819_10074136_00400008_0_00052",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-14T15:34:14.052",
+        "ideixo": "14295",
+        "ordem": "1",
+        "streetname": "Rua Da Estaçao"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.571394948107566, 40.960924158282069]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17612,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00010880_20230811_13033625_00400009_0_00024",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "Rio Uíma",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-22T11:19:55.196",
+        "ideixo": "17692",
+        "ordem": "2",
+        "streetname": "Rua Do Centro Social"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.478798452557159, 41.038196566931404]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 17616,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00010882_20230811_13035151_00000009_180_00032",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "Rio Uíma",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-22T11:19:44.529",
+        "ideixo": "17692",
+        "ordem": "2",
+        "streetname": "Rua Do Centro Social"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.479001269602216, 41.038644844681514]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 19762,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00010047_20231030_16024747_00300012_0_00883",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-21T18:12:37.599",
+        "ideixo": "15974",
+        "ordem": "1",
+        "streetname": "Rua De São Joao"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.550879092486296, 40.955192830249331]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 19773,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00010052_20231030_16054873_00900012_0_01008",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-21T18:12:37.806",
+        "ideixo": "15974",
+        "ordem": "1",
+        "streetname": "Rua De São Joao"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.550821351841254, 40.955271180531547]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 19774,
+        "codsinal": "ST9",
+        "estado": "Regular",
+        "foto": "CROP_00010053_20231030_16054873_00900012_0_01008",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO,ATENÇÃO EM ESPERA PROLONGADA TELEFONE PARA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-21T18:12:37.941",
+        "ideixo": "15974",
+        "ordem": "1",
+        "streetname": "Rua De São Joao"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.550886546640674, 40.955323528108337]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 19944,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00010155_20231031_14152571_00200008_0_01216",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-21T18:24:03.328",
+        "ideixo": "1989",
+        "ordem": "3",
+        "streetname": "Rua De Gueifar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.553156998774824, 40.963360626027715]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 19947,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00010156_20231031_14153617_00000008_180_01227",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PARE AO SINAL VERMELHO",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-11-21T18:24:03.379",
+        "ideixo": "1989",
+        "ordem": "3",
+        "streetname": "Rua De Gueifar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.553097871582397, 40.963208867171318]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 20281,
+        "codsinal": "STV1",
+        "estado": "Regular",
+        "foto": "CROP_00012961_20231103_10374287_00100008_90_01371",
+        "notas": null,
+        "regsinal": "Nao",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-22T13:42:42.453",
+        "ideixo": "16664",
+        "ordem": "1",
+        "streetname": "Rua Da Ribeirinha"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.571105427790775, 40.976231174494039]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 20597,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00013183_20231103_11214394_00100008_0_02864",
+        "notas": null,
+        "regsinal": "Nao",
+        "codpadic": null,
+        "textpadic": "ATENÇÃO INICIO DE OBRA",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-11-22T11:37:22.125",
+        "ideixo": "19993",
+        "ordem": "2",
+        "streetname": "Rua De S. José"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.572774021210915, 40.975088673367146]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 23193,
+        "codsinal": "T5a",
+        "estado": "Mau",
+        "foto": "CROP_00014839_20231120_11312886_00200008_90_03419",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "DOUBT",
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-12-05T12:58:44.297",
+        "ideixo": "12111",
+        "ordem": "1",
+        "streetname": "Rua Da Fronteira"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.516725619182182, 40.962673934182035]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 23891,
+        "codsinal": "STV1",
+        "estado": "Bom",
+        "foto": "CROP_00007403_20231023_15074412_00300008_0_01542",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "SONY",
+        "check": null,
+        "data": "2023-12-05T16:56:16.012",
+        "ideixo": "7258",
+        "ordem": "1",
+        "streetname": "Rua De Azevedo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.489922438530344, 40.96274756289764]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 24546,
+        "codsinal": "STV1",
+        "estado": "Regular",
+        "foto": "CROP_00015512_20231122_12424213_00700008_90_04965",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "BINDU",
+        "check": null,
+        "data": "2023-12-06T18:07:34.692",
+        "ideixo": "15571",
+        "ordem": "1",
+        "streetname": "Rua Do Ribeiro"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.445483646833067, 40.967675496267461]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 25689,
+        "codsinal": "ST9",
+        "estado": "Bom",
+        "foto": "CROP_00007964_20231123_15411300_00900008_0_06108",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "PEDIMOS DESCULPA PELO INCOMODO",
+        "valida": "NEW",
+        "tecnico": "SONY",
+        "check": null,
+        "data": "2023-12-07T17:04:29.549",
+        "ideixo": "17553",
+        "ordem": "1",
+        "streetname": "Rua Principal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.467237763556371, 41.005952739879817]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26056,
+        "codsinal": "STV1",
+        "estado": "Bom",
+        "foto": "CROP_00013974_20231123_16220783_00800008_0_07436",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T16:02:24.007",
+        "ideixo": "14101",
+        "ordem": "1",
+        "streetname": "Rua Da Zona Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.474677207780134, 41.01261089853903]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26057,
+        "codsinal": "STV1",
+        "estado": "Bom",
+        "foto": "CROP_00013975_20231123_16220783_00800008_0_07436",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T16:02:24.016",
+        "ideixo": "14101",
+        "ordem": "1",
+        "streetname": "Rua Da Zona Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.474705245793132, 41.012609583982282]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26062,
+        "codsinal": "STV1",
+        "estado": "Bom",
+        "foto": "CROP_00013979_20231123_16233599_00900008_90_07484",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T16:02:17.214",
+        "ideixo": "14614",
+        "ordem": "1",
+        "streetname": "Rua Da Zona Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.474640669958218, 41.012261330182412]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26063,
+        "codsinal": "STV1",
+        "estado": "Bom",
+        "foto": "CROP_00013980_20231123_16233599_00900008_90_07484",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": null,
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T16:02:10.856",
+        "ideixo": "3543",
+        "ordem": "1",
+        "streetname": "Rua Da Zona Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.474611419136131, 41.012263879785301]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26412,
+        "codsinal": "T3",
+        "estado": "Mau",
+        "foto": "CROP_00014157_20231122_13010941_00500008_0_05597",
+        "notas": "NECESSITA CORTE DE RAMOS",
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO INHA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T11:04:37.171",
+        "ideixo": "10143",
+        "ordem": "1",
+        "streetname": "Rua Do Emigrante"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.429782297644964, 40.975127172276714]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26413,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00014158_20231122_13280531_00100008_0_06422",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO INHA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T11:04:37.206",
+        "ideixo": "10143",
+        "ordem": "1",
+        "streetname": "Rua Do Emigrante"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.429593013981281, 40.975098476338829]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26539,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00014203_20231122_12304355_00900008_0_04731",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO INHA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T11:07:30.304",
+        "ideixo": "14674",
+        "ordem": "1",
+        "streetname": "Rua Pinho Leal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.439771606604525, 40.969779478213709]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "IDPRIM": 26542,
+        "codsinal": "T3",
+        "estado": "Bom",
+        "foto": "CROP_00014204_20231122_12305607_00600008_180_04716",
+        "notas": null,
+        "regsinal": "Sim",
+        "codpadic": null,
+        "textpadic": "RIO INHA",
+        "valida": "NEW",
+        "tecnico": "PUJA",
+        "check": null,
+        "data": "2023-12-07T11:07:30.317",
+        "ideixo": "14674",
+        "ordem": "1",
+        "streetname": "Rua Pinho Leal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-8.440252441191952, 40.969955038999757]
+      }
+    }
+  ]
+}
