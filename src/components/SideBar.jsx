@@ -1187,7 +1187,6 @@ function SideBar({
               <Checkbox>Shopping Centre</Checkbox>
             </Menu.Item>
           </SubMenu>
-          {/* 725-1180 delete submenu */}
           <div className="m-4 text-center">
             <Button
               type="primary"
