@@ -215,95 +215,95 @@ function OpenMap({
   /* ------------------------------------------- */
 
   return (
-    // <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
-    <MapContainer
-      center={centerPosition}
-      zoom={zoomLevel}
-      scrollWheelZoom={true}
-      style={{
-        height: "100vh",
-        width: "100%",
-      }}
-      maxZoom={18}
-    >
-      {countryView && (
-        <GeoJSON data={countryData} style={countryCornersStyle} />
-      )}
+    <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
+      <MapContainer
+        center={centerPosition}
+        zoom={zoomLevel}
+        scrollWheelZoom={true}
+        style={{
+          height: "100vh",
+          width: "100%",
+        }}
+        maxZoom={18}
+      >
+        {countryView && (
+          <GeoJSON data={countryData} style={countryCornersStyle} />
+        )}
 
-      {stateView && <GeoJSON data={stateData} style={stateCornersStyle} />}
+        {stateView && <GeoJSON data={stateData} style={stateCornersStyle} />}
 
-      {districtView && (
-        <GeoJSON data={districtData} style={districtCornersStyle} />
-      )}
+        {districtView && (
+          <GeoJSON data={districtData} style={districtCornersStyle} />
+        )}
 
-      {/* Render markers for filtered airports */}
+        {/* Render markers for filtered airports */}
 
-      <MarkerClusterGroup>
-        {filteredAirports.map((airport, index) => (
-          <Marker
-            key={index}
-            icon={airportIcon}
-            position={[
-              airport.geometry.coordinates[1],
-              airport.geometry.coordinates[0],
-            ]}
-          >
-            <Popup>
-              <div>
-                <img src={airport.properties.Image} alt="airport" />
-                <h3>{airport.properties["Airport Name"]}</h3>
-                <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
+        <MarkerClusterGroup>
+          {filteredAirports.map((airport, index) => (
+            <Marker
+              key={index}
+              icon={airportIcon}
+              position={[
+                airport.geometry.coordinates[1],
+                airport.geometry.coordinates[0],
+              ]}
+            >
+              <Popup>
+                <div>
+                  <img src={airport.properties.Image} alt="airport" />
+                  <h3>{airport.properties["Airport Name"]}</h3>
+                  <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
 
-      {/* Render markers for filtered POI'S */}
+        {/* Render markers for filtered POI'S */}
 
-      <MarkerClusterGroup>
-        {filteredPois.map((poi, index) => (
-          <Marker
-            key={index}
-            icon={poiIcon}
-            position={[
-              poi.geometry.coordinates[1],
-              poi.geometry.coordinates[0],
-            ]}
-          >
-            <Popup>
-              <div>
-                <h3>{poi.properties.streetname}</h3>
-                <p>{`Type: ${poi.properties.estado}`}</p>
-                <p>{`Catregory: ${poi.properties.descricao}`}</p>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
+        <MarkerClusterGroup>
+          {filteredPois.map((poi, index) => (
+            <Marker
+              key={index}
+              icon={poiIcon}
+              position={[
+                poi.geometry.coordinates[1],
+                poi.geometry.coordinates[0],
+              ]}
+            >
+              <Popup>
+                <div>
+                  <h3>{poi.properties.streetname}</h3>
+                  <p>{`Type: ${poi.properties.estado}`}</p>
+                  <p>{`Catregory: ${poi.properties.descricao}`}</p>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
 
-      <FeatureGroup ref={featureGroupRef}>
-        <EditControl
-          position="topleft"
-          draw={{
-            rectangle: false,
-            polygon: true,
-            polyline: false,
-            circle: false,
-            circlemarker: false,
-            marker: false,
-          }}
-          onCreated={handleDrawCreated}
-        />
-      </FeatureGroup>
-      {isMapLayerVisible && (
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="© OpenStreetMap contributors"
-        />
-      )}
-    </MapContainer>
-    // </div>
+        <FeatureGroup ref={featureGroupRef}>
+          <EditControl
+            position="topleft"
+            draw={{
+              rectangle: false,
+              polygon: true,
+              polyline: false,
+              circle: false,
+              circlemarker: false,
+              marker: false,
+            }}
+            onCreated={handleDrawCreated}
+          />
+        </FeatureGroup>
+        {isMapLayerVisible && (
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="© OpenStreetMap contributors"
+          />
+        )}
+      </MapContainer>
+    </div>
   );
 }
 

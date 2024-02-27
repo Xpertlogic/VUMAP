@@ -90,9 +90,6 @@ function Subscription() {
     };
 
     const handleSubscribe = () => {
-      // const plan = title.toLowerCase().includes("premium")
-      //   ? "premium"
-      //   : "premium plus";
       handlePayment(plan, price);
     };
 

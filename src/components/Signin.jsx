@@ -25,7 +25,7 @@ const Signin = ({ onLogin }) => {
         response.data.roles[0] === "ROLE_USER"
       ) {
         onLogin(response.data.email, response.data.token, password);
-        console.log(response.data);
+        // console.log(response.data);
 
         // notification.success({
         //   message: "Login Successful",
