@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, lazy } from "react";
 import { LoginContext } from "../context/LoginContext";
 import { SubscribeContext } from "../context/SubscribeContext";
 import {
@@ -11,10 +11,11 @@ import {
   Modal,
   Switch,
 } from "antd";
-import countryData from "../data/indiaData.json";
-import stateData from "../data/All_State_Data.json";
-import districtData from "../data/districts.json";
-import Subscription from "./Subscription";
+const Subscription = lazy(() => import("./Subscription"));
+
+const countryData = lazy(() => import("../data/indiaData.json"));
+const stateData = lazy(() => import("../data/All_State_Data.json"));
+const districtData = lazy(() => import("../data/districts.json"));
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -170,8 +171,7 @@ function SideBar({
 
   /* ---- Country ---- */
 
-  const getCountryData = countryData.features
-    .map((item) => item.properties.NAME)
+  const getCountryData = countryData?.features?.map((item) => item.properties.NAME)
     .filter((x) => x !== null);
 
   const handleCountryChange = (value) => {
@@ -188,8 +188,7 @@ function SideBar({
 
   /* ---- States ---- */
 
-  const getStatesData = stateData.features
-    .map((item) => item.properties.Name)
+  const getStatesData = stateData.features?.map((item) => item.properties.Name)
     .filter((x) => x !== null);
 
   const handleStateChange = (value) => {
@@ -205,8 +204,7 @@ function SideBar({
 
   /* ---- Districts ---- */
 
-  const getDistrictsData = districtData.features
-    .map((item) => item.properties.Dist_Name)
+  const getDistrictsData = districtData?.features?.map((item) => item.properties.Dist_Name)
     .filter((x) => x !== null);
 
   const handleDistrictChange = (value) => {

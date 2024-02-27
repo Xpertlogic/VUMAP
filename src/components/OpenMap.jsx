@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useContext } from "react";
+import { useEffect, useState, useRef, useContext, lazy } from "react";
 import { LoginContext } from "../context/LoginContext";
 import {
   MapContainer,
@@ -13,11 +13,13 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import "../style/style.css";
 import { EditControl } from "react-leaflet-draw";
-import countryData from "../data/indiaData.json";
-import stateData from "../data/All_State_Data.json";
-import districtData from "../data/districts.json";
+
 import MarkerClusterGroup from "react-leaflet-cluster";
-import axios from "axios";
+const countryData = lazy(() => import("../data/indiaData.json"));
+const stateData = lazy(() => import("../data/All_State_Data.json"));
+
+const districtData = lazy(() => import("../data/districts.json"));
+// import axios from "axios";
 
 function OpenMap({
   markersInsidePolygon,
