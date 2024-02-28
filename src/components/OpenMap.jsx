@@ -15,11 +15,9 @@ import "../style/style.css";
 import { EditControl } from "react-leaflet-draw";
 
 import MarkerClusterGroup from "react-leaflet-cluster";
-const countryData = lazy(() => import("../data/indiaData.json"));
-const stateData = lazy(() => import("../data/All_State_Data.json"));
-
-const districtData = lazy(() => import("../data/districts.json"));
-// import axios from "axios";
+// const countryData = lazy(() => import("../data/indiaData.json"));
+// const stateData = lazy(() => import("../data/All_State_Data.json"));
+// const districtData = lazy(() => import("../data/districts.json"));
 
 function OpenMap({
   markersInsidePolygon,
@@ -45,24 +43,55 @@ function OpenMap({
 
   //--------------------------
 
+  const [countryData, setCountryData] = useState(null);
+  const [stateData, setStateData] = useState(null);
+  const [districtData, setDistrictData] = useState(null);
+
+  useEffect(() => {
+    const fetchCountryData = async () => {
+      const dataModuleCountry = await import("../data/indiaData.json");
+      setCountryData(dataModuleCountry.default);
+    };
+
+    fetchCountryData();
+  }, []);
+
+  useEffect(() => {
+    const fetchStateData = async () => {
+      const dataModuleState = await import("../data/All_State_Data.json");
+      setStateData(dataModuleState.default);
+    };
+
+    fetchStateData();
+  }, []);
+
+  useEffect(() => {
+    const fetchDistrictData = async () => {
+      const dataModuleDistrict = await import("../data/districts.json");
+      setDistrictData(dataModuleDistrict.default);
+    };
+
+    fetchDistrictData();
+  }, []);
+
   /* ---------- Login ------------ */
   const { loggedIn } = useContext(LoginContext);
 
-  const vumapUrl = "https://vumap.s3.ap-south-1.amazonaws.com/district.json";
+  // const vumapUrl = "https://vumap.s3.ap-south-1.amazonaws.com/district.json";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(vumapUrl);
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(vumapUrl);
+  //       const data = await response.json();
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     setCenterPosition(mapData);

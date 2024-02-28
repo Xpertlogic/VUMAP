@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import "../style/subscription.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -10,7 +10,12 @@ import { SubscribeContext } from "../context/SubscribeContext";
 function Subscription() {
   // const [paymentSuccess,setPaymentSuccess] = useState(false)
   const [Razorpay, isLoaded] = useRazorpay();
-  const { userData, storedToken } = useContext(LoginContext);
+  const {
+    userData,
+    storedToken,
+    // subscriptionState, setSubscriptionState
+  } = useContext(LoginContext);
+
   const { subscriptionState, setSubscriptionState } =
     useContext(SubscribeContext);
 
@@ -39,37 +44,38 @@ function Subscription() {
         } Plan`,
         image: "",
         handler: async (razorpayResponse) => {
-          try {
-            const Payload = {
-              email: userData.email,
-              tier: plan === "premium" ? "Premium" : "Premium Plus", // Update tier based on plan
-              paymentid: razorpayResponse.razorpay_payment_id,
-              token: storedToken,
-            };
+          console.log(razorpayResponse);
+          if (razorpayResponse.razorpay_payment_id) {
+            try {
+              const Payload = {
+                email: userData.email,
+                tier: plan === "premium" ? "Premium" : "Premium Plus", // Update tier based on plan
+                paymentid: razorpayResponse.razorpay_payment_id,
+                token: storedToken,
+              };
 
-            const headers = {
-              Token: storedToken,
-              "Content-Type": "application/json",
-            };
+              const headers = {
+                Token: storedToken,
+                "Content-Type": "application/json",
+              };
 
-            const response = await axios.post(
-              "http://54.252.180.142:8080/api/user/payments",
-              Payload,
-              { headers: headers }
-            );
-
-            if (!response.data.success) {
-              throw new Error("Failed to record payment");
+              const response = await axios.post(
+                "http://54.252.180.142:8080/api/user/payments",
+                Payload,
+                { headers: headers }
+              );
+              // setPaymentSuccess(true);
+              setSubscriptionState({
+                ...subscriptionState,
+                paymentSuccess: true,
+                selectedPlan: plan,
+              });
+              console.log("Payment recorded successfully!");
+            } catch (error) {
+              console.error("Error recording payment:", error);
             }
-            // setPaymentSuccess(true);
-            setSubscriptionState({
-              ...subscriptionState,
-              paymentSuccess: true,
-              selectedPlan: plan,
-            });
-            console.log("Payment recorded successfully!");
-          } catch (error) {
-            console.error("Error recording payment:", error);
+          } else {
+            console.log("somthing went wrong in payments");
           }
         },
         prefill: {

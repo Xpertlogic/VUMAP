@@ -10,6 +10,18 @@ export const LoginProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const storedToken = localStorage.getItem("token");
 
+  // const storedPaymentSuccess = localStorage.getItem("paymentSuccess");
+
+  // const [subscriptionState, setSubscriptionState] = useState({
+  //   paymentSuccess: storedPaymentSuccess,
+  //   selectedPlan: null,
+  // });
+
+  // useEffect(() => {
+  //   // Store paymentSuccess in local storage whenever it changes
+  //   localStorage.setItem("paymentSuccess", subscriptionState.paymentSuccess);
+  // }, [subscriptionState.paymentSuccess]);
+
   const verifyToken = async (token) => {
     try {
       const response = await axios.post(
@@ -31,12 +43,17 @@ export const LoginProvider = ({ children }) => {
 
   useEffect(() => {
     verifyToken(token);
-  }, [token, storedToken, loggedIn]);
+  }, [token, storedToken]);
 
   const login = (email, token) => {
     setEmail(email);
     localStorage.setItem("email", email);
     localStorage.setItem("token", token);
+    // setSubscriptionState({
+    //   paymentSuccess: subscriptionState.paymentSuccess,
+    //   selectedPlan: null,
+    // });
+    // console.log(subscriptionState);
   };
 
   const logout = () => {
@@ -45,11 +62,24 @@ export const LoginProvider = ({ children }) => {
     setLoggedIn(false);
     localStorage.removeItem("email");
     localStorage.removeItem("token");
+    // setSubscriptionState({
+    //   paymentSuccess: false,
+    //   selectedPlan: null,
+    // });
+    // console.log(subscriptionState);
   };
 
   return (
     <LoginContext.Provider
-      value={{ userData, loggedIn, logout, login, storedToken }}
+      value={{
+        userData,
+        loggedIn,
+        logout,
+        login,
+        storedToken,
+        // subscriptionState,
+        // setSubscriptionState,
+      }}
     >
       {children}
     </LoginContext.Provider>

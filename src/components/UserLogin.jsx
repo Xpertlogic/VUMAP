@@ -6,7 +6,72 @@ function UserLogin() {
   );
 }
 /* 
- <SubMenu key="sub4-2" title="Companies">
+  <SubMenu
+            key="sub4"
+            title={
+              <span className="text-[1rem] flex gap-2">
+                <Checkbox></Checkbox>
+                POI
+              </span>
+            }
+          >
+            <SubMenu
+              key="sub4-1"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Automotive Dealer
+                </span>
+              }
+            >
+              <Menu.Item key="1">
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Bike")}
+                  checked={selectedPoiTypes.includes("Bike")}
+                >
+                  Bike
+                </Checkbox>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Car")}
+                  checked={selectedPoiTypes.includes("Car")}
+                >
+                  Car
+                </Checkbox>
+              </Menu.Item>
+              <Menu.Item key="3">
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Bus")}
+                  checked={selectedPoiTypes.includes("Bus")}
+                >
+                  Bus
+                </Checkbox>
+              </Menu.Item>
+              <Menu.Item key="4">
+                <Checkbox
+                  onChange={() => handelPoiTypeChange("Truck")}
+                  checked={selectedPoiTypes.includes("Truck")}
+                >
+                  Truck
+                </Checkbox>
+              </Menu.Item>
+              <Menu.Item key="5">
+                <Checkbox>Electric Vehicle</Checkbox>
+              </Menu.Item>
+              <Menu.Item key="6">
+                <Checkbox>Others</Checkbox>
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu
+              key="sub4-2"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Companies
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Private Companies</Checkbox>
               </Menu.Item>
@@ -14,7 +79,15 @@ function UserLogin() {
                 <Checkbox>Others</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-3" title="Entertainment">
+            <SubMenu
+              key="sub4-3"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Entertainment
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Café/Pub</Checkbox>
               </Menu.Item>
@@ -37,7 +110,15 @@ function UserLogin() {
             <Menu.Item key="sub4-4">
               <Checkbox>Golf Course</Checkbox>
             </Menu.Item>
-            <SubMenu key="sub4-5" title="Hotels/Restaurants">
+            <SubMenu
+              key="sub4-5"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Hotels/Restaurants
+                </span>
+              }
+            >
               {" "}
               <Menu.Item key="1">
                 <Checkbox>Hotels</Checkbox>
@@ -49,7 +130,15 @@ function UserLogin() {
                 <Checkbox>Others</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-6" title="Place of Worship">
+            <SubMenu
+              key="sub4-6"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Place of Worship
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Temple</Checkbox>
               </Menu.Item>
@@ -75,7 +164,15 @@ function UserLogin() {
                 <Checkbox>Community Centre</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-7" title="Repair Facility">
+            <SubMenu
+              key="sub4-7"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Repair Facility
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Bike</Checkbox>
               </Menu.Item>
@@ -92,7 +189,15 @@ function UserLogin() {
             <Menu.Item key="sub4-8">
               <Checkbox>Business Park</Checkbox>
             </Menu.Item>
-            <SubMenu key="sub4-9" title="Education">
+            <SubMenu
+              key="sub4-9"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Education
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>School</Checkbox>
               </Menu.Item>
@@ -112,7 +217,15 @@ function UserLogin() {
                 <Checkbox>Other</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-10" title="Finance">
+            <SubMenu
+              key="sub4-10"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Finance
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>ATM</Checkbox>
               </Menu.Item>
@@ -123,7 +236,15 @@ function UserLogin() {
                 <Checkbox>Loan/Others</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-11" title="Government Office">
+            <SubMenu
+              key="sub4-11"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Government Office
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Central Government</Checkbox>
               </Menu.Item>
@@ -146,7 +267,15 @@ function UserLogin() {
                 <Checkbox>Others</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-12" title="Health Care">
+            <SubMenu
+              key="sub4-12"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Health Care
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Government Hospitals</Checkbox>
               </Menu.Item>
@@ -160,7 +289,15 @@ function UserLogin() {
                 <Checkbox>Others</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-13" title="Hostels">
+            <SubMenu
+              key="sub4-13"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Hostels
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Boys Hostel</Checkbox>
               </Menu.Item>
@@ -171,7 +308,15 @@ function UserLogin() {
                 <Checkbox>Other</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-14" title="Park and Recreation Area">
+            <SubMenu
+              key="sub4-14"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Park and Recreation Area
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Cemetery</Checkbox>
               </Menu.Item>
@@ -185,7 +330,15 @@ function UserLogin() {
                 <Checkbox>Memorial</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-15" title="Public Amenity">
+            <SubMenu
+              key="sub4-15"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Public Amenity
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Toilet</Checkbox>
               </Menu.Item>
@@ -199,7 +352,15 @@ function UserLogin() {
                 <Checkbox>Rest Area</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-16" title="Services">
+            <SubMenu
+              key="sub4-16"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Services
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Professional Services</Checkbox>
               </Menu.Item>
@@ -210,7 +371,15 @@ function UserLogin() {
                 <Checkbox>Other Services</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-17" title="Shop">
+            <SubMenu
+              key="sub4-17"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Shop
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Pharmacy</Checkbox>
               </Menu.Item>
@@ -317,7 +486,15 @@ function UserLogin() {
                 <Checkbox>Food & Drinks</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-18" title="Sports Centre">
+            <SubMenu
+              key="sub4-18"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Sports Centre
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Cricket</Checkbox>
               </Menu.Item>
@@ -337,7 +514,15 @@ function UserLogin() {
                 <Checkbox>Others</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-19" title="Tourist Places">
+            <SubMenu
+              key="sub4-19"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Tourist Places
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>Beach</Checkbox>
               </Menu.Item>
@@ -357,7 +542,15 @@ function UserLogin() {
                 <Checkbox>Others</Checkbox>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4-20" title="Utility">
+            <SubMenu
+              key="sub4-20"
+              title={
+                <span>
+                  <Checkbox className="mr-2" />
+                  Utility
+                </span>
+              }
+            >
               <Menu.Item key="1">
                 <Checkbox>EV Stations</Checkbox>
               </Menu.Item>
