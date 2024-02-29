@@ -13,11 +13,9 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import "../style/style.css";
 import { EditControl } from "react-leaflet-draw";
+import axios from "axios";
 
 import MarkerClusterGroup from "react-leaflet-cluster";
-// const countryData = lazy(() => import("../data/indiaData.json"));
-// const stateData = lazy(() => import("../data/All_State_Data.json"));
-// const districtData = lazy(() => import("../data/districts.json"));
 
 function OpenMap({
   markersInsidePolygon,
@@ -27,6 +25,7 @@ function OpenMap({
   countryView,
   stateView,
   districtView,
+  cityView,
   selectedAirportTypes,
   airportDataView,
   selectedPoiTypes,
@@ -43,55 +42,93 @@ function OpenMap({
 
   //--------------------------
 
+  console.log("country", countryView, stateView);
+
+  /* ------ Country-State-District-City ------ */
   const [countryData, setCountryData] = useState(null);
   const [stateData, setStateData] = useState(null);
   const [districtData, setDistrictData] = useState(null);
+  const [cityData, setCityData] = useState(null);
 
+  const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
+
+  /* ----- Countries ----- */
   useEffect(() => {
     const fetchCountryData = async () => {
-      const dataModuleCountry = await import("../data/indiaData.json");
-      setCountryData(dataModuleCountry.default);
+      try {
+        const response = await axios.get(
+          `${baseUrl}/${countryView}/boundary.geojson`
+        );
+
+        setCountryData(response.data.features[0].geometry.coordinates);
+      } catch (error) {
+        console.error("Error fetching Country Boundary:", error);
+      }
     };
 
     fetchCountryData();
-  }, []);
+  }, [countryView]);
+
+  console.log(countryData);
+
+  /* ----- States ----- */
 
   useEffect(() => {
     const fetchStateData = async () => {
-      const dataModuleState = await import("../data/All_State_Data.json");
-      setStateData(dataModuleState.default);
+      try {
+        const response = await axios.get(
+          `${baseUrl}/${countryView}/${stateView}/boundary.geojson`
+        );
+
+        setStateData(response.data);
+      } catch (error) {
+        console.error("Error fetching State Boundary:", error);
+      }
     };
 
     fetchStateData();
-  }, []);
+  }, [stateView]);
+
+  console.log(stateData);
+
+  /* ----- Districts ----- */
 
   useEffect(() => {
     const fetchDistrictData = async () => {
-      const dataModuleDistrict = await import("../data/districts.json");
-      setDistrictData(dataModuleDistrict.default);
-    };
+      try {
+        const response = await axios.get(
+          `${baseUrl}/india/odisha/khordha/boundary.geojson`
+        );
 
+        setDistrictData(response.data);
+      } catch (error) {
+        console.error("Error fetching District Boundary:", error);
+      }
+    };
     fetchDistrictData();
   }, []);
 
+  /* ----- Cities ----- */
+
+  useEffect(() => {
+    const fetchCitiesData = async () => {
+      try {
+        const response = await axios.get(
+          `${baseUrl}/india/odisha/khordha/bhubaneswar/boundary.geojson`
+        );
+
+        setCityData(response.data);
+      } catch (error) {
+        console.error("Error fetching City Boundary:", error);
+      }
+    };
+    fetchCitiesData();
+  }, []);
+
+  /* ----------------------------------------------------- */
+
   /* ---------- Login ------------ */
   const { loggedIn } = useContext(LoginContext);
-
-  // const vumapUrl = "https://vumap.s3.ap-south-1.amazonaws.com/district.json";
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(vumapUrl);
-  //       const data = await response.json();
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     setCenterPosition(mapData);
@@ -137,6 +174,15 @@ function OpenMap({
     radius: 5,
     fillColor: "transparent",
     color: "red",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
+
+  const cityCornersStyle = {
+    radius: 5,
+    fillColor: "transparent",
+    color: "black",
     weight: 2,
     opacity: 1,
     fillOpacity: 0.8,
@@ -228,7 +274,7 @@ function OpenMap({
     setMarkersInsidePolygon(filteredMarkers);
   };
 
-  console.log(markersInsidePolygon);
+  // console.log(markersInsidePolygon);
 
   /* -------------- Airport Data -------------- */
 
@@ -245,6 +291,7 @@ function OpenMap({
   );
   /* ------------------------------------------- */
 
+  console.log(countryData);
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
       <MapContainer
@@ -266,6 +313,8 @@ function OpenMap({
         {districtView && (
           <GeoJSON data={districtData} style={districtCornersStyle} />
         )}
+
+        {cityView && <GeoJSON data={cityData} style={cityCornersStyle} />}
 
         {/* Render markers for filtered airports */}
 

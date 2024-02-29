@@ -11,12 +11,8 @@ import {
   Modal,
   Switch,
 } from "antd";
-// import countryData from "../data/indiaData.json";
+import axios from "axios";
 const Subscription = lazy(() => import("./Subscription"));
-
-// const countryData = lazy(() => import("../data/indiaData.json"));
-// const stateData = lazy(() => import("../data/All_State_Data.json"));
-// const districtData = lazy(() => import("../data/districts.json"));
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -28,14 +24,16 @@ function SideBar({
   onSelectedCountry,
   onSelectedState,
   onSelectedDistrict,
+  onSelectedCity,
   selectedAirportTypes,
   onAirportTypeChange,
   selectedPoiTypes,
   onPoiTypesChange,
 }) {
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedState, setSelectedState] = useState(null);
-  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
   /*----------- Select All checkbox ----------*/
@@ -49,36 +47,54 @@ function SideBar({
   });
   /* ------------------------------------------ */
 
-  const [countryData, setCountryData] = useState(null);
-  const [stateData, setStateData] = useState(null);
-  const [districtData, setDistrictData] = useState(null);
+  /* ------ Country-State-District-City ------ */
+  const [districtData, setDistrictData] = useState("");
+  const [cityData, setCityData] = useState("");
 
-  useEffect(() => {
-    const fetchCountryData = async () => {
-      const dataModuleCountry = await import("../data/indiaData.json");
-      setCountryData(dataModuleCountry.default);
-    };
+  const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
 
-    fetchCountryData();
-  }, []);
+  /* ----- Countries ----- */
 
-  useEffect(() => {
-    const fetchStateData = async () => {
-      const dataModuleState = await import("../data/All_State_Data.json");
-      setStateData(dataModuleState.default);
-    };
+  const handleCountryChange = (value) => {
+    setSelectedCountry();
+    setSelectedState(null);
+    setSelectedDistrict(null);
+    onSelectedCountry(value.toLowerCase());
+  };
 
-    fetchStateData();
-  }, []);
+  /* ----- States ----- */
 
-  useEffect(() => {
-    const fetchDistrictData = async () => {
-      const dataModuleDistrict = await import("../data/districts.json");
-      setDistrictData(dataModuleDistrict.default);
-    };
+  const handleStateChange = (value) => {
+    setSelectedState(value.toLowerCase());
+    setSelectedDistrict("");
+    onSelectedState(value.toLowerCase());
+  };
 
-    fetchDistrictData();
-  }, []);
+  /* ----- Districts ----- */
+
+  const getDistrictsData = districtData?.features
+    ?.map((item) => item.properties.name)
+    .filter((x) => x !== null);
+
+  const handleDistrictChange = (value) => {
+    const getDistrict = districtData?.features.find(
+      (item) => item.properties.name === value
+    );
+    setSelectedDistrict(getDistrict);
+    onSelectedDistrict(value);
+  };
+
+  /* ----- Cities ----- */
+
+  const getCitiesData = cityData?.name;
+
+  const handleCityChange = (value) => {
+    const getCity = cityData?.name;
+    setSelectedCity(getCity);
+    onSelectedCity(value);
+  };
+
+  /* ----------------------------------------------------- */
 
   const { subscriptionState } = useContext(SubscribeContext);
   /* ---------- Login ------------ */
@@ -199,73 +215,7 @@ function SideBar({
     onPoiTypesChange(updatedSelectedPoiTypes);
   };
 
-  /* ---------------- */
-
-  /* ---- Country ---- */
-
-  console.log(countryData);
-
-  const getCountryData = countryData?.features
-    ?.map((item) => item.properties.NAME)
-    .filter((x) => x !== null);
-
-  console.log(getCountryData);
-
-  const handleCountryChange = (value) => {
-    const getCountry = countryData?.features.find(
-      (item) => item.properties.NAME === value
-    );
-    setSelectedCountry(getCountry);
-    setSelectedState(null);
-    setSelectedDistrict(null);
-    onSelectedCountry(value);
-  };
-
   /* --------------------- */
-
-  /* ---- States ---- */
-
-  const getStatesData = stateData?.features
-    ?.map((item) => item.properties.Name)
-    .filter((x) => x !== null);
-
-  const handleStateChange = (value) => {
-    const getState = stateData?.features.find(
-      (item) => item.properties.Name === value
-    );
-
-    setSelectedState(getState);
-    setSelectedDistrict(null);
-    onSelectedState(value);
-  };
-  /* --------------------- */
-
-  /* ---- Districts ---- */
-
-  const getDistrictsData = districtData?.features
-    ?.map((item) => item.properties.Dist_Name)
-    .filter((x) => x !== null);
-
-  const handleDistrictChange = (value) => {
-    const getDistrict = districtData?.features.find(
-      (item) => item.properties.Dist_Name === value
-    );
-    setSelectedDistrict(getDistrict);
-
-    onSelectedDistrict(value);
-  };
-  /* --------------------- */
-
-  useEffect(() => {
-    // If the country changes, reset state and district
-    setSelectedState(null);
-    setSelectedDistrict(null);
-  }, [selectedCountry]);
-
-  useEffect(() => {
-    // If the state changes, reset district
-    setSelectedDistrict(null);
-  }, [selectedState]);
 
   /* -------- For Subscription ------- */
   const showSubscriptionModal = () => {
@@ -339,18 +289,12 @@ function SideBar({
               </div>
               <div>
                 <Select
-                  style={{ width: 150 }}
+                  style={{ width: 160 }}
                   onChange={(value) => handleCountryChange(value)}
                 >
-                  {getCountryData && getCountryData !== undefined
-                    ? getCountryData.map((countryItem, index) => {
-                        return (
-                          <option value={countryItem} key={index}>
-                            {countryItem}
-                          </option>
-                        );
-                      })
-                    : "No Country"}
+                  <option key="select-state" value="india">
+                    India
+                  </option>
                 </Select>
               </div>
             </div>
@@ -362,19 +306,19 @@ function SideBar({
               </div>
               <div>
                 <Select
-                  style={{ width: 150 }}
+                  style={{ width: 160 }}
                   onChange={(value) => handleStateChange(value)}
-                  disabled={!selectedCountry}
+                  disabled={selectedCountry?.length < 1}
                 >
-                  {getStatesData && getStatesData !== undefined
-                    ? getStatesData.map((stateItem, index) => {
-                        return (
-                          <option value={stateItem} key={index}>
-                            {stateItem}
-                          </option>
-                        );
-                      })
-                    : "No State"}
+                  <option key="select-state" value="odisha">
+                    Odisha
+                  </option>
+                  <option key="select-state" value="goa">
+                    Goa
+                  </option>
+                  <option key="select-state" value="uttar pradesh">
+                    Uttar Pradesh
+                  </option>
                 </Select>
               </div>
             </div>
@@ -386,19 +330,24 @@ function SideBar({
               </div>
               <div>
                 <Select
-                  style={{ width: 150 }}
+                  style={{ width: 160 }}
                   onChange={(value) => handleDistrictChange(value)}
                   disabled={!selectedState}
                 >
-                  {getDistrictsData && getDistrictsData !== undefined
-                    ? getDistrictsData.map((districtItem, index) => {
-                        return (
-                          <option value={districtItem} key={index}>
-                            {districtItem}
-                          </option>
-                        );
-                      })
-                    : "No District"}
+                  {[
+                    <option key="select-district" value={null}>
+                      Select District
+                    </option>,
+                    ...(getDistrictsData && getDistrictsData !== undefined
+                      ? getDistrictsData.map((districtItem, index) => {
+                          return (
+                            <option value={districtItem} key={index}>
+                              {districtItem}
+                            </option>
+                          );
+                        })
+                      : []),
+                  ]}
                 </Select>
               </div>
             </div>
@@ -410,10 +359,19 @@ function SideBar({
               </div>
               <div>
                 <Select
-                  style={{ width: 150 }}
-                  options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
-                  disabled
-                />
+                  style={{ width: 160 }}
+                  onChange={(value) => handleCityChange(value)}
+                  disabled={!selectedDistrict}
+                >
+                  <option key="select-city" value={null}>
+                    Select City
+                  </option>
+                  {getCitiesData && (
+                    <option value={getCitiesData} key={getCitiesData}>
+                      {getCitiesData}
+                    </option>
+                  )}
+                </Select>
               </div>
             </div>
           </Form.Item>
@@ -424,7 +382,7 @@ function SideBar({
               </div>
               <div>
                 <Select
-                  style={{ width: 150 }}
+                  style={{ width: 160 }}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
                   disabled
                 />
@@ -438,7 +396,7 @@ function SideBar({
               </div>
               <div>
                 <Select
-                  style={{ width: 150 }}
+                  style={{ width: 160 }}
                   options={[{ value: "bhubaneswar", label: "Bhubaneswar" }]}
                   disabled
                 />

@@ -16,6 +16,7 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState();
   const [selectedState, setSelectedState] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState();
+  const [selectedCity, setSelectedCity] = useState();
   //-->For Airports
   const [selectedAirportTypes, setSelectedAirportTypes] = useState([]);
   //-->For POI's
@@ -44,14 +45,28 @@ function App() {
 
   const handleCountryChange = (countryItem) => {
     setSelectedCountry(countryItem);
+    setSelectedState(null);
+    setSelectedDistrict(null);
+    setSelectedCity(null);
+    console.log("change", countryItem);
   };
 
   const handleStateChange = (stateItem) => {
     setSelectedState(stateItem);
+    setSelectedDistrict(null);
+    setSelectedCity(null);
+    console.log("change", stateItem);
   };
 
   const handleDistrictChange = (districtItem) => {
     setSelectedDistrict(districtItem);
+    setSelectedCity(null);
+    console.log("change", districtItem);
+  };
+
+  const handleCityChange = (cityItem) => {
+    setSelectedCity(cityItem);
+    console.log("change", cityItem);
   };
 
   return (
@@ -66,6 +81,7 @@ function App() {
                   onSelectedCountry={handleCountryChange}
                   onSelectedState={handleStateChange}
                   onSelectedDistrict={handleDistrictChange}
+                  onSelectedCity={handleCityChange}
                   markersInsidePolygon={markersInsidePolygon}
                   setMarkersInsidePolygon={setMarkersInsidePolygon}
                   selectedAirportTypes={selectedAirportTypes}
@@ -84,6 +100,7 @@ function App() {
                 countryView={selectedCountry}
                 stateView={selectedState}
                 districtView={selectedDistrict}
+                cityView={selectedCity}
                 selectedAirportTypes={selectedAirportTypes}
                 markersInsidePolygon={markersInsidePolygon}
                 setMarkersInsidePolygon={setMarkersInsidePolygon}
