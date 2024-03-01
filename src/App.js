@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { LoginContext, LoginProvider } from "./context/LoginContext";
+import { useState, useContext, useEffect } from "react";
+import { LoginProvider } from "./context/LoginContext";
 import { SubscribeProvider } from "./context/SubscribeContext";
 import "./style/style.css";
 import { Suspense, lazy } from "react";
@@ -12,7 +12,6 @@ const { Content } = Layout;
 const SideBar = lazy(() => import("./components/SideBar"));
 
 function App() {
-  const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
   const [selectedCountry, setSelectedCountry] = useState();
   const [selectedState, setSelectedState] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState();
@@ -25,6 +24,13 @@ function App() {
   const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]);
   //--> For Map Switch
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
+
+  // const [stateData, setStateData] = useState(null);
+
+  // // Function to update stateData
+  // const updateStateData = (data) => {
+  //   setStateData(data);
+  // };
 
   /* ------------------------------------------ */
 
@@ -41,32 +47,29 @@ function App() {
   const handleToggleMapLayerVisibility = (isVisible) => {
     setIsMapLayerVisible(isVisible);
   };
+
   /* ------------------------------------------ */
 
   const handleCountryChange = (countryItem) => {
     setSelectedCountry(countryItem);
-    setSelectedState(null);
-    setSelectedDistrict(null);
-    setSelectedCity(null);
-    console.log("change", countryItem);
+    setSelectedState("");
+    setSelectedDistrict("");
+    setSelectedCity("");
   };
 
   const handleStateChange = (stateItem) => {
     setSelectedState(stateItem);
-    setSelectedDistrict(null);
-    setSelectedCity(null);
-    console.log("change", stateItem);
+    setSelectedDistrict("");
+    setSelectedCity("");
   };
 
   const handleDistrictChange = (districtItem) => {
     setSelectedDistrict(districtItem);
-    setSelectedCity(null);
-    console.log("change", districtItem);
+    setSelectedCity("");
   };
 
   const handleCityChange = (cityItem) => {
     setSelectedCity(cityItem);
-    console.log("change", cityItem);
   };
 
   return (
@@ -77,6 +80,7 @@ function App() {
             <Suspense fallback={<div>Loading...</div>}>
               <SubscribeProvider>
                 <SideBar
+                  // stateData={stateData}
                   onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
                   onSelectedCountry={handleCountryChange}
                   onSelectedState={handleStateChange}
@@ -95,8 +99,8 @@ function App() {
             </Suspense>
             <Content className="overflow-hidden">
               <OpenMap
+                // updateStateData={updateStateData}
                 isMapLayerVisible={isMapLayerVisible}
-                mapData={centerPosition}
                 countryView={selectedCountry}
                 stateView={selectedState}
                 districtView={selectedDistrict}

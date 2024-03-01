@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useContext, lazy } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import {
   MapContainer,
@@ -21,7 +21,6 @@ function OpenMap({
   markersInsidePolygon,
   setMarkersInsidePolygon,
   isMapLayerVisible,
-  mapData,
   countryView,
   stateView,
   districtView,
@@ -31,10 +30,8 @@ function OpenMap({
   selectedPoiTypes,
   poiDataView,
 }) {
-  // const position = mapData && mapData;
-  const [centerPosition, setCenterPosition] = useState(mapData);
+  const [centerPosition, setCenterPosition] = useState([20.5937, 78.9629]);
   const [zoomLevel, setZoomLevel] = useState(5);
-  // const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]);
   const featureGroupRef = useRef();
 
   //--------------------------------
@@ -42,13 +39,12 @@ function OpenMap({
 
   //--------------------------
 
-  console.log("country", countryView, stateView);
-
   /* ------ Country-State-District-City ------ */
   const [countryData, setCountryData] = useState(null);
   const [stateData, setStateData] = useState(null);
   const [districtData, setDistrictData] = useState(null);
   const [cityData, setCityData] = useState(null);
+  const [poiData, setPoiData] = useState();
 
   const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
 
@@ -60,16 +56,23 @@ function OpenMap({
           `${baseUrl}/${countryView}/boundary.geojson`
         );
 
-        setCountryData(response.data.features[0].geometry.coordinates);
+        // const countryPositionVal =
+        //   response.data.features[0].geometry.coordinates[0].flat()[0];
+
+        setCountryData(response.data);
+
+        // setCenterPosition([countryPositionVal[1], countryPositionVal[0]]);
       } catch (error) {
         console.error("Error fetching Country Boundary:", error);
       }
     };
 
+    if (countryView) {
+      setZoomLevel(5);
+    }
+
     fetchCountryData();
   }, [countryView]);
-
-  console.log(countryData);
 
   /* ----- States ----- */
 
@@ -79,17 +82,26 @@ function OpenMap({
         const response = await axios.get(
           `${baseUrl}/${countryView}/${stateView}/boundary.geojson`
         );
+        const statePositionVal =
+          response.data.features[0].geometry.coordinates[0].flat()[0];
 
         setStateData(response.data);
+
+        setCenterPosition([statePositionVal[1], statePositionVal[0]]);
       } catch (error) {
         console.error("Error fetching State Boundary:", error);
       }
     };
 
-    fetchStateData();
+    if (stateView) {
+      setZoomLevel(6);
+    }
+    if (stateView?.length > 0) {
+      fetchStateData();
+    }
   }, [stateView]);
 
-  console.log(stateData);
+  console.log(centerPosition);
 
   /* ----- Districts ----- */
 
@@ -97,16 +109,28 @@ function OpenMap({
     const fetchDistrictData = async () => {
       try {
         const response = await axios.get(
-          `${baseUrl}/india/odisha/khordha/boundary.geojson`
+          `${baseUrl}/${countryView}/${stateView}/${districtView}/boundary.geojson`
         );
 
+        const districtPositionVal =
+          response.data.features[0].geometry.coordinates[0].flat()[0];
+
         setDistrictData(response.data);
+
+        setCenterPosition([districtPositionVal[1], districtPositionVal[0]]);
       } catch (error) {
         console.error("Error fetching District Boundary:", error);
       }
     };
-    fetchDistrictData();
-  }, []);
+
+    if (districtView) {
+      setZoomLevel(9);
+    }
+
+    if (districtView?.length > 0) {
+      fetchDistrictData();
+    }
+  }, [districtView]);
 
   /* ----- Cities ----- */
 
@@ -114,43 +138,44 @@ function OpenMap({
     const fetchCitiesData = async () => {
       try {
         const response = await axios.get(
-          `${baseUrl}/india/odisha/khordha/bhubaneswar/boundary.geojson`
+          `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/boundary.geojson`
         );
+
+        const responsePoi = await axios.get(
+          `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/POI.geojson`
+        );
+
+        const cityPositionVal =
+          response.data.features[0].geometry.coordinates[0].flat()[0];
+
+        setPoiData(responsePoi.data);
+
+        setCenterPosition([cityPositionVal[1], cityPositionVal[0]]);
 
         setCityData(response.data);
       } catch (error) {
         console.error("Error fetching City Boundary:", error);
       }
     };
-    fetchCitiesData();
-  }, []);
 
+    if (cityView) {
+      setZoomLevel(11);
+    }
+
+    if (cityView?.length > 0) {
+      fetchCitiesData();
+    }
+  }, [cityView]);
+
+  console.log(poiData);
   /* ----------------------------------------------------- */
 
   /* ---------- Login ------------ */
   const { loggedIn } = useContext(LoginContext);
 
-  useEffect(() => {
-    setCenterPosition(mapData);
-  }, [mapData]);
-
-  useEffect(() => {
-    if (countryView) {
-      setZoomLevel(6);
-    }
-  }, [countryView]);
-
-  useEffect(() => {
-    if (stateView) {
-      setZoomLevel(8);
-    }
-  }, [stateView]);
-
-  useEffect(() => {
-    if (districtView) {
-      setZoomLevel(8);
-    }
-  }, [districtView]);
+  // useEffect(() => {
+  //   setCenterPosition(mapData);
+  // }, [mapData]);
 
   const countryCornersStyle = {
     radius: 5,
@@ -217,7 +242,7 @@ function OpenMap({
 
   const handleDrawCreated = async (event) => {
     const getData = filteredAirports;
-    console.log(getData);
+    // console.log(getData);
     const { layer } = event;
     const geoJSONData = layer.toGeoJSON();
 
@@ -291,11 +316,11 @@ function OpenMap({
   );
   /* ------------------------------------------- */
 
-  console.log(countryData);
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
       <MapContainer
-        center={centerPosition}
+        key={centerPosition}
+        center={centerPosition} // am receive the position through mapData from
         zoom={zoomLevel}
         scrollWheelZoom={true}
         style={{
@@ -304,17 +329,33 @@ function OpenMap({
         }}
         maxZoom={18}
       >
-        {countryView && (
+        {countryView && countryData && (
           <GeoJSON data={countryData} style={countryCornersStyle} />
         )}
 
-        {stateView && <GeoJSON data={stateData} style={stateCornersStyle} />}
-
-        {districtView && (
-          <GeoJSON data={districtData} style={districtCornersStyle} />
+        {stateView && stateData && (
+          <GeoJSON
+            key={JSON.stringify(stateData)}
+            data={stateData}
+            style={stateCornersStyle}
+          />
         )}
 
-        {cityView && <GeoJSON data={cityData} style={cityCornersStyle} />}
+        {districtView && districtData && (
+          <GeoJSON
+            key={JSON.stringify(districtData)}
+            data={districtData}
+            style={districtCornersStyle}
+          />
+        )}
+
+        {cityView && cityData && (
+          <GeoJSON
+            key={JSON.stringify(cityData)}
+            data={cityData}
+            style={cityCornersStyle}
+          />
+        )}
 
         {/* Render markers for filtered airports */}
 
