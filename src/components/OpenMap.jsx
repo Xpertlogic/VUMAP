@@ -34,20 +34,20 @@ function OpenMap({
   const [centerPosition, setCenterPosition] = useState([22.8046, 86.2029]);
   const [zoomLevel, setZoomLevel] = useState(5);
   const featureGroupRef = useRef();
-
-  //--------------------------------
   const [selectedPolygonLayer, setSelectedPolygonLayer] = useState(null);
 
-  //--------------------------
-  /* ------ Country-State-District-City ------ */
+  /* ---------- Login ------------ */
+  const { loggedIn } = useContext(LoginContext);
+
+  /* ------ Country-State-District-City-Airport-Railway-POIs ------ */
   const [countryData, setCountryData] = useState(null);
   const [stateData, setStateData] = useState(null);
   const [districtData, setDistrictData] = useState(null);
   const [cityData, setCityData] = useState(null);
-  const [poiData, setPoiData] = useState();
   const [airportData, setAirportData] = useState();
   const [railData, setRailData] = useState();
   const [railPlatformData, setRailPlatformData] = useState();
+  const [poiData, setPoiData] = useState();
 
   const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
 
@@ -98,7 +98,6 @@ function OpenMap({
 
         const zip = new JSZip();
         const zipFile = await zip.loadAsync(responseRailPlatform.data);
-        // Assuming your GeoJSON file is named "boundary.geojson" within the ZIP
         const geojsonStr = await zipFile
           .file("railwayplatform.geojson")
           .async("string");
@@ -144,7 +143,7 @@ function OpenMap({
     if (stateView?.length > 0) {
       fetchStateData();
     }
-  }, [stateView]);
+  }, [countryView, stateView]);
 
   /* ----- Districts ----- */
 
@@ -173,7 +172,7 @@ function OpenMap({
     if (districtView?.length > 0) {
       fetchDistrictData();
     }
-  }, [districtView]);
+  }, [countryView, stateView, districtView]);
 
   /* ----- Cities ----- */
 
@@ -208,72 +207,9 @@ function OpenMap({
     if (cityView?.length > 0) {
       fetchCitiesData();
     }
-  }, [cityView]);
+  }, [countryView, stateView, districtView, cityView]);
 
   /* ----------------------------------------------------- */
-
-  /* ---------- Login ------------ */
-  const { loggedIn } = useContext(LoginContext);
-
-  // useEffect(() => {
-  //   setCenterPosition(mapData);
-  // }, [mapData]);
-
-  const countryCornersStyle = {
-    radius: 5,
-    fillColor: "transparent",
-    color: "blue",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8,
-  };
-
-  const stateCornersStyle = {
-    radius: 5,
-    fillColor: "transparent",
-    color: "green",
-    weight: 2,
-    opacity: 1,
-    fillOpacity: 0.8,
-  };
-
-  const districtCornersStyle = {
-    radius: 5,
-    fillColor: "transparent",
-    color: "red",
-    weight: 2,
-    opacity: 1,
-    fillOpacity: 0.8,
-  };
-
-  const cityCornersStyle = {
-    radius: 5,
-    fillColor: "transparent",
-    color: "black",
-    weight: 2,
-    opacity: 1,
-    fillOpacity: 0.8,
-  };
-
-  const airportIcon = new L.Icon({
-    iconUrl: "images/airport.webp",
-    iconSize: [32, 32],
-    popupAnchor: [0, -10],
-  });
-
-  const poiIcon = new L.Icon({
-    iconUrl: "images/markers.png",
-    iconSize: [32, 32],
-    popupAnchor: [0, -10],
-  });
-
-  const railLineStyle = {
-    fillColor: "brown",
-    color: "brown",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8,
-  };
 
   /* ----- Created Polygon Draw ---- */
   useEffect(() => {
@@ -357,11 +293,6 @@ function OpenMap({
   );
 
   /* -------------- Railway Data -------------- */
-  console.log(railData);
-  // const filteredRails = railData?.features.filter((airport) =>
-  //   selectedAirportTypes.includes(airport.airporttype)
-  // );
-
   /* ------------------------------------------- */
 
   /* -------------- POI Data -------------- */
@@ -370,7 +301,71 @@ function OpenMap({
     selectedPoiTypes.includes(poi.properties.descricao)
   );
   /* ------------------------------------------- */
-  console.log(railPlatformData);
+
+  /* ---------- Custom style for Icon and Boundary ---------- */
+
+  const countryCornersStyle = {
+    radius: 5,
+    fillColor: "transparent",
+    color: "blue",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
+
+  const stateCornersStyle = {
+    radius: 5,
+    fillColor: "transparent",
+    color: "green",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
+
+  const districtCornersStyle = {
+    radius: 5,
+    fillColor: "transparent",
+    color: "red",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
+
+  const cityCornersStyle = {
+    radius: 5,
+    fillColor: "transparent",
+    color: "black",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
+
+  const airportIcon = new L.Icon({
+    iconUrl: "images/airport.webp",
+    iconSize: [32, 32],
+    popupAnchor: [0, -10],
+  });
+
+  const poiIcon = new L.Icon({
+    iconUrl: "images/markers.png",
+    iconSize: [32, 32],
+    popupAnchor: [0, -10],
+  });
+
+  const railLineStyle = {
+    fillColor: "brown",
+    color: "brown",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+  };
+
+  const railIcon = new L.Icon({
+    iconUrl: "images/railway_platform.webp",
+    iconSize: [32, 32],
+    popupAnchor: [0, -10],
+  });
+
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
       <MapContainer
@@ -423,8 +418,7 @@ function OpenMap({
           />
         )}
 
-        {/* Render markers for filtered airports */}
-
+        {/* markers for filtered airports */}
         <MarkerClusterGroup>
           {filteredAirports?.map((airport, index) => (
             <Marker
@@ -444,12 +438,15 @@ function OpenMap({
             </Marker>
           ))}
         </MarkerClusterGroup>
+
+        {/* markers for filtered railway platforms */}
+
         {selectedRailTypes.includes("Platforms") && (
           <MarkerClusterGroup>
             {railPlatformData?.features?.map((airport, index) => (
               <Marker
                 key={index}
-                icon={airportIcon}
+                icon={railIcon}
                 position={[
                   airport.geometry.coordinates[1],
                   airport.geometry.coordinates[0],
@@ -466,7 +463,7 @@ function OpenMap({
           </MarkerClusterGroup>
         )}
 
-        {/* Render markers for filtered POI'S */}
+        {/* markers for filtered POI'S */}
 
         <MarkerClusterGroup>
           {filteredPois.map((poi, index) => (

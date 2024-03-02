@@ -26,13 +26,6 @@ function App() {
   //--> For Map Switch
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
 
-  // const [stateData, setStateData] = useState(null);
-
-  // // Function to update stateData
-  // const updateStateData = (data) => {
-  //   setStateData(data);
-  // };
-
   /* ------------------------------------------ */
 
   // const { loggedIn } = useContext(LoginContext);

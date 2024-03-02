@@ -256,10 +256,6 @@ function SideBar({
 
   /* ------------------------------------------------ */
 
-  /* --------------- POI ------------- */
-
-  /* --------------------------------- */
-
   /* -------- For Subscription ------- */
   // const showSubscriptionModal = () => {
   //   setIsSubscriptionModalOpen(true);
