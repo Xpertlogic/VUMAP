@@ -5,7 +5,6 @@ import "./style/style.css";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
 import OpenMap from "./components/OpenMap";
-import airportData from "./data/Transports/Airports/Airports.json";
 import poiData from "./data/All_POI.json";
 
 const { Content } = Layout;
@@ -18,6 +17,8 @@ function App() {
   const [selectedCity, setSelectedCity] = useState();
   //-->For Airports
   const [selectedAirportTypes, setSelectedAirportTypes] = useState([]);
+  //-->For Railways
+  const [selectedRailTypes, setSelectedRailTypes] = useState([]);
   //-->For POI's
   const [selectedPoiTypes, setSelectedPoiTypes] = useState([]);
   //--> Track selected polygon data
@@ -92,6 +93,7 @@ function App() {
                   onAirportTypeChange={(types) =>
                     setSelectedAirportTypes(types)
                   }
+                  onRailTypeChange={(types) => setSelectedRailTypes(types)}
                   selectedPoiTypes={selectedPoiTypes}
                   onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
                 />
@@ -99,16 +101,15 @@ function App() {
             </Suspense>
             <Content className="overflow-hidden">
               <OpenMap
-                // updateStateData={updateStateData}
                 isMapLayerVisible={isMapLayerVisible}
                 countryView={selectedCountry}
                 stateView={selectedState}
                 districtView={selectedDistrict}
                 cityView={selectedCity}
                 selectedAirportTypes={selectedAirportTypes}
+                selectedRailTypes={selectedRailTypes}
                 markersInsidePolygon={markersInsidePolygon}
                 setMarkersInsidePolygon={setMarkersInsidePolygon}
-                airportDataView={airportData}
                 selectedPoiTypes={selectedPoiTypes}
                 poiDataView={poiData}
               />

@@ -11,11 +11,13 @@ import {
   Modal,
   Switch,
 } from "antd";
+import SelectAllCheckbox from "./SelectAllCheckBox";
 const Subscription = lazy(() => import("./Subscription"));
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
+const CheckboxGroup = Checkbox.Group;
 function SideBar({
   // stateData,
   markersInsidePolygon,
@@ -25,28 +27,142 @@ function SideBar({
   onSelectedState,
   onSelectedDistrict,
   onSelectedCity,
-  selectedAirportTypes,
   onAirportTypeChange,
+  onRailTypeChange,
   selectedPoiTypes,
   onPoiTypesChange,
 }) {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
 
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
+
   /*----------- Select All checkbox ----------*/
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState({
-    sub5: [],
-    sub1: [],
-    sub2: [],
-    sub3: [],
-    sub4: [],
-    airports: [],
-  });
-  /* ------------------------------------------ */
+
+  /* --------------- Airport ------------- */
+
+  const [airportData, setAirportData] = useState([]);
+  const [checkAirports, setCheckAirports] = useState(false);
+  const [checkAllAirport, setCheckAllAirport] = useState(false);
+
+  const airportTypes = ["International", "Domestic", "State/Private"];
+
+  const onChangeAirport = (val) => {
+    setAirportData(val);
+    setCheckAirports(!!val.length && val.length < airportTypes.length);
+    setCheckAllAirport(val.length === airportTypes.length);
+    onAirportTypeChange(val);
+  };
+  const onCheckAllAirport = (e) => {
+    setAirportData(e.target.checked ? airportTypes : []);
+    setCheckAirports(false);
+    setCheckAllAirport(e.target.checked);
+    onAirportTypeChange(e.target.checked ? airportTypes : []);
+  };
+
+  /* --------------- Railway ------------- */
+
+  const [railData, setRailData] = useState([]);
+  const [checkRails, setCheckRails] = useState(false);
+  const [checkAllRail, setCheckAllRail] = useState(false);
+
+  const railTypes = ["Rail Line", "Platforms"];
+
+  const onChangeRail = (val) => {
+    setRailData(val);
+    setCheckRails(!!val.length && val.length < railTypes.length);
+    setCheckAllRail(val.length === railTypes.length);
+    onRailTypeChange(val);
+  };
+  const onCheckAllRail = (e) => {
+    setRailData(e.target.checked ? railTypes : []);
+    setCheckRails(false);
+    setCheckAllRail(e.target.checked);
+    onRailTypeChange(e.target.checked ? railTypes : []);
+  };
+
+  /* --------------- Roads ------------- */
+
+  const [roadData, setRoadData] = useState([]);
+  const [checkRoads, setCheckRoads] = useState(false);
+  const [checkAllRoad, setCheckAllRoad] = useState(false);
+
+  const roadTypes = [
+    "Roads",
+    "Tollgates",
+    "Tunnel",
+    "Fly over",
+    "Roads Signs",
+    "Parking Area",
+  ];
+
+  const onChangeRoad = (val) => {
+    setRoadData(val);
+    setCheckRoads(!!val.length && val.length < roadTypes.length);
+    setCheckAllRoad(val.length === roadTypes.length);
+    // onRoadTypeChange(val);
+  };
+  const onCheckAllRoad = (e) => {
+    setRoadData(e.target.checked ? roadTypes : []);
+    setCheckRoads(false);
+    setCheckAllRoad(e.target.checked);
+    // onRoadTypeChange(e.target.checked ? roadTypes : []);
+  };
+
+  /* --------------- Buildings ------------- */
+
+  const [buildingData, setBuildingData] = useState([]);
+  const [checkBuildings, setCheckBuildings] = useState(false);
+  const [checkAllBuilding, setCheckAllBuilding] = useState(false);
+
+  const buildingTypes = ["Residentials", "Commercial"];
+
+  const onChangeBuilding = (val) => {
+    setBuildingData(val);
+    setCheckBuildings(!!val.length && val.length < buildingTypes.length);
+    setCheckAllBuilding(val.length === buildingTypes.length);
+    // onBuildingTypeChange(val);
+  };
+  const onCheckAllBuilding = (e) => {
+    setBuildingData(e.target.checked ? buildingTypes : []);
+    setCheckBuildings(false);
+    setCheckAllBuilding(e.target.checked);
+    // onBuildingTypeChange(e.target.checked ? buildingTypes : []);
+  };
+
+  /* -------------------- POIs --------------------- */
+
+  /* ------ Automotive Dealer -------- */
+
+  const [autoDealerData, setAutoDealerData] = useState([]);
+  const [checkAutoDealers, setCheckAutoDealers] = useState(false);
+  const [checkAllAutoDealer, setCheckAllAutoDealer] = useState(false);
+
+  const autoDealerTypes = [
+    "Bike",
+    "Car",
+    "Bus",
+    "Truck",
+    "Electric Vehicle",
+    "Others",
+  ];
+
+  const onChangeAutoDealer = (val) => {
+    setAutoDealerData(val);
+    setCheckAutoDealers(!!val.length && val.length < autoDealerTypes.length);
+    setCheckAllAutoDealer(val.length === autoDealerTypes.length);
+    // onAutoDealerTypeChange(val);
+  };
+  const onCheckAllAutoDealer = (e) => {
+    setAutoDealerData(e.target.checked ? autoDealerTypes : []);
+    setCheckAutoDealers(false);
+    setCheckAllAutoDealer(e.target.checked);
+    // onAutoDealerTypeChange(e.target.checked ? autoDealerTypes : []);
+  };
+
+  /* ----------------------------------------------- */
 
   /* ----- Countries ----- */
 
@@ -62,9 +178,7 @@ function SideBar({
     setSelectedState(value.toLowerCase());
     setSelectedDistrict("");
     onSelectedState(value.toLowerCase());
-    // setCenterPosition(stateData?.features[0].geometry.coordinates);
   };
-  // console.log(stateData?.features[0].geometry.coordinates);
 
   /* ----- Districts ----- */
 
@@ -76,7 +190,6 @@ function SideBar({
   /* ----- Cities ----- */
 
   const handleCityChange = (value) => {
-    setSelectedCity(value.toLowerCase());
     onSelectedCity(value.toLowerCase());
   };
 
@@ -84,11 +197,7 @@ function SideBar({
 
   const { subscriptionState } = useContext(SubscribeContext);
   /* ---------- Login ------------ */
-  const {
-    loggedIn,
-    // userData,
-    // subscriptionState
-  } = useContext(LoginContext);
+  const { loggedIn } = useContext(LoginContext);
 
   /* ---------------------------------- */
 
@@ -129,18 +238,10 @@ function SideBar({
 
   //-------------- For Reset ------------
   const handleReset = () => {
-    setSelectedCheckboxes({
-      sub5: [],
-      sub1: [],
-      sub2: [],
-      sub3: [],
-      sub4: [],
-      airports: [],
-    });
+    //
     setSelectedCountry("undefined");
     setSelectedState("undefined");
     setSelectedDistrict("undefined");
-    setSelectedCity(undefined);
   };
 
   /* ------------Map Switch Layer ------------ */
@@ -153,59 +254,16 @@ function SideBar({
     }
   };
 
-  // --------------------------------
-
-  // Function to handle individual checkbox changes within each submenu
-  const handleCheckboxChange = (submenuKey, checkboxKey) => {
-    setSelectedCheckboxes((prevSelectedCheckboxes) => {
-      const submenuCheckboxes = prevSelectedCheckboxes[submenuKey];
-      const updatedCheckboxes = submenuCheckboxes.includes(checkboxKey)
-        ? submenuCheckboxes.filter((key) => key !== checkboxKey)
-        : [...submenuCheckboxes, checkboxKey];
-      return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
-    });
-  };
-
-  // Function to handle "Select All" checkbox changes within each submenu
-  const handleSelectAll = (submenuKey, submenuItems) => {
-    setSelectedCheckboxes((prevSelectedCheckboxes) => {
-      const isAllSelected =
-        prevSelectedCheckboxes[submenuKey].length === submenuItems.length;
-      const updatedCheckboxes = isAllSelected
-        ? []
-        : [...submenuItems.map((item) => item.toString())];
-      return { ...prevSelectedCheckboxes, [submenuKey]: updatedCheckboxes };
-    });
-  };
-
   /* ------------------------------------------------ */
 
-  /* --------------- Airport ------------- */
-
-  // Function to handle airport type change
-  const handleAirportTypeChange = (airportType) => {
-    const updatedSelectedTypes = selectedAirportTypes.includes(airportType)
-      ? selectedAirportTypes.filter((type) => type !== airportType)
-      : [...selectedAirportTypes, airportType];
-
-    onAirportTypeChange(updatedSelectedTypes);
-  };
-
   /* --------------- POI ------------- */
-  const handelPoiTypeChange = (poiType) => {
-    const updatedSelectedPoiTypes = selectedPoiTypes.includes(poiType)
-      ? selectedPoiTypes.filter((type) => type !== poiType)
-      : [...selectedPoiTypes, poiType];
 
-    onPoiTypesChange(updatedSelectedPoiTypes);
-  };
-
-  /* --------------------- */
+  /* --------------------------------- */
 
   /* -------- For Subscription ------- */
-  const showSubscriptionModal = () => {
-    setIsSubscriptionModalOpen(true);
-  };
+  // const showSubscriptionModal = () => {
+  //   setIsSubscriptionModalOpen(true);
+  // };
 
   const handleCancel = () => {
     setIsSubscriptionModalOpen(false);
@@ -354,263 +412,133 @@ function SideBar({
             </div>
           </Form.Item>
 
-          <SubMenu
+          {/* <SubMenu
             key="sub5"
             title={
               <span className="text-[1rem] flex gap-2">
-                <Checkbox
-                  className=""
-                  onChange={() =>
-                    handleSelectAll("sub5", ["1", "2", "3", "4", "5"])
-                  }
-                  checked={selectedCheckboxes.sub5.length === 5}
-                ></Checkbox>
+                <Checkbox className=""></Checkbox>
                 Administrative Boundaries
               </span>
             }
           >
             <Menu.Item key="1">
-              <Checkbox
-                onChange={() => handleCheckboxChange("sub5", "1")}
-                checked={selectedCheckboxes.sub5.includes("1")}
-              >
-                Country Boundary
-              </Checkbox>
+              <Checkbox>Country Boundary</Checkbox>
             </Menu.Item>
             <Menu.Item key="2">
-              <Checkbox
-                onChange={() => handleCheckboxChange("sub5", "2")}
-                checked={selectedCheckboxes.sub5.includes("2")}
-              >
-                State Boundary
-              </Checkbox>
+              <Checkbox>State Boundary</Checkbox>
             </Menu.Item>
             <Menu.Item key="3">
-              <Checkbox
-                onChange={() => handleCheckboxChange("sub5", "3")}
-                checked={selectedCheckboxes.sub5.includes("3")}
-              >
-                District Boundary
-              </Checkbox>
+              <Checkbox>District Boundary</Checkbox>
             </Menu.Item>
             <Menu.Item key="4">
-              <Checkbox
-                onChange={() => handleCheckboxChange("sub5", "4")}
-                checked={selectedCheckboxes.sub5.includes("4")}
-              >
-                Postal Boundary
-              </Checkbox>
+              <Checkbox>Postal Boundary</Checkbox>
             </Menu.Item>
             <Menu.Item key="5">
-              <Checkbox
-                onChange={() => handleCheckboxChange("sub5", "5")}
-                checked={selectedCheckboxes.sub5.includes("5")}
-              >
-                Locality Boundary
-              </Checkbox>
+              <Checkbox>Locality Boundary</Checkbox>
             </Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
 
-          <SubMenu
-            key="sub11"
-            title={
-              <span className="text-[1rem] flex gap-2">
-                <Checkbox></Checkbox>Transports
-              </span>
-            }
-          >
+          <SubMenu key="sub11" title="Transports" className="text-[1rem]">
             <SubMenu
               key="airports"
               title={
-                <span>
-                  <Checkbox
-                    className="mr-2"
-                    onChange={() =>
-                      handleSelectAll("airports", [
-                        "International",
-                        "Domestic",
-                        "State/Private",
-                      ])
-                    }
-                    checked={selectedCheckboxes.airports.length === 3}
-                  />
-                  Airports
-                </span>
+                <SelectAllCheckbox
+                  title="Airports"
+                  indeterminate={checkAirports}
+                  checkAll={checkAllAirport}
+                  onCheckAllChange={onCheckAllAirport}
+                />
               }
             >
-              <Menu.Item key="International">
-                <Checkbox
-                  className="mr-2"
-                  onChange={() => {
-                    handleCheckboxChange("airports", "International");
-                    handleAirportTypeChange("International");
-                  }}
-                  checked={selectedCheckboxes.airports.includes(
-                    "International"
-                  )}
-                />
-                International
-              </Menu.Item>
-              <Menu.Item key="Domestic">
-                <Checkbox
-                  className="mr-2"
-                  onChange={() => {
-                    handleCheckboxChange("airports", "Domestic");
-                    handleAirportTypeChange("Domestic");
-                  }}
-                  checked={selectedCheckboxes.airports.includes("Domestic")}
-                />
-                Domestic
-              </Menu.Item>
-
-              <Menu.Item key="State/Private">
-                <Checkbox
-                  className="mr-2"
-                  onChange={() => {
-                    handleCheckboxChange("airports", "State/Private");
-                    handleAirportTypeChange("State/Private");
-                  }}
-                  checked={selectedCheckboxes.airports.includes(
-                    "State/Private"
-                  )}
-                />
-                State/Private Others
-              </Menu.Item>
-            </SubMenu>
-
-            <SubMenu
-              key="sub1-2"
-              title={
-                <span className="text-[1rem]">
-                  <Checkbox className="mr-2"></Checkbox>
-                  Rail
-                </span>
-              }
-            >
-              <Menu.Item key="3">
-                <Checkbox>Rail Line</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Platforms</Checkbox>
-              </Menu.Item>
+              <CheckboxGroup
+                className="allCheckBox"
+                options={airportTypes}
+                value={airportData}
+                onChange={onChangeAirport}
+              />
             </SubMenu>
             <SubMenu
-              key="sub1-3"
+              key="rails"
               title={
-                <span className="text-[1rem]">
-                  <Checkbox className="mr-2"></Checkbox>
-                  Roads
-                </span>
+                <SelectAllCheckbox
+                  title="Rail"
+                  indeterminate={checkRails}
+                  checkAll={checkAllRail}
+                  onCheckAllChange={onCheckAllRail}
+                />
               }
             >
-              <Menu.Item key="3">
-                <Checkbox>Roads</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Tollgates</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="1">
-                <Checkbox>Tunnel</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Fly over</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Roads Signs</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Parking Area</Checkbox>
-              </Menu.Item>
+              <CheckboxGroup
+                className="allCheckBox"
+                options={railTypes}
+                value={railData}
+                onChange={onChangeRail}
+              />
+            </SubMenu>
+            <SubMenu
+              key="roads"
+              title={
+                <SelectAllCheckbox
+                  title="Roads"
+                  indeterminate={checkRoads}
+                  checkAll={checkAllRoad}
+                  onCheckAllChange={onCheckAllRoad}
+                />
+              }
+            >
+              <CheckboxGroup
+                className="allCheckBox"
+                options={roadTypes}
+                value={roadData}
+                onChange={onChangeRoad}
+              />
             </SubMenu>
           </SubMenu>
-          <SubMenu
-            key="sub2"
-            title={
-              <span className="text-[1rem] flex gap-2">
-                <Checkbox
-                  onChange={() => handleSelectAll("sub2", ["1", "2"])}
-                  checked={selectedCheckboxes.sub2.length === 2}
-                ></Checkbox>
-                Buildings
-              </span>
-            }
-          >
-            <Menu.Item key="5">
-              <Checkbox
-                onChange={() => handleCheckboxChange("sub2", "1")}
-                checked={selectedCheckboxes.sub2.includes("1")}
-              >
-                Residentials
-              </Checkbox>
-            </Menu.Item>
-            <Menu.Item key="6">
-              <Checkbox
-                onChange={() => handleCheckboxChange("sub2", "2")}
-                checked={selectedCheckboxes.sub2.includes("2")}
-              >
-                Commercial
-              </Checkbox>
-            </Menu.Item>
+          <SubMenu key="building" title="Buildings" className="text-[1rem]">
+            <SubMenu
+              key="buildings"
+              title={
+                <SelectAllCheckbox
+                  title="Select all"
+                  indeterminate={checkBuildings}
+                  checkAll={checkAllBuilding}
+                  onCheckAllChange={onCheckAllBuilding}
+                />
+              }
+            >
+              <CheckboxGroup
+                className="allCheckBox"
+                options={buildingTypes}
+                value={buildingData}
+                onChange={onChangeBuilding}
+              />
+            </SubMenu>
           </SubMenu>
-          <Menu.Item key="sub3">
+
+          <Menu.Item key="house number">
             <Checkbox className="text-[1rem]">House Number</Checkbox>
           </Menu.Item>
-          <SubMenu
-            key="sub4"
-            title={
-              <span className="text-[1rem] flex gap-2">
-                <Checkbox></Checkbox>
-                POI
-              </span>
-            }
-          >
+
+          {/* ---- POIs ---- */}
+          <SubMenu key="poi" title="POI" className="text-[1rem]">
+            {/* ---- Automotive Dealer ---- */}
             <SubMenu
-              key="sub4-1"
+              key="automotive dealer"
               title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Automotive Dealer
-                </span>
+                <SelectAllCheckbox
+                  title="Automotive Dealer"
+                  indeterminate={checkAutoDealers}
+                  checkAll={checkAllAutoDealer}
+                  onCheckAllChange={onCheckAllAutoDealer}
+                />
               }
             >
-              <Menu.Item key="1">
-                <Checkbox
-                  onChange={() => handelPoiTypeChange("Bike")}
-                  checked={selectedPoiTypes.includes("Bike")}
-                >
-                  Bike
-                </Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox
-                  onChange={() => handelPoiTypeChange("Car")}
-                  checked={selectedPoiTypes.includes("Car")}
-                >
-                  Car
-                </Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox
-                  onChange={() => handelPoiTypeChange("Bus")}
-                  checked={selectedPoiTypes.includes("Bus")}
-                >
-                  Bus
-                </Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox
-                  onChange={() => handelPoiTypeChange("Truck")}
-                  checked={selectedPoiTypes.includes("Truck")}
-                >
-                  Truck
-                </Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Electric Vehicle</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
+              <CheckboxGroup
+                className="allCheckBox"
+                options={autoDealerTypes}
+                value={autoDealerData}
+                onChange={onChangeAutoDealer}
+              />
             </SubMenu>
             <SubMenu
               key="sub4-2"

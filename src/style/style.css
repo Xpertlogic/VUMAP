@@ -17,5 +17,17 @@
 
 /* ----  Pricing ------ */
 
+/* ----- Sidebar CheckBox Group ----- */
+
+.allCheckBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 80px;
+  padding: 10px 0;
+}
+
+
+
 
 
