@@ -370,7 +370,7 @@ function OpenMap({
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
       <MapContainer
         key={centerPosition}
-        center={centerPosition} // am receive the position through mapData from
+        center={centerPosition}
         zoom={zoomLevel}
         scrollWheelZoom={true}
         style={{
