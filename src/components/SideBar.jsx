@@ -12,6 +12,8 @@ import {
   Switch,
 } from "antd";
 import SelectAllCheckbox from "./SelectAllCheckBox";
+import axios from "axios";
+
 const Subscription = lazy(() => import("./Subscription"));
 
 const { SubMenu } = Menu;
@@ -29,12 +31,15 @@ function SideBar({
   onSelectedCity,
   onAirportTypeChange,
   onRailTypeChange,
-  selectedPoiTypes,
   onPoiTypesChange,
+  selectedRoadTypes,
+  onBuildingTypeChange,
+  homeSelected
 }) {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedCity, setSelectedSelectedCity] = useState("");
 
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
@@ -46,6 +51,7 @@ function SideBar({
   const [airportData, setAirportData] = useState([]);
   const [checkAirports, setCheckAirports] = useState(false);
   const [checkAllAirport, setCheckAllAirport] = useState(false);
+  const [homesSelected, setHomesSelected] = useState(false);
 
   const airportTypes = ["International", "Domestic", "State/Private"];
 
@@ -102,12 +108,14 @@ function SideBar({
     setRoadData(val);
     setCheckRoads(!!val.length && val.length < roadTypes.length);
     setCheckAllRoad(val.length === roadTypes.length);
+    selectedRoadTypes(val)
     // onRoadTypeChange(val);
   };
   const onCheckAllRoad = (e) => {
     setRoadData(e.target.checked ? roadTypes : []);
     setCheckRoads(false);
     setCheckAllRoad(e.target.checked);
+    selectedRoadTypes(e.target.checked ? roadTypes : [])
     // onRoadTypeChange(e.target.checked ? roadTypes : []);
   };
 
@@ -123,44 +131,200 @@ function SideBar({
     setBuildingData(val);
     setCheckBuildings(!!val.length && val.length < buildingTypes.length);
     setCheckAllBuilding(val.length === buildingTypes.length);
-    // onBuildingTypeChange(val);
+    onBuildingTypeChange(val);
   };
   const onCheckAllBuilding = (e) => {
     setBuildingData(e.target.checked ? buildingTypes : []);
     setCheckBuildings(false);
     setCheckAllBuilding(e.target.checked);
-    // onBuildingTypeChange(e.target.checked ? buildingTypes : []);
+    onBuildingTypeChange(e.target.checked ? buildingTypes : []);
   };
 
   /* -------------------- POIs --------------------- */
 
   /* ------ Automotive Dealer -------- */
 
-  const [autoDealerData, setAutoDealerData] = useState([]);
-  const [checkAutoDealers, setCheckAutoDealers] = useState(false);
-  const [checkAllAutoDealer, setCheckAllAutoDealer] = useState(false);
+  const [checkedListPOI, setCheckedListPOI] = useState({});
+  const [indeterminatePOI, setIndeterminatePOI] = useState({});
+  const [checkAllPOI, setCheckAllPOI] = useState({});
 
-  const autoDealerTypes = [
-    "Bike",
-    "Car",
-    "Bus",
-    "Truck",
-    "Electric Vehicle",
-    "Others",
-  ];
+  const onChangePOI = (category, checkedValues) => {
+    const newCheckedList = { ...checkedListPOI, [category]: checkedValues };
+    setCheckedListPOI(newCheckedList);
+    setIndeterminatePOI({ ...indeterminatePOI, [category]: !!checkedValues.length && checkedValues.length < POI[category].length });
+    setCheckAllPOI({ ...checkAllPOI, [category]: checkedValues.length === POI[category].length });
+    onPoiTypesChange([newCheckedList])
+  };
 
-  const onChangeAutoDealer = (val) => {
-    setAutoDealerData(val);
-    setCheckAutoDealers(!!val.length && val.length < autoDealerTypes.length);
-    setCheckAllAutoDealer(val.length === autoDealerTypes.length);
-    // onAutoDealerTypeChange(val);
+  const onCheckAllChangePOI = (category, e) => {
+    const allChecked = e.target.checked;
+    const newCheckedListPOI = { ...checkedListPOI, [category]: allChecked ? POI[category] : [] };
+    setCheckedListPOI(newCheckedListPOI);
+    setIndeterminatePOI({ ...indeterminatePOI, [category]: false });
+    setCheckAllPOI({ ...checkAllPOI, [category]: allChecked });
+    onPoiTypesChange([newCheckedListPOI])
   };
-  const onCheckAllAutoDealer = (e) => {
-    setAutoDealerData(e.target.checked ? autoDealerTypes : []);
-    setCheckAutoDealers(false);
-    setCheckAllAutoDealer(e.target.checked);
-    // onAutoDealerTypeChange(e.target.checked ? autoDealerTypes : []);
+  const POI = {
+    "Automotive Dealer": [
+      "Bike",
+      "Car",
+      "Bus",
+      "Truck",
+      "Electric Vehicle",
+      "Others"
+    ],
+    "Companies": [
+      "Private Companies",
+      "Others"
+    ],
+    "Entertainment": [
+      "Café/Pub",
+      "Cinema Hall",
+      "Theatre",
+      "Nightlife",
+      "Bar",
+      "Others"
+    ],
+    "Golf Course": [],
+    "Hotels/Restaurants": [
+      "Hotels",
+      "Restaurants",
+      "Others"
+    ],
+    "Place of Worship": [
+      "Temple",
+      "Church",
+      "Masjid",
+      "Gurudwara",
+      "Ashram",
+      "Mosque",
+      "Pagoda",
+      "Community Centre"
+    ],
+    "Repair Facility": [
+      "Bike",
+      "Cycle",
+      "Car",
+      "Others"
+    ],
+    "Business Park": [],
+    "Education": [
+      "School",
+      "College/ University",
+      "Anganwadi Centre",
+      "Institutes",
+      "Library",
+      "Other"
+    ],
+    "Finance": [
+      "ATM",
+      "Bank",
+      "Loan/Others"
+    ],
+    "Government Office": [
+      "Central Government",
+      "State Government",
+      "City level Government",
+      "Court House",
+      "Police Station",
+      "Post office",
+      "Others"
+    ],
+    "Health Care": [
+      "Government Hospitals",
+      "Private Hospitals",
+      "Clinic",
+      "Others"
+    ],
+    "Hostels": [
+      "Boys Hostel",
+      "Girls Hostel",
+      "Other"
+    ],
+    "Park and Recreation Area": [
+      "Cemetery",
+      "Park",
+      "Picnic Spot",
+      "Memorial"
+    ],
+    "Public Amenity": [
+      "Toilet",
+      "Bus stop",
+      "Aadhar Centre/CSC",
+      "Rest Area"
+    ],
+    "Services": [
+      "Professional Services",
+      "Communication Services",
+      "Other Services"
+    ],
+    "Shop": [
+      "Pharmacy",
+      "Variety Store",
+      "Travel Agents",
+      "Agricultural Supplies",
+      "Cycle Store",
+      "Animal Services",
+      "Antique/Art",
+      "Bags & Leatherwear",
+      "Beauty Salon",
+      "Gents Salon",
+      "Footwear & Shoe Repairs",
+      "Cloth Store",
+      "Books Shops",
+      "Delicatessen",
+      "Dry cleaners",
+      "Electricals",
+      "Electronics",
+      "Factory Outlet",
+      "Florists & Puja Vandar",
+      "Furniture/Home Furnishings",
+      "                Glassware/Ceramic",
+      "Hardware",
+      "House & Garden",
+      "Jewelry",
+      "Clocks & Watches",
+      "                Mobile Phone",
+      "             Opticians",
+      "Photo Lab/Development",
+      "              Photocopy",
+      "Sports Equipment & Clothing",
+      "                Recycling Shop",
+      "                Tailor Shop",
+      "Toys & Games",
+      "                Stamp Shop",
+      "Food & Drinks"
+    ],
+    "Sports Centre": [
+      "Cricket",
+      "Basketball",
+      "Football",
+      "Hockey",
+      "Volleyball",
+      "Others"
+    ],
+    "Tourist Places": [
+      "                Beach",
+      "                Waterfall",
+      "                Statue",
+      "Geographic Feature",
+      "                Museum",
+      "                Others"
+    ],
+    "Utility": [
+      "EV Stations",
+      "Petrol Stations",
+      "Electric Stations",
+      "Gas Stations",
+      "Telephone Station",
+      "Water Supply",
+      "Overhead Tank",
+      "                Other"
+    ],
+    "Zoo": [],
+    "Shopping Centre": []
   };
+
 
   /* ----------------------------------------------- */
 
@@ -168,16 +332,31 @@ function SideBar({
 
   const handleCountryChange = (value) => {
     setSelectedCountry(value.toLowerCase());
-    setSelectedState("");
-    setSelectedDistrict("");
     onSelectedCountry(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    setCheckedListPOI({});
+    onPoiTypesChange([]);
+    onSelectedCity("");
+    setSelectedSelectedCity("");
+    setSelectedDistrict("");
+    onSelectedDistrict("");
+    setSelectedState("");
+    onSelectedState("");
   };
 
   /* ----- States ----- */
   const handleStateChange = (value) => {
     setSelectedState(value.toLowerCase());
-    setSelectedDistrict("");
     onSelectedState(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    setCheckedListPOI({});
+    onPoiTypesChange([]);
+    onSelectedCity("");
+    setSelectedSelectedCity("");
+    setSelectedDistrict("");
+    onSelectedDistrict("");
   };
 
   /* ----- Districts ----- */
@@ -185,19 +364,31 @@ function SideBar({
   const handleDistrictChange = (value) => {
     setSelectedDistrict(value.toLowerCase());
     onSelectedDistrict(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    onPoiTypesChange([])
+    setCheckedListPOI({});
+    onSelectedCity("");
+    setSelectedSelectedCity("");
   };
 
   /* ----- Cities ----- */
 
   const handleCityChange = (value) => {
     onSelectedCity(value.toLowerCase());
+    setSelectedSelectedCity(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    setCheckedListPOI({});
+    onPoiTypesChange([])
+
   };
 
   /* ----------------------------------------------------- */
 
   const { subscriptionState } = useContext(SubscribeContext);
   /* ---------- Login ------------ */
-  const { loggedIn } = useContext(LoginContext);
+  const { loggedIn, userData } = useContext(LoginContext);
 
   /* ---------------------------------- */
 
@@ -209,9 +400,8 @@ function SideBar({
   };
 
   //----------Polygon Create-----------
-
   const handleDownloadMarkersInsidePolygon = () => {
-    if (subscriptionState.paymentSuccess) {
+    if (userData.tier !== "free") {
       if (markersInsidePolygon.length > 0) {
         const geoJSONData = {
           type: "FeatureCollection",
@@ -239,9 +429,12 @@ function SideBar({
   //-------------- For Reset ------------
   const handleReset = () => {
     //
-    setSelectedCountry("undefined");
-    setSelectedState("undefined");
-    setSelectedDistrict("undefined");
+    setSelectedCountry("");
+    setSelectedState("");
+    setSelectedDistrict("");
+    selectedRoadTypes('');
+    setCheckAllPOI({})
+
   };
 
   /* ------------Map Switch Layer ------------ */
@@ -253,17 +446,6 @@ function SideBar({
       onToggleMapLayerVisibility(newVisibility);
     }
   };
-
-  /* ------------------------------------------------ */
-
-  /* --------------- POI ------------- */
-
-  /* --------------------------------- */
-
-  /* -------- For Subscription ------- */
-  // const showSubscriptionModal = () => {
-  //   setIsSubscriptionModalOpen(true);
-  // };
 
   const handleCancel = () => {
     setIsSubscriptionModalOpen(false);
@@ -292,7 +474,19 @@ function SideBar({
       document.removeEventListener("keydown", preventF12);
     };
   }, [loggedIn]);
-
+  const [stateList, setStateList] = useState([]);
+  const getStates = async() => {
+     const res = await axios.get("https://webgis1.nic.in/publishing/rest/services/bharatmapsnew/admin2023/MapServer/0/query?token=&f=json&orderByFields=STNAME&outFields=STNAME%2CState_LGD&returnGeometry=false&spatialRel=esriSpatialRelIntersects&where=1%3D1");
+     setStateList(res.data.features)
+  }
+  useEffect(() => {
+    getStates();
+  }, [selectedCountry]);
+  const handleCheckboxChange = (e) => {
+    setHomesSelected(e.target.checked);
+    homeSelected(e.target.checked)
+  };
+  console.log(userData)
   return (
     <>
       <Sider
@@ -353,15 +547,13 @@ function SideBar({
                   onChange={(value) => handleStateChange(value)}
                   disabled={selectedCountry?.length < 1}
                 >
-                  <option key="odisha" value="odisha">
-                    Odisha
-                  </option>
-                  <option key="goa" value="goa">
-                    Goa
-                  </option>
-                  <option key="uttar pradesh" value="uttar pradesh">
-                    Uttar Pradesh
-                  </option>
+                  {stateList?.map((item) => {
+                    return (
+                      <option key={item.attributes.stname} value={item.attributes.stname}>
+                        {item.attributes.stname}
+                    </option>
+                    )
+                  })}
                 </Select>
               </div>
             </div>
@@ -411,34 +603,9 @@ function SideBar({
               </div>
             </div>
           </Form.Item>
-
-          {/* <SubMenu
-            key="sub5"
-            title={
-              <span className="text-[1rem] flex gap-2">
-                <Checkbox className=""></Checkbox>
-                Administrative Boundaries
-              </span>
-            }
-          >
-            <Menu.Item key="1">
-              <Checkbox>Country Boundary</Checkbox>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Checkbox>State Boundary</Checkbox>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Checkbox>District Boundary</Checkbox>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Checkbox>Postal Boundary</Checkbox>
-            </Menu.Item>
-            <Menu.Item key="5">
-              <Checkbox>Locality Boundary</Checkbox>
-            </Menu.Item>
-          </SubMenu> */}
-
+          {selectedCountry.length > 0 && 
           <SubMenu key="sub11" title="Transports" className="text-[1rem]">
+            
             <SubMenu
               key="airports"
               title={
@@ -457,6 +624,7 @@ function SideBar({
                 onChange={onChangeAirport}
               />
             </SubMenu>
+            {selectedState.length > 0 && 
             <SubMenu
               key="rails"
               title={
@@ -475,8 +643,11 @@ function SideBar({
                 onChange={onChangeRail}
               />
             </SubMenu>
+}
+            {selectedCity.length > 0 && 
             <SubMenu
               key="roads"
+              
               title={
                 <SelectAllCheckbox
                   title="Roads"
@@ -493,573 +664,60 @@ function SideBar({
                 onChange={onChangeRoad}
               />
             </SubMenu>
+            }
           </SubMenu>
-          <SubMenu key="building" title="Buildings" className="text-[1rem]">
-            <SubMenu
-              key="buildings"
-              title={
+          }
+          {selectedCity.length > 0 && 
+          <SubMenu  key="building" title={
                 <SelectAllCheckbox
-                  title="Select all"
+                  title="Buildings"
                   indeterminate={checkBuildings}
                   checkAll={checkAllBuilding}
                   onCheckAllChange={onCheckAllBuilding}
                 />
-              }
-            >
+              } className="text-[1rem]">
+           
               <CheckboxGroup
                 className="allCheckBox"
                 options={buildingTypes}
                 value={buildingData}
                 onChange={onChangeBuilding}
               />
-            </SubMenu>
           </SubMenu>
-
-          <Menu.Item key="house number">
-            <Checkbox className="text-[1rem]">House Number</Checkbox>
-          </Menu.Item>
+}
+          {selectedCity.length > 0 && 
+          <SubMenu key="house number" className="no-arrow" disabled title={
+            <Checkbox onChange={handleCheckboxChange}        
+            checked={homesSelected}
+            className="text-[1rem]">House Number</Checkbox>} ></SubMenu>
+          }
 
           {/* ---- POIs ---- */}
-          <SubMenu key="poi" title="POI" className="text-[1rem]">
-            {/* ---- Automotive Dealer ---- */}
-            <SubMenu
-              key="automotive dealer"
-              title={
-                <SelectAllCheckbox
-                  title="Automotive Dealer"
-                  indeterminate={checkAutoDealers}
-                  checkAll={checkAllAutoDealer}
-                  onCheckAllChange={onCheckAllAutoDealer}
+          {selectedCity.length > 0 && 
+          <SubMenu key="POIData" title="POI">
+            {Object.keys(POI).map(category => (
+              <SubMenu
+                key={category}
+                title={
+                  <Checkbox
+                    indeterminate={indeterminatePOI[category]}
+                    onChange={(e) => onCheckAllChangePOI(category, e)}
+                    checked={checkAllPOI[category]}
+                  >
+                    {category}
+                  </Checkbox>
+                }
+              >
+                <CheckboxGroup
+                  options={POI[category]}
+                  value={checkedListPOI[category]}
+                  onChange={(checkedValues) => onChangePOI(category, checkedValues)}
                 />
-              }
-            >
-              <CheckboxGroup
-                className="allCheckBox"
-                options={autoDealerTypes}
-                value={autoDealerData}
-                onChange={onChangeAutoDealer}
-              />
-            </SubMenu>
-            <SubMenu
-              key="sub4-2"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Companies
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Private Companies</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-3"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Entertainment
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Café/Pub</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Cinema Hall</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Theatre</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Nightlife</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Bar</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <Menu.Item key="sub4-4">
-              <Checkbox>Golf Course</Checkbox>
-            </Menu.Item>
-            <SubMenu
-              key="sub4-5"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Hotels/Restaurants
-                </span>
-              }
-            >
-              {" "}
-              <Menu.Item key="1">
-                <Checkbox>Hotels</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Restaurants</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-6"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Place of Worship
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Temple</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Church</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Masjid</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Gurudwara</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Ashram</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Mosque</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="7">
-                <Checkbox>Pagoda</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="8">
-                <Checkbox>Community Centre</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-7"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Repair Facility
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Bike</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Cycle</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Car</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <Menu.Item key="sub4-8">
-              <Checkbox>Business Park</Checkbox>
-            </Menu.Item>
-            <SubMenu
-              key="sub4-9"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Education
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>School</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>College/ University</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Anganwadi Centre</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Institutes</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Library</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Other</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-10"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Finance
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>ATM</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Bank</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Loan/Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-11"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Government Office
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Central Government</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>State Government</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>City level Government</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Court House</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Police Station</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Post office</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="7">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-12"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Health Care
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Government Hospitals</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Private Hospitals</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Clinic</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-13"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Hostels
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Boys Hostel</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Girls Hostel</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Other</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-14"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Park and Recreation Area
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Cemetery</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Park</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Picnic Spot</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Memorial</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-15"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Public Amenity
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Toilet</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Bus stop</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Aadhar Centre/CSC</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Rest Area</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-16"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Services
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Professional Services</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Communication Services</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Other Services</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-17"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Shop
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Pharmacy</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Variety Store</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Travel Agents</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Agricultural Supplies</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Cycle Store</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Animal Services</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="7">
-                <Checkbox>Antique/Art</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="8">
-                <Checkbox>Bags & Leatherwear</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="9">
-                <Checkbox>Beauty Salon</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="10">
-                <Checkbox>Gents Salon</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="11">
-                <Checkbox>Footwear & Shoe Repairs</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="12">
-                <Checkbox>Cloth Store</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="13">
-                <Checkbox>Books Shops</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="14">
-                <Checkbox>Delicatessen</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="15">
-                <Checkbox>Dry cleaners</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="16">
-                <Checkbox>Electricals</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="17">
-                <Checkbox>Electronics</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="18">
-                <Checkbox>Factory Outlet</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="19">
-                <Checkbox>Florists & Puja Vandar</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="20">
-                <Checkbox>Furniture/Home Furnishings</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="21">
-                <Checkbox>Glassware/Ceramic</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="22">
-                <Checkbox>Hardware</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="23">
-                <Checkbox>House & Garden</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="24">
-                <Checkbox>Jewelry</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="25">
-                <Checkbox>Clocks & Watches</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="26">
-                <Checkbox>Mobile Phone</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="27">
-                <Checkbox>Opticians</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="28">
-                <Checkbox>Photo Lab/Development</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="29">
-                <Checkbox>Photocopy</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="30">
-                <Checkbox>Sports Equipment & Clothing</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="31">
-                <Checkbox>Recycling Shop</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="32">
-                <Checkbox>Tailor Shop</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="33">
-                <Checkbox>Toys & Games</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="34">
-                <Checkbox>Stamp Shop</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="35">
-                <Checkbox>Food & Drinks</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-18"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Sports Centre
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Cricket</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Basketball</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Football</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Hockey</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Volleyball</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-19"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Tourist Places
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>Beach</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Waterfall</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Statue</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Geographic Feature</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Museum</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Others</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4-20"
-              title={
-                <span>
-                  <Checkbox className="mr-2" />
-                  Utility
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-                <Checkbox>EV Stations</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Checkbox>Petrol Stations</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Checkbox>Electric Stations</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Checkbox>Gas Stations</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Checkbox>Telephone Station</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Checkbox>Water Supply</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="7">
-                <Checkbox>Overhead Tank</Checkbox>
-              </Menu.Item>
-              <Menu.Item key="8">
-                <Checkbox>Other</Checkbox>
-              </Menu.Item>
-            </SubMenu>
-            <Menu.Item key="sub4-21">
-              <Checkbox>Zoo</Checkbox>
-            </Menu.Item>
-            <Menu.Item key="sub4-22">
-              <Checkbox>Shopping Centre</Checkbox>
-            </Menu.Item>
+              </SubMenu>
+
+            ))}
           </SubMenu>
+          }
 
           <div className="m-4 text-center">
             <Button
@@ -1073,12 +731,12 @@ function SideBar({
               type="primary"
               className="bg-blue-700"
               onClick={handleDownloadMarkersInsidePolygon}
-              // onClick={() => {
-              //   handleDownloadMarkersInsidePolygon();
-              //   showSubscriptionModal();
-              // }}
+            // onClick={() => {
+            //   handleDownloadMarkersInsidePolygon();
+            //   showSubscriptionModal();
+            // }}
             >
-              {subscriptionState.paymentSuccess ? "Download" : "Subscribe"}
+              {userData?.tier !== "free" ? "Download" : "Subscribe"}
             </Button>
             {/* Conditionally render the "Download Boundary" button based on the user's login status */}
             {loggedIn && (
