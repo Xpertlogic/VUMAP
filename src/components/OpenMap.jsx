@@ -42,19 +42,20 @@ function OpenMap({
   //--------------------------------
   const [selectedPolygonLayer, setSelectedPolygonLayer] = useState(null);
 
-  //--------------------------
-  /* ------ Country-State-District-City ------ */
+  /* ---------- Login ------------ */
+
+  /* ------ Country-State-District-City-Airport-Railway-POIs ------ */
   const [countryData, setCountryData] = useState(null);
   const [stateData, setStateData] = useState(null);
   const [districtData, setDistrictData] = useState(null);
   const [cityData, setCityData] = useState(null);
-  const [poiData, setPoiData] = useState();
   const [airportData, setAirportData] = useState();
   const [railData, setRailData] = useState();
   const [railPlatformData, setRailPlatformData] = useState();
   const [houseNumber, setHouseNumber] = useState([]);
   const [buildingsData, selectedBuildingsData] = useState([]);
   const [totalData, setTotalData] = useState([]);
+  const [poiData, setPoiData] = useState([]);
 
   const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
   /* ----- Countries ----- */
@@ -177,7 +178,7 @@ function OpenMap({
     if (districtView?.length > 0) {
       fetchDistrictData();
     }
-  }, [districtView]);
+  }, [countryView, stateView, districtView]);
 
   /* ----- Cities ----- */
 
@@ -535,6 +536,9 @@ function OpenMap({
             </Marker>
           ))}
         </MarkerClusterGroup>
+
+        {/* markers for filtered railway platforms */}
+
         {selectedRailTypes.includes("Platforms") && (
           <MarkerClusterGroup>
             {railPlatformData?.features?.map((airport, index) => (
