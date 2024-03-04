@@ -371,57 +371,23 @@ function OpenMap({
     const { layer } = event;
     const geoJSONData = layer.toGeoJSON();
 
-    // const geoJSONData = {
-    //   type: "FeatureCollection",
-    //   features: getData.map((marker) => ({
-    //     type: "Feature",
-    //     geometry: {
-    //       type: "Point",
-    //       coordinates: [
-    //         marker.geometry.coordinates[0],
-    //         marker.geometry.coordinates[1],
-    //       ],
-    //     },
-    //     properties: {
-    //       // You can include any additional properties here if needed
-    //       AirportName: marker.properties["Airport Name"],
-    //       AirportType: marker.properties["Airport Type"],
-    //     },
-    //   })),
-    // };
-
-    // console.log(geoJSONData);
-
     // ----------------
     setSelectedPolygonLayer(layer);
     setMarkersInsidePolygon([]); // Reset markers inside polygon when new polygon is drawn
 
-    // const filteredAirports1 = await airportDataView.features.filter((airport) =>
-    //   selectedAirportTypes.includes(airport.properties["Airport Type"])
-    // );
-
-    // console.log(filteredAirports1);
-    // const bounds = layer.getBounds();
-    // const filteredMarkers = [];
-    // airportDataView.features.forEach((airport) => {
-    //   const coordinates = L.latLng(
-    //     airport.geometry.coordinates[1],
-    //     airport.geometry.coordinates[0]
-    //   );
-    //   if (bounds.contains(coordinates)) {
-    //     filteredMarkers.push(airport); // Push the marker object
-    //   }
-    // });
-    //   poiDataView.features.forEach((poi) => {
-    //     const coordinates = L.latLng(
-    //       poi.geometry.coordinates[1],
-    //       poi.geometry.coordinates[0]
-    //     );
-    //     if (bounds.contains(coordinates)) {
-    //       filteredMarkers.push(poi); // Push the marker object
-    //     }
-    //   });
-    //   setMarkersInsidePolygon(filteredMarkers);
+    const bounds = layer.getBounds();
+    const filteredMarkers = [];
+    filteredPOI.forEach((airport) => {
+      const coordinates = L.latLng(
+        airport.geometry.coordinates[1],
+        airport.geometry.coordinates[0]
+      );
+      if (bounds.contains(coordinates)) {
+        filteredMarkers.push(airport); 
+      }
+    });
+      console.log(filteredMarkers,"filtered markers")
+      setMarkersInsidePolygon(filteredMarkers);
   };
 
   // console.log(markersInsidePolygon);
@@ -433,6 +399,7 @@ function OpenMap({
   const CustomMarker = ({ position, text }) => (
     <Marker position={position} icon={L.divIcon({ className: 'custom-label', html: text })} />
   );
+  console.log(filteredPOI)
   /* ------------------------------------------- */
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
@@ -566,7 +533,7 @@ function OpenMap({
           <MarkerClusterGroup disableClusteringAtZoom={18}>
             {filteredPOI?.map((poi, index) => (
               <Marker
-                key={poi.properties.streetname}
+                key={`${poi.properties.streetname}-${index}`}
                 icon={poiIcon}
                 position={[
                   poi.geometry.coordinates[1],
