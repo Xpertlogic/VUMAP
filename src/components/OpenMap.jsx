@@ -15,9 +15,7 @@ import "../style/style.css";
 import { EditControl } from "react-leaflet-draw";
 import axios from "axios";
 import JSZip from "jszip";
-import {
-  HomeTwoTone,
-} from '@ant-design/icons';
+import { HomeTwoTone } from "@ant-design/icons";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 function OpenMap({
@@ -31,10 +29,9 @@ function OpenMap({
   selectedAirportTypes,
   selectedRailTypes,
   selectedPoiTypes,
-  poiDataView,
   buildingTypes,
   selectedRoads,
-  homeSelected
+  homeSelected,
 }) {
   const [centerPosition, setCenterPosition] = useState([22.8046, 86.2029]);
   const [zoomLevel, setZoomLevel] = useState(5);
@@ -43,6 +40,7 @@ function OpenMap({
   const [selectedPolygonLayer, setSelectedPolygonLayer] = useState(null);
 
   /* ---------- Login ------------ */
+  const { loggedIn } = useContext(LoginContext);
 
   /* ------ Country-State-District-City-Airport-Railway-POIs ------ */
   const [countryData, setCountryData] = useState(null);
@@ -54,10 +52,11 @@ function OpenMap({
   const [railPlatformData, setRailPlatformData] = useState();
   const [houseNumber, setHouseNumber] = useState([]);
   const [buildingsData, selectedBuildingsData] = useState([]);
-  const [totalData, setTotalData] = useState([]);
   const [poiData, setPoiData] = useState([]);
+  const [totalData, setTotalData] = useState([]);
 
   const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
+
   /* ----- Countries ----- */
   useEffect(() => {
     const fetchCountryData = async () => {
@@ -80,8 +79,6 @@ function OpenMap({
       setZoomLevel(5);
     }
 
-    // fetchRailData();
-    // fetchRailPlatformData();
     fetchCountryData();
   }, [countryView]);
 
@@ -189,7 +186,8 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/boundary.geojson`
         );
 
-        const cityPositionVal = response.data.features[0].geometry.coordinates[0].flat()[0];
+        const cityPositionVal =
+          response.data.features[0].geometry.coordinates[0].flat()[0];
         setCenterPosition([cityPositionVal[1], cityPositionVal[0]]);
         setCityData(response.data);
       } catch (error) {
@@ -205,16 +203,14 @@ function OpenMap({
 
         const zip = new JSZip();
         const zipFile = await zip.loadAsync(responsePoi.data);
-        const geojsonStr = await zipFile
-          .file("POI.geojson")
-          .async("string");
+        const geojsonStr = await zipFile.file("POI.geojson").async("string");
         const geojsonData = JSON.parse(geojsonStr);
 
         setPoiData(geojsonData);
       } catch (error) {
         console.error("Error fetching POI Data:", error);
       }
-    }
+    };
     const fetchHouseNumber = async () => {
       try {
         const responsePoi = await axios.get(
@@ -233,7 +229,7 @@ function OpenMap({
       } catch (error) {
         console.error("Error fetching Housing Number:", error);
       }
-    }
+    };
 
     if (cityView) {
       setZoomLevel(11);
@@ -241,17 +237,128 @@ function OpenMap({
 
     if (cityView?.length > 0) {
       fetchCitiesData();
-      fetchPOIData()
-      fetchHouseNumber()
+      fetchPOIData();
+      fetchHouseNumber();
     }
   }, [cityView?.length > 0]);
-  /* ----------------------------------------------------- */
-  /* ---------- Login ------------ */
-  const { loggedIn } = useContext(LoginContext);
+  /* --------------------------------------- */
+
+  /* -------- Airport Data ------- */
+  const filteredAirports = airportData?.features.filter((airport) =>
+    selectedAirportTypes.some((type) =>
+      airport.properties["Airport Type"].includes(type)
+    )
+  );
+
+  /* ---- Railway Platform Data ---- */
+  const filteredPlatform = railPlatformData?.features?.filter(
+    (platform) => platform.properties.IDPRIM
+  );
+
+  /* ----- House Number Data ----- */
+  const filteredHouseNum = houseNumber?.features?.filter(
+    (houseNum) => houseNum.properties.IDPRIM
+  );
+
+  /* --------- POI Data ---------- */
+
+  const filteredPOI = poiData?.features?.filter((poi) => {
+    const category = poi.properties.Category;
+    const subCategory = poi.properties.SubCategory;
+
+    // Check if the category is selected
+    if (selectedPoiTypes[0]?.hasOwnProperty(category)) {
+      // Check if the subcategory is selected
+      if (selectedPoiTypes[0][category]?.includes(subCategory)) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+
+  // console.log(filteredPOI);
+
+  /* ------- Stored Filter Data in totalData ------- */
+
+  useEffect(() => {
+    const getData = () => {
+      let newData = [];
+      if (selectedAirportTypes.length > 0) {
+        newData = [...newData, ...filteredAirports];
+      }
+      if (selectedRailTypes.length > 0) {
+        newData = [...newData, ...filteredPlatform];
+      }
+      if (buildingTypes.length > 0) {
+        newData = [...newData, ...filteredHouseNum];
+      }
+      if (selectedPoiTypes.length > 0) {
+        newData = [...newData, ...filteredPOI];
+      }
+
+      setTotalData(newData);
+    };
+    getData();
+  }, [selectedAirportTypes, selectedPoiTypes, selectedRailTypes]);
+
+  console.log("Total Data", totalData);
+
+  /* ----- Created Polygon Draw ---- */
+
+  const handleDrawCreated = async (event) => {
+    const filteredMarkers = [];
+    setMarkersInsidePolygon([]); //Reset markers inside polygon when new polygon is draw
+
+    const { layer } = event;
+    const bounds = layer.getBounds();
+
+    setSelectedPolygonLayer(layer.toGeoJSON());
+
+    totalData.forEach((marker) => {
+      const coordinates = L.latLng(
+        marker.geometry.coordinates[1],
+        marker.geometry.coordinates[0]
+      );
+
+      if (bounds.contains(coordinates)) {
+        filteredMarkers.push(marker);
+      }
+    });
+
+    setMarkersInsidePolygon(filteredMarkers);
+  };
 
   // useEffect(() => {
-  //   setCenterPosition(mapData);
-  // }, [mapData]);
+  //   if (selectedPolygonLayer) {
+  //     const bounds = selectedPolygonLayer.getBounds();
+  //     const filteredMarkers = markersInsidePolygon.filter((marker) => {
+  //       const coordinates = L.latlng(
+  //         marker.geometry.coordinates[1],
+  //         marker.geometry.coordinates[0]
+  //       );
+
+  //       return bounds.contains(coordinates);
+  //     });
+
+  //     console.log(filteredMarkers, "filtered markers");
+
+  //     setMarkersInsidePolygon(filteredMarkers);
+  //   }
+  // }, [selectedPolygonLayer, setMarkersInsidePolygon]);
+
+  // const filteredPois = poiData?.features?.filter((poi) =>
+  //   selectedPoiTypes.includes(poi.properties.SubCategory)
+  // );
+
+  /* ---------- Custom Marker Style ------------ */
+
+  const CustomMarker = ({ position, text }) => (
+    <Marker
+      position={position}
+      icon={L.divIcon({ className: "custom-label", html: text })}
+    />
+  );
 
   const countryCornersStyle = {
     radius: 5,
@@ -260,7 +367,7 @@ function OpenMap({
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
-    pmIgnore: true
+    pmIgnore: true,
   };
 
   const stateCornersStyle = {
@@ -288,14 +395,13 @@ function OpenMap({
     weight: 2,
     opacity: 1,
     fillOpacity: 0.8,
-    pmIgnore: true
+    pmIgnore: true,
   };
 
   const airportIcon = new L.Icon({
     iconUrl: "images/airport.webp",
     iconSize: [32, 32],
     popupAnchor: [0, -10],
-
   });
 
   const poiIcon = new L.Icon({
@@ -310,96 +416,10 @@ function OpenMap({
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
-    pmIgnore: true
-  };
-  /* -------------- Airport Data -------------- */
-  const filteredAirports = airportData?.features.filter((airport) =>
-  selectedAirportTypes.some((type) =>
-  airport.properties["Airport Type"].includes(type)
-)  );
-  console.log(filteredAirports)
-
-  /* ------------------------------------------- */
-  /* -------------- POI Data -------------- */
-  const filteredPOI = poiData?.features?.filter(poi => {
-    const category = poi.properties.Category;
-    const subCategory = poi.properties.SubCategory;
-
-    // Check if the category is selected
-    if (selectedPoiTypes[0]?.hasOwnProperty(category)) {
-      // Check if the subcategory is selected
-      if (selectedPoiTypes[0][category]?.includes(subCategory)) {
-        return true;
-      }
-    }
-
-    return false;
-  });
-  console.log(filteredAirports)
-  // useEffect(() => {
-  //   const getData = () => {
-  //     let newData = [];
-  //     if(selectedAirportTypes.length > 0){
-  //       newData = [...newData, ...filteredAirports];
-  //     }
-  //     if(selectedPoiTypes.length > 0){
-  //       newData =[...newData, ...filteredPOI];
-  //     }
-  //     setTotalData(newData)
-  //   }
-  //   getData()
-  // }, [selectedAirportTypes, selectedPoiTypes]);
-  console.log(totalData);
-  /* ----- Created Polygon Draw ---- */
-  useEffect(() => {
-    if (selectedPolygonLayer) {
-      const bounds = selectedPolygonLayer.getBounds();
-      const filteredMarkers = markersInsidePolygon.filter((marker) => {
-        const coordinates = L.latLng(
-          marker.geometry.coordinates[1],
-          marker.geometry.coordinates[0]
-        );
-        return bounds.contains(coordinates);
-      });
-      setMarkersInsidePolygon(filteredMarkers);
-    }
-  }, [selectedPolygonLayer, setMarkersInsidePolygon]);
-
-  const handleDrawCreated = async (event) => {
-    // const getData = filteredAirports;
-    // console.log(getData);
-    const { layer } = event;
-    const geoJSONData = layer.toGeoJSON();
-
-    // ----------------
-    setSelectedPolygonLayer(layer);
-    setMarkersInsidePolygon([]); // Reset markers inside polygon when new polygon is drawn
-
-    const bounds = layer.getBounds();
-    const filteredMarkers = [];
-    filteredPOI.forEach((airport) => {
-      const coordinates = L.latLng(
-        airport.geometry.coordinates[1],
-        airport.geometry.coordinates[0]
-      );
-      if (bounds.contains(coordinates)) {
-        filteredMarkers.push(airport); 
-      }
-    });
-      console.log(filteredMarkers,"filtered markers")
-      setMarkersInsidePolygon(filteredMarkers);
+    pmIgnore: true,
   };
 
-  // console.log(markersInsidePolygon);
-
-  
-  // const filteredPois = poiData?.features?.filter((poi) =>
-  //   selectedPoiTypes.includes(poi.properties.SubCategory)
-  // );
-  const CustomMarker = ({ position, text }) => (
-    <Marker position={position} icon={L.divIcon({ className: 'custom-label', html: text })} />
-  );
-  console.log(filteredPOI)
+  // console.log(filteredPOI);
   /* ------------------------------------------- */
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
@@ -454,28 +474,25 @@ function OpenMap({
         )}
 
         {/* Render markers for filtered airports */}
-        {homeSelected &&
-          <MarkerClusterGroup disableClusteringAtZoom={18} >
-
-            {houseNumber?.features
-              ?.map((houseNumber, index) => (
-                <CustomMarker
-                  key={houseNumber}
-                  position={[
-                    houseNumber.geometry.coordinates[1],
-                    houseNumber.geometry.coordinates[0],
-                  ]}
-                  text={houseNumber.properties.streetname} // Text content is the house number
-                />
-              ))}
-          </MarkerClusterGroup>
-        }
-        <MarkerClusterGroup disableClusteringAtZoom={18} >
-
-          {buildingTypes?.length > 0 && selectedBuildingsData?.features
-            ?.map((houseNumber, index) => (
+        {homeSelected && (
+          <MarkerClusterGroup disableClusteringAtZoom={18}>
+            {houseNumber?.features?.map((houseNumber, index) => (
               <CustomMarker
-                key={houseNumber.properties.streetname}
+                key={houseNumber}
+                position={[
+                  houseNumber.geometry.coordinates[1],
+                  houseNumber.geometry.coordinates[0],
+                ]}
+                text={houseNumber.properties.streetname} // Text content is the house number
+              />
+            ))}
+          </MarkerClusterGroup>
+        )}
+        <MarkerClusterGroup disableClusteringAtZoom={18}>
+          {buildingTypes?.length > 0 &&
+            selectedBuildingsData?.features?.map((houseNumber, index) => (
+              <CustomMarker
+                key={index}
                 position={[
                   houseNumber?.geometry?.coordinates[1],
                   houseNumber?.geometry?.coordinates[0],
@@ -529,7 +546,7 @@ function OpenMap({
         )}
 
         {/* Render markers for filtered POI'S */}
-        {selectedPoiTypes.length > 0 &&
+        {selectedPoiTypes.length > 0 && (
           <MarkerClusterGroup disableClusteringAtZoom={18}>
             {filteredPOI?.map((poi, index) => (
               <Marker
@@ -550,7 +567,7 @@ function OpenMap({
               </Marker>
             ))}
           </MarkerClusterGroup>
-        }
+        )}
         <FeatureGroup ref={featureGroupRef}>
           <EditControl
             position="topleft"

@@ -34,7 +34,7 @@ function SideBar({
   onPoiTypesChange,
   selectedRoadTypes,
   onBuildingTypeChange,
-  homeSelected
+  homeSelected,
 }) {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
@@ -43,6 +43,9 @@ function SideBar({
 
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
+
+  /* ---------- Login ------------ */
+  const { loggedIn, userData } = useContext(LoginContext);
 
   /*----------- Select All checkbox ----------*/
 
@@ -108,14 +111,14 @@ function SideBar({
     setRoadData(val);
     setCheckRoads(!!val.length && val.length < roadTypes.length);
     setCheckAllRoad(val.length === roadTypes.length);
-    selectedRoadTypes(val)
+    selectedRoadTypes(val);
     // onRoadTypeChange(val);
   };
   const onCheckAllRoad = (e) => {
     setRoadData(e.target.checked ? roadTypes : []);
     setCheckRoads(false);
     setCheckAllRoad(e.target.checked);
-    selectedRoadTypes(e.target.checked ? roadTypes : [])
+    selectedRoadTypes(e.target.checked ? roadTypes : []);
     // onRoadTypeChange(e.target.checked ? roadTypes : []);
   };
 
@@ -142,8 +145,6 @@ function SideBar({
 
   /* -------------------- POIs --------------------- */
 
-  /* ------ Automotive Dealer -------- */
-
   const [checkedListPOI, setCheckedListPOI] = useState({});
   const [indeterminatePOI, setIndeterminatePOI] = useState({});
   const [checkAllPOI, setCheckAllPOI] = useState({});
@@ -151,18 +152,28 @@ function SideBar({
   const onChangePOI = (category, checkedValues) => {
     const newCheckedList = { ...checkedListPOI, [category]: checkedValues };
     setCheckedListPOI(newCheckedList);
-    setIndeterminatePOI({ ...indeterminatePOI, [category]: !!checkedValues.length && checkedValues.length < POI[category].length });
-    setCheckAllPOI({ ...checkAllPOI, [category]: checkedValues.length === POI[category].length });
-    onPoiTypesChange([newCheckedList])
+    setIndeterminatePOI({
+      ...indeterminatePOI,
+      [category]:
+        !!checkedValues.length && checkedValues.length < POI[category].length,
+    });
+    setCheckAllPOI({
+      ...checkAllPOI,
+      [category]: checkedValues.length === POI[category].length,
+    });
+    onPoiTypesChange([newCheckedList]);
   };
 
   const onCheckAllChangePOI = (category, e) => {
     const allChecked = e.target.checked;
-    const newCheckedListPOI = { ...checkedListPOI, [category]: allChecked ? POI[category] : [] };
+    const newCheckedListPOI = {
+      ...checkedListPOI,
+      [category]: allChecked ? POI[category] : [],
+    };
     setCheckedListPOI(newCheckedListPOI);
     setIndeterminatePOI({ ...indeterminatePOI, [category]: false });
     setCheckAllPOI({ ...checkAllPOI, [category]: allChecked });
-    onPoiTypesChange([newCheckedListPOI])
+    onPoiTypesChange([newCheckedListPOI]);
   };
   const POI = {
     "Automotive Dealer": [
@@ -171,26 +182,19 @@ function SideBar({
       "Bus",
       "Truck",
       "Electric Vehicle",
-      "Others"
+      "Others",
     ],
-    "Companies": [
-      "Private Companies",
-      "Others"
-    ],
-    "Entertainment": [
+    Companies: ["Private Companies", "Others"],
+    Entertainment: [
       "Café/Pub",
       "Cinema Hall",
       "Theatre",
       "Nightlife",
       "Bar",
-      "Others"
+      "Others",
     ],
     "Golf Course": [],
-    "Hotels/Restaurants": [
-      "Hotels",
-      "Restaurants",
-      "Others"
-    ],
+    "Hotels/Restaurants": ["Hotels", "Restaurants", "Others"],
     "Place of Worship": [
       "Temple",
       "Church",
@@ -199,28 +203,19 @@ function SideBar({
       "Ashram",
       "Mosque",
       "Pagoda",
-      "Community Centre"
+      "Community Centre",
     ],
-    "Repair Facility": [
-      "Bike",
-      "Cycle",
-      "Car",
-      "Others"
-    ],
+    "Repair Facility": ["Bike", "Cycle", "Car", "Others"],
     "Business Park": [],
-    "Education": [
+    Education: [
       "School",
       "College/ University",
       "Anganwadi Centre",
       "Institutes",
       "Library",
-      "Other"
+      "Other",
     ],
-    "Finance": [
-      "ATM",
-      "Bank",
-      "Loan/Others"
-    ],
+    Finance: ["ATM", "Bank", "Loan/Others"],
     "Government Office": [
       "Central Government",
       "State Government",
@@ -228,37 +223,23 @@ function SideBar({
       "Court House",
       "Police Station",
       "Post office",
-      "Others"
+      "Others",
     ],
     "Health Care": [
       "Government Hospitals",
       "Private Hospitals",
       "Clinic",
-      "Others"
+      "Others",
     ],
-    "Hostels": [
-      "Boys Hostel",
-      "Girls Hostel",
-      "Other"
-    ],
-    "Park and Recreation Area": [
-      "Cemetery",
-      "Park",
-      "Picnic Spot",
-      "Memorial"
-    ],
-    "Public Amenity": [
-      "Toilet",
-      "Bus stop",
-      "Aadhar Centre/CSC",
-      "Rest Area"
-    ],
-    "Services": [
+    Hostels: ["Boys Hostel", "Girls Hostel", "Other"],
+    "Park and Recreation Area": ["Cemetery", "Park", "Picnic Spot", "Memorial"],
+    "Public Amenity": ["Toilet", "Bus stop", "Aadhar Centre/CSC", "Rest Area"],
+    Services: [
       "Professional Services",
       "Communication Services",
-      "Other Services"
+      "Other Services",
     ],
-    "Shop": [
+    Shop: [
       "Pharmacy",
       "Variety Store",
       "Travel Agents",
@@ -293,7 +274,7 @@ function SideBar({
       "                Tailor Shop",
       "Toys & Games",
       "                Stamp Shop",
-      "Food & Drinks"
+      "Food & Drinks",
     ],
     "Sports Centre": [
       "Cricket",
@@ -301,7 +282,7 @@ function SideBar({
       "Football",
       "Hockey",
       "Volleyball",
-      "Others"
+      "Others",
     ],
     "Tourist Places": [
       "                Beach",
@@ -309,9 +290,9 @@ function SideBar({
       "                Statue",
       "Geographic Feature",
       "                Museum",
-      "                Others"
+      "                Others",
     ],
-    "Utility": [
+    Utility: [
       "EV Stations",
       "Petrol Stations",
       "Electric Stations",
@@ -319,12 +300,11 @@ function SideBar({
       "Telephone Station",
       "Water Supply",
       "Overhead Tank",
-      "                Other"
+      "                Other",
     ],
-    "Zoo": [],
-    "Shopping Centre": []
+    Zoo: [],
+    "Shopping Centre": [],
   };
-
 
   /* ----------------------------------------------- */
 
@@ -366,7 +346,7 @@ function SideBar({
     onSelectedDistrict(value.toLowerCase());
     setCheckAllPOI({});
     setIndeterminatePOI({});
-    onPoiTypesChange([])
+    onPoiTypesChange([]);
     setCheckedListPOI({});
     onSelectedCity("");
     setSelectedSelectedCity("");
@@ -380,15 +360,8 @@ function SideBar({
     setCheckAllPOI({});
     setIndeterminatePOI({});
     setCheckedListPOI({});
-    onPoiTypesChange([])
-
+    onPoiTypesChange([]);
   };
-
-  /* ----------------------------------------------------- */
-
-  const { subscriptionState } = useContext(SubscribeContext);
-  /* ---------- Login ------------ */
-  const { loggedIn, userData } = useContext(LoginContext);
 
   /* ---------------------------------- */
 
@@ -399,7 +372,9 @@ function SideBar({
     window.location.href = dropboxLink;
   };
 
-  //----------Polygon Create-----------
+  // console.log(markersInsidePolygon);
+
+  /* ----------Polygon Create----------- */
   const handleDownloadMarkersInsidePolygon = () => {
     if (userData.tier !== "free") {
       if (markersInsidePolygon.length > 0) {
@@ -426,15 +401,13 @@ function SideBar({
     }
   };
 
-  //-------------- For Reset ------------
+  /* -------------- For Reset ------------ */
   const handleReset = () => {
-    //
     setSelectedCountry("");
     setSelectedState("");
     setSelectedDistrict("");
-    selectedRoadTypes('');
-    setCheckAllPOI({})
-
+    selectedRoadTypes("");
+    setCheckAllPOI({});
   };
 
   /* ------------Map Switch Layer ------------ */
@@ -474,19 +447,24 @@ function SideBar({
       document.removeEventListener("keydown", preventF12);
     };
   }, [loggedIn]);
+
+  /* ------ Get State Data ------ */
+
   const [stateList, setStateList] = useState([]);
-  const getStates = async() => {
-     const res = await axios.get("https://webgis1.nic.in/publishing/rest/services/bharatmapsnew/admin2023/MapServer/0/query?token=&f=json&orderByFields=STNAME&outFields=STNAME%2CState_LGD&returnGeometry=false&spatialRel=esriSpatialRelIntersects&where=1%3D1");
-     setStateList(res.data.features)
-  }
+  const getStates = async () => {
+    const res = await axios.get(
+      "https://webgis1.nic.in/publishing/rest/services/bharatmapsnew/admin2023/MapServer/0/query?token=&f=json&orderByFields=STNAME&outFields=STNAME%2CState_LGD&returnGeometry=false&spatialRel=esriSpatialRelIntersects&where=1%3D1"
+    );
+    setStateList(res.data.features);
+  };
   useEffect(() => {
     getStates();
   }, [selectedCountry]);
   const handleCheckboxChange = (e) => {
     setHomesSelected(e.target.checked);
-    homeSelected(e.target.checked)
+    homeSelected(e.target.checked);
   };
-  console.log(userData)
+  // console.log(userData);
   return (
     <>
       <Sider
@@ -549,10 +527,13 @@ function SideBar({
                 >
                   {stateList?.map((item) => {
                     return (
-                      <option key={item.attributes.stname} value={item.attributes.stname}>
+                      <option
+                        key={item.attributes.stname}
+                        value={item.attributes.stname}
+                      >
                         {item.attributes.stname}
-                    </option>
-                    )
+                      </option>
+                    );
                   })}
                 </Select>
               </div>
@@ -603,121 +584,133 @@ function SideBar({
               </div>
             </div>
           </Form.Item>
-          {selectedCountry.length > 0 && 
-          <SubMenu key="sub11" title="Transports" className="text-[1rem]">
-            
-            <SubMenu
-              key="airports"
-              title={
-                <SelectAllCheckbox
-                  title="Airports"
-                  indeterminate={checkAirports}
-                  checkAll={checkAllAirport}
-                  onCheckAllChange={onCheckAllAirport}
+          {selectedCountry.length > 0 && (
+            <SubMenu key="sub11" title="Transports" className="text-[1rem]">
+              <SubMenu
+                key="airports"
+                title={
+                  <SelectAllCheckbox
+                    title="Airports"
+                    indeterminate={checkAirports}
+                    checkAll={checkAllAirport}
+                    onCheckAllChange={onCheckAllAirport}
+                  />
+                }
+              >
+                <CheckboxGroup
+                  className="allCheckBox"
+                  options={airportTypes}
+                  value={airportData}
+                  onChange={onChangeAirport}
                 />
-              }
-            >
-              <CheckboxGroup
-                className="allCheckBox"
-                options={airportTypes}
-                value={airportData}
-                onChange={onChangeAirport}
-              />
+              </SubMenu>
+              {selectedState.length > 0 && (
+                <SubMenu
+                  key="rails"
+                  title={
+                    <SelectAllCheckbox
+                      title="Rail"
+                      indeterminate={checkRails}
+                      checkAll={checkAllRail}
+                      onCheckAllChange={onCheckAllRail}
+                    />
+                  }
+                >
+                  <CheckboxGroup
+                    className="allCheckBox"
+                    options={railTypes}
+                    value={railData}
+                    onChange={onChangeRail}
+                  />
+                </SubMenu>
+              )}
+              {selectedCity.length > 0 && (
+                <SubMenu
+                  key="roads"
+                  title={
+                    <SelectAllCheckbox
+                      title="Roads"
+                      indeterminate={checkRoads}
+                      checkAll={checkAllRoad}
+                      onCheckAllChange={onCheckAllRoad}
+                    />
+                  }
+                >
+                  <CheckboxGroup
+                    className="allCheckBox"
+                    options={roadTypes}
+                    value={roadData}
+                    onChange={onChangeRoad}
+                  />
+                </SubMenu>
+              )}
             </SubMenu>
-            {selectedState.length > 0 && 
+          )}
+          {selectedCity.length > 0 && (
             <SubMenu
-              key="rails"
+              key="building"
               title={
-                <SelectAllCheckbox
-                  title="Rail"
-                  indeterminate={checkRails}
-                  checkAll={checkAllRail}
-                  onCheckAllChange={onCheckAllRail}
-                />
-              }
-            >
-              <CheckboxGroup
-                className="allCheckBox"
-                options={railTypes}
-                value={railData}
-                onChange={onChangeRail}
-              />
-            </SubMenu>
-}
-            {selectedCity.length > 0 && 
-            <SubMenu
-              key="roads"
-              
-              title={
-                <SelectAllCheckbox
-                  title="Roads"
-                  indeterminate={checkRoads}
-                  checkAll={checkAllRoad}
-                  onCheckAllChange={onCheckAllRoad}
-                />
-              }
-            >
-              <CheckboxGroup
-                className="allCheckBox"
-                options={roadTypes}
-                value={roadData}
-                onChange={onChangeRoad}
-              />
-            </SubMenu>
-            }
-          </SubMenu>
-          }
-          {selectedCity.length > 0 && 
-          <SubMenu  key="building" title={
                 <SelectAllCheckbox
                   title="Buildings"
                   indeterminate={checkBuildings}
                   checkAll={checkAllBuilding}
                   onCheckAllChange={onCheckAllBuilding}
                 />
-              } className="text-[1rem]">
-           
+              }
+              className="text-[1rem]"
+            >
               <CheckboxGroup
                 className="allCheckBox"
                 options={buildingTypes}
                 value={buildingData}
                 onChange={onChangeBuilding}
               />
-          </SubMenu>
-}
-          {selectedCity.length > 0 && 
-          <SubMenu key="house number" className="no-arrow" disabled title={
-            <Checkbox onChange={handleCheckboxChange}        
-            checked={homesSelected}
-            className="text-[1rem]">House Number</Checkbox>} ></SubMenu>
-          }
+            </SubMenu>
+          )}
+          {selectedCity.length > 0 && (
+            <SubMenu
+              key="house number"
+              className="no-arrow"
+              disabled
+              title={
+                <Checkbox
+                  onChange={handleCheckboxChange}
+                  checked={homesSelected}
+                  className="text-[1rem]"
+                >
+                  House Number
+                </Checkbox>
+              }
+            ></SubMenu>
+          )}
 
           {/* ---- POIs ---- */}
-          {selectedCity.length > 0 && 
-          <SubMenu key="POIData" title="POI">
-            {Object.keys(POI).map(category => (
-              <SubMenu
-                key={category}
-                title={
-                  <Checkbox
-                    indeterminate={indeterminatePOI[category]}
-                    onChange={(e) => onCheckAllChangePOI(category, e)}
-                    checked={checkAllPOI[category]}
-                  >
-                    {category}
-                  </Checkbox>
-                }
-              >
-                <CheckboxGroup
-                  options={POI[category]}
-                  value={checkedListPOI[category]}
-                  onChange={(checkedValues) => onChangePOI(category, checkedValues)}
-                />
-              </SubMenu>
-
-            ))}
-          </SubMenu>
-          }
+          {selectedCity.length > 0 && (
+            <SubMenu key="POIData" title="POI">
+              {Object.keys(POI).map((category) => (
+                <SubMenu
+                  key={category}
+                  title={
+                    <Checkbox
+                      indeterminate={indeterminatePOI[category]}
+                      onChange={(e) => onCheckAllChangePOI(category, e)}
+                      checked={checkAllPOI[category]}
+                    >
+                      {category}
+                    </Checkbox>
+                  }
+                >
+                  <CheckboxGroup
+                    options={POI[category]}
+                    value={checkedListPOI[category]}
+                    onChange={(checkedValues) =>
+                      onChangePOI(category, checkedValues)
+                    }
+                  />
+                </SubMenu>
+              ))}
+            </SubMenu>
+          )}
 
           <div className="m-4 text-center">
             <Button
@@ -731,10 +724,6 @@ function SideBar({
               type="primary"
               className="bg-blue-700"
               onClick={handleDownloadMarkersInsidePolygon}
-            // onClick={() => {
-            //   handleDownloadMarkersInsidePolygon();
-            //   showSubscriptionModal();
-            // }}
             >
               {userData?.tier !== "free" ? "Download" : "Subscribe"}
             </Button>

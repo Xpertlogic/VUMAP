@@ -1,11 +1,10 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { LoginProvider } from "./context/LoginContext";
 import { SubscribeProvider } from "./context/SubscribeContext";
 import "./style/style.css";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
 import OpenMap from "./components/OpenMap";
-import poiData from "./data/All_POI.json";
 
 const { Content } = Layout;
 const SideBar = lazy(() => import("./components/SideBar"));
@@ -29,13 +28,7 @@ function App() {
   const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]);
   //--> For Map Switch
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
-  const [homeSelected, setHomeSelected] = useState(false)
-  // const [stateData, setStateData] = useState(null);
-
-  // // Function to update stateData
-  // const updateStateData = (data) => {
-  //   setStateData(data);
-  // };
+  const [homeSelected, setHomeSelected] = useState(false);
 
   /* ------------------------------------------ */
 
@@ -85,7 +78,6 @@ function App() {
             <Suspense fallback={<div>Loading...</div>}>
               <SubscribeProvider>
                 <SideBar
-                  // stateData={stateData}
                   onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
                   onSelectedCountry={handleCountryChange}
                   onSelectedState={handleStateChange}
@@ -94,10 +86,10 @@ function App() {
                   markersInsidePolygon={markersInsidePolygon}
                   setMarkersInsidePolygon={setMarkersInsidePolygon}
                   selectedAirportTypes={selectedAirportTypes}
-                  selectedRoadTypes={(types) =>
-                    setSelectedRoadTypes(types)
+                  selectedRoadTypes={(types) => setSelectedRoadTypes(types)}
+                  onBuildingTypeChange={(types) =>
+                    setSelectedBuildingTypes(types)
                   }
-                  onBuildingTypeChange={(types) => setSelectedBuildingTypes(types)}
                   onAirportTypeChange={(types) =>
                     setSelectedAirportTypes(types)
                   }
@@ -120,7 +112,6 @@ function App() {
                 markersInsidePolygon={markersInsidePolygon}
                 setMarkersInsidePolygon={setMarkersInsidePolygon}
                 selectedPoiTypes={selectedPoiTypes}
-                poiDataView={poiData}
                 selectedRoads={selectedRoadTypes}
                 buildingTypes={selectedBuildingTypes}
                 homeSelected={homeSelected}
