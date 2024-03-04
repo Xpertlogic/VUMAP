@@ -49,7 +49,7 @@ function Subscription() {
             try {
               const Payload = {
                 email: userData.email,
-                tier: plan === "premium" ? "Premium" : "Premium Plus", // Update tier based on plan
+                tier: plan === "premium" ? "tier1" : "tier2", // Update tier based on plan
                 paymentid: razorpayResponse.razorpay_payment_id,
                 token: storedToken,
               };

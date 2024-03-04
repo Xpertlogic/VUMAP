@@ -15,7 +15,9 @@ import "../style/style.css";
 import { EditControl } from "react-leaflet-draw";
 import axios from "axios";
 import JSZip from "jszip";
-
+import {
+  HomeTwoTone,
+} from '@ant-design/icons';
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 function OpenMap({
@@ -30,14 +32,17 @@ function OpenMap({
   selectedRailTypes,
   selectedPoiTypes,
   poiDataView,
+  buildingTypes,
+  selectedRoads,
+  homeSelected
 }) {
   const [centerPosition, setCenterPosition] = useState([22.8046, 86.2029]);
   const [zoomLevel, setZoomLevel] = useState(5);
   const featureGroupRef = useRef();
+  //--------------------------------
   const [selectedPolygonLayer, setSelectedPolygonLayer] = useState(null);
 
   /* ---------- Login ------------ */
-  const { loggedIn } = useContext(LoginContext);
 
   /* ------ Country-State-District-City-Airport-Railway-POIs ------ */
   const [countryData, setCountryData] = useState(null);
@@ -47,10 +52,12 @@ function OpenMap({
   const [airportData, setAirportData] = useState();
   const [railData, setRailData] = useState();
   const [railPlatformData, setRailPlatformData] = useState();
-  const [poiData, setPoiData] = useState();
+  const [houseNumber, setHouseNumber] = useState([]);
+  const [buildingsData, selectedBuildingsData] = useState([]);
+  const [totalData, setTotalData] = useState([]);
+  const [poiData, setPoiData] = useState([]);
 
   const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
-
   /* ----- Countries ----- */
   useEffect(() => {
     const fetchCountryData = async () => {
@@ -59,7 +66,7 @@ function OpenMap({
           `${baseUrl}/${countryView}/boundary.geojson`
         );
         const responseAirport = await axios.get(
-          `${baseUrl}/${countryView}/airports.geojson`
+          `${baseUrl}/${countryView}/Airport.geojson`
         );
 
         setCountryData(response.data);
@@ -69,52 +76,12 @@ function OpenMap({
       }
     };
 
-    const fetchRailData = async () => {
-      try {
-        const responseRail = await axios.get(
-          `${baseUrl}/${countryView}/Indianrailline.zip`,
-          { responseType: "arraybuffer" }
-        );
-
-        const zip = new JSZip();
-        const zipFile = await zip.loadAsync(responseRail.data);
-        // Assuming your GeoJSON file is named "boundary.geojson" within the ZIP
-        const geojsonStr = await zipFile
-          .file("Indianrailline.geojson")
-          .async("string");
-        const geojsonData = JSON.parse(geojsonStr);
-
-        setRailData(geojsonData);
-      } catch (error) {
-        console.error("Error fetching Country Boundary:", error);
-      }
-    };
-    const fetchRailPlatformData = async () => {
-      try {
-        const responseRailPlatform = await axios.get(
-          `${baseUrl}/${countryView}/railwayplatform.zip`,
-          { responseType: "arraybuffer" }
-        );
-
-        const zip = new JSZip();
-        const zipFile = await zip.loadAsync(responseRailPlatform.data);
-        const geojsonStr = await zipFile
-          .file("railwayplatform.geojson")
-          .async("string");
-        const geojsonData = JSON.parse(geojsonStr);
-
-        setRailPlatformData(geojsonData);
-      } catch (error) {
-        console.error("Error fetching Country Boundary:", error);
-      }
-    };
-
     if (countryView) {
       setZoomLevel(5);
     }
 
-    fetchRailData();
-    fetchRailPlatformData();
+    // fetchRailData();
+    // fetchRailPlatformData();
     fetchCountryData();
   }, [countryView]);
 
@@ -136,15 +103,54 @@ function OpenMap({
         console.error("Error fetching State Boundary:", error);
       }
     };
+    const fetchRailData = async () => {
+      try {
+        const responseRail = await axios.get(
+          `${baseUrl}/${countryView}/${stateView}/Railline.zip`,
+          { responseType: "arraybuffer" }
+        );
 
+        const zip = new JSZip();
+        const zipFile = await zip.loadAsync(responseRail.data);
+        // Assuming your GeoJSON file is named "boundary.geojson" within the ZIP
+        const geojsonStr = await zipFile
+          .file("Railline_Odisha.geojson")
+          .async("string");
+        const geojsonData = JSON.parse(geojsonStr);
+
+        setRailData(geojsonData);
+      } catch (error) {
+        console.error("Error fetching rail Data:", error);
+      }
+    };
+    const fetchRailPlatformData = async () => {
+      try {
+        const responseRailPlatform = await axios.get(
+          `${baseUrl}/${countryView}/${stateView}/Railwayplatform.zip`,
+          { responseType: "arraybuffer" }
+        );
+
+        const zip = new JSZip();
+        const zipFile = await zip.loadAsync(responseRailPlatform.data);
+        const geojsonStr = await zipFile
+          .file("Railwayplatform_Odisha.geojson")
+          .async("string");
+        const geojsonData = JSON.parse(geojsonStr);
+
+        setRailPlatformData(geojsonData);
+      } catch (error) {
+        console.error("Error fetching rail platform data:", error);
+      }
+    };
     if (stateView) {
       setZoomLevel(6);
     }
     if (stateView?.length > 0) {
       fetchStateData();
+      fetchRailData();
+      fetchRailPlatformData();
     }
-  }, [countryView, stateView]);
-
+  }, [stateView]);
   /* ----- Districts ----- */
 
   useEffect(() => {
@@ -183,22 +189,51 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/boundary.geojson`
         );
 
-        const responsePoi = await axios.get(
-          `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/POI.geojson`
-        );
-
-        const cityPositionVal =
-          response.data.features[0].geometry.coordinates[0].flat()[0];
-
-        setPoiData(responsePoi.data);
-
+        const cityPositionVal = response.data.features[0].geometry.coordinates[0].flat()[0];
         setCenterPosition([cityPositionVal[1], cityPositionVal[0]]);
-
         setCityData(response.data);
       } catch (error) {
         console.error("Error fetching City Boundary:", error);
       }
     };
+    const fetchPOIData = async () => {
+      try {
+        const responsePoi = await axios.get(
+          `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/POI.zip`,
+          { responseType: "arraybuffer" }
+        );
+
+        const zip = new JSZip();
+        const zipFile = await zip.loadAsync(responsePoi.data);
+        const geojsonStr = await zipFile
+          .file("POI.geojson")
+          .async("string");
+        const geojsonData = JSON.parse(geojsonStr);
+
+        setPoiData(geojsonData);
+      } catch (error) {
+        console.error("Error fetching POI Data:", error);
+      }
+    }
+    const fetchHouseNumber = async () => {
+      try {
+        const responsePoi = await axios.get(
+          `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/HouseNumber.zip`,
+          { responseType: "arraybuffer" }
+        );
+
+        const zip = new JSZip();
+        const zipFile = await zip.loadAsync(responsePoi.data);
+        const geojsonStr = await zipFile
+          .file("HouseNumber.geojson")
+          .async("string");
+        const geojsonData = JSON.parse(geojsonStr);
+
+        setHouseNumber(geojsonData);
+      } catch (error) {
+        console.error("Error fetching Housing Number:", error);
+      }
+    }
 
     if (cityView) {
       setZoomLevel(11);
@@ -206,103 +241,17 @@ function OpenMap({
 
     if (cityView?.length > 0) {
       fetchCitiesData();
+      fetchPOIData()
+      fetchHouseNumber()
     }
-  }, [countryView, stateView, districtView, cityView]);
-
+  }, [cityView?.length > 0]);
   /* ----------------------------------------------------- */
+  /* ---------- Login ------------ */
+  const { loggedIn } = useContext(LoginContext);
 
-  /* ----- Created Polygon Draw ---- */
-  useEffect(() => {
-    if (selectedPolygonLayer) {
-      const bounds = selectedPolygonLayer.getBounds();
-      const filteredMarkers = markersInsidePolygon.filter((marker) => {
-        const coordinates = L.latLng(
-          marker.geometry.coordinates[1],
-          marker.geometry.coordinates[0]
-        );
-        return bounds.contains(coordinates);
-      });
-      setMarkersInsidePolygon(filteredMarkers);
-    }
-  }, [selectedPolygonLayer, setMarkersInsidePolygon]);
-
-  const handleDrawCreated = async (event) => {
-    // const getData = filteredAirports;
-    // console.log(getData);
-    const { layer } = event;
-    const geoJSONData = layer.toGeoJSON();
-
-    // const geoJSONData = {
-    //   type: "FeatureCollection",
-    //   features: getData.map((marker) => ({
-    //     type: "Feature",
-    //     geometry: {
-    //       type: "Point",
-    //       coordinates: [
-    //         marker.geometry.coordinates[0],
-    //         marker.geometry.coordinates[1],
-    //       ],
-    //     },
-    //     properties: {
-    //       // You can include any additional properties here if needed
-    //       AirportName: marker.properties["Airport Name"],
-    //       AirportType: marker.properties["Airport Type"],
-    //     },
-    //   })),
-    // };
-
-    // console.log(geoJSONData);
-
-    // ----------------
-    setSelectedPolygonLayer(layer);
-    setMarkersInsidePolygon([]); // Reset markers inside polygon when new polygon is drawn
-
-    // const filteredAirports1 = await airportDataView.features.filter((airport) =>
-    //   selectedAirportTypes.includes(airport.properties["Airport Type"])
-    // );
-
-    // console.log(filteredAirports1);
-    // const bounds = layer.getBounds();
-    // const filteredMarkers = [];
-    // airportDataView.features.forEach((airport) => {
-    //   const coordinates = L.latLng(
-    //     airport.geometry.coordinates[1],
-    //     airport.geometry.coordinates[0]
-    //   );
-    //   if (bounds.contains(coordinates)) {
-    //     filteredMarkers.push(airport); // Push the marker object
-    //   }
-    // });
-    //   poiDataView.features.forEach((poi) => {
-    //     const coordinates = L.latLng(
-    //       poi.geometry.coordinates[1],
-    //       poi.geometry.coordinates[0]
-    //     );
-    //     if (bounds.contains(coordinates)) {
-    //       filteredMarkers.push(poi); // Push the marker object
-    //     }
-    //   });
-    //   setMarkersInsidePolygon(filteredMarkers);
-  };
-
-  // console.log(markersInsidePolygon);
-
-  /* -------------- Airport Data -------------- */
-  const filteredAirports = airportData?.features.filter((airport) =>
-    selectedAirportTypes.includes(airport.airporttype)
-  );
-
-  /* -------------- Railway Data -------------- */
-  /* ------------------------------------------- */
-
-  /* -------------- POI Data -------------- */
-
-  const filteredPois = poiDataView.features.filter((poi) =>
-    selectedPoiTypes.includes(poi.properties.descricao)
-  );
-  /* ------------------------------------------- */
-
-  /* ---------- Custom style for Icon and Boundary ---------- */
+  // useEffect(() => {
+  //   setCenterPosition(mapData);
+  // }, [mapData]);
 
   const countryCornersStyle = {
     radius: 5,
@@ -311,6 +260,7 @@ function OpenMap({
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
+    pmIgnore: true
   };
 
   const stateCornersStyle = {
@@ -338,12 +288,14 @@ function OpenMap({
     weight: 2,
     opacity: 1,
     fillOpacity: 0.8,
+    pmIgnore: true
   };
 
   const airportIcon = new L.Icon({
     iconUrl: "images/airport.webp",
     iconSize: [32, 32],
     popupAnchor: [0, -10],
+
   });
 
   const poiIcon = new L.Icon({
@@ -358,14 +310,97 @@ function OpenMap({
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
+    pmIgnore: true
+  };
+  /* -------------- Airport Data -------------- */
+  const filteredAirports = airportData?.features.filter((airport) =>
+  selectedAirportTypes.some((type) =>
+  airport.properties["Airport Type"].includes(type)
+)  );
+  console.log(filteredAirports)
+
+  /* ------------------------------------------- */
+  /* -------------- POI Data -------------- */
+  const filteredPOI = poiData?.features?.filter(poi => {
+    const category = poi.properties.Category;
+    const subCategory = poi.properties.SubCategory;
+
+    // Check if the category is selected
+    if (selectedPoiTypes[0]?.hasOwnProperty(category)) {
+      // Check if the subcategory is selected
+      if (selectedPoiTypes[0][category]?.includes(subCategory)) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+  console.log(filteredAirports)
+  // useEffect(() => {
+  //   const getData = () => {
+  //     let newData = [];
+  //     if(selectedAirportTypes.length > 0){
+  //       newData = [...newData, ...filteredAirports];
+  //     }
+  //     if(selectedPoiTypes.length > 0){
+  //       newData =[...newData, ...filteredPOI];
+  //     }
+  //     setTotalData(newData)
+  //   }
+  //   getData()
+  // }, [selectedAirportTypes, selectedPoiTypes]);
+  console.log(totalData);
+  /* ----- Created Polygon Draw ---- */
+  useEffect(() => {
+    if (selectedPolygonLayer) {
+      const bounds = selectedPolygonLayer.getBounds();
+      const filteredMarkers = markersInsidePolygon.filter((marker) => {
+        const coordinates = L.latLng(
+          marker.geometry.coordinates[1],
+          marker.geometry.coordinates[0]
+        );
+        return bounds.contains(coordinates);
+      });
+      setMarkersInsidePolygon(filteredMarkers);
+    }
+  }, [selectedPolygonLayer, setMarkersInsidePolygon]);
+
+  const handleDrawCreated = async (event) => {
+    // const getData = filteredAirports;
+    // console.log(getData);
+    const { layer } = event;
+    const geoJSONData = layer.toGeoJSON();
+
+    // ----------------
+    setSelectedPolygonLayer(layer);
+    setMarkersInsidePolygon([]); // Reset markers inside polygon when new polygon is drawn
+
+    const bounds = layer.getBounds();
+    const filteredMarkers = [];
+    filteredPOI.forEach((airport) => {
+      const coordinates = L.latLng(
+        airport.geometry.coordinates[1],
+        airport.geometry.coordinates[0]
+      );
+      if (bounds.contains(coordinates)) {
+        filteredMarkers.push(airport); 
+      }
+    });
+      console.log(filteredMarkers,"filtered markers")
+      setMarkersInsidePolygon(filteredMarkers);
   };
 
-  const railIcon = new L.Icon({
-    iconUrl: "images/railway_platform.webp",
-    iconSize: [32, 32],
-    popupAnchor: [0, -10],
-  });
+  // console.log(markersInsidePolygon);
 
+  
+  // const filteredPois = poiData?.features?.filter((poi) =>
+  //   selectedPoiTypes.includes(poi.properties.SubCategory)
+  // );
+  const CustomMarker = ({ position, text }) => (
+    <Marker position={position} icon={L.divIcon({ className: 'custom-label', html: text })} />
+  );
+  console.log(filteredPOI)
+  /* ------------------------------------------- */
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
       <MapContainer
@@ -409,7 +444,7 @@ function OpenMap({
 
         {selectedRailTypes.includes("Rail Line") && (
           <GeoJSON
-            key={JSON.stringify(railData)}
+            key="raillines"
             data={railData}
             style={railLineStyle}
             onEachFeature={(feature, layer) => {
@@ -418,21 +453,51 @@ function OpenMap({
           />
         )}
 
-        {/* markers for filtered airports */}
+        {/* Render markers for filtered airports */}
+        {homeSelected &&
+          <MarkerClusterGroup disableClusteringAtZoom={18} >
+
+            {houseNumber?.features
+              ?.map((houseNumber, index) => (
+                <CustomMarker
+                  key={houseNumber}
+                  position={[
+                    houseNumber.geometry.coordinates[1],
+                    houseNumber.geometry.coordinates[0],
+                  ]}
+                  text={houseNumber.properties.streetname} // Text content is the house number
+                />
+              ))}
+          </MarkerClusterGroup>
+        }
+        <MarkerClusterGroup disableClusteringAtZoom={18} >
+
+          {buildingTypes?.length > 0 && selectedBuildingsData?.features
+            ?.map((houseNumber, index) => (
+              <CustomMarker
+                key={houseNumber.properties.streetname}
+                position={[
+                  houseNumber?.geometry?.coordinates[1],
+                  houseNumber?.geometry?.coordinates[0],
+                ]}
+                text={houseNumber.properties.streetname} // Text content is the house number
+              />
+            ))}
+        </MarkerClusterGroup>
         <MarkerClusterGroup>
           {filteredAirports?.map((airport, index) => (
             <Marker
-              key={index}
+              key={airport.properties["Airport Name"]}
               icon={airportIcon}
               position={[
-                airport.geometry.coordinates[1],
-                airport.geometry.coordinates[0],
+                airport?.properties?.Longitude,
+                airport?.properties?.Latitude,
               ]}
             >
               <Popup>
                 <div>
                   <h3>{airport.properties["Airport Name"]}</h3>
-                  <p>{`Type: ${airport.airporttype}`}</p>
+                  <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
                 </div>
               </Popup>
             </Marker>
@@ -446,7 +511,7 @@ function OpenMap({
             {railPlatformData?.features?.map((airport, index) => (
               <Marker
                 key={index}
-                icon={railIcon}
+                icon={airportIcon}
                 position={[
                   airport.geometry.coordinates[1],
                   airport.geometry.coordinates[0],
@@ -463,29 +528,29 @@ function OpenMap({
           </MarkerClusterGroup>
         )}
 
-        {/* markers for filtered POI'S */}
-
-        <MarkerClusterGroup>
-          {filteredPois.map((poi, index) => (
-            <Marker
-              key={index}
-              icon={poiIcon}
-              position={[
-                poi.geometry.coordinates[1],
-                poi.geometry.coordinates[0],
-              ]}
-            >
-              <Popup>
-                <div>
-                  <h3>{poi.properties.streetname}</h3>
-                  <p>{`Type: ${poi.properties.estado}`}</p>
-                  <p>{`Catregory: ${poi.properties.descricao}`}</p>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
-        </MarkerClusterGroup>
-
+        {/* Render markers for filtered POI'S */}
+        {selectedPoiTypes.length > 0 &&
+          <MarkerClusterGroup disableClusteringAtZoom={18}>
+            {filteredPOI?.map((poi, index) => (
+              <Marker
+                key={`${poi.properties.streetname}-${index}`}
+                icon={poiIcon}
+                position={[
+                  poi.geometry.coordinates[1],
+                  poi.geometry.coordinates[0],
+                ]}
+              >
+                <Popup>
+                  <div>
+                    <h3>{poi.properties.streetname}</h3>
+                    <p>{`Type: ${poi.properties.estado}`}</p>
+                    <p>{`Catregory: ${poi.properties.descricao}`}</p>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
+        }
         <FeatureGroup ref={featureGroupRef}>
           <EditControl
             position="topleft"

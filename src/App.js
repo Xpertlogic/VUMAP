@@ -17,14 +17,25 @@ function App() {
   const [selectedCity, setSelectedCity] = useState();
   //-->For Airports
   const [selectedAirportTypes, setSelectedAirportTypes] = useState([]);
+  const [selectedRoadTypes, setSelectedRoadTypes] = useState([]);
+
   //-->For Railways
   const [selectedRailTypes, setSelectedRailTypes] = useState([]);
   //-->For POI's
   const [selectedPoiTypes, setSelectedPoiTypes] = useState([]);
+  const [selectedBuildingTypes, setSelectedBuildingTypes] = useState([]);
+
   //--> Track selected polygon data
   const [markersInsidePolygon, setMarkersInsidePolygon] = useState([]);
   //--> For Map Switch
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
+  const [homeSelected, setHomeSelected] = useState(false)
+  // const [stateData, setStateData] = useState(null);
+
+  // // Function to update stateData
+  // const updateStateData = (data) => {
+  //   setStateData(data);
+  // };
 
   /* ------------------------------------------ */
 
@@ -83,11 +94,16 @@ function App() {
                   markersInsidePolygon={markersInsidePolygon}
                   setMarkersInsidePolygon={setMarkersInsidePolygon}
                   selectedAirportTypes={selectedAirportTypes}
+                  selectedRoadTypes={(types) =>
+                    setSelectedRoadTypes(types)
+                  }
+                  onBuildingTypeChange={(types) => setSelectedBuildingTypes(types)}
                   onAirportTypeChange={(types) =>
                     setSelectedAirportTypes(types)
                   }
                   onRailTypeChange={(types) => setSelectedRailTypes(types)}
                   selectedPoiTypes={selectedPoiTypes}
+                  homeSelected={(value) => setHomeSelected(value)}
                   onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
                 />
               </SubscribeProvider>
@@ -105,6 +121,9 @@ function App() {
                 setMarkersInsidePolygon={setMarkersInsidePolygon}
                 selectedPoiTypes={selectedPoiTypes}
                 poiDataView={poiData}
+                selectedRoads={selectedRoadTypes}
+                buildingTypes={selectedBuildingTypes}
+                homeSelected={homeSelected}
               />
             </Content>
           </Layout>
