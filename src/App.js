@@ -29,16 +29,8 @@ function App() {
   //--> For Map Switch
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
   const [homeSelected, setHomeSelected] = useState(false);
-  console.log(markersInsidePolygon)
+  // console.log(markersInsidePolygon);
   /* ------------------------------------------ */
-
-  // const { loggedIn } = useContext(LoginContext);
-
-  // Function to handle user login
-  // const handleLogin = async () => {
-  //   // Logic to handle user login
-  //   setLoggedIn(true);
-  // };
 
   /* State to manage the visibility of the map tile layer */
 

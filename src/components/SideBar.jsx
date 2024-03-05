@@ -15,6 +15,7 @@ import SelectAllCheckbox from "./SelectAllCheckBox";
 import axios from "axios";
 
 const Subscription = lazy(() => import("./Subscription"));
+const TableData = lazy(() => import("./TableData"));
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -39,10 +40,12 @@ function SideBar({
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedCity, setSelectedSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
 
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
+
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
 
   /* ---------- Login ------------ */
   const { loggedIn, userData } = useContext(LoginContext);
@@ -318,7 +321,7 @@ function SideBar({
     setCheckedListPOI({});
     onPoiTypesChange([]);
     onSelectedCity("");
-    setSelectedSelectedCity("");
+    setSelectedCity("");
     setSelectedDistrict("");
     onSelectedDistrict("");
     setSelectedState("");
@@ -334,7 +337,7 @@ function SideBar({
     setCheckedListPOI({});
     onPoiTypesChange([]);
     onSelectedCity("");
-    setSelectedSelectedCity("");
+    setSelectedCity("");
     setSelectedDistrict("");
     onSelectedDistrict("");
   };
@@ -349,14 +352,14 @@ function SideBar({
     onPoiTypesChange([]);
     setCheckedListPOI({});
     onSelectedCity("");
-    setSelectedSelectedCity("");
+    setSelectedCity("");
   };
 
   /* ----- Cities ----- */
 
   const handleCityChange = (value) => {
     onSelectedCity(value.toLowerCase());
-    setSelectedSelectedCity(value.toLowerCase());
+    setSelectedCity(value.toLowerCase());
     setCheckAllPOI({});
     setIndeterminatePOI({});
     setCheckedListPOI({});
@@ -372,9 +375,18 @@ function SideBar({
     window.location.href = dropboxLink;
   };
 
-  // console.log(markersInsidePolygon);
+  /* ------ Download The Data -------- */
+
+  const handleDownload = () => {
+    setIsCategoryModalOpen(true);
+  };
+
+  const handleCancelCategoryModal = () => {
+    setIsCategoryModalOpen(false);
+  };
 
   /* ----------Polygon Create----------- */
+
   const handleDownloadMarkersInsidePolygon = () => {
     if (userData.tier !== "free") {
       if (markersInsidePolygon.length > 0) {
@@ -406,8 +418,31 @@ function SideBar({
     setSelectedCountry("");
     setSelectedState("");
     setSelectedDistrict("");
-    selectedRoadTypes("");
+    setSelectedCity("");
+    setAirportData([]);
+    setCheckAirports(false);
+    setCheckAllAirport(false);
+    setRailData([]);
+    setCheckRails(false);
+    setCheckAllRail(false);
+    setRoadData([]);
+    setCheckRoads(false);
+    setCheckAllRoad(false);
+    setBuildingData([]);
+    setCheckBuildings(false);
+    setCheckAllBuilding(false);
+    setHomesSelected(false);
+    setCheckedListPOI({});
+    setIndeterminatePOI({});
     setCheckAllPOI({});
+    onSelectedCountry("");
+    onSelectedState("");
+    onSelectedDistrict("");
+    onPoiTypesChange("");
+    onRailTypeChange("");
+    selectedRoadTypes("");
+    onBuildingTypeChange("");
+    homeSelected("");
   };
 
   /* ------------Map Switch Layer ------------ */
@@ -451,20 +486,26 @@ function SideBar({
   /* ------ Get State Data ------ */
 
   const [stateList, setStateList] = useState([]);
+
   const getStates = async () => {
     const res = await axios.get(
       "https://webgis1.nic.in/publishing/rest/services/bharatmapsnew/admin2023/MapServer/0/query?token=&f=json&orderByFields=STNAME&outFields=STNAME%2CState_LGD&returnGeometry=false&spatialRel=esriSpatialRelIntersects&where=1%3D1"
     );
+
     setStateList(res.data.features);
   };
+
   useEffect(() => {
     getStates();
   }, [selectedCountry]);
+
   const handleCheckboxChange = (e) => {
     setHomesSelected(e.target.checked);
     homeSelected(e.target.checked);
   };
+
   // console.log(userData);
+
   return (
     <>
       <Sider
@@ -507,8 +548,11 @@ function SideBar({
                   style={{ width: 160 }}
                   onChange={(value) => handleCountryChange(value)}
                 >
-                  <option key="select-state" value="india">
+                  <option key="india" value="india">
                     India
+                  </option>
+                  <option key="pakistan" value="pakistan">
+                    Pakistan
                   </option>
                 </Select>
               </div>
@@ -526,12 +570,13 @@ function SideBar({
                   disabled={selectedCountry?.length < 1}
                 >
                   {stateList?.map((item) => {
+                    const stateName = item.attributes.stname;
+                    const formattedStateName =
+                      stateName.charAt(0).toUpperCase() +
+                      stateName.slice(1).toLowerCase();
                     return (
-                      <option
-                        key={item.attributes.stname}
-                        value={item.attributes.stname}
-                      >
-                        {item.attributes.stname}
+                      <option key={stateName} value={stateName}>
+                        {formattedStateName}
                       </option>
                     );
                   })}
@@ -646,8 +691,9 @@ function SideBar({
               )}
             </SubMenu>
           )}
-          {selectedCity.length > 0 && (
+          {/* {selectedCity.length > 0 && (
             <SubMenu
+              disabled
               key="building"
               title={
                 <SelectAllCheckbox
@@ -666,12 +712,11 @@ function SideBar({
                 onChange={onChangeBuilding}
               />
             </SubMenu>
-          )}
+          )} */}
           {selectedCity.length > 0 && (
             <SubMenu
               key="house number"
               className="no-arrow"
-              disabled
               title={
                 <Checkbox
                   onChange={handleCheckboxChange}
@@ -720,14 +765,16 @@ function SideBar({
             >
               Reset
             </Button>
-            <Button
-              type="primary"
-              className="bg-blue-700"
-              onClick={handleDownloadMarkersInsidePolygon}
-            >
-              {userData?.tier !== "free" ? "Download" : "Subscribe"}
-            </Button>
-            {/* Conditionally render the "Download Boundary" button based on the user's login status */}
+            {markersInsidePolygon.length > 0 && (
+              <Button
+                type="primary"
+                className="bg-blue-700"
+                onClick={handleDownload}
+              >
+                {userData?.tier !== "free" ? "Download" : "Subscribe"}
+              </Button>
+            )}
+
             {loggedIn && (
               <div className="text-center mt-2">
                 <Button
@@ -754,6 +801,13 @@ function SideBar({
       >
         <Subscription />
       </Modal>
+
+      <TableData
+        dataMarker={markersInsidePolygon}
+        modalOpen={isCategoryModalOpen}
+        modalClose={handleCancelCategoryModal}
+        downloadModal={handleDownloadMarkersInsidePolygon}
+      />
     </>
   );
 }

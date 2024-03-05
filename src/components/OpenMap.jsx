@@ -246,7 +246,7 @@ function OpenMap({
 
   /* -------- Airport Data ------- */
   const filteredAirports = airportData?.features.filter((airport) =>
-    selectedAirportTypes.some((type) =>
+    selectedAirportTypes?.some((type) =>
       airport.properties["Airport Type"].includes(type)
     )
   );
@@ -278,8 +278,6 @@ function OpenMap({
     return false;
   });
 
-  // console.log(filteredPOI);
-
   /* ------- Stored Filter Data in totalData ------- */
 
   useEffect(() => {
@@ -291,7 +289,7 @@ function OpenMap({
       if (selectedRailTypes.length > 0) {
         newData = [...newData, ...filteredPlatform];
       }
-      if (buildingTypes.length > 0) {
+      if (homeSelected === true) {
         newData = [...newData, ...filteredHouseNum];
       }
       if (selectedPoiTypes.length > 0) {
@@ -302,8 +300,7 @@ function OpenMap({
       setMarkersInsidePolygon(newData);
     };
     getData();
-  }, [selectedAirportTypes, selectedPoiTypes, selectedRailTypes]);
-
+  }, [selectedAirportTypes, selectedPoiTypes, selectedRailTypes, homeSelected]);
 
   /* ---------- Custom Marker Style ------------ */
 
@@ -358,6 +355,12 @@ function OpenMap({
     popupAnchor: [0, -10],
   });
 
+  const platformIcon = new L.Icon({
+    iconUrl: "images/railway_platform.webp",
+    iconSize: [32, 32],
+    popupAnchor: [0, -10],
+  });
+
   const poiIcon = new L.Icon({
     iconUrl: "images/markers.png",
     iconSize: [32, 32],
@@ -390,13 +393,13 @@ function OpenMap({
 
   const onPolygonCreate = (event) => {
     const { layer } = event;
-      setSelectedPolygonLayer(layer);
-    }
-    const onFeatureGroupReady = reactFGref => {
-      // store the featureGroup ref for future access to content
-      setSelectedPolygonLayer(reactFGref);
+    setSelectedPolygonLayer(layer);
   };
-  console.log(homeSelected)
+  const onFeatureGroupReady = (reactFGref) => {
+    // store the featureGroup ref for future access to content
+    setSelectedPolygonLayer(reactFGref);
+  };
+
   /* ------------------------------------------- */
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
@@ -455,7 +458,7 @@ function OpenMap({
           <MarkerClusterGroup disableClusteringAtZoom={18}>
             {houseNumber?.features?.map((houseNumber, index) => (
               <CustomMarker
-                key={houseNumber+index}
+                key={houseNumber + index}
                 position={[
                   houseNumber.geometry.coordinates[1],
                   houseNumber.geometry.coordinates[0],
@@ -505,7 +508,7 @@ function OpenMap({
             {railPlatformData?.features?.map((airport, index) => (
               <Marker
                 key={index}
-                icon={airportIcon}
+                icon={platformIcon}
                 position={[
                   airport.geometry.coordinates[1],
                   airport.geometry.coordinates[0],
@@ -545,8 +548,8 @@ function OpenMap({
             ))}
           </MarkerClusterGroup>
         )}
-        
-        <FeatureGroup key={centerPosition+1}>
+
+        <FeatureGroup key={centerPosition + 1}>
           <EditControl
             position="topleft"
             draw={{
@@ -557,13 +560,13 @@ function OpenMap({
               circlemarker: false,
               marker: false,
             }}
-            ref={featureGroupRef => {
+            ref={(featureGroupRef) => {
               onFeatureGroupReady(featureGroupRef);
-          }}            
-          onCreated={onPolygonCreate}
+            }}
+            onCreated={onPolygonCreate}
           />
         </FeatureGroup>
-       
+
         {isMapLayerVisible && (
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
