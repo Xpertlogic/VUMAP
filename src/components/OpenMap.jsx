@@ -299,6 +299,7 @@ function OpenMap({
       }
 
       setTotalData(newData);
+      setMarkersInsidePolygon(newData);
     };
     getData();
   }, [selectedAirportTypes, selectedPoiTypes, selectedRailTypes]);
