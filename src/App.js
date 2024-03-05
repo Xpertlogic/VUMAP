@@ -29,7 +29,7 @@ function App() {
   //--> For Map Switch
   const [isMapLayerVisible, setIsMapLayerVisible] = useState(true);
   const [homeSelected, setHomeSelected] = useState(false);
-
+  console.log(markersInsidePolygon)
   /* ------------------------------------------ */
 
   // const { loggedIn } = useContext(LoginContext);

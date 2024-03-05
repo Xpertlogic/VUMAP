@@ -6,6 +6,7 @@ import {
   FeatureGroup,
   GeoJSON,
   Marker,
+  Polygon,
   Popup,
 } from "react-leaflet";
 import L from "leaflet";
@@ -302,54 +303,6 @@ function OpenMap({
     getData();
   }, [selectedAirportTypes, selectedPoiTypes, selectedRailTypes]);
 
-  console.log("Total Data", totalData);
-
-  /* ----- Created Polygon Draw ---- */
-
-  const handleDrawCreated = async (event) => {
-    const filteredMarkers = [];
-    setMarkersInsidePolygon([]); //Reset markers inside polygon when new polygon is draw
-
-    const { layer } = event;
-    const bounds = layer.getBounds();
-
-    setSelectedPolygonLayer(layer.toGeoJSON());
-
-    totalData.forEach((marker) => {
-      const coordinates = L.latLng(
-        marker.geometry.coordinates[1],
-        marker.geometry.coordinates[0]
-      );
-
-      if (bounds.contains(coordinates)) {
-        filteredMarkers.push(marker);
-      }
-    });
-
-    setMarkersInsidePolygon(filteredMarkers);
-  };
-
-  // useEffect(() => {
-  //   if (selectedPolygonLayer) {
-  //     const bounds = selectedPolygonLayer.getBounds();
-  //     const filteredMarkers = markersInsidePolygon.filter((marker) => {
-  //       const coordinates = L.latlng(
-  //         marker.geometry.coordinates[1],
-  //         marker.geometry.coordinates[0]
-  //       );
-
-  //       return bounds.contains(coordinates);
-  //     });
-
-  //     console.log(filteredMarkers, "filtered markers");
-
-  //     setMarkersInsidePolygon(filteredMarkers);
-  //   }
-  // }, [selectedPolygonLayer, setMarkersInsidePolygon]);
-
-  // const filteredPois = poiData?.features?.filter((poi) =>
-  //   selectedPoiTypes.includes(poi.properties.SubCategory)
-  // );
 
   /* ---------- Custom Marker Style ------------ */
 
@@ -418,8 +371,31 @@ function OpenMap({
     fillOpacity: 0.8,
     pmIgnore: true,
   };
+  const [editableFG, setEditableFG] = useState(null);
 
-  // console.log(filteredPOI);
+  useEffect(() => {
+    if (selectedPolygonLayer) {
+      const bounds = selectedPolygonLayer.getBounds();
+      const filteredMarkers = totalData.filter((marker) => {
+        const coordinates = L.latLng(
+          marker.geometry.coordinates[1],
+          marker.geometry.coordinates[0]
+        );
+        return bounds.contains(coordinates);
+      });
+      setMarkersInsidePolygon(filteredMarkers);
+    }
+  }, [selectedPolygonLayer, totalData, editableFG]);
+
+  const onPolygonCreate = (event) => {
+    const { layer } = event;
+      setSelectedPolygonLayer(layer);
+    }
+    const onFeatureGroupReady = reactFGref => {
+      // store the featureGroup ref for future access to content
+      setSelectedPolygonLayer(reactFGref);
+  };
+  console.log(homeSelected)
   /* ------------------------------------------- */
   return (
     <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
@@ -478,7 +454,7 @@ function OpenMap({
           <MarkerClusterGroup disableClusteringAtZoom={18}>
             {houseNumber?.features?.map((houseNumber, index) => (
               <CustomMarker
-                key={houseNumber}
+                key={houseNumber+index}
                 position={[
                   houseNumber.geometry.coordinates[1],
                   houseNumber.geometry.coordinates[0],
@@ -568,7 +544,8 @@ function OpenMap({
             ))}
           </MarkerClusterGroup>
         )}
-        <FeatureGroup ref={featureGroupRef}>
+        
+        <FeatureGroup key={centerPosition+1}>
           <EditControl
             position="topleft"
             draw={{
@@ -579,9 +556,13 @@ function OpenMap({
               circlemarker: false,
               marker: false,
             }}
-            onCreated={handleDrawCreated}
+            ref={featureGroupRef => {
+              onFeatureGroupReady(featureGroupRef);
+          }}            
+          onCreated={onPolygonCreate}
           />
         </FeatureGroup>
+       
         {isMapLayerVisible && (
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
