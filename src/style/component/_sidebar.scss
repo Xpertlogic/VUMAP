@@ -1,0 +1,42 @@
+/* --------- Slider Box - Left Section -------- */
+
+.side-bar::-webkit-scrollbar {
+    width: 0;
+}
+
+.side-bar {
+    scrollbar-width: none;
+}
+
+.select-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+}
+
+
+/* ----- Sidebar CheckBox Group ----- */
+
+.allCheckBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.ant-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ant-menu-submenu-title,
+.ant-menu-item,
+.ant-menu-submenu-title {
+    padding: 5px 15px !important;
+}
+
+.ant-checkbox-group-item {
+    padding: 5px 30px !important;
+}

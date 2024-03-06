@@ -1,0 +1,29 @@
+.contact-section {
+    padding: 0 50px;
+
+    h1 {
+        text-align: center;
+        margin: 1rem 0 3rem;
+
+        font: {
+            size: 5rem;
+            weight: 900;
+        }
+    }
+
+    .contact-header {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 4rem;
+        line-height: 2;
+    }
+
+    .contact-form {
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+}

@@ -541,7 +541,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1rem]">Country: </label>
+                <label className="text-[1.6rem]">Country: </label>
               </div>
               <div>
                 <Select
@@ -561,7 +561,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1rem]">States: </label>
+                <label className=" text-[1.6rem]">States: </label>
               </div>
               <div>
                 <Select
@@ -587,7 +587,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1rem]">District:</label>{" "}
+                <label className=" text-[1.6rem]">District:</label>{" "}
               </div>
               <div>
                 <Select
@@ -611,7 +611,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1rem]">City:</label>{" "}
+                <label className=" text-[1.6rem]">City:</label>{" "}
               </div>
               <div>
                 <Select
@@ -630,7 +630,7 @@ function SideBar({
             </div>
           </Form.Item>
           {selectedCountry.length > 0 && (
-            <SubMenu key="sub11" title="Transports" className="text-[1rem]">
+            <SubMenu key="sub11" title="Transports" className="text-[1.6rem]">
               <SubMenu
                 key="airports"
                 title={
@@ -703,7 +703,7 @@ function SideBar({
                   onCheckAllChange={onCheckAllBuilding}
                 />
               }
-              className="text-[1rem]"
+              className="text-[1.6rem]"
             >
               <CheckboxGroup
                 className="allCheckBox"
@@ -721,7 +721,7 @@ function SideBar({
                 <Checkbox
                   onChange={handleCheckboxChange}
                   checked={homesSelected}
-                  className="text-[1rem]"
+                  className="text-[1.6rem]"
                 >
                   House Number
                 </Checkbox>

@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from "react";
-import "../style/subscription.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
@@ -10,21 +9,25 @@ import { SubscribeContext } from "../context/SubscribeContext";
 function Subscription() {
   // const [paymentSuccess,setPaymentSuccess] = useState(false)
   const [Razorpay, isLoaded] = useRazorpay();
-  const {
-    userData,
-    storedToken,
-    // subscriptionState, setSubscriptionState
-  } = useContext(LoginContext);
+  const { userData, storedToken } = useContext(LoginContext);
 
   const { subscriptionState, setSubscriptionState } =
     useContext(SubscribeContext);
 
-  const PricingCard = ({ title, price, features, isActive, plan }) => {
-    const handlePayment = async (plan, price) => {
-      // const accessToken = localStorage.getItem("token");
-      // console.log(accessToken);
-      // console.log(storedToken);
+  const handleCustomAction = () => {
+    console.log("contact click");
+  };
 
+  const PricingCard = ({
+    title,
+    price,
+    features,
+    isActive,
+    plan,
+    buttonText,
+    buttonAction,
+  }) => {
+    const handlePayment = async (plan, price) => {
       const amount =
         parseFloat(
           price
@@ -110,9 +113,15 @@ function Subscription() {
             </li>
           ))}
         </ul>
-        <button onClick={handleSubscribe} className="subscribe-link">
-          Subscribe
-        </button>
+        {buttonText && buttonAction ? (
+          <button onClick={buttonAction} className="custom-button">
+            {buttonText}
+          </button>
+        ) : (
+          <button onClick={handleSubscribe} className="subscribe-link">
+            Subscribe
+          </button>
+        )}
         <Link to="/" className="terms-link">
           Terms & Conditions
         </Link>
@@ -132,25 +141,37 @@ function Subscription() {
       ) : (
         <div className="wrapper">
           <PricingCard
-            title="Premium Plan"
-            price="₹299 /3 Months"
+            title="Basic Plan"
+            price="₹299/ Month"
             features={[
-              "Unlimited boundary downloads",
-              "Download limit: Users can download up to 1000 POIs (Points of Interest)",
-              "Access to limited features for the duration of the subscription",
+              "All data will visible and user can analyze",
+              "Unlimited admin Boundary Downloads (up to postal label)",
+              "User can Download 1000 POIs",
             ]}
             isActive={false}
           />
           <PricingCard
-            title="Premium Plus Plan"
-            price="₹999 /12 Months"
+            title="Business Plan"
+            price="₹2999 /1 Year"
             features={[
-              "Unlimited boundary downloads",
-              "Download limit: Users can download up to 3000 POIs (Points of Interest)",
-              "House number feature: Exclusive access for Premium Plus members",
-              "Access to more limited features compared to the Premium Plan",
+              "All data will visible and user can analyze",
+              "Unlimited admin Boundary Downloads(up to Village label)",
+              "User can Download 1000 POIs",
+              "House Numbers and Roads signs are Exclusive access for Business Plans.",
+              "Dedicated Support team.",
             ]}
             isActive={true}
+          />
+          <PricingCard
+            title="Enterprise Custom"
+            price="₹Custom"
+            features={[
+              "For More Data sets contact our team.",
+              "Road line, Rail line, Buildings or any other GIS data sets please, Contact our team.",
+            ]}
+            isActive={false}
+            buttonText="Contact Us"
+            buttonAction={handleCustomAction}
           />
         </div>
       )}
