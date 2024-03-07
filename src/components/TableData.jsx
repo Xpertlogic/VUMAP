@@ -16,23 +16,23 @@ const columns = [
 ];
 
 function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
-  const [btnVisiable, setBtnVisiable] = useState(false);
+  const [btnVisiable, setBtnVisiable] = useState(true);
   const { userData } = useContext(LoginContext);
 
   /* ----- Category Download Data According to The Plan ----- */
 
   useEffect(() => {
+    console.log(userData)
     if (userData && userData.tier) {
       const exceedsLimit = dataMarker.some((item) => {
         const { Category, count } = item.properties;
-        return handelCategoryDownload(Category, count);
+        return handelCategoryDownload(Category, count) > count; // Check if count exceeds limit
       });
-      console.log(exceedsLimit);
-      setBtnVisiable(exceedsLimit);
+      setBtnVisiable(!exceedsLimit); // Set button visibility based on whether any count exceeds limit
     }
   }, [dataMarker, userData]);
 
-  //   console.log(btnVisiable);
+  console.log(btnVisiable);
 
   const handelCategoryDownload = (name, count) => {
     if (userData.tier === "tier1") {
@@ -217,7 +217,7 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
       data: handelCategoryDownload(name, count),
     })
   );
-
+  const containsText = formattedData.some(item => typeof item.data === 'string' && item.data.includes("You can't download"));
   return (
     <div>
       {/* Category Modal  */}
@@ -227,19 +227,22 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
         style={{ margin: 10, padding: 0 }}
         centered
         width={"50%"}
-        footer={[
+        footer={
+          <>
           <Button key="back" onClick={modalClose}>
             Cancel
-          </Button>,
+          </Button>
+          
           <Button
             className="bg-green-600"
             key="submit"
             type="primary"
+            disabled={containsText}
             onClick={downloadModal}
           >
             Confirm
-          </Button>,
-        ]}
+          </Button>
+        </>}
       >
         <Table
           columns={columns}
