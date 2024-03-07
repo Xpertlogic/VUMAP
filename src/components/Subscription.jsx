@@ -203,10 +203,7 @@ function Subscription() {
     rzpay.open();
   };
 
-  const handleSubscribe = (plan, price) => {
-    handlePayment(plan, price);
-    setPaymentPlan(plan)
-  };
+ 
 
   return (
     <section>
