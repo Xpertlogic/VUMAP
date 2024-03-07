@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from "react";
-import "../style/subscription.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
@@ -10,17 +9,99 @@ import { SubscribeContext } from "../context/SubscribeContext";
 function Subscription() {
   // const [paymentSuccess,setPaymentSuccess] = useState(false)
   const [Razorpay, isLoaded] = useRazorpay();
-  const [paymentPlan, setPaymentPlan] = useState('');
-  const {
-    userData,
-    storedToken,
-    // subscriptionState, setSubscriptionState
-  } = useContext(LoginContext);
+  const { userData, storedToken } = useContext(LoginContext);
 
   const { subscriptionState, setSubscriptionState } =
     useContext(SubscribeContext);
 
-  const PricingCard = ({ title, price, features, isActive, plan }) => {
+  const handleCustomAction = () => {
+    console.log("contact click");
+  };
+
+  const PricingCard = ({
+    title,
+    price,
+    features,
+    isActive,
+    plan,
+    buttonText,
+    buttonAction,
+  }) => {
+    const handlePayment = async (plan, price) => {
+      const amount =
+        parseFloat(
+          price
+            .replace("₹", "")
+            .replace(",", "")
+            .replace(" /3 Months", "")
+            .replace(" /12 Months", "")
+        ) * 100; // Convert price to integer amount in paise
+
+      const options = {
+        key: "rzp_test_idc2jcfNoLW3KG",
+        amount: amount,
+        currency: "INR",
+        name: "Acme Corp",
+        description: `Subscription for ${
+          plan === "premium" ? "Premium" : "Premium Plus"
+        } Plan`,
+        image: "",
+        handler: async (razorpayResponse) => {
+          console.log(razorpayResponse);
+          if (razorpayResponse.razorpay_payment_id) {
+            try {
+              const Payload = {
+                email: userData.email,
+                tier: plan === "premium" ? "tier1" : "tier2", // Update tier based on plan
+                paymentid: razorpayResponse.razorpay_payment_id,
+                token: storedToken,
+              };
+
+              const headers = {
+                Token: storedToken,
+                "Content-Type": "application/json",
+              };
+
+              const response = await axios.post(
+                "http://54.252.180.142:8080/api/user/payments",
+                Payload,
+                { headers: headers }
+              );
+              // setPaymentSuccess(true);
+              setSubscriptionState({
+                ...subscriptionState,
+                paymentSuccess: true,
+                selectedPlan: plan,
+              });
+              console.log("Payment recorded successfully!");
+            } catch (error) {
+              console.error("Error recording payment:", error);
+            }
+          } else {
+            console.log("somthing went wrong in payments");
+          }
+        },
+        prefill: {
+          name: userData.username,
+          email: userData.email,
+          contact: userData.phone,
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzpay = new Razorpay(options);
+      rzpay.open();
+    };
+
+    const handleSubscribe = () => {
+      handlePayment(plan, price);
+    };
+
     return (
       <div className={`card ${isActive ? "active" : ""}`}>
         <h3>{title}</h3>
@@ -32,9 +113,15 @@ function Subscription() {
             </li>
           ))}
         </ul>
-        <button onClick={() => handleSubscribe(plan, price)} className="subscribe-link">
-          Subscribe
-        </button>
+        {buttonText && buttonAction ? (
+          <button onClick={buttonAction} className="custom-button">
+            {buttonText}
+          </button>
+        ) : (
+          <button onClick={handleSubscribe} className="subscribe-link">
+            Subscribe
+          </button>
+        )}
         <Link to="/" className="terms-link">
           Terms & Conditions
         </Link>
@@ -133,27 +220,37 @@ function Subscription() {
       ) : (
         <div className="wrapper">
           <PricingCard
-            title="Premium Plan"
-            plan="tier1"
-            price="₹299 /3 Months"
+            title="Basic Plan"
+            price="₹299/ Month"
             features={[
-              "Unlimited boundary downloads",
-              "Download limit: Users can download up to 1000 POIs (Points of Interest)",
-              "Access to limited features for the duration of the subscription",
+              "All data will visible and user can analyze",
+              "Unlimited admin Boundary Downloads (up to postal label)",
+              "User can Download 1000 POIs",
             ]}
             isActive={false}
           />
           <PricingCard
-            title="Premium Plus Plan"
-            price="₹999 /12 Months"
-            plan="tier2"
+            title="Business Plan"
+            price="₹2999 /1 Year"
             features={[
-              "Unlimited boundary downloads",
-              "Download limit: Users can download up to 3000 POIs (Points of Interest)",
-              "House number feature: Exclusive access for Premium Plus members",
-              "Access to more limited features compared to the Premium Plan",
+              "All data will visible and user can analyze",
+              "Unlimited admin Boundary Downloads(up to Village label)",
+              "User can Download 1000 POIs",
+              "House Numbers and Roads signs are Exclusive access for Business Plans.",
+              "Dedicated Support team.",
             ]}
             isActive={true}
+          />
+          <PricingCard
+            title="Enterprise Custom"
+            price="₹Custom"
+            features={[
+              "For More Data sets contact our team.",
+              "Road line, Rail line, Buildings or any other GIS data sets please, Contact our team.",
+            ]}
+            isActive={false}
+            buttonText="Contact Us"
+            buttonAction={handleCustomAction}
           />
         </div>
       )}

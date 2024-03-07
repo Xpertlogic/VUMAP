@@ -6,17 +6,14 @@ import {
   FeatureGroup,
   GeoJSON,
   Marker,
-  Polygon,
   Popup,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
-import "../style/style.css";
 import { EditControl } from "react-leaflet-draw";
 import axios from "axios";
 import JSZip from "jszip";
-import { HomeTwoTone } from "@ant-design/icons";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 function OpenMap({

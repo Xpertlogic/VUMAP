@@ -1,18 +1,114 @@
+import "../style/style.scss";
+
 function AboutUs() {
   return (
-    <section style={{ padding: "0 50px" }}>
-      <h1 className="text-3xl">About us</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit eius
-        perspiciatis quod quisquam rem a autem maxime, aliquam repudiandae,
-        adipisci enim alias magni praesentium quae tempore asperiores voluptates
-        labore. Maiores! Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Ratione qui magnam nisi deserunt, unde earum similique a voluptas
-        corrupti quas ipsam praesentium odit dicta consequatur aliquam? Sed
-        voluptas, excepturi modi, dolorem vero possimus similique ipsum ab
-        quasi, repellendus nihil numquam. Sint at nam doloremque error dolorum,
-        delectus ipsum deserunt facere?
-      </p>
+    <section className="about-section">
+      <h1>About Us</h1>
+      <div className="about-box">
+        <div className="left-box">
+          <div className="about-heading">
+            <h2># ABOUT GIS MAPS LAYERS </h2>
+            <p>
+              <strong>GIS MAPS LAYERS</strong> are composed of various layers of
+              spatial data that provide information about geographic features,
+              locations, and attributes. Each layer in a GIS map represents a
+              specific type of data, such as roads, POI, House Number,
+              Buildings, etc. It helps you create customized Geo Enabled
+              Platforms/Applications.
+              <p>Easily users can download and use it for their product.</p>
+            </p>
+          </div>
+          <div className="about-feature">
+            <h3>Features</h3>
+            <ol>
+              <li>
+                <p>
+                  1- Latest and correct leads with all information (Websites,
+                  Contact number and etc.)
+                </p>
+              </li>
+              <li>
+                <p>2- Visualize all layers</p>
+              </li>
+              <li>
+                <p>3- Download the latest and correct GIS layers</p>
+              </li>
+              <li>
+                <p>4- Analysis your area</p>
+              </li>
+              <li>
+                <p>5- Route Analysis</p>
+              </li>
+              <li>
+                <p>6- Get Customizes Maps</p>
+              </li>
+            </ol>
+          </div>
+
+          <div className="about-data-sets">
+            <h2># Data Sets :-</h2>
+            <ul>
+              <li>
+                <h3>Administrative Boundaries</h3>
+                <li>
+                  <p>1- Country Boundary</p>
+                </li>
+                <li>
+                  <p>2- State Boundary</p>
+                </li>
+                <li>
+                  <p>3- District Boundary</p>
+                </li>
+                <li>
+                  <p>4- Postal Boundary</p>
+                </li>
+                <li>
+                  <p>5- Locality Boundary</p>
+                </li>
+                <li>
+                  <p>6- Village Boundary</p>
+                </li>
+                <li>
+                  <p>7- Plot label Boundary</p>
+                </li>
+              </li>
+              <li>
+                <h3>Transports</h3>
+                <li>
+                  <p>1- Networks (Roads, Rails, etc.)</p>
+                </li>
+                <li>
+                  <p>
+                    2- Stations (Rail stations, Airports, Toll Gate/Plaza
+                    information, Bridges, Tunnel, etc.)
+                  </p>
+                </li>
+                <li>
+                  <p>3- Road Signs</p>
+                </li>
+              </li>
+
+              <li>
+                <h3>Buildings</h3>
+              </li>
+              <li>
+                <h3>House Number</h3>
+              </li>
+              <li>
+                <h3>POI (All categories’ POIs)</h3>
+              </li>
+            </ul>
+          </div>
+
+          <p className="help-paragraph">We are here to help you.</p>
+        </div>
+
+        <div className="right-box">
+          <figure>
+            <img src="./images/about.webp" alt="about" />
+          </figure>
+        </div>
+      </div>
     </section>
   );
 }

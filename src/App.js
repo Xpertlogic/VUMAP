@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { LoginProvider } from "./context/LoginContext";
 import { SubscribeProvider } from "./context/SubscribeContext";
-import "./style/style.css";
+import "./style/style.scss";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
 import OpenMap from "./components/OpenMap";

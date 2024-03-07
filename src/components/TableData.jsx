@@ -51,50 +51,92 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
           return "For Premium Plus Member Only";
         case "Automotive Dealer":
           return count > 20
-            ? `${count} You can't download  (limit - 20)`
+            ? `${count} You can't download (limit - 20)`
             : count;
         case "Building POI":
-          return count > 30 ? `${count} You can't download` : count;
+          return count > 30
+            ? `${count} You can't download (limit - 30)`
+            : count;
         case "Business Park":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Companies":
-          return count > 25 ? `${count} You can't download` : count;
+          return count > 25
+            ? `${count} You can't download (limit - 25)`
+            : count;
         case "Education":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Entertainment":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Finance":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Golf Course":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Government Office":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Health Care":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Accommodation":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Hotel/Restaurants":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Park and Recreation Area":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Place of Worship":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Public Amenity":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Repair Facility":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Services":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Shopping Centre":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Sports Centre":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Utility":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Zoo":
-          return count > 10 ? `${count} You can't download` : count;
+          return count > 10
+            ? `${count} You can't download (limit - 10)`
+            : count;
         case "Shop":
-          return count > 500 ? `${count} You can't download` : count;
+          return count > 500
+            ? `${count} You can't download (limit - 500)`
+            : count;
         default:
           return false;
       }
