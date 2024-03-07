@@ -1,5 +1,6 @@
 .about-section {
-    padding: 0 50px;
+    margin-bottom: 2rem;
+    overflow: hidden;
 
     h1 {
         text-align: center;
@@ -70,6 +71,7 @@
             }
 
             .help-paragraph {
+
                 font: {
                     size: 2rem;
                     weight: 600;

@@ -2,11 +2,11 @@ import "../style/style.scss";
 
 function AboutUs() {
   return (
-    <section className="about-section">
+    <section className="about-section container">
       <h1>About Us</h1>
       <div className="about-box">
         <div className="left-box">
-          <div className="about-heading">
+          <div className="about-heading slideInUpAnimation">
             <h2># ABOUT GIS MAPS LAYERS </h2>
             <p>
               <strong>GIS MAPS LAYERS</strong> are composed of various layers of
@@ -18,7 +18,7 @@ function AboutUs() {
               <p>Easily users can download and use it for their product.</p>
             </p>
           </div>
-          <div className="about-feature">
+          <div className="about-feature slideInUpAnimation">
             <h3>Features</h3>
             <ol>
               <li>
@@ -45,7 +45,7 @@ function AboutUs() {
             </ol>
           </div>
 
-          <div className="about-data-sets">
+          <div className="about-data-sets slideInUpAnimation">
             <h2># Data Sets :-</h2>
             <ul>
               <li>
@@ -100,10 +100,12 @@ function AboutUs() {
             </ul>
           </div>
 
-          <p className="help-paragraph">We are here to help you.</p>
+          <p className="help-paragraph slideInUpAnimation">
+            We are here to help you.
+          </p>
         </div>
 
-        <div className="right-box">
+        <div className="right-box zoomInAnimation">
           <figure>
             <img src="./images/about.webp" alt="about" />
           </figure>

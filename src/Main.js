@@ -1,7 +1,10 @@
-import { Footer } from "antd/es/layout/layout";
 import HeaderCompo from "./components/HeaderCompo";
+import Footer from "./components/Footer";
+import "./style/style.scss";
 import { Outlet } from "react-router-dom";
 import { LoginProvider } from "./context/LoginContext";
+// import { SubscribeProvider } from "./context/SubscribeContext";
+// import Subscription from "./components/Subscription";
 
 function Main() {
   return (
@@ -10,7 +13,10 @@ function Main() {
         <HeaderCompo />
       </LoginProvider>
       <Outlet />
-      <Footer style={{ textAlign: "center" }}>©2023 Vumtech</Footer>
+      <Footer />
+      {/* <SubscribeProvider>
+        <Subscription />
+      </SubscribeProvider> */}
     </>
   );
 }

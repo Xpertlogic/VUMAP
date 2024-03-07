@@ -2,6 +2,18 @@ html {
     font-size: 10px;
 }
 
+.container {
+    width: 100%;
+    max-width: 1420px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
 // => slideUP
 
 @keyframes slideInUp {
@@ -19,34 +31,61 @@ html {
     animation: slideInUp 1s ease both;
 }
 
+// => zoomIn
 
-/* ----- Customize Loader ----- */
-.loader {
-    width: 60px;
-    aspect-ratio: 2;
-    --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
-    background:
-        var(--_g) 0% 50%,
-        var(--_g) 50% 50%,
-        var(--_g) 100% 50%;
-    background-size: calc(100%/3) 50%;
-    animation: l3 1s infinite linear;
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+        visibility: visible
+    }
+
+    to {
+        ttransform: scale(1);
+    }
 }
 
-@keyframes l3 {
-    20% {
-        background-position: 0% 0%, 50% 50%, 100% 50%
+.zoomInAnimation {
+    animation: zoomIn 1s ease both;
+}
+
+/* ---- Social Media Links ----- */
+
+.social-media-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    .social-icon {
+        font-size: 2.6rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
-    40% {
-        background-position: 0% 100%, 50% 0%, 100% 50%
+    .facebook-icon {
+        color: #6c80ab;
     }
 
-    60% {
-        background-position: 0% 50%, 50% 100%, 100% 0%
+    .instagram-icon {
+        color: #e4405f;
     }
 
-    80% {
-        background-position: 0% 50%, 50% 50%, 100% 100%
+    .linkedin-icon {
+        color: #79a7c0;
     }
+
+    .youtube-icon {
+        color: #ff0000;
+    }
+}
+
+/* ---- Buttons ----- */
+
+.button-item {
+    background-color: #1677ff;
+    font-size: 1.6rem
 }

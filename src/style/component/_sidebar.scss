@@ -6,6 +6,10 @@
 
 .side-bar {
     scrollbar-width: none;
+    padding: 16px 0 !important;
+    background-color: #fff !important;
+    height: 100vh !important;
+    overflow: auto !important;
 }
 
 .select-group {
@@ -35,8 +39,35 @@
 .ant-menu-item,
 .ant-menu-submenu-title {
     padding: 5px 15px !important;
+
 }
+
+.ant-menu-submenu-title,
+.label-sidebar-select,
+.ant-checkbox-group-item,
+.ant-checkbox-wrapper {
+    font-size: 1.8rem;
+}
+
 
 .ant-checkbox-group-item {
     padding: 5px 30px !important;
+
+}
+
+.ant-select-selection-item {
+    font-size: 1.6rem;
+}
+
+/* ---- Sidebar Button Section ---- */
+
+.button-group-box {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0 15px;
+}
+
+.button-boundary-item {
+    text-align: center;
 }

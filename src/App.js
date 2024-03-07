@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { LoginProvider } from "./context/LoginContext";
 import { SubscribeProvider } from "./context/SubscribeContext";
-import "./style/style.scss";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
 import OpenMap from "./components/OpenMap";
@@ -65,7 +64,7 @@ function App() {
   return (
     <LoginProvider>
       <Layout>
-        <Content style={{ padding: "0 50px" }}>
+        <Content className="container">
           <Layout style={{ background: "#fff" }}>
             <Suspense fallback={<div>Loading...</div>}>
               <SubscribeProvider>

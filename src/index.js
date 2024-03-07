@@ -10,18 +10,16 @@ import {
 import App from "./App";
 import Main from "./Main";
 
-// import AboutUs from "./components/AboutUs";
-// import ContactUs from "./components/ContactUs";
-
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const ContactUs = lazy(() => import("./components/ContactUs"));
+const Terms = lazy(() => import("./components/Terms"));
 
 const propRoute = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Main />}>
       <Route path="/" element={<App />} />
       <Route
-        path="/About"
+        path="/about"
         element={
           <Suspense fallback={<div>Loading ....</div>}>
             <AboutUs />
@@ -29,10 +27,18 @@ const propRoute = createBrowserRouter(
         }
       />
       <Route
-        path="/Contact"
+        path="/contact"
         element={
           <Suspense fallback={<div>Loading ....</div>}>
             <ContactUs />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/terms&condition"
+        element={
+          <Suspense fallback={<div>Loading ....</div>}>
+            <Terms />
           </Suspense>
         }
       />

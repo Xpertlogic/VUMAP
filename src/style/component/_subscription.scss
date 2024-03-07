@@ -1,9 +1,9 @@
 header {
     h1 {
         text-align: center;
-        font-size: 2rem;
+        font-size: 3.5rem;
         font-weight: 600;
-        margin: 10px 0;
+        margin: 10px 0 20px;
     }
 }
 
@@ -13,7 +13,7 @@ header {
     color: rgba(0, 0, 0, 0.7);
 
     .card {
-        max-width: 500px;
+        max-width: 450px;
         background-color: #fff;
         padding: 40px;
         margin: 25px 13px;
@@ -22,13 +22,13 @@ header {
             3px 3px 10px -1px rgba(255, 255, 255, 0.7);
 
         h3 {
-            font-size: 1.8rem;
+            font-size: 2.8rem;
             margin-bottom: 10px;
         }
 
         h1 {
             font: {
-                size: 2rem;
+                size: 3rem;
                 weight: 700;
             }
 
@@ -53,6 +53,7 @@ header {
             margin-bottom: 2rem;
 
             li {
+                font-size: 1.6rem;
                 line-height: 2;
                 color: rgba(0, 0, 0, 0.9);
             }
@@ -71,6 +72,7 @@ header {
             font-weight: bold;
             transition: 0.4s;
             margin-bottom: 2rem;
+            font-size: 1.6rem;
 
             &:hover {
                 background-color: #5f30e2;
@@ -126,6 +128,7 @@ header {
             display: block;
             text-align: end;
             font-weight: 600;
+            font-size: 1.5rem;
         }
     }
 }

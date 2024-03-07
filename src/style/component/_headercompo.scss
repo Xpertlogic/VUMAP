@@ -1,0 +1,33 @@
+.nav-layout {
+    background-color: #001529;
+
+
+    .nav {
+        // padding: 0 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-bar {
+        font-size: 1.8rem;
+        line-height: 3;
+    }
+
+    .header-btn-group {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .button-item {
+        background-color: #1677ff;
+        font-size: 1.6rem;
+    }
+
+    .humburgger {
+        display: flex;
+        align-items: center;
+        padding: 4rem 2rem;
+        font-size: 3rem;
+    }
+}

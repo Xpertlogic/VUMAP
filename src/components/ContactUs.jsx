@@ -1,9 +1,17 @@
 import { Form, Input, Button } from "antd";
-import { PhoneTwoTone, MailTwoTone, HomeTwoTone } from "@ant-design/icons";
+import {
+  PhoneTwoTone,
+  MailTwoTone,
+  HomeTwoTone,
+  FacebookFilled,
+  LinkedinFilled,
+  InstagramFilled,
+  YoutubeFilled,
+} from "@ant-design/icons";
 
 function ContactUs() {
   return (
-    <section className="contact-section">
+    <section className="contact-section container">
       <h1>Contact Us</h1>
 
       <div className="contact-header slideInUpAnimation">
@@ -15,9 +23,31 @@ function ContactUs() {
           <MailTwoTone /> Email:-{" "}
           <a href="mailto:example@example.com">example@example.com</a>
         </p>
-        <p>
+        <p className="mb-2">
           <HomeTwoTone /> Address:- Lorem, Lorem, ipsum dolor. 751245
         </p>
+        <div className="social-media-link">
+          <li>
+            <a href="/" target="_blank">
+              <FacebookFilled className="social-icon facebook-icon" />
+            </a>
+          </li>
+          <li>
+            <a href="/" target="_blank">
+              <LinkedinFilled className="social-icon linkedin-icon" />
+            </a>
+          </li>
+          <li>
+            <a href="/" target="_blank">
+              <YoutubeFilled className="social-icon youtube-icon" />
+            </a>
+          </li>
+          <li>
+            <a href="/" target="_blank">
+              <InstagramFilled className="social-icon instagram-icon" />
+            </a>
+          </li>
+        </div>
       </div>
 
       <div className="contact-form slideInUpAnimation">

@@ -7,9 +7,9 @@ import {
   Select,
   Form,
   Checkbox,
-  Button,
   Modal,
   Switch,
+  Button,
 } from "antd";
 import SelectAllCheckbox from "./SelectAllCheckBox";
 import axios from "axios";
@@ -512,15 +512,11 @@ function SideBar({
         width={300}
         className="side-bar"
         style={{
-          padding: "16px 0",
-          background: "#fff",
-          overflow: "auto",
-          height: "100vh",
           pointerEvents: loggedIn ? "auto" : "none",
         }}
       >
         {/* Checkbox for toggling map tile layer visibility */}
-        <div className="flex justify-center mb-[1.5rem]">
+        <div className="flex justify-center mb-[2rem]">
           <Switch
             checked={isMapLayerVisible}
             onChange={handleMapLayerToggle}
@@ -541,7 +537,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className="text-[1.6rem]">Country: </label>
+                <label className="label-sidebar-select">Country: </label>
               </div>
               <div>
                 <Select
@@ -561,7 +557,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1.6rem]">States: </label>
+                <label className="label-sidebar-select">States: </label>
               </div>
               <div>
                 <Select
@@ -587,7 +583,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1.6rem]">District:</label>{" "}
+                <label className="label-sidebar-select">District:</label>{" "}
               </div>
               <div>
                 <Select
@@ -611,7 +607,7 @@ function SideBar({
           <Form.Item>
             <div className="select-group">
               <div>
-                <label className=" text-[1.6rem]">City:</label>{" "}
+                <label className="label-sidebar-select">City:</label>{" "}
               </div>
               <div>
                 <Select
@@ -630,7 +626,7 @@ function SideBar({
             </div>
           </Form.Item>
           {selectedCountry.length > 0 && (
-            <SubMenu key="sub11" title="Transports" className="text-[1.6rem]">
+            <SubMenu key="sub11" title="Transports">
               <SubMenu
                 key="airports"
                 title={
@@ -703,7 +699,7 @@ function SideBar({
                   onCheckAllChange={onCheckAllBuilding}
                 />
               }
-              className="text-[1.6rem]"
+              
             >
               <CheckboxGroup
                 className="allCheckBox"
@@ -721,7 +717,6 @@ function SideBar({
                 <Checkbox
                   onChange={handleCheckboxChange}
                   checked={homesSelected}
-                  className="text-[1.6rem]"
                 >
                   House Number
                 </Checkbox>
@@ -757,34 +752,37 @@ function SideBar({
             </SubMenu>
           )}
 
-          <div className="m-4 text-center">
+          <div className="button-group-box">
             <Button
+              className="button-item"
               type="primary"
-              className="bg-blue-700 mr-4"
+              size="large"
               onClick={handleReset}
             >
               Reset
             </Button>
             {markersInsidePolygon.length > 0 && (
               <Button
+                className="button-item"
                 type="primary"
-                className="bg-blue-700"
+                size="large"
                 onClick={handleDownload}
               >
                 {userData?.tier !== "free" ? "Download" : "Subscribe"}
               </Button>
             )}
+          </div>
 
+          <div className="button-boundary-item">
             {loggedIn && (
-              <div className="text-center mt-2">
-                <Button
-                  type="primary"
-                  className="bg-blue-700"
-                  onClick={handleDownloadBoundary}
-                >
-                  Download Boundary
-                </Button>
-              </div>
+              <Button
+                className="button-item mb-[2rem]"
+                type="primary"
+                size="large"
+                onClick={handleDownloadBoundary}
+              >
+                Download Boundary
+              </Button>
             )}
           </div>
         </Menu>

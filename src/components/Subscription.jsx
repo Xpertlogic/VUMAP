@@ -15,7 +15,7 @@ function Subscription() {
     useContext(SubscribeContext);
 
   const handleCustomAction = () => {
-    console.log("contact click");
+    window.location.href = "/contact"; //contact us page
   };
 
   const PricingCard = ({
@@ -114,7 +114,7 @@ function Subscription() {
           ))}
         </ul>
         {buttonText && buttonAction ? (
-          <button onClick={buttonAction} className="custom-button">
+          <button onClick={buttonAction} className="subscribe-link">
             {buttonText}
           </button>
         ) : (
@@ -170,7 +170,7 @@ function Subscription() {
               "Road line, Rail line, Buildings or any other GIS data sets please, Contact our team.",
             ]}
             isActive={false}
-            buttonText="Contact Us"
+            buttonText="Contact us"
             buttonAction={handleCustomAction}
           />
         </div>
