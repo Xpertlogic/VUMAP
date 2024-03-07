@@ -10,6 +10,7 @@ import { SubscribeContext } from "../context/SubscribeContext";
 function Subscription() {
   // const [paymentSuccess,setPaymentSuccess] = useState(false)
   const [Razorpay, isLoaded] = useRazorpay();
+  const [paymentPlan, setPaymentPlan] = useState('');
   const {
     userData,
     storedToken,
@@ -20,85 +21,6 @@ function Subscription() {
     useContext(SubscribeContext);
 
   const PricingCard = ({ title, price, features, isActive, plan }) => {
-    const handlePayment = async (plan, price) => {
-      // const accessToken = localStorage.getItem("token");
-      // console.log(accessToken);
-      // console.log(storedToken);
-
-      const amount =
-        parseFloat(
-          price
-            .replace("₹", "")
-            .replace(",", "")
-            .replace(" /3 Months", "")
-            .replace(" /12 Months", "")
-        ) * 100; // Convert price to integer amount in paise
-
-      const options = {
-        key: "rzp_test_idc2jcfNoLW3KG",
-        amount: amount,
-        currency: "INR",
-        name: "Acme Corp",
-        description: `Subscription for ${
-          plan === "premium" ? "Premium" : "Premium Plus"
-        } Plan`,
-        image: "",
-        handler: async (razorpayResponse) => {
-          console.log(razorpayResponse);
-          if (razorpayResponse.razorpay_payment_id) {
-            try {
-              const Payload = {
-                email: userData.email,
-                tier: plan === "premium" ? "tier1" : "tier2", // Update tier based on plan
-                paymentid: razorpayResponse.razorpay_payment_id,
-                token: storedToken,
-              };
-
-              const headers = {
-                Token: storedToken,
-                "Content-Type": "application/json",
-              };
-
-              const response = await axios.post(
-                "http://54.252.180.142:8080/api/user/payments",
-                Payload,
-                { headers: headers }
-              );
-              // setPaymentSuccess(true);
-              setSubscriptionState({
-                ...subscriptionState,
-                paymentSuccess: true,
-                selectedPlan: plan,
-              });
-              console.log("Payment recorded successfully!");
-            } catch (error) {
-              console.error("Error recording payment:", error);
-            }
-          } else {
-            console.log("somthing went wrong in payments");
-          }
-        },
-        prefill: {
-          name: userData.username,
-          email: userData.email,
-          contact: userData.phone,
-        },
-        notes: {
-          address: "Razorpay Corporate Office",
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-
-      const rzpay = new Razorpay(options);
-      rzpay.open();
-    };
-
-    const handleSubscribe = () => {
-      handlePayment(plan, price);
-    };
-
     return (
       <div className={`card ${isActive ? "active" : ""}`}>
         <h3>{title}</h3>
@@ -110,7 +32,7 @@ function Subscription() {
             </li>
           ))}
         </ul>
-        <button onClick={handleSubscribe} className="subscribe-link">
+        <button onClick={() => handleSubscribe(plan, price)} className="subscribe-link">
           Subscribe
         </button>
         <Link to="/" className="terms-link">
@@ -118,6 +40,85 @@ function Subscription() {
         </Link>
       </div>
     );
+  };
+  const handlePayment = async (plan, price) => {
+    // const accessToken = localStorage.getItem("token");
+    // console.log(accessToken);
+    // console.log(storedToken);
+    
+    const amount =
+      parseFloat(
+        price
+          .replace("₹", "")
+          .replace(",", "")
+          .replace(" /3 Months", "")
+          .replace(" /12 Months", "")
+      ) * 100; // Convert price to integer amount in paise
+
+    const options = {
+      key: "rzp_test_idc2jcfNoLW3KG",
+      amount: amount,
+      currency: "INR",
+      name: "Acme Corp",
+      description: `Subscription for ${
+        plan === "premium" ? "Premium" : "Premium Plus"
+      } Plan`,
+      image: "",
+      handler: async (razorpayResponse) => {
+        console.log(razorpayResponse);
+        if (razorpayResponse.razorpay_payment_id) {
+          try {
+            const Payload = {
+              email: userData.email,
+              tier: plan, // Update tier based on plan
+              paymentid: razorpayResponse.razorpay_payment_id,
+              token: storedToken,
+            };
+
+            const headers = {
+              Token: storedToken,
+              "Content-Type": "application/json",
+            };
+
+            const response = await axios.post(
+              "http://54.252.180.142:8080/api/user/payments",
+              Payload,
+              { headers: headers }
+            );
+            // setPaymentSuccess(true);
+            setSubscriptionState({
+              ...subscriptionState,
+              paymentSuccess: true,
+              selectedPlan: plan,
+            });
+            console.log("Payment recorded successfully!");
+          } catch (error) {
+            console.error("Error recording payment:", error);
+          }
+        } else {
+          console.log("somthing went wrong in payments");
+        }
+      },
+      prefill: {
+        name: userData.username,
+        email: userData.email,
+        contact: userData.phone,
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const rzpay = new Razorpay(options);
+    rzpay.open();
+  };
+
+  const handleSubscribe = (plan, price) => {
+    handlePayment(plan, price);
+    setPaymentPlan(plan)
   };
 
   return (
@@ -133,6 +134,7 @@ function Subscription() {
         <div className="wrapper">
           <PricingCard
             title="Premium Plan"
+            plan="tier1"
             price="₹299 /3 Months"
             features={[
               "Unlimited boundary downloads",
@@ -144,6 +146,7 @@ function Subscription() {
           <PricingCard
             title="Premium Plus Plan"
             price="₹999 /12 Months"
+            plan="tier2"
             features={[
               "Unlimited boundary downloads",
               "Download limit: Users can download up to 3000 POIs (Points of Interest)",
