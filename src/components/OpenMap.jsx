@@ -54,16 +54,14 @@ function OpenMap({
   const [totalData, setTotalData] = useState([]);
 
   const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
-  const getZipData = async(response, file) => {
+  const getZipData = async (response, file) => {
     const zip = new JSZip();
     const zipFile = await zip.loadAsync(response.data);
     // Assuming your GeoJSON file is named "boundary.geojson" within the ZIP
-    const geojsonStr = await zipFile
-      .file(file)
-      .async("string");
+    const geojsonStr = await zipFile.file(file).async("string");
     const geojsonData = JSON.parse(geojsonStr);
     return geojsonData;
-  }
+  };
   /* ----- Countries ----- */
   useEffect(() => {
     const fetchCountryData = async () => {
@@ -72,7 +70,10 @@ function OpenMap({
           `${baseUrl}/${countryView}/boundary_${countryView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const getBoundaryData = await getZipData(response, `boundary_${countryView}.geojson`);
+        const getBoundaryData = await getZipData(
+          response,
+          `boundary_${countryView}.geojson`
+        );
         const responseAirport = await axios.get(
           `${baseUrl}/${countryView}/Airport.geojson`
         );
@@ -100,9 +101,12 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/boundary_${stateView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const getBoundaryData = await getZipData(response, `boundary_${stateView}.geojson`);
+        const getBoundaryData = await getZipData(
+          response,
+          `boundary_${stateView}.geojson`
+        );
         const statePositionVal =
-        getBoundaryData.features[0].geometry.coordinates[0].flat()[0];
+          getBoundaryData.features[0].geometry.coordinates[0].flat()[0];
 
         setStateData(getBoundaryData);
 
@@ -117,7 +121,10 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/railline_${stateView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const geojsonData = await getZipData(responseRail, `railline_${stateView}.geojson`)
+        const geojsonData = await getZipData(
+          responseRail,
+          `railline_${stateView}.geojson`
+        );
         setRailData(geojsonData);
       } catch (error) {
         console.error("Error fetching rail Data:", error);
@@ -129,7 +136,10 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/railwayplatform_${stateView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const getBoundaryData = await getZipData(responseRailPlatform, `railwayplatform_${stateView}.geojson`);
+        const getBoundaryData = await getZipData(
+          responseRailPlatform,
+          `railwayplatform_${stateView}.geojson`
+        );
 
         setRailPlatformData(getBoundaryData);
       } catch (error) {
@@ -145,7 +155,6 @@ function OpenMap({
       fetchRailPlatformData();
     }
   }, [stateView]);
-  console.log(railPlatformData)
   /* ----- Districts ----- */
 
   useEffect(() => {
@@ -155,9 +164,12 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/${districtView}/boundary_${districtView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const getBoundaryData = await getZipData(response, `boundary_${districtView}.geojson`);
+        const getBoundaryData = await getZipData(
+          response,
+          `boundary_${districtView}.geojson`
+        );
         const districtPositionVal =
-        getBoundaryData.features[0].geometry.coordinates[0].flat()[0];
+          getBoundaryData.features[0].geometry.coordinates[0].flat()[0];
 
         setDistrictData(getBoundaryData);
 
@@ -185,9 +197,12 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/boundary_${cityView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const getBoundaryData = await getZipData(response, `boundary_${cityView}.geojson`);
+        const getBoundaryData = await getZipData(
+          response,
+          `boundary_${cityView}.geojson`
+        );
         const cityPositionVal =
-        getBoundaryData.features[0].geometry.coordinates[0].flat()[0];
+          getBoundaryData.features[0].geometry.coordinates[0].flat()[0];
         setCenterPosition([cityPositionVal[1], cityPositionVal[0]]);
         setCityData(getBoundaryData);
       } catch (error) {
@@ -200,7 +215,10 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/POI_${cityView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const geojsonData = await getZipData(responsePoi, `POI_${cityView}.geojson`);
+        const geojsonData = await getZipData(
+          responsePoi,
+          `POI_${cityView}.geojson`
+        );
 
         setPoiData(geojsonData);
       } catch (error) {
@@ -213,7 +231,10 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/housenumber_${cityView}.zip`,
           { responseType: "arraybuffer" }
         );
-        const getBoundaryData = await getZipData(responsePoi, `housenumber${cityView}.geojson`);
+        const getBoundaryData = await getZipData(
+          responsePoi,
+          `housenumber${cityView}.geojson`
+        );
 
         setHouseNumber(getBoundaryData);
       } catch (error) {
@@ -266,7 +287,6 @@ function OpenMap({
 
     return false;
   });
-  console.log(poiData)
   /* ------- Stored Filter Data in totalData ------- */
 
   useEffect(() => {

@@ -1,0 +1,60 @@
+/* --- For Help Whatsapp Icon --- */
+
+.help-section {
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    bottom: 2%;
+    right: 5%;
+    background-color: #25d366;
+    border-radius: 50%;
+    box-shadow: 2px 2px 3px #6eb66cde;
+    z-index: 99999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.jump {
+        animation: bounceAnimation 0.5s ease alternate;
+    }
+
+    @keyframes bounceAnimation {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        25% {
+            transform: translateY(-15px);
+        }
+
+        50% {
+            transform: translateY(0);
+        }
+
+        75% {
+            transform: translateY(-10px);
+        }
+    }
+
+}
+
+.whatsapp-icon {
+    font-size: 2.8rem;
+    color: #fff;
+}
+
+/* --------- for mobile --------- */
+@media screen and (max-width: 767px) {
+
+
+    .help-section {
+        width: 40px;
+        height: 40px;
+    }
+
+    .whatsapp-icon {
+        font-size: 2.2rem;
+    }
+}

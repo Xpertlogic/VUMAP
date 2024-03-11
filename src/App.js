@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { LoginProvider } from "./context/LoginContext";
 import { SubscribeProvider } from "./context/SubscribeContext";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
@@ -60,58 +59,53 @@ function App() {
   const handleCityChange = (cityItem) => {
     setSelectedCity(cityItem);
   };
-
   return (
-    <LoginProvider>
-      <Layout>
-        <Content className="container">
-          <Layout style={{ background: "#fff" }}>
-            <Suspense fallback={<div>Loading...</div>}>
-              <SubscribeProvider>
-                <SideBar
-                  onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
-                  onSelectedCountry={handleCountryChange}
-                  onSelectedState={handleStateChange}
-                  onSelectedDistrict={handleDistrictChange}
-                  onSelectedCity={handleCityChange}
-                  markersInsidePolygon={markersInsidePolygon}
-                  setMarkersInsidePolygon={setMarkersInsidePolygon}
-                  selectedAirportTypes={selectedAirportTypes}
-                  selectedRoadTypes={(types) => setSelectedRoadTypes(types)}
-                  onBuildingTypeChange={(types) =>
-                    setSelectedBuildingTypes(types)
-                  }
-                  onAirportTypeChange={(types) =>
-                    setSelectedAirportTypes(types)
-                  }
-                  onRailTypeChange={(types) => setSelectedRailTypes(types)}
-                  selectedPoiTypes={selectedPoiTypes}
-                  homeSelected={(value) => setHomeSelected(value)}
-                  onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
-                />
-              </SubscribeProvider>
-            </Suspense>
-            <Content className="overflow-hidden">
-              <OpenMap
-                isMapLayerVisible={isMapLayerVisible}
-                countryView={selectedCountry}
-                stateView={selectedState}
-                districtView={selectedDistrict}
-                cityView={selectedCity}
-                selectedAirportTypes={selectedAirportTypes}
-                selectedRailTypes={selectedRailTypes}
+    <Layout>
+      <Content className="container">
+        <Layout style={{ background: "#fff" }}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SubscribeProvider>
+              <SideBar
+                onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
+                onSelectedCountry={handleCountryChange}
+                onSelectedState={handleStateChange}
+                onSelectedDistrict={handleDistrictChange}
+                onSelectedCity={handleCityChange}
                 markersInsidePolygon={markersInsidePolygon}
                 setMarkersInsidePolygon={setMarkersInsidePolygon}
+                selectedAirportTypes={selectedAirportTypes}
+                selectedRoadTypes={(types) => setSelectedRoadTypes(types)}
+                onBuildingTypeChange={(types) =>
+                  setSelectedBuildingTypes(types)
+                }
+                onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
+                onRailTypeChange={(types) => setSelectedRailTypes(types)}
                 selectedPoiTypes={selectedPoiTypes}
-                selectedRoads={selectedRoadTypes}
-                buildingTypes={selectedBuildingTypes}
-                homeSelected={homeSelected}
+                homeSelected={(value) => setHomeSelected(value)}
+                onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
               />
-            </Content>
-          </Layout>
-        </Content>
-      </Layout>
-    </LoginProvider>
+            </SubscribeProvider>
+          </Suspense>
+          <Content className="overflow-hidden">
+            <OpenMap
+              isMapLayerVisible={isMapLayerVisible}
+              countryView={selectedCountry}
+              stateView={selectedState}
+              districtView={selectedDistrict}
+              cityView={selectedCity}
+              selectedAirportTypes={selectedAirportTypes}
+              selectedRailTypes={selectedRailTypes}
+              markersInsidePolygon={markersInsidePolygon}
+              setMarkersInsidePolygon={setMarkersInsidePolygon}
+              selectedPoiTypes={selectedPoiTypes}
+              selectedRoads={selectedRoadTypes}
+              buildingTypes={selectedBuildingTypes}
+              homeSelected={homeSelected}
+            />
+          </Content>
+        </Layout>
+      </Content>
+    </Layout>
   );
 }
 

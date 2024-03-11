@@ -1,52 +1,31 @@
 import { Form, Input, Button } from "antd";
-import {
-  PhoneTwoTone,
-  MailTwoTone,
-  HomeTwoTone,
-  FacebookFilled,
-  LinkedinFilled,
-  InstagramFilled,
-  YoutubeFilled,
-} from "@ant-design/icons";
+import { PhoneTwoTone, MailTwoTone, HomeTwoTone } from "@ant-design/icons";
+import SocialMedia from "./SocialMedia";
 
 function ContactUs() {
   return (
     <section className="contact-section container">
-      <h1>Contact Us</h1>
+      <h1 className="heading-h1 slideInDownAnimation">Contact Us</h1>
 
       <div className="contact-header slideInUpAnimation">
         <p>
           <PhoneTwoTone />
-          Phone:- <a href="tel:+1234567890">+1 (234) 567-890</a>
+          <span>
+            Phone:- <a href="tel:+1234567890">+1 (234) 567-890</a>
+          </span>
         </p>
         <p>
-          <MailTwoTone /> Email:-{" "}
-          <a href="mailto:example@example.com">example@example.com</a>
+          <MailTwoTone />
+          <span>
+            Email:- <a href="mailto:example@example.com">example@example.com</a>
+          </span>
         </p>
         <p className="mb-2">
-          <HomeTwoTone /> Address:- Lorem, Lorem, ipsum dolor. 751245
+          <HomeTwoTone />
+          <span>Address:- Lorem, Lorem, ipsum dolor. 751245</span>
         </p>
-        <div className="social-media-link">
-          <li>
-            <a href="/" target="_blank">
-              <FacebookFilled className="social-icon facebook-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/" target="_blank">
-              <LinkedinFilled className="social-icon linkedin-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/" target="_blank">
-              <YoutubeFilled className="social-icon youtube-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/" target="_blank">
-              <InstagramFilled className="social-icon instagram-icon" />
-            </a>
-          </li>
+        <div>
+          <SocialMedia />
         </div>
       </div>
 
@@ -106,7 +85,12 @@ function ContactUs() {
             <Input.TextArea rows={5} placeholder="Write a message..." />
           </Form.Item>
 
-          <Button type="primary" htmlType="submit" className="bg-blue-700">
+          <Button
+            type="primary"
+            size="large"
+            htmlType="submit"
+            className="button-item message-btn"
+          >
             Send Message
           </Button>
         </Form>

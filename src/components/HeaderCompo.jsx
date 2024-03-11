@@ -2,10 +2,20 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
-import { Layout, Menu, notification, Button, Modal, Grid, Drawer } from "antd";
+import {
+  Layout,
+  Menu,
+  notification,
+  Button,
+  Modal,
+  Grid,
+  Drawer,
+  Breadcrumb,
+} from "antd";
 import { LoginContext } from "../context/LoginContext";
 import { MenuOutlined } from "@ant-design/icons";
 const { useBreakpoint } = Grid;
+const { Content } = Layout;
 
 function HeaderCompo() {
   /* ------ for User Login ----- */
@@ -72,9 +82,7 @@ function HeaderCompo() {
   /* ---- Path For Breadcrumb Item ---- */
   const location = useLocation();
   const screens = useBreakpoint();
-  // const pathForBreadcrumb = location.pathname.split("/").filter((i) => i);
-
-  console.log(screens);
+  const pathForBreadcrumb = location.pathname.split("/").filter((i) => i);
 
   const menuItems = (
     <Menu
@@ -142,9 +150,7 @@ function HeaderCompo() {
               className="humburgger"
               type="text"
               onClick={() => setDrawerVisible(true)}
-              icon={
-                <MenuOutlined style={{ color: "#fff", fontSize: "2rem" }} />
-              }
+              icon={<MenuOutlined className="menu-icon" />}
             />
             <Drawer
               title="Menu"
@@ -156,27 +162,26 @@ function HeaderCompo() {
             </Drawer>
           </nav>
         )}
-
-        {/* Dynamic breadcrumbs */}
-        {/* <Content style={{ padding: "0 50px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+      </Layout>
+      {/* Dynamic breadcrumbs */}
+      <Layout>
+        <Content className="container pl-5 ">
+          <Breadcrumb style={{ margin: "16px 0" }} className="text-2xl">
             <Breadcrumb.Item>
               <Link to="/">Home</Link>
             </Breadcrumb.Item>
-            
+
             {pathForBreadcrumb.map((breadcrumbItem, index) => (
               <Breadcrumb.Item key={index}>
-                <Link
-                  to={`/${pathForBreadcrumb.slice(0, index + 1).join("/")}`}
-                >
-                  {breadcrumbItem}
+                <Link to={`/${breadcrumbItem.toLowerCase()}`}>
+                  {breadcrumbItem.charAt(0).toUpperCase() +
+                    breadcrumbItem.slice(1).toLowerCase()}
                 </Link>
               </Breadcrumb.Item>
             ))}
           </Breadcrumb>
-        </Content> */}
+        </Content>
       </Layout>
-
       {/* Sign In Modal  */}
       <Modal
         title="Sign In"
@@ -196,6 +201,11 @@ function HeaderCompo() {
           onCancel={hideWelcomeModal}
           centered
           width={"50%"}
+          okButtonProps={{
+            style: {
+              backgroundColor: "#007bff",
+            },
+          }}
         >
           <p className="text-[3rem]">Welcome To Vumap, {userData.username}!</p>
         </Modal>

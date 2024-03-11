@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Form, Input, notification } from "antd";
+import { Link } from "react-router-dom";
+import { Button, Form, Input, notification, Checkbox } from "antd";
 import axios from "axios";
 
 const formItemLayout = {
@@ -279,7 +280,23 @@ function Signup() {
             }),
           ]}
         >
-          <Input.Password />
+          <Input.Password className="mb-5" />
+          <Form.Item
+            name="agree"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject("Please check the agreement"),
+              },
+            ]}
+          >
+            <Checkbox>
+              I agree to the <Link to="/terms&condition">T&C</Link>
+            </Checkbox>
+          </Form.Item>
         </Form.Item>
 
         {showOTPField && (

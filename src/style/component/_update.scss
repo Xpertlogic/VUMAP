@@ -1,0 +1,54 @@
+.update-section {
+    overflow: hidden;
+    margin-right: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
+    h1 {
+        margin-bottom: 1rem;
+        background-color: #b1caed;
+        position: relative;
+        z-index: 9999;
+        padding: 1rem 2rem;
+        color: #07164a;
+
+        font: {
+            size: 3rem;
+            weight: 700;
+        }
+    }
+
+    .update-box {
+        width: 100%;
+        max-width: 500px;
+        height: 500px;
+        padding: 1rem 2rem;
+        line-height: 1.7;
+        animation: scroll 30s linear infinite;
+
+        .update-item {
+            font-size: 1.7rem;
+            font-weight: 500;
+            border-bottom: 1px solid #000;
+            padding: 0 0 1rem;
+            margin-bottom: 1.5rem;
+            white-space: none;
+
+
+            &:last-child {
+                border: none;
+            }
+
+        }
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}

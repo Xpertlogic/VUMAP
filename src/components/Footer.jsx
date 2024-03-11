@@ -1,10 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import {
-  FacebookFilled,
-  LinkedinFilled,
-  InstagramFilled,
-  YoutubeFilled,
-} from "@ant-design/icons";
+import SocialMedia from "./SocialMedia";
 
 const Footer = () => {
   const location = useLocation();
@@ -12,9 +7,10 @@ const Footer = () => {
     <footer>
       <section className="footer-section container">
         <div className="footer-logo">
-          <p>Vumtech</p>
+          <p>GISMAPSLAYERS</p>
         </div>
-        <div className="footer-link">
+
+        <ul className="footer-link">
           <li className={location.pathname === "/" ? "active" : ""}>
             <Link to="/">Home</Link>
           </li>
@@ -29,32 +25,14 @@ const Footer = () => {
           >
             <Link to="/terms&condition">Terms & Condition</Link>
           </li>
-        </div>
-        <div className="social-media-link">
-          <li>
-            <a href="/" target="_blank">
-              <FacebookFilled className="social-icon facebook-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/" target="_blank">
-              <LinkedinFilled className="social-icon linkedin-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/" target="_blank">
-              <YoutubeFilled className="social-icon youtube-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="/" target="_blank">
-              <InstagramFilled className="social-icon instagram-icon" />
-            </a>
-          </li>
+        </ul>
+
+        <div>
+          <SocialMedia />
         </div>
       </section>
       <div className="footer-bottom">
-        <p>&copy; Vumtech 2024</p>
+        <p>&copy; GISMAPSLAYERS 2024</p>
       </div>
     </footer>
   );

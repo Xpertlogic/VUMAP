@@ -14,39 +14,17 @@ li {
     list-style: none;
 }
 
-// => slideUP
+.heading-h1 {
+    text-align: center;
+    margin: 4rem 0;
 
-@keyframes slideInUp {
-    from {
-        transform: translateY(100%);
-        visibility: visible
-    }
-
-    to {
-        transform: translateY(0)
+    font: {
+        size: 5rem;
+        weight: 700;
     }
 }
 
-.slideInUpAnimation {
-    animation: slideInUp 1s ease both;
-}
 
-// => zoomIn
-
-@keyframes zoomIn {
-    from {
-        transform: scale(0);
-        visibility: visible
-    }
-
-    to {
-        ttransform: scale(1);
-    }
-}
-
-.zoomInAnimation {
-    animation: zoomIn 1s ease both;
-}
 
 /* ---- Social Media Links ----- */
 
@@ -88,4 +66,74 @@ li {
 .button-item {
     background-color: #1677ff;
     font-size: 1.6rem
+}
+
+
+
+// => slideUP
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        visibility: visible
+    }
+
+    to {
+        transform: translateY(0)
+    }
+}
+
+.slideInUpAnimation {
+    animation: slideInUp 1s ease both;
+}
+
+// => slideDown
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        visibility: visible
+    }
+
+    to {
+        transform: translateY(0)
+    }
+}
+
+.slideInDownAnimation {
+    animation: slideInDown 1s ease both;
+}
+
+// => slideRightToLeft
+
+@keyframes slideRightToLeft {
+    from {
+        transform: translateX(100%);
+        visibility: visible
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+.slideRightToLeftAnimation {
+    animation: slideRightToLeft 1s ease both;
+}
+
+// => zoomIn
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+        visibility: visible
+    }
+
+    to {
+        ttransform: scale(1);
+    }
+}
+
+.zoomInAnimation {
+    animation: zoomIn 1s ease both;
 }

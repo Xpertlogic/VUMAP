@@ -1,9 +1,13 @@
+import { lazy } from "react";
 import "../style/style.scss";
+import { Suspense } from "react";
+
+const UpdateBox = lazy(() => import("./UpdateBox"));
 
 function AboutUs() {
   return (
     <section className="about-section container">
-      <h1>About Us</h1>
+      <h1 className="heading-h1 slideInDownAnimation">About Us</h1>
       <div className="about-box">
         <div className="left-box">
           <div className="about-heading slideInUpAnimation">
@@ -105,10 +109,10 @@ function AboutUs() {
           </p>
         </div>
 
-        <div className="right-box zoomInAnimation">
-          <figure>
-            <img src="./images/about.webp" alt="about" />
-          </figure>
+        <div className="right-box">
+          <Suspense fallback={<div>Loading...</div>}>
+            <UpdateBox />
+          </Suspense>
         </div>
       </div>
     </section>
