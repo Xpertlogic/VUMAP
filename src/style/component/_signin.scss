@@ -1,0 +1,36 @@
+.ant-modal-content {
+
+
+    .ant-modal-header {
+        margin-bottom: 3rem;
+
+        .ant-modal-title {
+            text-align: center;
+            text-transform: uppercase;
+
+            font: {
+                size: 4rem;
+                weight: 500;
+            }
+
+            ;
+        }
+    }
+
+    .ant-modal-close {
+        display: block;
+    }
+
+    .ant-modal-body {
+
+        .ant-form {
+
+            .ant-form-item-control-input {
+
+                .ant-input-affix-wrapper {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+    }
+}

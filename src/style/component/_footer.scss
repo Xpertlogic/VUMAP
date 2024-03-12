@@ -25,6 +25,11 @@ footer {
 
             li {
                 padding: 5px 3px;
+                transition: color .3s ease;
+
+                &:hover {
+                    color: #fff;
+                }
             }
         }
 
@@ -34,6 +39,7 @@ footer {
     .footer-bottom {
         text-align: center;
         font-size: 1.8rem;
+
     }
 
     .active {

@@ -2,7 +2,6 @@
     overflow: hidden;
 
     .terms-paragraph {
-        color: #595959;
         margin-bottom: 1.5rem;
 
         font: {
@@ -16,11 +15,10 @@
         line-height: 2;
 
         h2 {
-            color: #000000;
 
             font: {
                 size: 2rem;
-                weight: 500;
+                weight: 700;
             }
         }
 
@@ -29,7 +27,6 @@
         }
 
         p {
-            color: #595959;
             font-size: 1.5rem;
         }
     }
@@ -41,11 +38,10 @@
             line-height: 1.8;
 
             span {
-                color: #000000;
 
                 font: {
                     size: 2rem;
-                    weight: 500;
+                    weight: 700;
                 }
             }
 
@@ -56,9 +52,6 @@
                 padding-left: 2rem;
                 font-size: 1.6rem;
 
-                li {
-                    color: #595959;
-                }
             }
         }
     }

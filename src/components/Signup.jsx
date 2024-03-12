@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Form, Input, notification, Checkbox } from "antd";
+import { Button, Form, Input, notification, Checkbox, Modal } from "antd";
 import axios from "axios";
 
 const formItemLayout = {
@@ -99,8 +99,6 @@ function Signup() {
             phone: values.phone,
           }
         );
-
-        console.log("API Response:", registerResponse.data);
 
         notification.success({
           message: "Registration Successful",
@@ -281,22 +279,22 @@ function Signup() {
           ]}
         >
           <Input.Password className="mb-5" />
-          <Form.Item
-            name="agree"
-            valuePropName="checked"
-            rules={[
-              {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject("Please check the agreement"),
-              },
-            ]}
-          >
-            <Checkbox>
-              I agree to the <Link to="/terms&condition">T&C</Link>
-            </Checkbox>
-          </Form.Item>
+        </Form.Item>
+        <Form.Item
+          name="agree"
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) =>
+                value
+                  ? Promise.resolve()
+                  : Promise.reject("Please check the agreement"),
+            },
+          ]}
+        >
+          <Checkbox>
+            I agree to the <Link to="/terms&condition">T&C</Link>
+          </Checkbox>
         </Form.Item>
 
         {showOTPField && (

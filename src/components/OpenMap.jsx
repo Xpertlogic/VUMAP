@@ -156,7 +156,7 @@ function OpenMap({
     }
   }, [stateView]);
   /* ----- Districts ----- */
-
+  // console.log(railPlatformData);
   useEffect(() => {
     const fetchDistrictData = async () => {
       try {

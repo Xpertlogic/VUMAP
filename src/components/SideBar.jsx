@@ -377,6 +377,7 @@ function SideBar({
   };
 
   /* ------ Get Data Limit ----- */
+  const [limitData, setLimitData] = useState([]);
 
   const getLimitData = async () => {
     try {
@@ -391,31 +392,9 @@ function SideBar({
           headers: headers,
         }
       );
-      console.log(response.data);
+      setLimitData(response.data);
     } catch (error) {
       console.error("Error fetching limit data:", error);
-    }
-  };
-
-  /* ------ Update Data Limit ------ */
-
-  const updateLimitData = async () => {
-    try {
-      const headers = {
-        Token: storedToken,
-        "Content-Type": "application/json",
-      };
-
-      const response = await axios.post(
-        "http://54.252.180.142:8080/api/user/updatelimit",
-        {}, // Empty object as the request body
-        {
-          headers: headers,
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error updating limit data:", error);
     }
   };
 
@@ -424,10 +403,6 @@ function SideBar({
   const handleDownload = () => {
     setIsCategoryModalOpen(true);
     getLimitData();
-    setTimeout(() => {
-      setIsCategoryModalOpen(false); // Close the modal after download
-      updateLimitData();
-    }, 5000);
   };
 
   const handleCancelCategoryModal = () => {
@@ -435,7 +410,7 @@ function SideBar({
   };
 
   /* ----------Polygon Create----------- */
-
+  console.log(limitData);
   const handleDownloadMarkersInsidePolygon = () => {
     if (userData.tier !== "free") {
       if (markersInsidePolygon.length > 0) {
@@ -677,6 +652,7 @@ function SideBar({
                   disabled={selectedState?.length < 1}
                 >
                   <option value="">Select District</option>
+                  <option value="Khordha">Khordha</option>
                   {filteredDistricts.map((item, index) => {
                     return (
                       <Select.Option
@@ -703,6 +679,7 @@ function SideBar({
                   disabled={selectedDistrict?.length < 1}
                 >
                   <option value="">Select City</option>
+                  <option value="bhubaneswar">Bhubaneswar</option>
                   {filteredCities.map((item, index) => {
                     return (
                       <Select.Option key={`${item}-${index}`} value={item}>
@@ -894,6 +871,7 @@ function SideBar({
         modalOpen={isCategoryModalOpen}
         modalClose={handleCancelCategoryModal}
         downloadModal={handleDownloadMarkersInsidePolygon}
+        limitData={limitData}
       />
     </>
   );

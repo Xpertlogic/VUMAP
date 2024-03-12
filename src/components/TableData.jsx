@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Table, Button, Modal } from "antd";
 import { LoginContext } from "../context/LoginContext";
+import axios from "axios";
 
 const columns = [
   {
@@ -15,9 +16,15 @@ const columns = [
   },
 ];
 
-function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
+function TableData({
+  dataMarker,
+  modalOpen,
+  modalClose,
+  downloadModal,
+  limitData,
+}) {
   const [btnVisiable, setBtnVisiable] = useState(true);
-  const { userData } = useContext(LoginContext);
+  const { userData, storedToken } = useContext(LoginContext);
 
   /* ----- Category Download Data According to The Plan ----- */
 
@@ -35,11 +42,15 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
     if (userData.tier === "tier1") {
       switch (name) {
         case "Airports":
-          return count > 75 ? `${count} You can't download` : count;
+          return count > limitData.airports
+            ? `${count} You can't download (limit - 20)`
+            : count;
         case "Rail":
           return "Contact Us";
         case "Railway Stations":
-          return count > 100 ? `${count} You can't download` : count;
+          return count > limitData.railwayStations
+            ? `${count} You can't download (limit - 20)`
+            : count;
         case "Roads":
           return "Contact Us";
         case "Buildings":
@@ -47,91 +58,91 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
         case "House Number":
           return "For Premium Plus Member Only";
         case "Automotive Dealer":
-          return count > 20
+          return count > limitData.automotiveDealer
             ? `${count} You can't download (limit - 20)`
             : count;
         case "Building POI":
-          return count > 30
+          return count > limitData.buildingPOI
             ? `${count} You can't download (limit - 30)`
             : count;
         case "Business Park":
-          return count > 10
+          return count > limitData.businessPark
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Companies":
-          return count > 25
+          return count > limitData.companies
             ? `${count} You can't download (limit - 25)`
             : count;
         case "Education":
-          return count > 10
+          return count > limitData.education
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Entertainment":
-          return count > 10
+          return count > limitData.entertainment
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Finance":
-          return count > 10
+          return count > limitData.finance
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Golf Course":
-          return count > 10
+          return count > limitData.golfCourse
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Government Office":
-          return count > 10
+          return count > limitData.governmentOffice
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Health Care":
-          return count > 10
+          return count > limitData.healthCare
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Accommodation":
-          return count > 10
+          return count > limitData.accommodation
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Hotel/Restaurants":
-          return count > 10
+          return count > limitData.hotelRestaurants
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Park and Recreation Area":
-          return count > 10
+          return count > limitData.parkAndRecreationArea
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Place of Worship":
-          return count > 10
+          return count > limitData.placeOfWorship
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Public Amenity":
-          return count > 10
+          return count > limitData.publicAmenity
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Repair Facility":
-          return count > 10
+          return count > limitData.repairFacility
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Services":
-          return count > 10
+          return count > limitData.services
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Shopping Centre":
-          return count > 10
+          return count > limitData.shoppingCentre
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Sports Centre":
-          return count > 10
+          return count > limitData.sportsCentre
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Utility":
-          return count > 10
+          return count > limitData.utility
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Zoo":
-          return count > 10
+          return count > limitData.zoo
             ? `${count} You can't download (limit - 10)`
             : count;
         case "Shop":
-          return count > 500
+          return count > limitData.shop
             ? `${count} You can't download (limit - 500)`
             : count;
         default:
@@ -140,67 +151,118 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
     } else if (userData.tier === "tier2") {
       switch (name) {
         case "Airports":
-          return count > 150 ? `${count} You can't download` : count;
+          return count > limitData.airports
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Rail":
           return "Contact Us";
         case "Railway Stations":
-          return count > 200 ? `${count} You can't download` : count;
+          return count > limitData.railwayStations
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Roads":
           return "Contact Us";
         case "Buildings":
           return "Contact Us";
         case "House Number":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.houseNo
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Automotive Dealer":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.automotiveDealer
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Building POI":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.buildingPOI
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Business Park":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.businessPark
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Companies":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.companies
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Education":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.education
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Entertainment":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.entertainment
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Finance":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.finance
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Golf Course":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.golfCourse
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Government Office":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.governmentOffice
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Health Care":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.healthCare
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Accommodation":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.accommodation
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Hotel/Restaurants":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.hotelRestaurants
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Park and Recreation Area":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.parkAndRecreationArea
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Place of Worship":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.placeOfWorship
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Public Amenity":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.publicAmenity
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Repair Facility":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.repairFacility
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Services":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.services
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Shopping Centre":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.shoppingCentre
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Sports Centre":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.sportsCentre
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Utility":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.utility
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Zoo":
-          return count > 50 ? `${count} You can't download` : count;
+          return count > limitData.zoo
+            ? `${count} You can't download (limit - )`
+            : count;
         case "Shop":
-          return count > 1500 ? `${count} You can't download` : count;
+          return count > limitData.shop
+            ? `${count} You can't download (limit - )`
+            : count;
         default:
           return false;
       }
     }
   };
 
+  /* ------ Update Data Limit ------ */
   const categoryCounts = dataMarker.reduce((acc, item) => {
     const category = item.properties?.Category;
     acc[category] = (acc[category] || 0) + 1;
@@ -214,10 +276,48 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
       data: handelCategoryDownload(name, count),
     })
   );
+
   const containsText = formattedData.some(
     (item) =>
       typeof item.data === "string" && item.data.includes("You can't download")
   );
+
+  const convertedData = {};
+
+  for (const key in categoryCounts) {
+    const lowerCaseKey = key
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join("");
+    convertedData[
+      lowerCaseKey.charAt(0).toLowerCase() + lowerCaseKey.slice(1)
+    ] = categoryCounts[key];
+  }
+
+  const updateLimitData = async () => {
+    try {
+      const headers = {
+        Token: storedToken,
+        "Content-Type": "application/json",
+      };
+
+      const response = await axios.post(
+        "http://54.252.180.142:8080/api/user/updatelimit",
+        convertedData,
+        {
+          headers: headers,
+        }
+      );
+      if (response.status === 200) {
+        downloadModal();
+        modalClose();
+      }
+      //here when response.status === 200 then download the marker in geojson formatted file if not showing error (confirm button) after confirm the tabel modal pop up will close and data of tabel will null
+    } catch (error) {
+      console.error("Error updating limit data:", error);
+    }
+  };
+
   return (
     <div>
       {/* Category Modal  */}
@@ -238,7 +338,7 @@ function TableData({ dataMarker, modalOpen, modalClose, downloadModal }) {
               key="submit"
               type="primary"
               disabled={containsText}
-              onClick={downloadModal}
+              onClick={updateLimitData}
             >
               Confirm
             </Button>

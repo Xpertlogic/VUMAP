@@ -188,6 +188,7 @@ function HeaderCompo() {
         open={isSignInModalOpen}
         onOk={hideSignInModal}
         onCancel={hideSignInModal}
+        centered
         footer={null}
       >
         <Signin onLogin={handleLogin} />

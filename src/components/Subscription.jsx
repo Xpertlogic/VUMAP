@@ -4,15 +4,11 @@ import { Link } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 import useRazorpay from "react-razorpay";
 import { LoginContext } from "../context/LoginContext";
-import { SubscribeContext } from "../context/SubscribeContext";
 
 function Subscription() {
-  // const [paymentSuccess,setPaymentSuccess] = useState(false)
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [Razorpay, isLoaded] = useRazorpay();
   const { userData, storedToken } = useContext(LoginContext);
-
-  const { subscriptionState, setSubscriptionState } =
-    useContext(SubscribeContext);
 
   const handleCustomAction = () => {
     window.location.href = "/contact";
@@ -67,12 +63,12 @@ function Subscription() {
                 Payload,
                 { headers: headers }
               );
-              // setPaymentSuccess(true);
-              setSubscriptionState({
-                ...subscriptionState,
-                paymentSuccess: true,
-                selectedPlan: plan,
-              });
+
+              if (response.status === 200) {
+                setPaymentSuccess(userData.tier !== "free");
+              }
+              //here respone.status === 200 hit the verify token api to store the user data and show the subscription susccess pop up
+
               console.log("Payment recorded successfully!");
             } catch (error) {
               console.error("Error recording payment:", error);
@@ -134,7 +130,8 @@ function Subscription() {
       <header>
         <h1>Subscription Plan</h1>
       </header>
-      {subscriptionState.paymentSuccess ? (
+
+      {paymentSuccess ? (
         <div>
           <h2>Payment successful!</h2>
         </div>

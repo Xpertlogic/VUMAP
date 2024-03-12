@@ -91,17 +91,12 @@ const Signin = ({ onLogin }) => {
         />
       </Form.Item>
 
-      <Form.Item>
-        <Link className="block" to="">
-          Forgot password
-        </Link>
-      </Form.Item>
-
       <Form.Item className="text-center">
         <Button
           type="primary"
+          size="large"
           htmlType="submit"
-          className="bg-blue-700 mr-[5px]"
+          className="button-item"
         >
           Log in
         </Button>
