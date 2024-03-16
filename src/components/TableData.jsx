@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Table, Button, Modal } from "antd";
 import { LoginContext } from "../context/LoginContext";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const columns = [
   {
@@ -42,15 +43,31 @@ function TableData({
     if (userData.tier === "tier1") {
       switch (name) {
         case "Airports":
-          return count > limitData.airports
-            ? `${count} You can't download (limit - 20)`
-            : count;
+          return count > limitData.airports ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 20 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Rail":
           return "Contact Us";
         case "Railway Stations":
-          return count > limitData.railwayStations
-            ? `${count} You can't download (limit - 20)`
-            : count;
+          return count > limitData.railwayStations ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 20 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Roads":
           return "Contact Us";
         case "Buildings":
@@ -58,204 +75,580 @@ function TableData({
         case "House Number":
           return "For Premium Plus Member Only";
         case "Automotive Dealer":
-          return count > limitData.automotiveDealer
-            ? `${count} You can't download (limit - 20)`
-            : count;
+          return count > limitData.automotiveDealer ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 20 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Building POI":
-          return count > limitData.buildingPOI
-            ? `${count} You can't download (limit - 30)`
-            : count;
+          return count > limitData.buildingPOI ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 30 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Business Park":
-          return count > limitData.businessPark
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.businessPark ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Companies":
-          return count > limitData.companies
-            ? `${count} You can't download (limit - 25)`
-            : count;
+          return count > limitData.companies ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Education":
-          return count > limitData.education
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.education ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Entertainment":
-          return count > limitData.entertainment
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.entertainment ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Finance":
-          return count > limitData.finance
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.finance ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Golf Course":
-          return count > limitData.golfCourse
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.golfCourse ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Government Office":
-          return count > limitData.governmentOffice
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.governmentOffice ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Health Care":
-          return count > limitData.healthCare
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.healthCare ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Accommodation":
-          return count > limitData.accommodation
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.accommodation ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Hotel/Restaurants":
-          return count > limitData.hotelRestaurants
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.hotelRestaurants ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Park and Recreation Area":
-          return count > limitData.parkAndRecreationArea
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.parkAndRecreationArea ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Place of Worship":
-          return count > limitData.placeOfWorship
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.placeOfWorship ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Public Amenity":
-          return count > limitData.publicAmenity
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.publicAmenity ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Repair Facility":
-          return count > limitData.repairFacility
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.repairFacility ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Services":
-          return count > limitData.services
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.services ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Shopping Centre":
-          return count > limitData.shoppingCentre
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.shoppingCentre ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Sports Centre":
-          return count > limitData.sportsCentre
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.sportsCentre ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Utility":
-          return count > limitData.utility
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.utility ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Zoo":
-          return count > limitData.zoo
-            ? `${count} You can't download (limit - 10)`
-            : count;
+          return count > limitData.zoo ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Shop":
-          return count > limitData.shop
-            ? `${count} You can't download (limit - 500)`
-            : count;
+          return count > limitData.shop ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 10 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         default:
           return false;
       }
     } else if (userData.tier === "tier2") {
       switch (name) {
         case "Airports":
-          return count > limitData.airports
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.airports ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Rail":
           return "Contact Us";
         case "Railway Stations":
-          return count > limitData.railwayStations
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.railwayStations ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Roads":
           return "Contact Us";
         case "Buildings":
           return "Contact Us";
         case "House Number":
-          return count > limitData.houseNo
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.houseNo ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Automotive Dealer":
-          return count > limitData.automotiveDealer
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.automotiveDealer ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Building POI":
-          return count > limitData.buildingPOI
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.buildingPOI ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Business Park":
-          return count > limitData.businessPark
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.businessPark ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Companies":
-          return count > limitData.companies
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.companies ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Education":
-          return count > limitData.education
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.education ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Entertainment":
-          return count > limitData.entertainment
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.entertainment ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Finance":
-          return count > limitData.finance
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.finance ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Golf Course":
-          return count > limitData.golfCourse
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.golfCourse ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Government Office":
-          return count > limitData.governmentOffice
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.governmentOffice ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Health Care":
-          return count > limitData.healthCare
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.healthCare ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Accommodation":
-          return count > limitData.accommodation
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.accommodation ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Hotel/Restaurants":
-          return count > limitData.hotelRestaurants
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.hotelRestaurants ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Park and Recreation Area":
-          return count > limitData.parkAndRecreationArea
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.parkAndRecreationArea ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Place of Worship":
-          return count > limitData.placeOfWorship
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.placeOfWorship ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Public Amenity":
-          return count > limitData.publicAmenity
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.publicAmenity ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Repair Facility":
-          return count > limitData.repairFacility
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.repairFacility ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Services":
-          return count > limitData.services
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.services ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Shopping Centre":
-          return count > limitData.shoppingCentre
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.shoppingCentre ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Sports Centre":
-          return count > limitData.sportsCentre
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.sportsCentre ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Utility":
-          return count > limitData.utility
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.utility ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Zoo":
-          return count > limitData.zoo
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.zoo ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         case "Shop":
-          return count > limitData.shop
-            ? `${count} You can't download (limit - )`
-            : count;
+          return count > limitData.shop ? (
+            <span className="span-text">
+              {count} -You have reached your limit please connect with our
+              Backend Team for more information (limit - 50 ).{" "}
+              <Link to="/contact" className="text-blue-300">
+                Contact Us
+              </Link>
+            </span>
+          ) : (
+            count
+          );
         default:
           return false;
       }
@@ -279,7 +672,14 @@ function TableData({
 
   const containsText = formattedData.some(
     (item) =>
-      typeof item.data === "string" && item.data.includes("You can't download")
+      typeof item.data === "object" && // Check if data is JSX element
+      React.Children.toArray(item.data.props.children).some(
+        (child) =>
+          typeof child === "string" && // Check if child is a string
+          child.includes(
+            "-You have reached your limit please connect with our Backend Team for more information"
+          )
+      )
   );
 
   const convertedData = {};

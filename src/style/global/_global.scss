@@ -143,3 +143,13 @@ li {
 .zoomInAnimation {
     animation: zoomIn 1s ease both;
 }
+
+/* ---- Media Query For Global ---- */
+
+
+@media screen and (max-width: 1199.98px) {
+
+    .container {
+        padding: 0 2rem;
+    }
+}

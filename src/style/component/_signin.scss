@@ -1,5 +1,5 @@
 .ant-modal-content {
-
+    padding: 4rem 4.5rem !important;
 
     .ant-modal-header {
         margin-bottom: 3rem;
@@ -26,11 +26,15 @@
         .ant-form {
 
             .ant-form-item-control-input {
+                font-size: 2rem;
 
-                .ant-input-affix-wrapper {
-                    font-size: 1.8rem;
-                }
             }
         }
     }
+}
+
+/* ------------ Sign Up Modal ---------------- */
+
+.ant-form-item-label {
+    text-align: start !important;
 }

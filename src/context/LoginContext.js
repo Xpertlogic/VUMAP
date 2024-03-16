@@ -33,6 +33,7 @@ export const LoginProvider = ({ children }) => {
     setEmail(email);
     localStorage.setItem("email", email);
     localStorage.setItem("token", token);
+    window.location.reload();
   };
 
   const logout = () => {
@@ -40,6 +41,7 @@ export const LoginProvider = ({ children }) => {
     setLoggedIn(false);
     localStorage.removeItem("email");
     localStorage.removeItem("token");
+    window.location.reload();
   };
   return (
     <LoginContext.Provider

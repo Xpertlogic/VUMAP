@@ -91,7 +91,7 @@ const Signin = ({ onLogin }) => {
         />
       </Form.Item>
 
-      <Form.Item className="text-center">
+      <div className="text-center mb-4">
         <Button
           type="primary"
           size="large"
@@ -100,7 +100,7 @@ const Signin = ({ onLogin }) => {
         >
           Log in
         </Button>
-      </Form.Item>
+      </div>
     </Form>
   );
 };

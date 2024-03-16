@@ -2,28 +2,19 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
-import {
-  Layout,
-  Menu,
-  notification,
-  Button,
-  Modal,
-  Grid,
-  Drawer,
-  Breadcrumb,
-} from "antd";
+import { Layout, Menu, Button, Modal, Grid, Drawer, Breadcrumb } from "antd";
 import { LoginContext } from "../context/LoginContext";
 import { MenuOutlined } from "@ant-design/icons";
+import Profile from "./Profile";
 const { useBreakpoint } = Grid;
 const { Content } = Layout;
 
 function HeaderCompo() {
   /* ------ for User Login ----- */
-  const { loggedIn, login, logout, userData } = useContext(LoginContext);
+  const { loggedIn, login, userData } = useContext(LoginContext);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   //------------For Page Refresh Data store In Local Storage -----
 
@@ -41,18 +32,6 @@ function HeaderCompo() {
     login(email, authToken);
     setShowWelcomeModal(true);
     setIsSignInModalOpen(false);
-    setIsLoggingIn(false);
-    // window.location.reload();
-  };
-
-  const handleLogout = () => {
-    logout();
-    setShowWelcomeModal(false);
-    notification.success({
-      message: "Logged Out",
-      description: "You have been successfully logged out.",
-    });
-    // window.location.reload();
   };
 
   const hideWelcomeModal = () => {
@@ -66,7 +45,6 @@ function HeaderCompo() {
 
   const hideSignInModal = () => {
     setIsSignInModalOpen(false);
-    setIsLoggingIn(false);
   };
 
   const showSignUpModal = () => {
@@ -87,8 +65,8 @@ function HeaderCompo() {
   const menuItems = (
     <Menu
       className="nav-bar"
-      theme="dark"
-      mode="horizontal"
+      theme={screens.md ? "dark" : "light"}
+      mode={screens.md ? "horizontal" : "vertical"}
       defaultSelectedKeys={[location.pathname]}
       selectedKeys={[location.pathname]}
     >
@@ -109,19 +87,14 @@ function HeaderCompo() {
   return (
     <>
       <Layout className="nav-layout">
-        {screens.lg ? (
+        {screens.md ? (
           <nav className="nav container">
             {menuItems}
             <div>
               {loggedIn ? (
-                <Button
-                  className="button-item"
-                  type="primary"
-                  size="large"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
+                <div className="header-btn-group">
+                  <Profile />
+                </div>
               ) : (
                 <div className="header-btn-group">
                   <Button
@@ -145,7 +118,7 @@ function HeaderCompo() {
             </div>
           </nav>
         ) : (
-          <nav className="nav">
+          <nav className="nav container">
             <Button
               className="humburgger"
               type="text"
@@ -160,6 +133,32 @@ function HeaderCompo() {
             >
               {menuItems}
             </Drawer>
+            <div>
+              {loggedIn ? (
+                <div className="header-btn-group">
+                  <Profile />
+                </div>
+              ) : (
+                <div className="header-btn-group">
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size={screens.md ? "large" : "middle"}
+                    onClick={showSignInModal}
+                  >
+                    Sign In
+                  </Button>
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size={screens.md ? "large" : "middle"}
+                    onClick={showSignUpModal}
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+              )}
+            </div>
           </nav>
         )}
       </Layout>
@@ -208,16 +207,16 @@ function HeaderCompo() {
             },
           }}
         >
-          <p className="text-[3rem]">Welcome To Vumap, {userData.username}!</p>
+          <p className="text-[3rem]">
+            Welcome To GISMap Layers, {userData.username}!
+          </p>
         </Modal>
       )}
 
       {/* Signup Modal */}
       <Modal
         title="Sign Up"
-        open={
-          isSignUpModalOpen && !loggedIn && !isLoggingIn && !isSignInModalOpen
-        } // Show modal only if it's not logged in
+        open={isSignUpModalOpen && !loggedIn} // Show modal only if it's not logged in
         onCancel={hideSignUpModal}
         centered
         footer={null}

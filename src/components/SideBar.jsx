@@ -308,6 +308,7 @@ function SideBar({
     ],
     Zoo: [],
     "Shopping Centre": [],
+    Undefined: [],
   };
 
   /* ----------------------------------------------- */
@@ -369,13 +370,6 @@ function SideBar({
 
   /* ---------------------------------- */
 
-  /* ---------- Download Boundary -------- */
-  const handleDownloadBoundary = () => {
-    const dropboxLink =
-      "https://www.dropbox.com/scl/fi/nw4rpd8r2g798i1dtd61a/vumtech_19th.zip?rlkey=drnpsicogdbkhtujr19thavs6&dl=0";
-    window.location.href = dropboxLink;
-  };
-
   /* ------ Get Data Limit ----- */
   const [limitData, setLimitData] = useState([]);
 
@@ -397,20 +391,33 @@ function SideBar({
       console.error("Error fetching limit data:", error);
     }
   };
-
   /* ------ Download The Data -------- */
 
   const handleDownload = () => {
-    setIsCategoryModalOpen(true);
-    getLimitData();
+    if (userData?.tier === "free") {
+      setIsSubscriptionModalOpen(true);
+    } else {
+      setIsCategoryModalOpen(true);
+      getLimitData();
+    }
   };
+  console.log(userData);
+  /* ---- After Success Of Subscription ------ */
+
+  const handleOnSuccess = () => {
+    setIsSubscriptionModalOpen(false);
+  };
+
+  useEffect(() => {
+    handleOnSuccess();
+  }, []);
 
   const handleCancelCategoryModal = () => {
     setIsCategoryModalOpen(false);
   };
 
   /* ----------Polygon Create----------- */
-  console.log(limitData);
+
   const handleDownloadMarkersInsidePolygon = () => {
     if (userData.tier !== "free") {
       if (markersInsidePolygon.length > 0) {
@@ -483,29 +490,29 @@ function SideBar({
     setIsSubscriptionModalOpen(false);
   };
 
-  useEffect(() => {
-    // Function to prevent right-click on the sidebar when user is not logged in
-    const preventRightClick = (event) => {
-      if (!loggedIn) {
-        event.preventDefault();
-      }
-    };
+  // useEffect(() => {
+  //   // Function to prevent right-click on the sidebar when user is not logged in
+  //   const preventRightClick = (event) => {
+  //     if (!loggedIn) {
+  //       event.preventDefault();
+  //     }
+  //   };
 
-    // Function to prevent F12 key when user is not logged in
-    const preventF12 = (event) => {
-      if (!loggedIn && event.keyCode === 123) {
-        event.preventDefault();
-      }
-    };
+  //   // Function to prevent F12 key when user is not logged in
+  //   const preventF12 = (event) => {
+  //     if (!loggedIn && event.keyCode === 123) {
+  //       event.preventDefault();
+  //     }
+  //   };
 
-    document.addEventListener("contextmenu", preventRightClick);
-    document.addEventListener("keydown", preventF12);
+  //   document.addEventListener("contextmenu", preventRightClick);
+  //   document.addEventListener("keydown", preventF12);
 
-    return () => {
-      document.removeEventListener("contextmenu", preventRightClick);
-      document.removeEventListener("keydown", preventF12);
-    };
-  }, [loggedIn]);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", preventRightClick);
+  //     document.removeEventListener("keydown", preventF12);
+  //   };
+  // }, [loggedIn]);
 
   /* ------ Get All Country/State/District/City Data ------ */
   const [allData, setAllData] = useState("");
@@ -563,13 +570,7 @@ function SideBar({
 
   return (
     <>
-      <Sider
-        width={300}
-        className="side-bar"
-        style={{
-          pointerEvents: loggedIn ? "auto" : "none",
-        }}
-      >
+      <Sider width={300} className="side-bar">
         {/* Checkbox for toggling map tile layer visibility */}
         <div className="flex justify-center mb-[2rem]">
           <Switch
@@ -834,20 +835,7 @@ function SideBar({
                 size="large"
                 onClick={handleDownload}
               >
-                {userData?.tier !== "free" ? "Download" : "Subscribe"}
-              </Button>
-            )}
-          </div>
-
-          <div className="button-boundary-item">
-            {loggedIn && (
-              <Button
-                className="button-item mb-[2rem]"
-                type="primary"
-                size="large"
-                onClick={handleDownloadBoundary}
-              >
-                Download Boundary
+                Download
               </Button>
             )}
           </div>
@@ -860,19 +848,20 @@ function SideBar({
         onCancel={handleCancel}
         style={{ margin: 10, padding: 0 }}
         centered
-        width={"85%"}
+        width={"90%"}
         footer={null}
       >
-        <Subscription />
+        <Subscription onSuccess={handleOnSuccess} />
       </Modal>
-
-      <TableData
-        dataMarker={markersInsidePolygon}
-        modalOpen={isCategoryModalOpen}
-        modalClose={handleCancelCategoryModal}
-        downloadModal={handleDownloadMarkersInsidePolygon}
-        limitData={limitData}
-      />
+      {loggedIn && (
+        <TableData
+          dataMarker={markersInsidePolygon}
+          modalOpen={isCategoryModalOpen}
+          modalClose={handleCancelCategoryModal}
+          downloadModal={handleDownloadMarkersInsidePolygon}
+          limitData={limitData}
+        />
+      )}
     </>
   );
 }

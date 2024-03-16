@@ -52,3 +52,20 @@
         transform: translateY(-100%);
     }
 }
+
+
+/* ---- Media Query For About Section ---- */
+
+@media screen and (max-width: 574.98px) {
+    .update-section {
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .update-box {
+            .update-item {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}

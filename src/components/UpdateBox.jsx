@@ -7,6 +7,14 @@ const items = [
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet! Lorem ipsum dolor sit.",
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet! Lorem ipsum dolor sit.",
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet! Lorem ipsum dolor sit.",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet!",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet!",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet! Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet! Lorem ipsum dolor sit.",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet! Lorem ipsum dolor sit.",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eveniet! Lorem ipsum dolor sit.",
 ];
 
 const UpdateBox = () => {

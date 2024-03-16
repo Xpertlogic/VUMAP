@@ -21,7 +21,7 @@ const Help = () => {
   return (
     <section>
       <a
-        href="https://wa.me/7749872073"
+        href="https://wa.me/8456898666"
         className="help-section"
         target="_blank"
         rel="noopener noreferrer"

@@ -49,3 +49,25 @@ footer {
 }
 
 /* ---- Media Query For Footer Section ---- */
+
+@media screen and (max-width: 991.98px) {
+
+    .footer-section {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .footer-bottom {
+        margin-bottom: 3rem;
+
+    }
+}
+
+
+@media screen and (max-width: 574.98px) {
+
+    .footer-link {
+        flex-direction: column;
+    }
+
+}

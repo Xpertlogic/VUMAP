@@ -5,7 +5,7 @@ import { CheckOutlined } from "@ant-design/icons";
 import useRazorpay from "react-razorpay";
 import { LoginContext } from "../context/LoginContext";
 
-function Subscription() {
+function Subscription({ onSuccess }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [Razorpay, isLoaded] = useRazorpay();
   const { userData, storedToken } = useContext(LoginContext);
@@ -23,14 +23,40 @@ function Subscription() {
     buttonText,
     buttonAction,
   }) => {
-    const handlePayment = async (plan, price) => {
+    const handlePayment = async (title, price) => {
+      let plan;
+      switch (title) {
+        case "Basic Plan":
+          plan = "Basic Plan";
+          break;
+        case "Business Plan":
+          plan = "Business Plan";
+          break;
+        default:
+          plan = "Free";
+          break;
+      }
+
+      let tier;
+      switch (plan) {
+        case "Basic Plan":
+          tier = "tier1";
+          break;
+        case "Business Plan":
+          tier = "tier2";
+          break;
+        default:
+          tier = "free";
+          break;
+      }
+
       const amount =
         parseFloat(
           price
             .replace("₹", "")
             .replace(",", "")
-            .replace(" /3 Months", "")
-            .replace(" /12 Months", "")
+            .replace(" / Month", "")
+            .replace(" /1 Year", "")
         ) * 100; // Convert price to integer amount in paise
 
       const options = {
@@ -38,9 +64,7 @@ function Subscription() {
         amount: amount,
         currency: "INR",
         name: "Acme Corp",
-        description: `Subscription for ${
-          plan === "premium" ? "Premium" : "Premium Plus"
-        } Plan`,
+        description: `Subscription for ${plan}`,
         image: "",
         handler: async (razorpayResponse) => {
           console.log(razorpayResponse);
@@ -48,7 +72,7 @@ function Subscription() {
             try {
               const Payload = {
                 email: userData.email,
-                tier: plan === "premium" ? "tier1" : "tier2", // Update tier based on plan
+                tier: tier,
                 paymentid: razorpayResponse.razorpay_payment_id,
                 token: storedToken,
               };
@@ -66,6 +90,7 @@ function Subscription() {
 
               if (response.status === 200) {
                 setPaymentSuccess(userData.tier !== "free");
+                onSuccess();
               }
               //here respone.status === 200 hit the verify token api to store the user data and show the subscription susccess pop up
 
@@ -95,7 +120,7 @@ function Subscription() {
     };
 
     const handleSubscribe = () => {
-      handlePayment(plan, price);
+      handlePayment(title, price);
     };
 
     return (

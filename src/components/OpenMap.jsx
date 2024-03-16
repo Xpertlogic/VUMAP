@@ -156,7 +156,7 @@ function OpenMap({
     }
   }, [stateView]);
   /* ----- Districts ----- */
-  // console.log(railPlatformData);
+
   useEffect(() => {
     const fetchDistrictData = async () => {
       try {
@@ -215,6 +215,7 @@ function OpenMap({
           `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/POI_${cityView}.zip`,
           { responseType: "arraybuffer" }
         );
+
         const geojsonData = await getZipData(
           responsePoi,
           `POI_${cityView}.geojson`
@@ -225,6 +226,7 @@ function OpenMap({
         console.error("Error fetching POI Data:", error);
       }
     };
+
     const fetchHouseNumber = async () => {
       try {
         const responsePoi = await axios.get(
@@ -233,7 +235,7 @@ function OpenMap({
         );
         const getBoundaryData = await getZipData(
           responsePoi,
-          `housenumber${cityView}.geojson`
+          `housenumber_${cityView}.geojson`
         );
 
         setHouseNumber(getBoundaryData);
@@ -384,7 +386,6 @@ function OpenMap({
     fillOpacity: 0.8,
     pmIgnore: true,
   };
-  const [editableFG, setEditableFG] = useState(null);
 
   useEffect(() => {
     if (selectedPolygonLayer) {
@@ -398,7 +399,7 @@ function OpenMap({
       });
       setMarkersInsidePolygon(filteredMarkers);
     }
-  }, [selectedPolygonLayer, totalData, editableFG]);
+  }, [selectedPolygonLayer, totalData]);
 
   const onPolygonCreate = (event) => {
     const { layer } = event;
@@ -411,7 +412,7 @@ function OpenMap({
 
   /* ------------------------------------------- */
   return (
-    <div style={{ pointerEvents: loggedIn ? "auto" : "none" }}>
+    <div>
       <MapContainer
         key={centerPosition}
         center={centerPosition}
@@ -421,7 +422,7 @@ function OpenMap({
           height: "100vh",
           width: "100%",
         }}
-        maxZoom={18}
+        maxZoom={loggedIn ? 16 : 8}
       >
         {countryView && countryData && (
           <GeoJSON data={countryData} style={countryCornersStyle} />
@@ -466,14 +467,33 @@ function OpenMap({
         {homeSelected && (
           <MarkerClusterGroup disableClusteringAtZoom={18}>
             {houseNumber?.features?.map((houseNumber, index) => (
-              <CustomMarker
+              <Marker
                 key={houseNumber + index}
+                icon={poiIcon}
                 position={[
                   houseNumber.geometry.coordinates[1],
                   houseNumber.geometry.coordinates[0],
                 ]}
-                text={houseNumber.properties.streetname} // Text content is the house number
-              />
+              >
+                {loggedIn && (
+                  <Popup>
+                    <div>
+                      {houseNumber.properties.Photo_Name.length > 0 && (
+                        <img
+                          src={`${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/${cityView}_housenumber_photo/${houseNumber.properties.Photo_Name}.jpg`}
+                          alt="No_Image"
+                        />
+                      )}
+                      <h3 className="text-[2rem]">
+                        {houseNumber.properties.Category}{" "}
+                        <span className="text-[1.8rem]">
+                          - {houseNumber.properties.Housenumbe}
+                        </span>
+                      </h3>
+                    </div>
+                  </Popup>
+                )}
+              </Marker>
             ))}
           </MarkerClusterGroup>
         )}
@@ -486,26 +506,31 @@ function OpenMap({
                   houseNumber?.geometry?.coordinates[1],
                   houseNumber?.geometry?.coordinates[0],
                 ]}
-                text={houseNumber.properties.streetname} // Text content is the house number
+                text={houseNumber.properties.streetname}
               />
             ))}
         </MarkerClusterGroup>
         <MarkerClusterGroup>
           {filteredAirports?.map((airport, index) => (
             <Marker
-              key={airport.properties["Airport Name"]}
+              key={airport.properties["Airport Name"] + index}
               icon={airportIcon}
               position={[
-                airport?.properties?.Longitude,
                 airport?.properties?.Latitude,
+                airport?.properties?.Longitude,
               ]}
             >
-              <Popup>
-                <div>
-                  <h3>{airport.properties["Airport Name"]}</h3>
-                  <p>{`Type: ${airport.properties["Airport Type"]}`}</p>
-                </div>
-              </Popup>
+              {loggedIn && (
+                <Popup>
+                  <div>
+                    <h3 className="text-[3rem]">
+                      {airport.properties["Airport Name"]}
+                    </h3>
+                    <p className="text-[2.2rem]">{`Type: ${airport.properties["Airport Type"]}`}</p>
+                    <p className="text-[2.2rem]">{`State: ${airport.properties.State}`}</p>
+                  </div>
+                </Popup>
+              )}
             </Marker>
           ))}
         </MarkerClusterGroup>
@@ -514,21 +539,26 @@ function OpenMap({
 
         {selectedRailTypes.includes("Platforms") && (
           <MarkerClusterGroup>
-            {railPlatformData?.features?.map((airport, index) => (
+            {railPlatformData?.features?.map((platform, index) => (
               <Marker
-                key={index}
+                key={platform.properties.IDPRIM + index}
                 icon={platformIcon}
                 position={[
-                  airport.geometry.coordinates[1],
-                  airport.geometry.coordinates[0],
+                  platform.geometry.coordinates[1],
+                  platform.geometry.coordinates[0],
                 ]}
               >
-                <Popup>
-                  <div>
-                    <h3>{airport.properties["Airport Name"]}</h3>
-                    <p>{`Type: ${airport.airporttype}`}</p>
-                  </div>
-                </Popup>
+                {loggedIn && (
+                  <Popup>
+                    <div>
+                      <h3 className="text-[3rem]">
+                        {platform.properties.name}
+                      </h3>
+                      <p className="text-[2.2rem]">{`State: ${platform.properties.state}`}</p>
+                      <p className="text-[2.2rem]">{`Code: ${platform.properties.code}`}</p>
+                    </div>
+                  </Popup>
+                )}
               </Marker>
             ))}
           </MarkerClusterGroup>
@@ -546,35 +576,45 @@ function OpenMap({
                   poi.geometry.coordinates[0],
                 ]}
               >
-                <Popup>
-                  <div>
-                    <h3>{poi.properties.streetname}</h3>
-                    <p>{`Type: ${poi.properties.estado}`}</p>
-                    <p>{`Catregory: ${poi.properties.descricao}`}</p>
-                  </div>
-                </Popup>
+                {loggedIn && (
+                  <Popup>
+                    <div>
+                      {poi.properties.Photo_Name.length > 0 && (
+                        <img
+                          src={`${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/${cityView}_POI_photo/${poi.properties.Photo_Name}.jpg`}
+                          alt="No_Image"
+                        />
+                      )}
+                      <h3 className="text-[3rem]">{poi.properties.Name}</h3>
+                      <p className="text-[2.2rem]">{`Type: ${poi.properties.SubCategory}`}</p>
+                      <p className="text-[2.2rem]">{`Catregory: ${poi.properties.Category}`}</p>
+                    </div>
+                  </Popup>
+                )}
               </Marker>
             ))}
           </MarkerClusterGroup>
         )}
 
-        <FeatureGroup key={centerPosition + 1}>
-          <EditControl
-            position="topleft"
-            draw={{
-              rectangle: false,
-              polygon: true,
-              polyline: false,
-              circle: false,
-              circlemarker: false,
-              marker: false,
-            }}
-            ref={(featureGroupRef) => {
-              onFeatureGroupReady(featureGroupRef);
-            }}
-            onCreated={onPolygonCreate}
-          />
-        </FeatureGroup>
+        {loggedIn && (
+          <FeatureGroup key={centerPosition + 1}>
+            <EditControl
+              position="topleft"
+              draw={{
+                rectangle: false,
+                polygon: true,
+                polyline: false,
+                circle: false,
+                circlemarker: false,
+                marker: false,
+              }}
+              ref={(featureGroupRef) => {
+                onFeatureGroupReady(featureGroupRef);
+              }}
+              onCreated={onPolygonCreate}
+            />
+          </FeatureGroup>
+        )}
 
         {isMapLayerVisible && (
           <TileLayer

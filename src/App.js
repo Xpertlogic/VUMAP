@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { SubscribeProvider } from "./context/SubscribeContext";
 import { Suspense, lazy } from "react";
 import { Layout } from "antd";
 import OpenMap from "./components/OpenMap";
@@ -64,27 +63,23 @@ function App() {
       <Content className="container">
         <Layout style={{ background: "#fff" }}>
           <Suspense fallback={<div>Loading...</div>}>
-            <SubscribeProvider>
-              <SideBar
-                onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
-                onSelectedCountry={handleCountryChange}
-                onSelectedState={handleStateChange}
-                onSelectedDistrict={handleDistrictChange}
-                onSelectedCity={handleCityChange}
-                markersInsidePolygon={markersInsidePolygon}
-                setMarkersInsidePolygon={setMarkersInsidePolygon}
-                selectedAirportTypes={selectedAirportTypes}
-                selectedRoadTypes={(types) => setSelectedRoadTypes(types)}
-                onBuildingTypeChange={(types) =>
-                  setSelectedBuildingTypes(types)
-                }
-                onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
-                onRailTypeChange={(types) => setSelectedRailTypes(types)}
-                selectedPoiTypes={selectedPoiTypes}
-                homeSelected={(value) => setHomeSelected(value)}
-                onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
-              />
-            </SubscribeProvider>
+            <SideBar
+              onToggleMapLayerVisibility={handleToggleMapLayerVisibility}
+              onSelectedCountry={handleCountryChange}
+              onSelectedState={handleStateChange}
+              onSelectedDistrict={handleDistrictChange}
+              onSelectedCity={handleCityChange}
+              markersInsidePolygon={markersInsidePolygon}
+              setMarkersInsidePolygon={setMarkersInsidePolygon}
+              selectedAirportTypes={selectedAirportTypes}
+              selectedRoadTypes={(types) => setSelectedRoadTypes(types)}
+              onBuildingTypeChange={(types) => setSelectedBuildingTypes(types)}
+              onAirportTypeChange={(types) => setSelectedAirportTypes(types)}
+              onRailTypeChange={(types) => setSelectedRailTypes(types)}
+              selectedPoiTypes={selectedPoiTypes}
+              homeSelected={(value) => setHomeSelected(value)}
+              onPoiTypesChange={(types) => setSelectedPoiTypes(types)}
+            />
           </Suspense>
           <Content className="overflow-hidden">
             <OpenMap

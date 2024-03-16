@@ -1,5 +1,5 @@
 import { Form, Input, Button } from "antd";
-import { PhoneTwoTone, MailTwoTone, HomeTwoTone } from "@ant-design/icons";
+import { PhoneTwoTone, MailTwoTone } from "@ant-design/icons";
 import SocialMedia from "./SocialMedia";
 
 function ContactUs() {
@@ -11,18 +11,14 @@ function ContactUs() {
         <p>
           <PhoneTwoTone />
           <span>
-            Phone:- <a href="tel:+1234567890">+1 (234) 567-890</a>
+            Phone:- <a href="tel:+918456898666">+91 8456898666</a>
           </span>
         </p>
-        <p>
+        <p className="mb-2">
           <MailTwoTone />
           <span>
             Email:- <a href="mailto:example@example.com">example@example.com</a>
           </span>
-        </p>
-        <p className="mb-2">
-          <HomeTwoTone />
-          <span>Address:- Lorem, Lorem, ipsum dolor. 751245</span>
         </p>
         <div>
           <SocialMedia />
@@ -46,7 +42,6 @@ function ContactUs() {
 
           <Form.Item
             name="email"
-            // label="E-mail"
             rules={[
               {
                 type: "email",
@@ -62,7 +57,6 @@ function ContactUs() {
           </Form.Item>
           <Form.Item
             name="phone"
-            // label="Phone Number"
             rules={[
               {
                 required: true,

@@ -68,8 +68,9 @@
         }
 
         .right-box {
-            max-width: 700px;
+            max-width: 500px;
             width: 100%;
+            margin-bottom: 3rem;
 
             img {
                 width: 100%;
@@ -78,4 +79,15 @@
     }
 
 
+}
+
+
+/* ---- Media Query For About Section ---- */
+
+@media screen and (max-width: 1099.98px) {
+
+    .about-box {
+        align-items: center;
+        flex-direction: column-reverse;
+    }
 }

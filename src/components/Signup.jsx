@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Form, Input, notification, Checkbox, Modal } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  notification,
+  Checkbox,
+  Modal,
+  Row,
+  Col,
+} from "antd";
 import axios from "axios";
 
 const formItemLayout = {
@@ -40,6 +49,7 @@ function Signup() {
   const [showOTPField, setShowOTPField] = useState(false);
   const [email, setEmail] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [signupModal, setSignupModal] = useState(false);
 
   const handleVerifyEmail = async () => {
     try {
@@ -99,11 +109,16 @@ function Signup() {
             phone: values.phone,
           }
         );
-
-        notification.success({
-          message: "Registration Successful",
-          description: "You have successfully registered.",
-        });
+        if (registerResponse.status === 200) {
+          window.location.reload(); //for instant reload
+          notification.success({
+            message: "Registration Successful",
+            description: "You have successfully registered.",
+          });
+          setSignupModal(true); // Close the modal
+        } else {
+          setSignupModal(false);
+        }
       } else {
         notification.error({
           message: "OTP Verification Failed",
@@ -129,7 +144,6 @@ function Signup() {
           message: "Registration Failed",
           description: "An error occurred while trying to register.",
         });
-        console.error("API Error:", error);
       }
     }
   };
@@ -142,181 +156,195 @@ function Signup() {
   };
 
   return (
-    <>
-      <Form
-        {...formItemLayout}
-        form={form}
-        name="register"
-        onFinish={onFinish}
-        style={{
-          maxWidth: 600,
-        }}
-        scrollToFirstError
-      >
-        <Form.Item
-          name="name"
-          label="Name"
-          rules={[
-            {
-              required: true,
-              message: "Please input your name!",
-              whitespace: true,
-            },
-          ]}
+    <section>
+      {signupModal === true ? (
+        <p className="text-[2rem]">
+          Hi..you have successfully Registered now you can LogIn and enjoy our
+          services.
+        </p>
+      ) : (
+        <Form
+          {...formItemLayout}
+          form={form}
+          name="register"
+          onFinish={onFinish}
+          style={{
+            maxWidth: 600,
+          }}
+          scrollToFirstError
         >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: "email",
-              message: "The input is not valid E-mail!",
-            },
-            {
-              required: true,
-              message: "Please input your E-mail!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        {showOTPField && (
           <Form.Item
-            name="otp"
-            label="OTP"
+            name="name"
+            label="Name"
             rules={[
               {
                 required: true,
-                message: "Please input your OTP!",
+                message: "Please input your name!",
+                whitespace: true,
               },
             ]}
           >
             <Input />
           </Form.Item>
-        )}
 
-        {!showOTPField && (
-          <Form.Item {...tailFormItemLayout}>
-            <Button
-              type="primary"
-              onClick={handleVerifyEmail}
-              className="bg-green-500 text-white"
+          <Row gutter={16}>
+            <Col span={19}>
+              <Form.Item
+                name="email"
+                label="E-mail"
+                labelCol={{ span: 10 }}
+                rules={[
+                  {
+                    type: "email",
+                    message: "The input is not valid E-mail!",
+                  },
+                  {
+                    required: true,
+                    message: "Please input your E-mail!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={5}>
+              {!showOTPField && (
+                <Form.Item style={{ marginBottom: 0 }}>
+                  <Button
+                    type="primary"
+                    onClick={handleVerifyEmail}
+                    className="bg-green-500 text-white"
+                  >
+                    Verify
+                  </Button>
+                </Form.Item>
+              )}
+            </Col>
+          </Row>
+
+          {showOTPField && (
+            <Form.Item
+              name="otp"
+              label="OTP"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your OTP!",
+                },
+              ]}
             >
-              Verify
-            </Button>
-          </Form.Item>
-        )}
+              <Input />
+            </Form.Item>
+          )}
 
-        <Form.Item
-          name="company"
-          label="Company"
-          rules={[
-            {
-              required: true,
-              message: "Please input your company name!",
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          name="phone"
-          label="Phone Number"
-          rules={[
-            {
-              required: true,
-              message: "Please input your phone number!",
-            },
-          ]}
-        >
-          <Input
-            style={{
-              width: "100%",
-            }}
-          />
-        </Form.Item>
-
-        <Form.Item
-          name="password"
-          label="Password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-          hasFeedback
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="confirm"
-          label="Confirm Password"
-          dependencies={["password"]}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Please confirm your password!",
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error("The new password that you entered do not match!")
-                );
+          <Form.Item
+            name="company"
+            label="Company"
+            rules={[
+              {
+                required: true,
+                message: "Please input your company name!",
+                whitespace: true,
               },
-            }),
-          ]}
-        >
-          <Input.Password className="mb-5" />
-        </Form.Item>
-        <Form.Item
-          name="agree"
-          valuePropName="checked"
-          rules={[
-            {
-              validator: (_, value) =>
-                value
-                  ? Promise.resolve()
-                  : Promise.reject("Please check the agreement"),
-            },
-          ]}
-        >
-          <Checkbox>
-            I agree to the <Link to="/terms&condition">T&C</Link>
-          </Checkbox>
-        </Form.Item>
-
-        {showOTPField && (
-          <Form.Item {...tailFormItemLayout}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="bg-blue-700 w-[60%]"
-            >
-              Register
-            </Button>
-            <Button
-              type="default"
-              onClick={handleReset}
-              style={{ marginLeft: 8 }}
-            >
-              Reset
-            </Button>
+            ]}
+          >
+            <Input />
           </Form.Item>
-        )}
-      </Form>
-    </>
+
+          <Form.Item
+            name="phone"
+            label="Phone Number"
+            rules={[
+              {
+                required: true,
+                message: "Please input your phone number!",
+              },
+            ]}
+          >
+            <Input
+              style={{
+                width: "100%",
+              }}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="confirm"
+            label="Confirm Password"
+            dependencies={["password"]}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: "Please confirm your password!",
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("The new password that you entered do not match!")
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password className="mb-5" />
+          </Form.Item>
+          <Form.Item
+            className="text-center"
+            name="agree"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject("Please check the agreement"),
+              },
+            ]}
+          >
+            <Checkbox>
+              I agree to the <Link to="/terms&condition">T&C</Link>
+            </Checkbox>
+          </Form.Item>
+
+          {showOTPField && (
+            <Form.Item {...tailFormItemLayout}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="bg-blue-700 w-[60%]"
+              >
+                Register
+              </Button>
+              <Button
+                type="default"
+                onClick={handleReset}
+                style={{ marginLeft: 8 }}
+              >
+                Reset
+              </Button>
+            </Form.Item>
+          )}
+        </Form>
+      )}
+    </section>
   );
 }
 
