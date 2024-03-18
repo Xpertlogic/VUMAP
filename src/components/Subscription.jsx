@@ -60,7 +60,7 @@ function Subscription({ onSuccess }) {
         ) * 100; // Convert price to integer amount in paise
 
       const options = {
-        key: "rzp_test_idc2jcfNoLW3KG",
+        key: "rzp_test_DBSJe5ZFN2DJ8x",
         amount: amount,
         currency: "INR",
         name: "Acme Corp",
