@@ -417,7 +417,7 @@ function OpenMap({
         key={centerPosition}
         center={centerPosition}
         zoom={zoomLevel}
-        scrollWheelZoom={true}
+        scrollWheelZoom={loggedIn ? true : false}
         style={{
           height: "100vh",
           width: "100%",
