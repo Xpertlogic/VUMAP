@@ -17,7 +17,7 @@ function ContactUs() {
         <p className="mb-2">
           <MailTwoTone />
           <span>
-            Email:- <a href="mailto:example@example.com">example@example.com</a>
+            Email:- <a href="mailto:support@gismapslayers.com">support@gismapslayers.com</a>
           </span>
         </p>
         <div>

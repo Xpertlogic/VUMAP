@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
       </section>
       <div className="footer-bottom">
-        <p>&copy; GISMAPSLAYERS 2024</p>
+        <p>&copy; VUMTECH DESIGN AND GEOSPATIAL PRIVATE LIMITED 2024</p>
       </div>
     </footer>
   );
