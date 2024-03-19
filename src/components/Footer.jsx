@@ -25,6 +25,13 @@ const Footer = () => {
           >
             <Link to="/terms&condition">Terms & Condition</Link>
           </li>
+          <li
+            className={
+              location.pathname === "/privacy&cancellation" ? "active" : ""
+            }
+          >
+            <Link to="/privacy&cancellation">Privacy & Cancellation</Link>
+          </li>
         </ul>
 
         <div>

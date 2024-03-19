@@ -1,0 +1,18 @@
+.add-data-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .add-data-item {
+        display: flex;
+        gap: 2rem;
+
+        .item-input {
+            width: 250px;
+        }
+
+        .item-select {
+            width: 250px;
+        }
+    }
+}

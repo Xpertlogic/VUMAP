@@ -82,6 +82,9 @@ function HeaderCompo() {
       <Menu.Item key="/terms&condition">
         <Link to="/terms&condition">T&C</Link>
       </Menu.Item>
+      <Menu.Item key="/privacy&cancellation">
+        <Link to="/privacy&cancellation">P&C</Link>
+      </Menu.Item>
     </Menu>
   );
   return (
