@@ -22,7 +22,7 @@ function HeaderCompo() {
     if (!loggedIn && !isSignInModalOpen) {
       const timer = setInterval(() => {
         setIsSignUpModalOpen(true);
-      }, 5000);
+      }, 12000);
 
       return () => clearInterval(timer);
     }
