@@ -103,7 +103,6 @@ const Privacy = () => {
               our handling of GIS data, please WhatsApp us at{" "}
               <a
                 href="https://wa.me/8456898666"
-                className="help-section"
                 target="_blank"
                 rel="noopener noreferrer"
               >
