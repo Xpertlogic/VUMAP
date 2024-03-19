@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  max-width: 1420px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* ---- Buttons ----- */
+.button-item {
+  background-color: #1677ff;
+  font-size: 1.6rem;
+}
+
+.admin-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: aliceblue;
+  padding: 2rem;
+}
+
+.add-data-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.add-data-section .add-data-item {
+  display: flex;
+  gap: 2rem;
+}
+.add-data-section .add-data-item .item-input {
+  width: 250px;
+}
+.add-data-section .add-data-item .item-select {
+  width: 250px;
+}/*# sourceMappingURL=admin_style.css.map */
