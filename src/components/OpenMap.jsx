@@ -49,10 +49,10 @@ function OpenMap({
   const [railData, setRailData] = useState();
   const [railPlatformData, setRailPlatformData] = useState();
   const [houseNumber, setHouseNumber] = useState([]);
+  const [roads, setRoads] = useState([]);
   const [buildingsData, selectedBuildingsData] = useState([]);
   const [poiData, setPoiData] = useState([]);
   const [totalData, setTotalData] = useState([]);
-
   const baseUrl = "https://vumap.s3.ap-south-1.amazonaws.com";
   const getZipData = async (response, file) => {
     const zip = new JSZip();
@@ -244,6 +244,21 @@ function OpenMap({
       }
     };
 
+    const fetchRoads = async () => {
+      try {
+        const responsePoi = await axios.get(
+          `${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/road_${cityView}.zip`,
+          { responseType: "arraybuffer" }
+        );
+        const getBoundaryData = await getZipData(
+          responsePoi,
+          `road_${cityView}.geojson`
+        );
+        setRoads(getBoundaryData);
+      } catch (error) {
+        console.error("Error fetching Housing Number:", error);
+      }
+    };
     if (cityView) {
       setZoomLevel(11);
     }
@@ -252,9 +267,10 @@ function OpenMap({
       fetchCitiesData();
       fetchPOIData();
       fetchHouseNumber();
+      fetchRoads();
     }
   }, [cityView?.length > 0]);
-
+  console.log(`road_${cityView}.geojson`)
   /* --------------------------------------- */
 
   /* -------- Airport Data ------- */
