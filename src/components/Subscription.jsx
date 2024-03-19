@@ -168,7 +168,7 @@ function Subscription({ onSuccess }) {
             features={[
               "All data will visible and user can analyze",
               "Unlimited admin Boundary Downloads (up to postal label)",
-              "User can Download 1000 POIs",
+              "User can Download 50 leads per category",
             ]}
             isActive={false}
           />
@@ -178,7 +178,7 @@ function Subscription({ onSuccess }) {
             features={[
               "All data will visible and user can analyze",
               "Unlimited admin Boundary Downloads(up to Village label)",
-              "User can Download 1000 POIs",
+              "User can Download 150 leads per category",
               "House Numbers and Roads signs are Exclusive access for Business Plans.",
               "Dedicated Support team.",
             ]}

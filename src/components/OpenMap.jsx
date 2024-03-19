@@ -38,7 +38,7 @@ function OpenMap({
   const [selectedPolygonLayer, setSelectedPolygonLayer] = useState(null);
 
   /* ---------- Login ------------ */
-  const { loggedIn } = useContext(LoginContext);
+  const { loggedIn, userData } = useContext(LoginContext);
 
   /* ------ Country-State-District-City-Airport-Railway-POIs ------ */
   const [countryData, setCountryData] = useState(null);
@@ -436,22 +436,19 @@ function OpenMap({
   };
 
   /* ------------------------------------------- */
-  console.log("selectedRoads", selectedRoads);
-  console.log("roads", roads);
-  console.log("roadsLineStyle", roadLineStyle);
-
+  console.log(userData)
   return (
     <div>
       <MapContainer
         key={centerPosition}
         center={centerPosition}
         zoom={zoomLevel}
-        scrollWheelZoom={loggedIn ? true : false}
+        scrollWheelZoom={loggedIn && userData?.tier !== 'free' ? true : false}
         style={{
           height: "100vh",
           width: "100%",
         }}
-        maxZoom={loggedIn ? 16 : 8}
+        maxZoom={loggedIn && userData?.tier !== 'free' ? 18 : 8}
       >
         {countryView && countryData && (
           <GeoJSON data={countryData} style={countryCornersStyle} />
