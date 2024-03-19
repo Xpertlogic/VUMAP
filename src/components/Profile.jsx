@@ -1,11 +1,10 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Dropdown, Space, Button } from "antd";
+import { Dropdown, Space, Button, Avatar } from "antd";
 import { LoginContext } from "../context/LoginContext";
 import { useContext, useState, useEffect } from "react";
 
 const Profile = () => {
   const { userData, logout } = useContext(LoginContext);
-  console.log(userData);
 
   //-> Username
   const Name = userData.username;
@@ -95,9 +94,10 @@ const Profile = () => {
       >
         <div onClick={(e) => e.preventDefault()}>
           <Space>
-            <div className="profile-icon-box">
-              <UserOutlined className="profile-icon" />
-            </div>
+            <Avatar
+              className="profile-icon-box"
+              icon={<UserOutlined className="profile-icon" />}
+            />
           </Space>
         </div>
       </Dropdown>

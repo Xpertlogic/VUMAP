@@ -270,7 +270,7 @@ function OpenMap({
       fetchRoads();
     }
   }, [cityView?.length > 0]);
-  console.log(`road_${cityView}.geojson`)
+
   /* --------------------------------------- */
 
   /* -------- Airport Data ------- */
@@ -395,8 +395,17 @@ function OpenMap({
   });
 
   const railLineStyle = {
-    fillColor: "brown",
-    color: "brown",
+    fillColor: "#454545",
+    color: "#454545",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+    pmIgnore: true,
+  };
+
+  const roadLineStyle = {
+    fillColor: "black",
+    color: "black",
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
@@ -427,6 +436,10 @@ function OpenMap({
   };
 
   /* ------------------------------------------- */
+  console.log("selectedRoads", selectedRoads);
+  console.log("roads", roads);
+  console.log("roadsLineStyle", roadLineStyle);
+
   return (
     <div>
       <MapContainer
@@ -468,15 +481,16 @@ function OpenMap({
           />
         )}
 
+        {/* --- Rail Lines Style --- */}
+
         {selectedRailTypes.includes("Rail Line") && (
-          <GeoJSON
-            key="raillines"
-            data={railData}
-            style={railLineStyle}
-            onEachFeature={(feature, layer) => {
-              layer.bindPopup(feature.properties.name);
-            }}
-          />
+          <GeoJSON key="raillines" data={railData} style={railLineStyle} />
+        )}
+
+        {/* --- Roads Style --- */}
+
+        {selectedRoads.includes("Roads") && (
+          <GeoJSON key="roads" data={roads} style={roadLineStyle} />
         )}
 
         {/* Render markers for filtered airports */}

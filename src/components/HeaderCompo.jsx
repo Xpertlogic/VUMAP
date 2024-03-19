@@ -18,15 +18,15 @@ function HeaderCompo() {
   const [drawerVisible, setDrawerVisible] = useState(false);
   //------------For Page Refresh Data store In Local Storage -----
 
-  // useEffect(() => {
-  //   if (!loggedIn) {
-  //     const timer = setInterval(() => {
-  //       setIsSignUpModalOpen(true);
-  //     }, 10000);
+  useEffect(() => {
+    if (!loggedIn && !isSignInModalOpen) {
+      const timer = setInterval(() => {
+        setIsSignUpModalOpen(true);
+      }, 5000);
 
-  //     return () => clearInterval(timer);
-  //   }
-  // }, [loggedIn]);
+      return () => clearInterval(timer);
+    }
+  }, [loggedIn, isSignInModalOpen]);
 
   const handleLogin = (email, authToken) => {
     login(email, authToken);
@@ -48,7 +48,7 @@ function HeaderCompo() {
   };
 
   const showSignUpModal = () => {
-    if (!isSignInModalOpen) {
+    if (!isSignInModalOpen && !loggedIn) {
       setIsSignUpModalOpen(true);
     }
   };
@@ -185,6 +185,7 @@ function HeaderCompo() {
         </Content>
       </Layout>
       {/* Sign In Modal  */}
+
       <Modal
         title="Sign In"
         open={isSignInModalOpen}

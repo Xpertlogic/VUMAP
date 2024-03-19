@@ -1,5 +1,5 @@
 import { Form, Input, Button } from "antd";
-import { PhoneTwoTone, MailTwoTone } from "@ant-design/icons";
+import { PhoneTwoTone, MailTwoTone, HomeTwoTone } from "@ant-design/icons";
 import SocialMedia from "./SocialMedia";
 
 function ContactUs() {
@@ -14,10 +14,20 @@ function ContactUs() {
             Phone:- <a href="tel:+918456898666">+91 8456898666</a>
           </span>
         </p>
-        <p className="mb-2">
+        <p>
           <MailTwoTone />
           <span>
-            Email:- <a href="mailto:support@gismapslayers.com">support@gismapslayers.com</a>
+            Email:-{" "}
+            <a href="mailto:support@gismapslayers.com">
+              support@gismapslayers.com
+            </a>
+          </span>
+        </p>
+        <p className="mb-4">
+          <HomeTwoTone />
+          <span>
+            Address:- PLOT NO 144/C, Prachi Enclave Road, Gujarat Bhawan,
+            Bhubaneswar, Khordha, Odisha, 751023
           </span>
         </p>
         <div>

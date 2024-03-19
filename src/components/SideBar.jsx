@@ -23,7 +23,6 @@ const { Sider } = Layout;
 
 const CheckboxGroup = Checkbox.Group;
 function SideBar({
-  // stateData,
   markersInsidePolygon,
   setMarkersInsidePolygon,
   onToggleMapLayerVisibility,
@@ -33,8 +32,9 @@ function SideBar({
   onSelectedCity,
   onAirportTypeChange,
   onRailTypeChange,
+  onRoadTypeChange,
   onPoiTypesChange,
-  selectedRoadTypes,
+
   onBuildingTypeChange,
   homeSelected,
 }) {
@@ -115,15 +115,13 @@ function SideBar({
     setRoadData(val);
     setCheckRoads(!!val.length && val.length < roadTypes.length);
     setCheckAllRoad(val.length === roadTypes.length);
-    selectedRoadTypes(val);
-    // onRoadTypeChange(val);
+    onRoadTypeChange(val);
   };
   const onCheckAllRoad = (e) => {
     setRoadData(e.target.checked ? roadTypes : []);
     setCheckRoads(false);
     setCheckAllRoad(e.target.checked);
-    selectedRoadTypes(e.target.checked ? roadTypes : []);
-    // onRoadTypeChange(e.target.checked ? roadTypes : []);
+    onRoadTypeChange(e.target.checked ? roadTypes : []);
   };
 
   /* --------------- Buildings ------------- */
@@ -313,63 +311,6 @@ function SideBar({
 
   /* ----------------------------------------------- */
 
-  /* ----- Countries ----- */
-
-  const handleCountryChange = (value) => {
-    setSelectedCountry(value);
-    onSelectedCountry(value.toLowerCase());
-    setCheckAllPOI({});
-    setIndeterminatePOI({});
-    setCheckedListPOI({});
-    onPoiTypesChange([]);
-    onSelectedCity("");
-    setSelectedCity("");
-    setSelectedDistrict("");
-    onSelectedDistrict("");
-    setSelectedState("");
-    onSelectedState("");
-  };
-
-  /* ----- States ----- */
-  const handleStateChange = (value) => {
-    setSelectedState(value);
-    onSelectedState(value.toLowerCase());
-    setCheckAllPOI({});
-    setIndeterminatePOI({});
-    setCheckedListPOI({});
-    onPoiTypesChange([]);
-    onSelectedCity("");
-    setSelectedCity("");
-    setSelectedDistrict("");
-    onSelectedDistrict("");
-  };
-
-  /* ----- Districts ----- */
-
-  const handleDistrictChange = (value) => {
-    setSelectedDistrict(value);
-    onSelectedDistrict(value.toLowerCase());
-    setCheckAllPOI({});
-    setIndeterminatePOI({});
-    onPoiTypesChange([]);
-    setCheckedListPOI({});
-    onSelectedCity("");
-    setSelectedCity("");
-  };
-
-  /* ----- Cities ----- */
-
-  const handleCityChange = (value) => {
-    onSelectedCity(value);
-    setSelectedCity(value.toLowerCase());
-    setCheckAllPOI({});
-    setIndeterminatePOI({});
-    setCheckedListPOI({});
-    onPoiTypesChange([]);
-  };
-
-  /* ---------------------------------- */
-
   /* ------ Get Data Limit ----- */
   const [limitData, setLimitData] = useState([]);
 
@@ -401,7 +342,6 @@ function SideBar({
       getLimitData();
     }
   };
-  console.log(userData);
   /* ---- After Success Of Subscription ------ */
 
   const handleOnSuccess = () => {
@@ -444,38 +384,6 @@ function SideBar({
     }
   };
 
-  /* -------------- For Reset ------------ */
-  const handleReset = () => {
-    setSelectedCountry("");
-    setSelectedState("");
-    setSelectedDistrict("");
-    setSelectedCity("");
-    setAirportData([]);
-    setCheckAirports(false);
-    setCheckAllAirport(false);
-    setRailData([]);
-    setCheckRails(false);
-    setCheckAllRail(false);
-    setRoadData([]);
-    setCheckRoads(false);
-    setCheckAllRoad(false);
-    setBuildingData([]);
-    setCheckBuildings(false);
-    setCheckAllBuilding(false);
-    setHomesSelected(false);
-    setCheckedListPOI({});
-    setIndeterminatePOI({});
-    setCheckAllPOI({});
-    onSelectedCountry("");
-    onSelectedState("");
-    onSelectedDistrict("");
-    onPoiTypesChange("");
-    onRailTypeChange("");
-    selectedRoadTypes("");
-    onBuildingTypeChange("");
-    homeSelected("");
-  };
-
   /* ------------Map Switch Layer ------------ */
   const handleMapLayerToggle = () => {
     const newVisibility = !isMapLayerVisible;
@@ -489,30 +397,6 @@ function SideBar({
   const handleCancel = () => {
     setIsSubscriptionModalOpen(false);
   };
-
-  // useEffect(() => {
-  //   // Function to prevent right-click on the sidebar when user is not logged in
-  //   const preventRightClick = (event) => {
-  //     if (!loggedIn) {
-  //       event.preventDefault();
-  //     }
-  //   };
-
-  //   // Function to prevent F12 key when user is not logged in
-  //   const preventF12 = (event) => {
-  //     if (!loggedIn && event.keyCode === 123) {
-  //       event.preventDefault();
-  //     }
-  //   };
-
-  //   document.addEventListener("contextmenu", preventRightClick);
-  //   document.addEventListener("keydown", preventF12);
-
-  //   return () => {
-  //     document.removeEventListener("contextmenu", preventRightClick);
-  //     document.removeEventListener("keydown", preventF12);
-  //   };
-  // }, [loggedIn]);
 
   /* ------ Get All Country/State/District/City Data ------ */
   const [allData, setAllData] = useState("");
@@ -568,6 +452,105 @@ function SideBar({
     homeSelected(e.target.checked);
   };
 
+  /* ----- Countries ----- */
+
+  const handleCountryChange = (value) => {
+    setSelectedCountry(value);
+    onSelectedCountry(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    setCheckedListPOI({});
+    onPoiTypesChange([]);
+    onSelectedCity("");
+    setSelectedCity("");
+    setSelectedDistrict("");
+    onSelectedDistrict("");
+    setSelectedState("");
+    onSelectedState("");
+  };
+
+  /* ----- States ----- */
+  const handleStateChange = (value) => {
+    setSelectedState(value);
+    onSelectedState(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    setCheckedListPOI({});
+    onPoiTypesChange([]);
+    onSelectedCity("");
+    setSelectedCity("");
+    setSelectedDistrict("");
+    onSelectedDistrict("");
+  };
+
+  /* ----- Districts ----- */
+
+  const handleDistrictChange = (value) => {
+    setSelectedDistrict(value);
+    onSelectedDistrict(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    onPoiTypesChange([]);
+    setCheckedListPOI({});
+    onSelectedCity("");
+    setSelectedCity("");
+  };
+
+  /* ----- Cities ----- */
+
+  const handleCityChange = (value) => {
+    onSelectedCity(value);
+    setSelectedCity(value.toLowerCase());
+    setCheckAllPOI({});
+    setIndeterminatePOI({});
+    setCheckedListPOI({});
+    onPoiTypesChange([]);
+  };
+
+  /* ---------- For Reset ----------- */
+
+  const handleReset = () => {
+    setSelectedCountry("");
+    setSelectedState("");
+    setSelectedDistrict("");
+    setSelectedCity("");
+
+    onSelectedCountry("");
+    onSelectedState("");
+    onSelectedDistrict("");
+    onSelectedCity("");
+
+    setAirportData([]);
+    setCheckAirports(false);
+    setCheckAllAirport(false);
+
+    setRailData([]);
+    setCheckRails(false);
+    setCheckAllRail(false);
+
+    setRoadData([]);
+    setCheckRoads(false);
+    setCheckAllRoad(false);
+
+    setBuildingData([]);
+    setCheckBuildings(false);
+    setCheckAllBuilding(false);
+
+    onBuildingTypeChange("");
+    homeSelected("");
+    setHomesSelected(false);
+
+    setCheckedListPOI({});
+    setIndeterminatePOI({});
+    setCheckAllPOI({});
+
+    onPoiTypesChange("");
+    onRailTypeChange("");
+    onRoadTypeChange("");
+  };
+
+  /* ---------------------------------- */
+
   return (
     <>
       <Sider width={300} className="side-bar">
@@ -599,8 +582,8 @@ function SideBar({
                 <Select
                   style={{ width: 160 }}
                   onChange={(value) => handleCountryChange(value)}
+                  value={selectedCountry ? selectedCountry : "Select Country"}
                 >
-                  <option value="">Select Country</option>
                   {filteredCountries.map((item, index) => {
                     return (
                       <Select.Option
@@ -624,9 +607,9 @@ function SideBar({
                 <Select
                   style={{ width: 160 }}
                   onChange={(value) => handleStateChange(value)}
+                  value={selectedState ? selectedState : "Select State"}
                   disabled={selectedCountry?.length < 1}
                 >
-                  <Select.Option value="">Select State</Select.Option>
                   {filteredStates.map((item, index) => {
                     return (
                       <Select.Option
@@ -650,9 +633,11 @@ function SideBar({
                 <Select
                   style={{ width: 160 }}
                   onChange={(value) => handleDistrictChange(value)}
+                  value={
+                    selectedDistrict ? selectedDistrict : "Select District"
+                  }
                   disabled={selectedState?.length < 1}
                 >
-                  <option value="">Select District</option>
                   <option value="Khordha">Khordha</option>
                   {filteredDistricts.map((item, index) => {
                     return (
@@ -677,9 +662,9 @@ function SideBar({
                 <Select
                   style={{ width: 160 }}
                   onChange={(value) => handleCityChange(value)}
+                  value={selectedCity ? selectedCity : "Select City"}
                   disabled={selectedDistrict?.length < 1}
                 >
-                  <option value="">Select City</option>
                   <option value="bhubaneswar">Bhubaneswar</option>
                   {filteredCities.map((item, index) => {
                     return (
