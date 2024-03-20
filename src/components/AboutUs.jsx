@@ -109,11 +109,11 @@ function AboutUs() {
           </p>
         </div>
 
-        <div className="right-box">
+        {/* <div className="right-box">
           <Suspense fallback={<div>Loading...</div>}>
             <UpdateBox />
           </Suspense>
-        </div>
+        </div> */}
       </div>
     </section>
   );

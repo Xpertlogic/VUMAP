@@ -435,20 +435,25 @@ function OpenMap({
     setSelectedPolygonLayer(reactFGref);
   };
 
+  /*---> Function to disable both right-click and left-click --- */
+  const disableClicksOff = (e) => {
+    e.preventDefault();
+  };
+
   /* ------------------------------------------- */
-  console.log(userData)
+  console.log(userData);
   return (
     <div>
       <MapContainer
         key={centerPosition}
         center={centerPosition}
         zoom={zoomLevel}
-        scrollWheelZoom={loggedIn && userData?.tier !== 'free' ? true : false}
+        scrollWheelZoom={loggedIn && userData?.tier !== "free" ? true : false}
         style={{
           height: "100vh",
           width: "100%",
         }}
-        maxZoom={loggedIn && userData?.tier !== 'free' ? 18 : 8}
+        maxZoom={loggedIn && userData?.tier !== "free" ? 18 : 8}
       >
         {countryView && countryData && (
           <GeoJSON data={countryData} style={countryCornersStyle} />
@@ -509,6 +514,8 @@ function OpenMap({
                         <img
                           src={`${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/${cityView}_housenumber_photo/${houseNumber.properties.Photo_Name}.jpg`}
                           alt="No_Image"
+                          onContextMenu={disableClicksOff}
+                          onClick={disableClicksOff}
                         />
                       )}
                       <h3 className="text-[2rem]">
@@ -610,6 +617,8 @@ function OpenMap({
                         <img
                           src={`${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/${cityView}_POI_photo/${poi.properties.Photo_Name}.jpg`}
                           alt="No_Image"
+                          onContextMenu={disableClicksOff}
+                          onClick={disableClicksOff}
                         />
                       )}
                       <h3 className="text-[3rem]">{poi.properties.Name}</h3>

@@ -22,15 +22,6 @@ const Profile = () => {
     }
   }, [userData]);
 
-  /* ---------- Download Boundary -------- */
-  const handleDownloadBoundary = () => {
-    const dropboxLink =
-      "https://www.dropbox.com/scl/fi/nw4rpd8r2g798i1dtd61a/vumtech_19th.zip?rlkey=drnpsicogdbkhtujr19thavs6&dl=0";
-    window.location.href = dropboxLink;
-  };
-
-  /* ---------- Sample Data -------- */
-
   /* ---------- Logout -------- */
   const handleLogout = () => {
     logout();
@@ -51,23 +42,6 @@ const Profile = () => {
     },
     {
       label: (
-        <p className="profile-link" onClick={handleDownloadBoundary}>
-          Download Boundary
-        </p>
-      ),
-      key: "2",
-    },
-    {
-      label: (
-        <p className="profile-link" onClick={handleDownloadBoundary}>
-          Sample Data
-        </p>
-      ),
-      key: "3",
-    },
-
-    {
-      label: (
         <div className="profile-btn">
           <Button
             className="button-item"
@@ -79,7 +53,7 @@ const Profile = () => {
           </Button>
         </div>
       ),
-      key: "4",
+      key: "2",
     },
   ];
 

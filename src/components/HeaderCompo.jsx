@@ -28,6 +28,15 @@ function HeaderCompo() {
     }
   }, [loggedIn, isSignInModalOpen]);
 
+  /* ---------- Download Boundary -------- */
+  const handleDownloadBoundary = () => {
+    const dropboxLink =
+      "https://www.dropbox.com/scl/fi/nw4rpd8r2g798i1dtd61a/vumtech_19th.zip?rlkey=drnpsicogdbkhtujr19thavs6&dl=0";
+    window.location.href = dropboxLink;
+  };
+
+  /* ---------- Sample Data -------- */
+
   const handleLogin = (email, authToken) => {
     login(email, authToken);
     setShowWelcomeModal(true);
@@ -96,6 +105,17 @@ function HeaderCompo() {
             <div>
               {loggedIn ? (
                 <div className="header-btn-group">
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size="large"
+                    onClick={handleDownloadBoundary}
+                  >
+                    Download boundary
+                  </Button>
+                  <Button className="button-item" type="primary" size="large">
+                    Sample data
+                  </Button>
                   <Profile />
                 </div>
               ) : (
@@ -139,6 +159,21 @@ function HeaderCompo() {
             <div>
               {loggedIn ? (
                 <div className="header-btn-group">
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size={screens.md ? "large" : "middle"}
+                    onClick={handleDownloadBoundary}
+                  >
+                    Download boundary
+                  </Button>
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size={screens.md ? "large" : "middle"}
+                  >
+                    Sample data
+                  </Button>
                   <Profile />
                 </div>
               ) : (
