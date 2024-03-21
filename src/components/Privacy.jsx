@@ -106,7 +106,7 @@ const Privacy = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                8456898666
+                <span className="text-green-600">8456898666</span>
               </a>{" "}
               .
             </p>

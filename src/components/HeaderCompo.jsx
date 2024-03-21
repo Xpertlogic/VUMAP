@@ -11,6 +11,7 @@ const { Content } = Layout;
 
 function HeaderCompo() {
   /* ------ for User Login ----- */
+
   const { loggedIn, login, userData } = useContext(LoginContext);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
@@ -18,21 +19,27 @@ function HeaderCompo() {
   const [drawerVisible, setDrawerVisible] = useState(false);
   //------------For Page Refresh Data store In Local Storage -----
 
-  useEffect(() => {
-    if (!loggedIn && !isSignInModalOpen) {
-      const timer = setInterval(() => {
-        setIsSignUpModalOpen(true);
-      }, 12000);
+  // useEffect(() => {
+  //   if (!loggedIn && !isSignInModalOpen) {
+  //     const timer = setInterval(() => {
+  //       setIsSignUpModalOpen(true);
+  //     }, 12000);
 
-      return () => clearInterval(timer);
-    }
-  }, [loggedIn, isSignInModalOpen]);
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [loggedIn, isSignInModalOpen]);
 
   /* ---------- Download Boundary -------- */
+
   const handleDownloadBoundary = () => {
     const dropboxLink =
       "https://www.dropbox.com/scl/fi/nw4rpd8r2g798i1dtd61a/vumtech_19th.zip?rlkey=drnpsicogdbkhtujr19thavs6&dl=0";
-    window.location.href = dropboxLink;
+
+    if (!loggedIn) {
+      setIsSignInModalOpen(true);
+    } else {
+      window.location.href = dropboxLink;
+    }
   };
 
   /* ---------- Sample Data -------- */
@@ -113,13 +120,18 @@ function HeaderCompo() {
                   >
                     Download boundary
                   </Button>
-                  <Button className="button-item" type="primary" size="large">
-                    Sample data
-                  </Button>
                   <Profile />
                 </div>
               ) : (
                 <div className="header-btn-group">
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size="large"
+                    onClick={handleDownloadBoundary}
+                  >
+                    Download boundary
+                  </Button>
                   <Button
                     className="button-item"
                     type="primary"
@@ -162,22 +174,23 @@ function HeaderCompo() {
                   <Button
                     className="button-item"
                     type="primary"
-                    size={screens.md ? "large" : "middle"}
+                    size="large"
                     onClick={handleDownloadBoundary}
                   >
                     Download boundary
-                  </Button>
-                  <Button
-                    className="button-item"
-                    type="primary"
-                    size={screens.md ? "large" : "middle"}
-                  >
-                    Sample data
                   </Button>
                   <Profile />
                 </div>
               ) : (
                 <div className="header-btn-group">
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size={screens.md ? "large" : "middle"}
+                    onClick={handleDownloadBoundary}
+                  >
+                    Download boundary
+                  </Button>
                   <Button
                     className="button-item"
                     type="primary"

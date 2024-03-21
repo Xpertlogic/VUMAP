@@ -14,7 +14,7 @@ function ContactUs() {
             Phone:- <a href="tel:+918456898666">+91 8456898666</a>
           </span>
         </p>
-        <p>
+        <p className="mb-4">
           <MailTwoTone />
           <span>
             Email:-{" "}
@@ -23,7 +23,7 @@ function ContactUs() {
             </a>
           </span>
         </p>
-        <p className="mb-4">
+        <p className="mb-4 leading-tight">
           <HomeTwoTone />
           <span>
             Address:- PLOT NO 144/C, Prachi Enclave Road, Gujarat Bhawan,

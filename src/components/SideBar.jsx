@@ -372,7 +372,7 @@ function SideBar({
 
         const a = document.createElement("a");
         a.href = url;
-        a.download = "markers_inside_polygon.geojson";
+        a.download = "GISMAPSLAYERS.geojson";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

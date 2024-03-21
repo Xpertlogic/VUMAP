@@ -510,7 +510,7 @@ function OpenMap({
                 {loggedIn && (
                   <Popup>
                     <div>
-                      {houseNumber.properties.Photo_Name.length > 0 && (
+                      {houseNumber.properties.Photo_Name?.length > 0 && (
                         <img
                           src={`${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/${cityView}_housenumber_photo/${houseNumber.properties.Photo_Name}.jpg`}
                           alt="No_Image"
@@ -613,7 +613,7 @@ function OpenMap({
                 {loggedIn && (
                   <Popup>
                     <div>
-                      {poi.properties.Photo_Name.length > 0 && (
+                      {poi.properties.Photo_Name?.length > 0 && (
                         <img
                           src={`${baseUrl}/${countryView}/${stateView}/${districtView}/${cityView}/${cityView}_POI_photo/${poi.properties.Photo_Name}.jpg`}
                           alt="No_Image"

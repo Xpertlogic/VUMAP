@@ -15,7 +15,7 @@ const Login = ({ onLogin }) => {
     );
     if (user) {
       onLogin();
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard"); //check for admin
     } else {
       setError("Invalid username or password");
     }

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { notification, Button, Form, Input } from "antd";
 import axios from "axios";
@@ -25,12 +24,6 @@ const Signin = ({ onLogin }) => {
         response.data.roles[0] === "ROLE_USER"
       ) {
         onLogin(response.data.email, response.data.token, password);
-        // console.log(response.data);
-
-        // notification.success({
-        //   message: "Login Successful",
-        //   description: "You have successfully logged in.",
-        // });
       } else {
         notification.error({
           message: "Login Failed",

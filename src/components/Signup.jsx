@@ -307,7 +307,6 @@ function Signup() {
             <Input.Password className="mb-5" />
           </Form.Item>
           <Form.Item
-            className="text-center"
             name="agree"
             valuePropName="checked"
             rules={[
@@ -320,7 +319,10 @@ function Signup() {
             ]}
           >
             <Checkbox>
-              I agree to the <Link to="/terms&condition">T&C</Link>
+              I agree to the{" "}
+              <a href="/terms&condition">
+                <span className="text-blue-600">Terms & Conditions</span>
+              </a>
             </Checkbox>
           </Form.Item>
 
