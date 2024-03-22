@@ -63,7 +63,7 @@ function Subscription({ onSuccess }) {
         key: "rzp_test_DBSJe5ZFN2DJ8x",
         amount: amount,
         currency: "INR",
-        name: "Acme Corp",
+        name: "GISMAPSLAYERS",
         description: `Subscription for ${plan}`,
         image: "",
         handler: async (razorpayResponse) => {
