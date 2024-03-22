@@ -34,7 +34,6 @@ function SideBar({
   onRailTypeChange,
   onRoadTypeChange,
   onPoiTypesChange,
-
   onBuildingTypeChange,
   homeSelected,
 }) {
@@ -523,6 +522,7 @@ function SideBar({
     setAirportData([]);
     setCheckAirports(false);
     setCheckAllAirport(false);
+    onAirportTypeChange();
 
     setRailData([]);
     setCheckRails(false);
@@ -544,9 +544,9 @@ function SideBar({
     setIndeterminatePOI({});
     setCheckAllPOI({});
 
-    onPoiTypesChange("");
     onRailTypeChange("");
     onRoadTypeChange("");
+    onPoiTypesChange("");
   };
 
   /* ---------------------------------- */
