@@ -310,16 +310,16 @@ function OpenMap({
   useEffect(() => {
     const getData = () => {
       let newData = [];
-      if (selectedAirportTypes.length > 0) {
+      if (selectedAirportTypes?.length > 0) {
         newData = [...newData, ...filteredAirports];
       }
-      if (selectedRailTypes.length > 0) {
+      if (selectedRailTypes?.length > 0) {
         newData = [...newData, ...filteredPlatform];
       }
       if (homeSelected === true) {
         newData = [...newData, ...filteredHouseNum];
       }
-      if (selectedPoiTypes.length > 0) {
+      if (selectedPoiTypes?.length > 0) {
         newData = [...newData, ...filteredPOI];
       }
 

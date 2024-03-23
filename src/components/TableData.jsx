@@ -45,11 +45,11 @@ function TableData({
         case "Airports":
           return count > limitData.airports ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 20 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -59,11 +59,11 @@ function TableData({
         case "Railway Stations":
           return count > limitData.railwayStations ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 20 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -77,11 +77,11 @@ function TableData({
         case "Automotive Dealer":
           return count > limitData.automotiveDealer ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 20 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -89,11 +89,11 @@ function TableData({
         case "Building POI":
           return count > limitData.buildingPOI ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 30 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -101,11 +101,11 @@ function TableData({
         case "Business Park":
           return count > limitData.businessPark ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -113,11 +113,11 @@ function TableData({
         case "Companies":
           return count > limitData.companies ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -125,11 +125,11 @@ function TableData({
         case "Education":
           return count > limitData.education ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -137,11 +137,11 @@ function TableData({
         case "Entertainment":
           return count > limitData.entertainment ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -149,11 +149,11 @@ function TableData({
         case "Finance":
           return count > limitData.finance ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -161,11 +161,11 @@ function TableData({
         case "Golf Course":
           return count > limitData.golfCourse ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -173,11 +173,11 @@ function TableData({
         case "Government Office":
           return count > limitData.governmentOffice ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -185,11 +185,11 @@ function TableData({
         case "Health Care":
           return count > limitData.healthCare ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -197,11 +197,11 @@ function TableData({
         case "Accommodation":
           return count > limitData.accommodation ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -209,11 +209,11 @@ function TableData({
         case "Hotel/Restaurants":
           return count > limitData.hotelRestaurants ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -221,11 +221,11 @@ function TableData({
         case "Park and Recreation Area":
           return count > limitData.parkAndRecreationArea ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -233,11 +233,11 @@ function TableData({
         case "Place of Worship":
           return count > limitData.placeOfWorship ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -245,11 +245,11 @@ function TableData({
         case "Public Amenity":
           return count > limitData.publicAmenity ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -257,11 +257,11 @@ function TableData({
         case "Repair Facility":
           return count > limitData.repairFacility ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -269,11 +269,11 @@ function TableData({
         case "Services":
           return count > limitData.services ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -281,11 +281,11 @@ function TableData({
         case "Shopping Centre":
           return count > limitData.shoppingCentre ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -293,11 +293,11 @@ function TableData({
         case "Sports Centre":
           return count > limitData.sportsCentre ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -305,11 +305,11 @@ function TableData({
         case "Utility":
           return count > limitData.utility ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -317,11 +317,11 @@ function TableData({
         case "Zoo":
           return count > limitData.zoo ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -329,11 +329,11 @@ function TableData({
         case "Shop":
           return count > limitData.shop ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 10 ).{" "}
+              {count} - Your limit (Limit-50) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -346,11 +346,11 @@ function TableData({
         case "Airports":
           return count > limitData.airports ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -360,11 +360,11 @@ function TableData({
         case "Railway Stations":
           return count > limitData.railwayStations ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -376,11 +376,11 @@ function TableData({
         case "House Number":
           return count > limitData.houseNo ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -388,11 +388,11 @@ function TableData({
         case "Automotive Dealer":
           return count > limitData.automotiveDealer ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -400,11 +400,11 @@ function TableData({
         case "Building POI":
           return count > limitData.buildingPOI ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -412,11 +412,11 @@ function TableData({
         case "Business Park":
           return count > limitData.businessPark ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -424,11 +424,11 @@ function TableData({
         case "Companies":
           return count > limitData.companies ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -436,11 +436,11 @@ function TableData({
         case "Education":
           return count > limitData.education ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -448,11 +448,11 @@ function TableData({
         case "Entertainment":
           return count > limitData.entertainment ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -460,11 +460,11 @@ function TableData({
         case "Finance":
           return count > limitData.finance ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -472,11 +472,11 @@ function TableData({
         case "Golf Course":
           return count > limitData.golfCourse ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -484,11 +484,11 @@ function TableData({
         case "Government Office":
           return count > limitData.governmentOffice ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -496,11 +496,11 @@ function TableData({
         case "Health Care":
           return count > limitData.healthCare ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -508,11 +508,11 @@ function TableData({
         case "Accommodation":
           return count > limitData.accommodation ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -520,11 +520,11 @@ function TableData({
         case "Hotel/Restaurants":
           return count > limitData.hotelRestaurants ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -532,11 +532,11 @@ function TableData({
         case "Park and Recreation Area":
           return count > limitData.parkAndRecreationArea ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -544,11 +544,11 @@ function TableData({
         case "Place of Worship":
           return count > limitData.placeOfWorship ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -556,11 +556,11 @@ function TableData({
         case "Public Amenity":
           return count > limitData.publicAmenity ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -568,11 +568,11 @@ function TableData({
         case "Repair Facility":
           return count > limitData.repairFacility ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -580,11 +580,11 @@ function TableData({
         case "Services":
           return count > limitData.services ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -592,11 +592,11 @@ function TableData({
         case "Shopping Centre":
           return count > limitData.shoppingCentre ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -604,11 +604,11 @@ function TableData({
         case "Sports Centre":
           return count > limitData.sportsCentre ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -616,11 +616,11 @@ function TableData({
         case "Utility":
           return count > limitData.utility ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -628,11 +628,11 @@ function TableData({
         case "Zoo":
           return count > limitData.zoo ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count
@@ -640,11 +640,11 @@ function TableData({
         case "Shop":
           return count > limitData.shop ? (
             <span className="span-text">
-              {count} -You have reached your limit please connect with our
-              Backend Team for more information (limit - 50 ).{" "}
+              {count} - Your limit (Limit-150) exceeded. For more data{" "}
               <Link to="/contact" className="text-blue-300">
                 Contact Us
               </Link>
+              .
             </span>
           ) : (
             count

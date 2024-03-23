@@ -19,15 +19,15 @@ function HeaderCompo() {
   const [drawerVisible, setDrawerVisible] = useState(false);
   //------------For Page Refresh Data store In Local Storage -----
 
-  // useEffect(() => {
-  //   if (!loggedIn && !isSignInModalOpen) {
-  //     const timer = setInterval(() => {
-  //       setIsSignUpModalOpen(true);
-  //     }, 12000);
+  useEffect(() => {
+    if (!loggedIn && !isSignInModalOpen) {
+      const timer = setInterval(() => {
+        setIsSignUpModalOpen(true);
+      }, 15000);
 
-  //     return () => clearInterval(timer);
-  //   }
-  // }, [loggedIn, isSignInModalOpen]);
+      return () => clearInterval(timer);
+    }
+  }, [loggedIn, isSignInModalOpen]);
 
   /* ---------- Download Boundary -------- */
 

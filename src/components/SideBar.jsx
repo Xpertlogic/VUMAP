@@ -34,7 +34,6 @@ function SideBar({
   onRailTypeChange,
   onRoadTypeChange,
   onPoiTypesChange,
-
   onBuildingTypeChange,
   homeSelected,
 }) {
@@ -356,6 +355,20 @@ function SideBar({
     setIsCategoryModalOpen(false);
   };
 
+  /*-> Subscription Modal Showing every 20 sec (without logged In)*/
+
+  useEffect(() => {
+    if (loggedIn) {
+      if (userData?.tier === "free") {
+        const timer = setInterval(() => {
+          setIsSubscriptionModalOpen(true);
+        }, 20000);
+
+        return () => clearInterval(timer);
+      }
+    }
+  }, [loggedIn, userData]);
+
   /* ----------Polygon Create----------- */
 
   const handleDownloadMarkersInsidePolygon = () => {
@@ -523,6 +536,7 @@ function SideBar({
     setAirportData([]);
     setCheckAirports(false);
     setCheckAllAirport(false);
+    onAirportTypeChange();
 
     setRailData([]);
     setCheckRails(false);
@@ -544,9 +558,9 @@ function SideBar({
     setIndeterminatePOI({});
     setCheckAllPOI({});
 
-    onPoiTypesChange("");
     onRailTypeChange("");
     onRoadTypeChange("");
+    onPoiTypesChange("");
   };
 
   /* ---------------------------------- */
@@ -831,9 +845,9 @@ function SideBar({
       <Modal
         open={isSubscriptionModalOpen}
         onCancel={handleCancel}
-        style={{ margin: 10, padding: 0 }}
+        style={{ margin: 20, padding: 10 }}
         centered
-        width={"90%"}
+        width={"85%"}
         footer={null}
       >
         <Subscription onSuccess={handleOnSuccess} />
