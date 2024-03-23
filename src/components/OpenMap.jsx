@@ -448,12 +448,12 @@ function OpenMap({
         key={centerPosition}
         center={centerPosition}
         zoom={zoomLevel}
-        scrollWheelZoom={loggedIn && userData?.tier !== "free" ? true : false}
+        scrollWheelZoom={loggedIn ? true : false}
         style={{
           height: "100vh",
           width: "100%",
         }}
-        maxZoom={loggedIn && userData?.tier !== "free" ? 18 : 8}
+        maxZoom={loggedIn ? 18 : 8}
       >
         {countryView && countryData && (
           <GeoJSON data={countryData} style={countryCornersStyle} />

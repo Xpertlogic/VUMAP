@@ -33,7 +33,7 @@ function HeaderCompo() {
 
   const handleDownloadBoundary = () => {
     const dropboxLink =
-      "https://www.dropbox.com/scl/fi/nw4rpd8r2g798i1dtd61a/vumtech_19th.zip?rlkey=drnpsicogdbkhtujr19thavs6&dl=0";
+      "https://drive.google.com/drive/folders/1oWgiuVS3Zy4QtnBa5UnmbZ9NYLHjTCm7?usp=drive_link";
 
     if (!loggedIn) {
       setIsSignInModalOpen(true);

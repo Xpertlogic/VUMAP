@@ -166,7 +166,7 @@ function Subscription({ onSuccess }) {
             title="Basic Plan"
             price="₹299/ Month"
             features={[
-              "All data will visible and user can analyze",
+              "All data will visible, user can analyze and download",
               "Unlimited admin Boundary Downloads (up to postal label)",
               "User can Download 50 leads per category",
             ]}
@@ -176,7 +176,7 @@ function Subscription({ onSuccess }) {
             title="Business Plan"
             price="₹2999 /1 Year"
             features={[
-              "All data will visible and user can analyze",
+              "All data will visible, user can analyze and download",
               "Unlimited admin Boundary Downloads(up to Village label)",
               "User can Download 150 leads per category",
               "House Numbers and Roads signs are Exclusive access for Business Plans.",
