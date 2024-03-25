@@ -107,7 +107,7 @@ function HeaderCompo() {
         <Link to="/">Home</Link>
       </Menu.Item>
       <Menu.Item key="/about">
-        <Link to="/about">About</Link>
+        <Link to="/about">About Us</Link>
       </Menu.Item>
       <Menu.Item key="/contact">
         <Link to="/contact">Contact</Link>
