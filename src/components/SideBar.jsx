@@ -357,17 +357,17 @@ function SideBar({
 
   /*-> Subscription Modal Showing every 20 sec (without logged In)*/
 
-  useEffect(() => {
-    if (loggedIn) {
-      if (userData?.tier === "free") {
-        const timer = setInterval(() => {
-          setIsSubscriptionModalOpen(true);
-        }, 20000);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     if (userData?.tier === "free") {
+  //       const timer = setInterval(() => {
+  //         setIsSubscriptionModalOpen(true);
+  //       }, 20000);
 
-        return () => clearInterval(timer);
-      }
-    }
-  }, [loggedIn, userData]);
+  //       return () => clearInterval(timer);
+  //     }
+  //   }
+  // }, [loggedIn, userData]);
 
   /* ----------Polygon Create----------- */
 

@@ -14,7 +14,7 @@ const Dashboard = () => {
   }));
 
   return (
-    <Layout className="container">
+    <Layout className="container dashboard">
       <Sider>
         <div className="demo-logo-vertical" />
         <Menu
@@ -32,7 +32,7 @@ const Dashboard = () => {
         <div
           style={{
             padding: 24,
-            minHeight: 500,
+            minHeight: 580,
           }}
         >
           <AddData />

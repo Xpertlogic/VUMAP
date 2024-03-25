@@ -19,30 +19,47 @@ function HeaderCompo() {
   const [drawerVisible, setDrawerVisible] = useState(false);
   //------------For Page Refresh Data store In Local Storage -----
 
-  useEffect(() => {
-    if (!loggedIn && !isSignInModalOpen) {
-      const timer = setInterval(() => {
-        setIsSignUpModalOpen(true);
-      }, 15000);
+  // useEffect(() => {
+  //   if (!loggedIn && !isSignInModalOpen) {
+  //     const timer = setInterval(() => {
+  //       setIsSignUpModalOpen(true);
+  //     }, 15000);
 
-      return () => clearInterval(timer);
-    }
-  }, [loggedIn, isSignInModalOpen]);
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [loggedIn, isSignInModalOpen]);
 
   /* ---------- Download Boundary -------- */
 
   const handleDownloadBoundary = () => {
-    const dropboxLink =
+    const freeBoundaryLink =
+      "https://drive.google.com/drive/folders/1iShkPIDFNQdC1r0NAo0eawlOck53etM9?usp=drive_link";
+
+    const basicBoundaryLink =
       "https://drive.google.com/drive/folders/1oWgiuVS3Zy4QtnBa5UnmbZ9NYLHjTCm7?usp=drive_link";
+
+    const businessBoundaryLink =
+      "https://drive.google.com/drive/folders/14MNv34Apha5RgWm2ndQTZOT-XsDecHm_?usp=drive_link";
 
     if (!loggedIn) {
       setIsSignInModalOpen(true);
+    } else if (userData.tier === "tier1") {
+      window.location.href = basicBoundaryLink;
+    } else if (userData.tier === "tier2") {
+      window.location.href = businessBoundaryLink;
     } else {
-      window.location.href = dropboxLink;
+      window.location.href = freeBoundaryLink;
     }
   };
 
   /* ---------- Sample Data -------- */
+
+  const handleSampleData = () => {
+    const sampleDataLink =
+      "https://drive.google.com/drive/folders/1FLrOl6BSwcs0vkDlX9XotxgOx2_p4KyX?usp=drive_link";
+
+    window.location.href = sampleDataLink;
+  };
 
   const handleLogin = (email, authToken) => {
     login(email, authToken);
@@ -120,6 +137,14 @@ function HeaderCompo() {
                   >
                     Download boundary
                   </Button>
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size="large"
+                    onClick={handleSampleData}
+                  >
+                    Sample data
+                  </Button>
                   <Profile />
                 </div>
               ) : (
@@ -178,6 +203,14 @@ function HeaderCompo() {
                     onClick={handleDownloadBoundary}
                   >
                     Download boundary
+                  </Button>
+                  <Button
+                    className="button-item"
+                    type="primary"
+                    size="large"
+                    onClick={handleSampleData}
+                  >
+                    Sample data
                   </Button>
                   <Profile />
                 </div>
