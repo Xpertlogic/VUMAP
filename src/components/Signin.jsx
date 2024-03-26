@@ -11,7 +11,7 @@ const Signin = ({ onLogin }) => {
     try {
       // Make a POST request using Axios
       const response = await axios.post(
-        "https://54.252.180.142:8080/api/auth/signin",
+        "http://54.252.180.142:8080/api/auth/signin",
         {
           email: email,
           password: password,
