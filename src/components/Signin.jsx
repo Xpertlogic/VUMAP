@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { notification, Button, Form, Input } from "antd";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Signin = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const onFinish = async () => {
     try {
       // Make a POST request using Axios
@@ -24,6 +25,15 @@ const Signin = ({ onLogin }) => {
         response.data.roles[0] === "ROLE_USER"
       ) {
         onLogin(response.data.email, response.data.token, password);
+      }
+      else if (
+        response.data &&
+        response.data.email === email &&
+        response.data.token &&
+        response.data.roles[0] === "ROLE_ADMIN"
+      ) {
+        localStorage.setItem("admintoken", response.data.token);
+        navigate("/admin/dashboard");
       } else {
         notification.error({
           message: "Login Failed",
