@@ -321,7 +321,7 @@ function SideBar({
       };
 
       const response = await axios.get(
-        "http://54.252.180.142:8080/api/user/getlimit",
+        "https://gismapslayers.com:8080/api/user/getlimit",
         {
           headers: headers,
         }

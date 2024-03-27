@@ -702,7 +702,7 @@ function TableData({
       };
 
       const response = await axios.post(
-        "http://54.252.180.142:8080/api/user/updatelimit",
+        "https://gismapslayers.com/api/user/updatelimit",
         convertedData,
         {
           headers: headers,

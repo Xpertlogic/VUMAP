@@ -83,7 +83,7 @@ function Subscription({ onSuccess }) {
               };
 
               const response = await axios.post(
-                "http://54.252.180.142:8080/api/user/payments",
+                "https://gismapslayers.com/api/user/payments",
                 Payload,
                 { headers: headers }
               );
