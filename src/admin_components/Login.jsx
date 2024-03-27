@@ -22,7 +22,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container login-section">
       <Form
         name="admin_login"
         layout="vertical"

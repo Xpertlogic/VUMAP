@@ -14,31 +14,29 @@ const Dashboard = () => {
   }));
 
   return (
-    <Layout className="container dashboard">
-      <Sider>
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={items}
-        >
-          {items.map((item) => (
-            <Menu.Item key={item.key}>{item.label}</Menu.Item>
-          ))}
-        </Menu>
-      </Sider>
-      <Content>
-        <div
-          style={{
-            padding: 24,
-            minHeight: 580,
-          }}
-        >
-          <AddData />
-        </div>
-      </Content>
-    </Layout>
+    <section className="container admin-section">
+      <h1>Admin Dashboard</h1>
+      <Layout className=" dashboard">
+        <Sider className="admin-sidebar">
+          <div className="demo-logo-vertical" />
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            items={items}
+          >
+            {items.map((item) => (
+              <Menu.Item key={item.key}>{item.label}</Menu.Item>
+            ))}
+          </Menu>
+        </Sider>
+        <Content>
+          <div className="main-data">
+            <AddData />
+          </div>
+        </Content>
+      </Layout>
+    </section>
   );
 };
 

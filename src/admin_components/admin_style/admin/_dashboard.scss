@@ -1,0 +1,27 @@
+.admin-section {
+    background-color: #F5F5F5;
+
+    h1 {
+        text-align: center;
+        margin: 2rem 0;
+
+        font: {
+            size: 4rem;
+            weight: 700;
+        }
+    }
+}
+
+
+
+.dashboard {
+
+    .admin-sidebar {
+        // padding: 1.5rem 0;
+        height: 70vh;
+    }
+
+    .main-data {
+        padding: 3rem;
+    }
+}

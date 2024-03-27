@@ -387,6 +387,11 @@ function OpenMap({
     iconSize: [32, 32],
     popupAnchor: [0, -10],
   });
+  const houseIcon = new L.Icon({
+    iconUrl: "images/home.webp",
+    iconSize: [32, 32],
+    popupAnchor: [0, -10],
+  });
 
   const poiIcon = new L.Icon({
     iconUrl: "images/markers.png",
@@ -501,7 +506,7 @@ function OpenMap({
             {houseNumber?.features?.map((houseNumber, index) => (
               <Marker
                 key={houseNumber + index}
-                icon={poiIcon}
+                icon={houseIcon}
                 position={[
                   houseNumber.geometry.coordinates[1],
                   houseNumber.geometry.coordinates[0],
@@ -534,14 +539,15 @@ function OpenMap({
         <MarkerClusterGroup disableClusteringAtZoom={18}>
           {buildingTypes?.length > 0 &&
             selectedBuildingsData?.features?.map((houseNumber, index) => (
-              <CustomMarker
-                key={index}
+              <Marker
+                key={houseNumber + index}
+                icon={houseIcon}
                 position={[
                   houseNumber?.geometry?.coordinates[1],
                   houseNumber?.geometry?.coordinates[0],
                 ]}
                 text={houseNumber.properties.streetname}
-              />
+              ></Marker>
             ))}
         </MarkerClusterGroup>
         <MarkerClusterGroup>
