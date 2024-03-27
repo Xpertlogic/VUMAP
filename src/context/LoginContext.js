@@ -12,7 +12,7 @@ export const LoginProvider = ({ children }) => {
   const verifyToken = async () => {
     try {
       const response = await axios.post(
-        "http://54.252.180.142:8080/api/v1/admin/verifytoken",
+        "https://gismapslayers.com/api/v1/admin/verifytoken",
         { token: storedToken }
       );
       setUserData(response.data);

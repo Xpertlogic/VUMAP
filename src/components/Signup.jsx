@@ -55,7 +55,7 @@ function Signup() {
     try {
       // Make a POST request to send OTP
       const response = await axios.post(
-        "http://54.252.180.142:8080/api/auth/send-otp",
+        "https://gismapslayers.com/api/auth/send-otp",
         {
           email: form.getFieldValue("email"),
         }
@@ -88,7 +88,7 @@ function Signup() {
     try {
       // Make a POST request to verify OTP
       const response = await axios.post(
-        "http://54.252.180.142:8080/api/auth/verify-otp",
+        "https://gismapslayers.com:8080/api/auth/verify-otp",
         {
           email,
           otp: values.otp,
@@ -99,7 +99,7 @@ function Signup() {
         // OTP verification successful, proceed with registration
         // Make a POST request to register user
         const registerResponse = await axios.post(
-          "http://54.252.180.142:8080/api/auth/signup",
+          "https://gismapslayers.com:8080/api/auth/signup",
           {
             username: values.name,
             password: values.password,
