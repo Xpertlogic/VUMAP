@@ -24,7 +24,7 @@ const AddData = () => {
     setCountryName(e.target.value);
   };
   useEffect(() => {
-    const getCountry = async() =>{
+    const getCountry = async () => {
       try {
         // Make a POST request to verify OTP
         const headers = {
@@ -35,19 +35,19 @@ const AddData = () => {
           "https://gismapslayers.com/api/v1/admin/country",
           { headers: headers }
         );
-        if(response.status === 200) {
-          const uniqueCountryNames = Array.from(new Set(response.data.map(item => item.countryname.toLowerCase())))
-          .filter(countryName => countryName.trim() !== '');
-          setCountries(uniqueCountryNames)
+        if (response.status === 200) {
+          const uniqueCountryNames = Array.from(
+            new Set(response.data.map((item) => item.countryname.toLowerCase()))
+          ).filter((countryName) => countryName.trim() !== "");
+          setCountries(uniqueCountryNames);
         }
-        }
-        catch (error) {
-          console.error("Error:", error);
-        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-      getCountry()
-  }, [countryName])
-  const handelAddedCountry = async() => {
+    };
+    getCountry();
+  }, [countryName]);
+  const handelAddedCountry = async () => {
     if (countryName.trim() !== "" && !countries.includes(countryName)) {
       try {
         // Make a POST request to verify OTP
@@ -63,14 +63,13 @@ const AddData = () => {
           },
           { headers: headers }
         );
-        if(response.status === 200) {
-          setCountryName("")
-          setCountries(countries.concat(countryName))
+        if (response.status === 200) {
+          setCountryName("");
+          setCountries(countries.concat(countryName));
         }
-        }
-        catch (error) {
-          console.error("Error:", error);
-        }
+      } catch (error) {
+        console.error("Error In To Add Country:", error);
+      }
     }
   };
 
@@ -79,14 +78,13 @@ const AddData = () => {
   const [selectCountryState, setSelectCountryState] = useState("");
   const [states, setStates] = useState([]);
   const changeCountry = (e) => {
-    setSelectCountryState(e)
-  }
+    setSelectCountryState(e);
+  };
   const handleStateInputChange = (e) => {
     setStateName(e.target.value);
   };
-  
+
   const handelAddedState = async () => {
-   
     if (stateName.trim() !== "" && !states.includes(stateName)) {
       try {
         // Make a POST request to verify OTP
@@ -103,14 +101,13 @@ const AddData = () => {
           },
           { headers: headers }
         );
-        if(response.status === 200) {
+        if (response.status === 200) {
           setStates([...states, stateName]);
           setStateName("");
         }
-        }
-        catch (error) {
-          console.error("Error:", error);
-        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   };
 
@@ -120,7 +117,7 @@ const AddData = () => {
   const [distState, setDistState] = useState("");
   const [districts, setDistricts] = useState([]);
   useEffect(() => {
-    const getState = async() =>{
+    const getState = async () => {
       try {
         // Make a POST request to verify OTP
         const headers = {
@@ -131,36 +128,35 @@ const AddData = () => {
           "https://gismapslayers.com/api/v1/admin/state",
           { headers: headers }
         );
-        if(response.status === 200) {
+        if (response.status === 200) {
           const statesWithMatchingCountry = response.data
-          .filter(item => item.country[0].countryname === distCountry) // Filter states based on country match
-          .map(item => item.statename.toLowerCase()); // Get state names and convert to lowercase
-  
-          const uniqueStateNames = Array.from(new Set(statesWithMatchingCountry))
-              .filter(statename => statename.trim() !== ''); // Get unique state names, excluding empty names
-      
+            .filter((item) => item.country[0].countryname === distCountry) // Filter states based on country match
+            .map((item) => item.statename.toLowerCase()); // Get state names and convert to lowercase
+
+          const uniqueStateNames = Array.from(
+            new Set(statesWithMatchingCountry)
+          ).filter((statename) => statename.trim() !== ""); // Get unique state names, excluding empty names
+
           setStates(uniqueStateNames);
-          setDistState("")
+          setDistState("");
         }
-        }
-        catch (error) {
-          console.error("Error:", error);
-        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-      getState()
-  }, [distCountry])
+    };
+    getState();
+  }, [distCountry]);
   const changeDistCountry = (e) => {
     setDistCountry(e);
-  }
+  };
   const changeDistState = (e) => {
     setDistState(e);
-  }
+  };
   const handleDistrictInputChange = (e) => {
     setDistrictName(e.target.value);
   };
-  
+
   const handelAddedDistrict = async () => {
-   
     if (districtName.trim() !== "" && !districts.includes(districtName)) {
       try {
         // Make a POST request to verify OTP
@@ -178,14 +174,13 @@ const AddData = () => {
           },
           { headers: headers }
         );
-        if(response.status === 200) {
+        if (response.status === 200) {
           setDistricts([...districts, districtName]);
           setDistrictName("");
         }
-        }
-        catch (error) {
-          console.error("Error:", error);
-        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   };
 
@@ -196,7 +191,7 @@ const AddData = () => {
   const [cityDistrict, setCityDistrict] = useState("");
   const [citys, setCitys] = useState([]);
   useEffect(() => {
-    const getState = async() =>{
+    const getState = async () => {
       try {
         // Make a POST request to verify OTP
         const headers = {
@@ -207,25 +202,24 @@ const AddData = () => {
           "https://gismapslayers.com/api/v1/admin/districts",
           { headers: headers }
         );
-        if(response.status === 200) {
+        if (response.status === 200) {
           // const statesWithMatchingCountry = response.data
           // .filter(item => item.country[0].countryname === distCountry) // Filter states based on country match
           // .map(item => item.statename.toLowerCase()); // Get state names and convert to lowercase
-  
+
           // const uniqueStateNames = Array.from(new Set(statesWithMatchingCountry))
           //     .filter(statename => statename.trim() !== ''); // Get unique state names, excluding empty names
-      
+
           // setStates(uniqueStateNames);
           // setDistState("")
-          console.log(response)
+          console.log(response);
         }
-        }
-        catch (error) {
-          console.error("Error:", error);
-        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-      getState()
-  }, [distCountry])
+    };
+    getState();
+  }, [distCountry]);
   const handleCityInputChange = (e) => {
     setCityName(e.target.value);
   };
@@ -260,14 +254,17 @@ const AddData = () => {
 
       {/* ----- Add State ----- */}
       <div className="add-data-item">
-        
-      <Select className="item-select" size="large" onChange={(event)=> changeCountry(event)}>
-      {countries.map((option) => (
-        <Select.Option key={option} value={option}>
-          {option}
-        </Select.Option>
-      ))}
-    </Select>
+        <Select
+          className="item-select"
+          size="large"
+          onChange={(event) => changeCountry(event)}
+        >
+          {countries.map((option) => (
+            <Select.Option key={option} value={option}>
+              {option}
+            </Select.Option>
+          ))}
+        </Select>
         <Input
           className="item-input"
           size="large"
@@ -289,14 +286,23 @@ const AddData = () => {
 
       {/* ----- Add District ----- */}
       <div className="add-data-item">
-          <Select className="item-select" size="large" onChange={(event)=> changeDistCountry(event)}>
+        <Select
+          className="item-select"
+          size="large"
+          onChange={(event) => changeDistCountry(event)}
+        >
           {countries.map((option) => (
             <Select.Option key={option} value={option}>
               {option}
             </Select.Option>
           ))}
         </Select>
-        <Select className="item-select" size="large" value={distState} onChange={(event)=> changeDistState(event)}>
+        <Select
+          className="item-select"
+          size="large"
+          value={distState}
+          onChange={(event) => changeDistState(event)}
+        >
           {states.map((option) => (
             <Select.Option key={option} value={option}>
               {option}
