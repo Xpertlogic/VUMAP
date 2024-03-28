@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Form, Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-
+import config from "../config";
 const Login = ({ onLogin }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  const staticUserData = [{ username: "admin", password: "password" }];
+  const staticUserData = [{ username: config.adminusername, password: config.adminpassword }];
 
   const onFinish = (values) => {
     const { username, password } = values;

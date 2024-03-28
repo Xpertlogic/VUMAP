@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import App from "./App";
 import Main from "./Main";
 import Admin from "./admin_components/Admin";
-import Login from "./admin_components/Login";
 import Dashboard from "./admin_components/Dashboard";
 
 const AboutUs = lazy(() => import("./components/AboutUs"));
@@ -55,10 +54,7 @@ ReactDOM.createRoot(root).render(
             }
           />
         </Route>
-        <Route path="/admin" element={<Admin />}>
-          <Route index element={<Login />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-        </Route>
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   </React.StrictMode>
