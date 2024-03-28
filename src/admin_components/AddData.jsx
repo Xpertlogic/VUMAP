@@ -23,6 +23,7 @@ const AddData = () => {
   const handleCountryInputChange = (e) => {
     setCountryName(e.target.value);
   };
+
   useEffect(() => {
     const getCountry = async () => {
       try {
@@ -47,6 +48,7 @@ const AddData = () => {
     };
     getCountry();
   }, [countryName]);
+
   const handelAddedCountry = async () => {
     if (countryName.trim() !== "" && !countries.includes(countryName)) {
       try {
@@ -74,9 +76,11 @@ const AddData = () => {
   };
 
   /* --- For State ----- */
+
   const [stateName, setStateName] = useState("");
   const [selectCountryState, setSelectCountryState] = useState("");
   const [states, setStates] = useState([]);
+
   const changeCountry = (e) => {
     setSelectCountryState(e);
   };
@@ -116,6 +120,7 @@ const AddData = () => {
   const [distCountry, setDistCountry] = useState("");
   const [distState, setDistState] = useState("");
   const [districts, setDistricts] = useState([]);
+
   useEffect(() => {
     const getState = async () => {
       try {
@@ -146,6 +151,7 @@ const AddData = () => {
     };
     getState();
   }, [distCountry]);
+
   const changeDistCountry = (e) => {
     setDistCountry(e);
   };

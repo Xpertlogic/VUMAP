@@ -25,15 +25,14 @@ const Signin = ({ onLogin }) => {
         response.data.roles[0] === "ROLE_USER"
       ) {
         onLogin(response.data.email, response.data.token, password);
-      }
-      else if (
+      } else if (
         response.data &&
         response.data.email === email &&
         response.data.token &&
         response.data.roles[0] === "ROLE_ADMIN"
       ) {
         localStorage.setItem("admintoken", response.data.token);
-        navigate("/admin/dashboard");
+        navigate("/dashboard");
       } else {
         notification.error({
           message: "Login Failed",

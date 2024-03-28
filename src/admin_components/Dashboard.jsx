@@ -24,6 +24,7 @@ const Dashboard = () => {
             mode="inline"
             defaultSelectedKeys={["1"]}
             items={items}
+            className="text-3xl"
           >
             {items.map((item) => (
               <Menu.Item key={item.key}>{item.label}</Menu.Item>
@@ -36,6 +37,7 @@ const Dashboard = () => {
           </div>
         </Content>
       </Layout>
+      <p>&copy; VUMTECH DESIGN AND GEOSPATIAL PRIVATE LIMITED 2024</p>
     </section>
   );
 };

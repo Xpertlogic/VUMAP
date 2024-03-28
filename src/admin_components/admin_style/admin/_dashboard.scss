@@ -1,13 +1,25 @@
 .admin-section {
-    background-color: #F5F5F5;
+    background-color: #001529;
 
     h1 {
         text-align: center;
         margin: 2rem 0;
+        color: azure;
 
         font: {
             size: 4rem;
             weight: 700;
+        }
+    }
+
+    p {
+        text-align: center;
+        color: azure;
+        margin: 1rem 0;
+
+        font: {
+            size: 2rem;
+            weight: 500;
         }
     }
 }
@@ -17,8 +29,8 @@
 .dashboard {
 
     .admin-sidebar {
-        // padding: 1.5rem 0;
-        height: 70vh;
+        padding: 1.5rem 0;
+        height: 80vh;
     }
 
     .main-data {
