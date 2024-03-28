@@ -90,6 +90,16 @@ function HeaderCompo() {
     setIsSignUpModalOpen(false);
   };
 
+  /* -> Open The modal Directly Throgh a link */
+  const signupModalOpenFromClick = () => {
+    setIsSignUpModalOpen(true);
+  };
+
+  const handelSignupOpenLink = () => {
+    hideSignInModal(); // Close signin modal
+    signupModalOpenFromClick(); // Open signup modal
+  };
+
   /* ---- Path For Breadcrumb Item ---- */
   const location = useLocation();
   const screens = useBreakpoint();
@@ -276,6 +286,18 @@ function HeaderCompo() {
         footer={null}
       >
         <Signin onLogin={handleLogin} />
+        <div>
+          {/* Link to open signup modal */}
+          <p>
+            Don't have an account?{" "}
+            <span
+              style={{ color: "blue", cursor: "pointer" }}
+              onClick={handelSignupOpenLink}
+            >
+              Sign Up
+            </span>
+          </p>
+        </div>
       </Modal>
 
       {loggedIn && (

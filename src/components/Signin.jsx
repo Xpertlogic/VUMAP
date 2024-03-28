@@ -84,7 +84,7 @@ const Signin = ({ onLogin }) => {
         />
       </Form.Item>
 
-      <div className="text-center mb-4">
+      <div className="text-center">
         <Button
           type="primary"
           size="large"
@@ -94,6 +94,12 @@ const Signin = ({ onLogin }) => {
           Log in
         </Button>
       </div>
+
+      <Form.Item>
+        <a href="/forgot-password" className="text-2xl">
+          Forgot Password?
+        </a>
+      </Form.Item>
     </Form>
   );
 };
