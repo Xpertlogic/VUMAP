@@ -677,7 +677,7 @@ function TableData({
         (child) =>
           typeof child === "string" && // Check if child is a string
           child.includes(
-            "-You have reached your limit please connect with our Backend Team for more information"
+            "exceeded"
           )
       )
   );
